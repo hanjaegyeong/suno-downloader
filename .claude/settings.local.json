@@ -8,7 +8,9 @@
       "Bash(fly version:*)",
       "Bash(powershell:*)",
       "Bash(export:*)",
-      "WebFetch(domain:suno-dl-kr.fly.dev)"
+      "WebFetch(domain:suno-dl-kr.fly.dev)",
+      "Bash(gh secret:*)",
+      "Bash(where gh:*)"
     ]
   }
 }
