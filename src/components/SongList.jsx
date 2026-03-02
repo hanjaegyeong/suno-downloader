@@ -30,18 +30,23 @@ async function fetchTrackBlob(proxyUrl) {
 
 function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
+class CookieExpiredError extends Error {
+  constructor(msg) { super(msg); this.name = 'CookieExpiredError'; }
+}
+
 async function fetchWavBlob(clipId) {
   const convResp = await fetch(`/api/wav/convert/${clipId}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });
-  if (convResp.status === 401) throw new Error(t('proCookieRequired'));
+  if (convResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
   if (convResp.status === 403) throw new Error(t('wavProRequired'));
   if (!convResp.ok) throw new Error(`${t('wavConvertFail')} ${convResp.status}`);
 
   for (let attempt = 0; attempt < 30; attempt++) {
     await sleep(2000);
     const urlResp = await fetch(`/api/wav/url/${clipId}`);
+    if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
     if (!urlResp.ok) continue;
     const data = await urlResp.json();
     const wavUrl = data.wav_file_url;
@@ -55,7 +60,7 @@ async function fetchWavBlob(clipId) {
   throw new Error(t('wavTimeout'));
 }
 
-export default function SongList({ songs, fmt, onStatus, lang }) {
+export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }) {
   const [btnStates, setBtnStates] = useState({});
   const [dlProgress, setDlProgress] = useState(null);
 
@@ -90,6 +95,9 @@ export default function SongList({ songs, fmt, onStatus, lang }) {
       markBtn(btnKey, 'done', 2500);
     } catch (err) {
       markBtn(btnKey, 'error', 3000);
+      if (err instanceof CookieExpiredError && onCookieExpired) {
+        onCookieExpired();
+      }
       onStatus({ msg: `❌ "${song.title}" ${t('dlOneFail')} ${err.message}`, type: 'error' });
     }
   };
@@ -110,6 +118,12 @@ export default function SongList({ songs, fmt, onStatus, lang }) {
         const blob = await downloadBlob(song, fmt);
         zip.file(filename, blob);
       } catch (e) {
+        if (e instanceof CookieExpiredError) {
+          if (onCookieExpired) onCookieExpired();
+          onStatus({ msg: `${t('proCookieRequired')} — ${t('dlOneFail')}`, type: 'error' });
+          setDlProgress(null);
+          return;
+        }
         failed++;
         console.warn(`Download failed: ${song.title}`, e);
       }
