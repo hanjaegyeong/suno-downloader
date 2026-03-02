@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { t } from '../i18n';
 
 function extractId(raw) {
   raw = raw.trim();
@@ -6,26 +7,20 @@ function extractId(raw) {
   return m ? m[1] : null;
 }
 
-export default function Downloader({
-  onSongs,
-  onStatus,
-  fmt,
-  onFmt,
-  hasToken,
-}) {
+export default function Downloader({ onSongs, onStatus, fmt, onFmt, hasToken, lang }) {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
 
   const go = async () => {
     const pid = extractId(url);
     if (!pid) {
-      onStatus({ msg: '❌ 올바른 Suno 플레이리스트 URL 또는 ID를 입력해주세요.', type: 'error' });
+      onStatus({ msg: t('invalidUrl'), type: 'error' });
       return;
     }
 
     setLoading(true);
     onSongs([]);
-    onStatus({ msg: '플레이리스트 불러오는 중…', type: 'loading' });
+    onStatus({ msg: t('loadingPlaylist'), type: 'loading' });
 
     try {
       const allSongs = [];
@@ -33,10 +28,7 @@ export default function Downloader({
 
       while (true) {
         const resp = await fetch(`/api/playlist/${pid}?page=${page}`);
-
-        if (!resp.ok) {
-          throw new Error(`서버 오류 HTTP ${resp.status}`);
-        }
+        if (!resp.ok) throw new Error(`${t('serverError')} ${resp.status}`);
 
         const data = await resp.json();
         const clips = data.playlist_clips || data.clips || [];
@@ -52,20 +44,19 @@ export default function Downloader({
           });
         });
 
-        // Suno returns up to 20 items per page; empty next page = done
         if (clips.length < 20) break;
         page++;
       }
 
       if (!allSongs.length) {
-        onStatus({ msg: '⚠️ 플레이리스트에서 트랙을 찾지 못했습니다.', type: 'error' });
+        onStatus({ msg: t('noTracks'), type: 'error' });
         return;
       }
 
       onSongs(allSongs);
-      onStatus({ msg: `✅ ${allSongs.length}개 트랙을 찾았습니다!`, type: 'ok' });
+      onStatus({ msg: `✅ ${allSongs.length}${t('tracksFound')}`, type: 'ok' });
     } catch (err) {
-      onStatus({ msg: `❌ 불러오기 실패: ${err.message}`, type: 'error' });
+      onStatus({ msg: `${t('loadFail')} ${err.message}`, type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -80,7 +71,7 @@ export default function Downloader({
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && !loading && go()}
-          placeholder="https://suno.com/playlist/"
+          placeholder={t('inputPlaceholder')}
           autoComplete="off"
           spellCheck="false"
         />
@@ -89,12 +80,12 @@ export default function Downloader({
           <option value="wav">WAV {!hasToken ? '(Pro)' : ''}</option>
         </select>
         <button className="btn-main" onClick={go} disabled={loading}>
-          {loading ? <><span className="spin" /> 로딩 중</> : '불러오기 ↓'}
+          {loading ? <><span className="spin" /> {t('loading')}</> : t('load')}
         </button>
       </div>
       <p className="hint">
-        Suno 플레이리스트 URL 또는 <b>Playlist ID</b>만 붙여넣어도 됩니다.<br />
-        예: <b>suno.com/playlist/fe85c062-…</b>
+        {t('inputHint')}<br />
+        <b>{t('inputExample')}</b>
       </p>
     </div>
   );
