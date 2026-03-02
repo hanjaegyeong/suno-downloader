@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
 import JSZip from 'jszip';
 import AdSlot from './AdSlot';
+import { t } from '../i18n';
 
 function cdnUrl(id, fmt) {
   return `https://cdn1.suno.ai/${id}.${fmt}`;
@@ -34,9 +35,9 @@ async function fetchWavBlob(clipId) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });
-  if (convResp.status === 401) throw new Error('Pro 쿠키를 먼저 연결해주세요');
-  if (convResp.status === 403) throw new Error('WAV는 Suno Pro 플랜 필요');
-  if (!convResp.ok) throw new Error(`변환 요청 실패 HTTP ${convResp.status}`);
+  if (convResp.status === 401) throw new Error(t('proCookieRequired'));
+  if (convResp.status === 403) throw new Error(t('wavProRequired'));
+  if (!convResp.ok) throw new Error(`${t('wavConvertFail')} ${convResp.status}`);
 
   for (let attempt = 0; attempt < 30; attempt++) {
     await sleep(2000);
@@ -47,14 +48,14 @@ async function fetchWavBlob(clipId) {
     if (wavUrl) {
       const name = `${clipId}.wav`;
       const audioResp = await fetch(`/api/audio?url=${encodeURIComponent(wavUrl)}&name=${encodeURIComponent(name)}`);
-      if (!audioResp.ok) throw new Error(`WAV 다운로드 실패 HTTP ${audioResp.status}`);
+      if (!audioResp.ok) throw new Error(`${t('wavDownloadFail')} ${audioResp.status}`);
       return audioResp.blob();
     }
   }
-  throw new Error('WAV 변환 시간 초과 (60초)');
+  throw new Error(t('wavTimeout'));
 }
 
-export default function SongList({ songs, fmt, onStatus }) {
+export default function SongList({ songs, fmt, onStatus, lang }) {
   const [btnStates, setBtnStates] = useState({});
   const [dlProgress, setDlProgress] = useState(null);
 
@@ -77,9 +78,7 @@ export default function SongList({ songs, fmt, onStatus }) {
   };
 
   const downloadBlob = async (song, f) => {
-    if (f === 'wav') {
-      return fetchWavBlob(song.id);
-    }
+    if (f === 'wav') return fetchWavBlob(song.id);
     return fetchTrackBlob(getProxyUrl(song, 'mp3'));
   };
 
@@ -91,7 +90,7 @@ export default function SongList({ songs, fmt, onStatus }) {
       markBtn(btnKey, 'done', 2500);
     } catch (err) {
       markBtn(btnKey, 'error', 3000);
-      onStatus({ msg: `❌ "${song.title}" 다운로드 실패: ${err.message}`, type: 'error' });
+      onStatus({ msg: `❌ "${song.title}" ${t('dlOneFail')} ${err.message}`, type: 'error' });
     }
   };
 
@@ -112,13 +111,13 @@ export default function SongList({ songs, fmt, onStatus }) {
         zip.file(filename, blob);
       } catch (e) {
         failed++;
-        console.warn(`다운로드 실패: ${song.title}`, e);
+        console.warn(`Download failed: ${song.title}`, e);
       }
     }
 
     if (zip.file(/.*/).length === 0) {
       setDlProgress(null);
-      onStatus({ msg: '❌ 다운로드된 트랙이 없어 ZIP을 생성할 수 없습니다.', type: 'error' });
+      onStatus({ msg: t('dlFailEmpty'), type: 'error' });
       return;
     }
 
@@ -129,17 +128,20 @@ export default function SongList({ songs, fmt, onStatus }) {
         setDlProgress({ current: Math.round(meta.percent), total: 100, phase: 'zip' });
       });
 
-      triggerBlobDownload(zipBlob, `suno-playlist.zip`);
-
+      triggerBlobDownload(zipBlob, 'suno-playlist.zip');
       setDlProgress(null);
+
       if (failed) {
-        onStatus({ msg: `⚠️ ${total - failed}개 성공, ${failed}개 실패 — ZIP 다운로드 완료`, type: 'error' });
+        onStatus({
+          msg: `⚠️ ${total - failed}${t('dlDonePartial')} ${failed}${t('dlDoneFail')}`,
+          type: 'error',
+        });
       } else {
-        onStatus({ msg: `✅ 전체 ${total}개 트랙 ZIP 다운로드 완료!`, type: 'ok' });
+        onStatus({ msg: `✅ ${total}${t('dlDoneAll')}`, type: 'ok' });
       }
     } catch (err) {
       setDlProgress(null);
-      onStatus({ msg: `❌ ZIP 생성 실패: ${err.message}`, type: 'error' });
+      onStatus({ msg: `${t('dlZipFail')} ${err.message}`, type: 'error' });
     }
   };
 
@@ -152,19 +154,17 @@ export default function SongList({ songs, fmt, onStatus }) {
 
   return (
     <div id="results">
-      {/* Results bar */}
       <div className="results-bar">
-        <h2>🎵 {songs.length}개 트랙</h2>
+        <h2>🎵 {songs.length}{t('trackCount')}</h2>
         <button className="btn-all" onClick={dlAll} disabled={!!dlProgress}>
           {dlProgress
             ? dlProgress.phase === 'zip'
-              ? `📦 ZIP 생성 중 ${dlProgress.current}%`
-              : `⏳ ${dlProgress.current}/${dlProgress.total} 다운로드 중`
-            : '📦 전체 ZIP 다운로드'}
+              ? `${t('dlZipping')} ${dlProgress.current}%`
+              : `⏳ ${dlProgress.current}/${dlProgress.total} ${t('dlProgress')}`
+            : t('dlAllZip')}
         </button>
       </div>
 
-      {/* Song list */}
       <div className="song-list">
         {songs.map((song, i) => {
           const mainKey = `${i}-${fmt}`;
@@ -212,10 +212,9 @@ export default function SongList({ songs, fmt, onStatus }) {
                 </div>
               </div>
 
-              {/* ⑥ In-list ad — every 5 tracks */}
               {(i + 1) % 5 === 0 && i + 1 < songs.length && (
                 <div className="in-list-ad">
-                  <AdSlot type="468" label="⑥ In-list Banner (5곡마다) — 스크롤 중 자연 노출" />
+                  <AdSlot type="468" label="In-list Banner" />
                 </div>
               )}
             </Fragment>
@@ -223,18 +222,9 @@ export default function SongList({ songs, fmt, onStatus }) {
         })}
       </div>
 
-      {/* ④ ⑤ Post-results ads */}
       <div className="ad-row">
-        <AdSlot
-          type="336"
-          label="④ Large Rectangle 336×280"
-          sublabel="결과 하단 — 체류 유저 타겟, 단가 높음"
-        />
-        <AdSlot
-          type="300"
-          label="⑤ Medium Rectangle 300×250"
-          sublabel="사이드 or 하단 병렬 배치"
-        />
+        <AdSlot type="336" label="④ Large Rectangle 336×280" />
+        <AdSlot type="300" label="⑤ Medium Rectangle 300×250" />
       </div>
     </div>
   );
