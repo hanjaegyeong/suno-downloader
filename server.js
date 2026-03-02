@@ -97,8 +97,15 @@ app.post('/api/auth/cookie', async (req, res) => {
         await clerkRefreshJwt();
         console.log('[clerk] JWT auto-refreshed');
       } catch (err) {
-        console.error('[clerk] JWT refresh failed:', err.message);
-        stopSession();
+        console.error('[clerk] JWT refresh failed, retrying with new session ID:', err.message);
+        try {
+          session.sid = await clerkGetSessionId(session.cookie);
+          await clerkRefreshJwt();
+          console.log('[clerk] JWT recovered after session ID refresh');
+        } catch (retryErr) {
+          console.error('[clerk] Recovery failed, stopping session:', retryErr.message);
+          stopSession();
+        }
       }
     }, JWT_REFRESH_MS);
 

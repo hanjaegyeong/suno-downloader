@@ -10,7 +10,9 @@
       "Bash(export:*)",
       "WebFetch(domain:suno-dl-kr.fly.dev)",
       "Bash(gh secret:*)",
-      "Bash(where gh:*)"
+      "Bash(where gh:*)",
+      "Bash(npx vite:*)",
+      "Bash(ls:*)"
     ]
   }
 }

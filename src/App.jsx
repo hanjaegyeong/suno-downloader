@@ -42,6 +42,12 @@ export default function App() {
     }
   }, [cookieInput, lang]);
 
+  const handleCookieExpired = useCallback(() => {
+    setProActive(false);
+    setShowCookie(true);
+    setStatus({ msg: t('cookieExpired'), type: 'error' });
+  }, [lang]);
+
   const disconnectCookie = useCallback(async () => {
     await fetch('/api/auth', { method: 'DELETE' }).catch(() => {});
     setProActive(false);
@@ -192,6 +198,7 @@ export default function App() {
               fmt={fmt}
               onStatus={setStatus}
               lang={lang}
+              onCookieExpired={handleCookieExpired}
             />
           )}
 
