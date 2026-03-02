@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://sunodl.com/sitemap.xml
+Sitemap: https://suno-dl-kr.fly.dev/sitemap.xml

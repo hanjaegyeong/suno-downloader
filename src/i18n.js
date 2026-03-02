@@ -1,5 +1,7 @@
 const messages = {
   ko: {
+    pageTitle: 'SunoDL – Suno 플레이리스트 전체 MP3 & WAV ZIP파일로 무료 다운로드',
+    pageDesc: 'Suno AI 라이브러리 플레이리스트 전곡을 MP3, WAV ZIP파일로 한 번에 다운로드. URL 붙여넣기만 하면 끝.',
     heroTitle1: 'Suno 플레이리스트',
     heroTitle2: '전곡 다운로드',
     heroDesc: '플레이리스트 URL만 붙여넣으면\nMP3 · WAV 무료 다운로드',
@@ -55,6 +57,8 @@ const messages = {
     footerRight: '음악 저작권은 각 제작자에게 있습니다. 개인 용도로만 사용하세요.',
   },
   en: {
+    pageTitle: 'SunoDL – Free Suno Playlist MP3 & WAV Downloader',
+    pageDesc: 'Download all tracks from any Suno AI playlist as MP3 or WAV for free. Just paste a playlist URL. No sign-up required.',
     heroTitle1: 'Suno Playlist',
     heroTitle2: 'Full Download',
     heroDesc: 'Just paste a playlist URL\nFree MP3 · WAV download',
@@ -110,6 +114,8 @@ const messages = {
     footerRight: 'Music copyrights belong to their creators. For personal use only.',
   },
   ja: {
+    pageTitle: 'SunoDL – Sunoプレイリスト MP3 & WAV 無料ダウンローダー',
+    pageDesc: 'Suno AIプレイリストの全曲をMP3・WAVで無料ダウンロード。URLを貼り付けるだけ。登録不要。',
     heroTitle1: 'Sunoプレイリスト',
     heroTitle2: '全曲ダウンロード',
     heroDesc: 'プレイリストURLを貼り付けるだけ\nMP3 · WAV 無料ダウンロード',
@@ -182,6 +188,9 @@ export function setLang(code) {
   currentLang = code;
   localStorage.setItem('sunodl-lang', code);
   document.documentElement.lang = code;
+  document.title = messages[code].pageTitle;
+  const descEl = document.querySelector('meta[name="description"]');
+  if (descEl) descEl.setAttribute('content', messages[code].pageDesc);
 }
 
 export function t(key) {
