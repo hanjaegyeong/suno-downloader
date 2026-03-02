@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Downloader from './components/Downloader';
 import SongList from './components/SongList';
 import AdSlot from './components/AdSlot';
@@ -34,6 +34,10 @@ export default function App() {
       if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
       setProActive(true);
       setStatus({ msg: t('connectOk'), type: 'ok' });
+      if (cookieResolveRef.current) {
+        cookieResolveRef.current(true);
+        cookieResolveRef.current = null;
+      }
     } catch (err) {
       setProActive(false);
       setStatus({ msg: `${t('connectFail')} ${err.message}`, type: 'error' });
@@ -42,10 +46,15 @@ export default function App() {
     }
   }, [cookieInput, lang]);
 
+  const cookieResolveRef = useRef(null);
+
   const handleCookieExpired = useCallback(() => {
     setProActive(false);
     setShowCookie(true);
     setStatus({ msg: t('cookieExpired'), type: 'error' });
+    return new Promise((resolve) => {
+      cookieResolveRef.current = resolve;
+    });
   }, [lang]);
 
   const disconnectCookie = useCallback(async () => {
@@ -102,11 +111,11 @@ export default function App() {
 
       {/* Cookie modal */}
       {showCookie && (
-        <div className="cookie-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowCookie(false); }}>
+        <div className="cookie-overlay" onClick={(e) => { if (e.target === e.currentTarget) { setShowCookie(false); if (cookieResolveRef.current) { cookieResolveRef.current(false); cookieResolveRef.current = null; } } }}>
           <div className="cookie-modal">
             <div className="cookie-modal-head">
               <h3>{t('modalTitle')}</h3>
-              <button className="cookie-close" onClick={() => setShowCookie(false)}>×</button>
+              <button className="cookie-close" onClick={() => { setShowCookie(false); if (cookieResolveRef.current) { cookieResolveRef.current(false); cookieResolveRef.current = null; } }}>×</button>
             </div>
 
             <div className="cookie-guide">
