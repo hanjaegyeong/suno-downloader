@@ -94,10 +94,11 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
       triggerBlobDownload(blob, `${sanitize(song.title)}.${f}`);
       markBtn(btnKey, 'done', 2500);
     } catch (err) {
-      markBtn(btnKey, 'error', 3000);
       if (err instanceof CookieExpiredError && onCookieExpired) {
-        onCookieExpired();
+        const reconnected = await onCookieExpired();
+        if (reconnected) return dlOne(song, f, btnKey);
       }
+      markBtn(btnKey, 'error', 3000);
       onStatus({ msg: `❌ "${song.title}" ${t('dlOneFail')} ${err.message}`, type: 'error' });
     }
   };
@@ -118,9 +119,13 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
         const blob = await downloadBlob(song, fmt);
         zip.file(filename, blob);
       } catch (e) {
-        if (e instanceof CookieExpiredError) {
-          if (onCookieExpired) onCookieExpired();
-          onStatus({ msg: `${t('proCookieRequired')} — ${t('dlOneFail')}`, type: 'error' });
+        if (e instanceof CookieExpiredError && onCookieExpired) {
+          onStatus({ msg: t('cookieExpired'), type: 'error' });
+          const reconnected = await onCookieExpired();
+          if (reconnected) {
+            i--;
+            continue;
+          }
           setDlProgress(null);
           return;
         }
