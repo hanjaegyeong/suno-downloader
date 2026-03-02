@@ -4,7 +4,11 @@
       "Bash(npm install:*)",
       "Bash(npm run:*)",
       "Bash(node:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(fly version:*)",
+      "Bash(powershell:*)",
+      "Bash(export:*)",
+      "WebFetch(domain:suno-dl-kr.fly.dev)"
     ]
   }
 }
