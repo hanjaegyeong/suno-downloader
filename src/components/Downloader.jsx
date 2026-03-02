@@ -24,7 +24,7 @@ export default function Downloader({ onSongs, onStatus, fmt, onFmt, hasToken, la
 
     try {
       const allSongs = [];
-      let page = 0;
+      let page = 1;
 
       while (true) {
         const resp = await fetch(`/api/playlist/${pid}?page=${page}`);
@@ -43,7 +43,6 @@ export default function Downloader({ onSongs, onStatus, fmt, onFmt, hasToken, la
             audioUrl: cl.audio_url || null,
           });
         });
-
         if (clips.length < 20) break;
         page++;
       }
