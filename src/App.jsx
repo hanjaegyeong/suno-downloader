@@ -71,15 +71,18 @@ export default function App() {
               <span className="pill">FREE</span>
             </div>
             <div className="header-right">
-              <select
-                className="lang-select"
-                value={lang}
-                onChange={(e) => changeLang(e.target.value)}
-              >
-                {LANGS.map((l) => (
-                  <option key={l.code} value={l.code}>{l.label}</option>
-                ))}
-              </select>
+              <div className="lang-wrapper">
+                <span className="lang-label">Language</span>
+                <select
+                  className="lang-select"
+                  value={lang}
+                  onChange={(e) => changeLang(e.target.value)}
+                >
+                  {LANGS.map((l) => (
+                    <option key={l.code} value={l.code}>{l.label}</option>
+                  ))}
+                </select>
+              </div>
               <button
                 className={`token-badge ${proActive ? 'ok' : 'neutral'}`}
                 onClick={() => setShowCookie(!showCookie)}
