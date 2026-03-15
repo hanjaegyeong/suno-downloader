@@ -33,6 +33,7 @@ export default function App() {
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
       setProActive(true);
+      setShowCookie(false);
       setStatus({ msg: t('connectOk'), type: 'ok' });
       if (cookieResolveRef.current) {
         cookieResolveRef.current(true);
