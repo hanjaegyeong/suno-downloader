@@ -227,11 +227,6 @@ export default function App() {
         <div className="wrap">
           <p>{t('footerCopy')}</p>
           <p>{t('footerRight')}</p>
-          <p style={{ marginTop: 6 }}>
-            <a href="#">Privacy Policy</a>
-            &nbsp;·&nbsp;
-            <a href="#">Terms of Use</a>
-          </p>
         </div>
       </footer>
     </>
