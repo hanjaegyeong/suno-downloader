@@ -72,12 +72,48 @@ async function clerkRefreshJwt() {
   return jwt;
 }
 
-function stopSession() {
+function stopSession(keepCookie = false) {
   if (session.timer) { clearInterval(session.timer); session.timer = null; }
-  session.cookie = '';
+  if (!keepCookie) session.cookie = '';
   session.sid = '';
   session.jwt = '';
   session.refreshedAt = 0;
+}
+
+function startRefreshTimer() {
+  if (session.timer) clearInterval(session.timer);
+  session.timer = setInterval(async () => {
+    try {
+      await clerkRefreshJwt();
+      console.log('[clerk] JWT auto-refreshed');
+    } catch (err) {
+      console.error('[clerk] JWT refresh failed, retrying with new session ID:', err.message);
+      try {
+        session.sid = await clerkGetSessionId(session.cookie);
+        await clerkRefreshJwt();
+        console.log('[clerk] JWT recovered after session ID refresh');
+      } catch (retryErr) {
+        console.error('[clerk] Recovery failed, keeping cookie for auto-recovery:', retryErr.message);
+        stopSession(true);
+      }
+    }
+  }, JWT_REFRESH_MS);
+}
+
+async function tryAutoRecover() {
+  if (!session.cookie) return false;
+  console.log('[clerk] Attempting auto-recovery with stored cookie...');
+  try {
+    session.sid = await clerkGetSessionId(session.cookie);
+    await clerkRefreshJwt();
+    startRefreshTimer();
+    console.log(`[clerk] Auto-recovery OK (sid=${session.sid.slice(0, 12)}…)`);
+    return true;
+  } catch (err) {
+    console.error('[clerk] Auto-recovery failed:', err.message);
+    stopSession(false);
+    return false;
+  }
 }
 
 // POST /api/auth/cookie — initialize Clerk session with __client cookie
@@ -92,22 +128,7 @@ app.post('/api/auth/cookie', async (req, res) => {
     session.sid = await clerkGetSessionId(cookie);
     await clerkRefreshJwt();
 
-    session.timer = setInterval(async () => {
-      try {
-        await clerkRefreshJwt();
-        console.log('[clerk] JWT auto-refreshed');
-      } catch (err) {
-        console.error('[clerk] JWT refresh failed, retrying with new session ID:', err.message);
-        try {
-          session.sid = await clerkGetSessionId(session.cookie);
-          await clerkRefreshJwt();
-          console.log('[clerk] JWT recovered after session ID refresh');
-        } catch (retryErr) {
-          console.error('[clerk] Recovery failed, stopping session:', retryErr.message);
-          stopSession();
-        }
-      }
-    }, JWT_REFRESH_MS);
+    startRefreshTimer();
 
     console.log(`[clerk] Session OK (sid=${session.sid.slice(0, 12)}…)`);
     res.json({ ok: true });
@@ -121,8 +142,9 @@ app.post('/api/auth/cookie', async (req, res) => {
 // GET /api/auth/status — check session health
 app.get('/api/auth/status', (_req, res) => {
   const active = !!(session.jwt && session.timer);
+  const canRecover = !active && !!session.cookie;
   const age = active ? Math.round((Date.now() - session.refreshedAt) / 1000) : -1;
-  res.json({ active, tokenAgeSec: age });
+  res.json({ active, canRecover, tokenAgeSec: age });
 });
 
 // DELETE /api/auth — logout
@@ -191,8 +213,12 @@ app.get('/api/playlist/:id', async (req, res) => {
 });
 
 // ─── WAV middleware: require active Clerk session ──────────────────────────
-function requireSession(req, res, next) {
-  const jwt = getJwt();
+async function requireSession(req, res, next) {
+  let jwt = getJwt();
+  if (!jwt) {
+    const recovered = await tryAutoRecover();
+    if (recovered) jwt = getJwt();
+  }
   if (!jwt) return res.status(401).json({ error: 'Suno Pro 쿠키를 먼저 설정해주세요.' });
   req.sunoJwt = jwt;
   next();
