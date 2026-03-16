@@ -224,6 +224,31 @@ async function requireSession(req, res, next) {
   next();
 }
 
+// ─── Helper: call Suno API with auto-retry on 401 ──────────────────────────
+async function sunoFetch(url, headersObj, opts = {}) {
+  let result = await curlFetch(url, headersObj, opts);
+
+  if (result.status === 401 && session.cookie) {
+    console.log('[suno] 401 received, refreshing JWT and retrying...');
+    try {
+      await clerkRefreshJwt();
+      headersObj['Authorization'] = `Bearer ${session.jwt}`;
+      result = await curlFetch(url, headersObj, opts);
+      console.log(`[suno] retry ← ${result.status}`);
+    } catch (refreshErr) {
+      console.error('[suno] JWT refresh failed, trying full recovery...');
+      const recovered = await tryAutoRecover();
+      if (recovered) {
+        headersObj['Authorization'] = `Bearer ${session.jwt}`;
+        result = await curlFetch(url, headersObj, opts);
+        console.log(`[suno] recovery retry ← ${result.status}`);
+      }
+    }
+  }
+
+  return result;
+}
+
 // ─── POST /api/wav/convert/:clipId — trigger WAV conversion ────────────────
 app.post('/api/wav/convert/:clipId', requireSession, async (req, res) => {
   const { clipId } = req.params;
@@ -236,7 +261,7 @@ app.post('/api/wav/convert/:clipId', requireSession, async (req, res) => {
 
   console.log(`[wav-convert] curl POST → ${targetUrl}`);
   try {
-    const { status, body } = await curlFetch(targetUrl, headers, { method: 'POST', body: '{}' });
+    const { status, body } = await sunoFetch(targetUrl, headers, { method: 'POST', body: '{}' });
     console.log(`[wav-convert] curl ← ${status}`);
     res.status(status).set('Content-Type', 'application/json').send(body || '{}');
   } catch (err) {
@@ -253,7 +278,7 @@ app.get('/api/wav/url/:clipId', requireSession, async (req, res) => {
 
   console.log(`[wav-url] curl → ${targetUrl}`);
   try {
-    const { status, body } = await curlFetch(targetUrl, headers);
+    const { status, body } = await sunoFetch(targetUrl, headers);
     console.log(`[wav-url] curl ← ${status}`);
     res.status(status).set('Content-Type', 'application/json').send(body);
   } catch (err) {
