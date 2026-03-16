@@ -242,7 +242,28 @@ async function ensureFreshJwt() {
 
 // ─── WAV middleware: require active Clerk session ──────────────────────────
 async function requireSession(req, res, next) {
-  const jwt = await ensureFreshJwt();
+  let jwt = await ensureFreshJwt();
+
+  // If session is dead but client sent the cookie header, auto-recover
+  if (!jwt) {
+    const cookieHeader = req.headers['x-clerk-cookie'];
+    if (cookieHeader) {
+      console.log('[clerk] Session lost, auto-recovering from request cookie...');
+      stopSession();
+      try {
+        session.cookie = cookieHeader;
+        session.sid = await clerkGetSessionId(cookieHeader);
+        await clerkRefreshJwt();
+        startRefreshTimer();
+        jwt = session.jwt;
+        console.log(`[clerk] Auto-recovery from header OK (sid=${session.sid.slice(0, 12)}…)`);
+      } catch (err) {
+        console.error('[clerk] Auto-recovery from header failed:', err.message);
+        stopSession();
+      }
+    }
+  }
+
   if (!jwt) return res.status(401).json({ error: 'Suno Pro 쿠키를 먼저 설정해주세요.' });
   req.sunoJwt = jwt;
   next();
@@ -301,6 +322,46 @@ app.get('/api/wav/url/:clipId', requireSession, async (req, res) => {
     console.error('[wav-url] curl error:', err.message);
     if (!res.headersSent) res.status(502).json({ error: err.message });
   }
+});
+
+// ─── GET /api/image?url=<encoded> ────────────────────────────────────────
+app.get('/api/image', (req, res) => {
+  const rawUrl = req.query.url;
+  if (!rawUrl) return res.status(400).json({ error: 'Missing url parameter' });
+
+  let parsed;
+  try { parsed = new URL(rawUrl); }
+  catch { return res.status(400).json({ error: 'Invalid url parameter' }); }
+
+  if (!isAllowedHost(parsed.hostname)) {
+    return res.status(403).json({ error: 'Forbidden CDN host' });
+  }
+
+  const headers = {
+    ...sunoHeaders(),
+    'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+  };
+
+  const upReq = https.request(
+    { hostname: parsed.hostname, port: 443, path: parsed.pathname + parsed.search, method: 'GET', headers },
+    (upRes) => {
+      if ([301, 302, 303, 307, 308].includes(upRes.statusCode)) {
+        const loc = upRes.headers['location'];
+        upRes.resume();
+        if (!loc) return res.status(502).json({ error: 'Redirect with no location' });
+        return res.redirect(loc);
+      }
+      res.status(upRes.statusCode);
+      res.set('Content-Type', upRes.headers['content-type'] || 'image/jpeg');
+      res.set('Cache-Control', 'public, max-age=86400');
+      if (upRes.headers['content-length']) res.set('Content-Length', upRes.headers['content-length']);
+      upRes.pipe(res);
+    }
+  );
+  upReq.on('error', (err) => {
+    if (!res.headersSent) res.status(502).json({ error: err.message });
+  });
+  upReq.end();
 });
 
 // ─── GET /api/audio?url=<encoded>&name=<encoded> ──────────────────────────

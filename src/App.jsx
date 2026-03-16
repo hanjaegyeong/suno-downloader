@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Downloader from './components/Downloader';
 import SongList from './components/SongList';
 import AdSlot from './components/AdSlot';
@@ -9,10 +9,27 @@ export default function App() {
   const [status, setStatus] = useState({ msg: '', type: '' });
   const [fmt, setFmt] = useState('mp3');
   const [showCookie, setShowCookie] = useState(false);
-  const [cookieInput, setCookieInput] = useState('');
+  const [cookieInput, setCookieInput] = useState(() => localStorage.getItem('suno_clerk_cookie') || '');
   const [proActive, setProActive] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [lang, setLangState] = useState(getLang);
+
+  // Auto-reconnect if cookie was saved from a previous session
+  useEffect(() => {
+    const saved = localStorage.getItem('suno_clerk_cookie');
+    if (saved) {
+      fetch('/api/auth/cookie', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cookie: saved }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.ok) setProActive(true);
+        })
+        .catch(() => {});
+    }
+  }, []);
 
   const changeLang = (code) => {
     setLang(code);
@@ -32,6 +49,7 @@ export default function App() {
       });
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
+      localStorage.setItem('suno_clerk_cookie', val);
       setProActive(true);
       setShowCookie(false);
       setStatus({ msg: t('connectOk'), type: 'ok' });
@@ -60,6 +78,7 @@ export default function App() {
 
   const disconnectCookie = useCallback(async () => {
     await fetch('/api/auth', { method: 'DELETE' }).catch(() => {});
+    localStorage.removeItem('suno_clerk_cookie');
     setProActive(false);
     setCookieInput('');
     setFmt('mp3');

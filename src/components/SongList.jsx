@@ -34,10 +34,15 @@ class CookieExpiredError extends Error {
   constructor(msg) { super(msg); this.name = 'CookieExpiredError'; }
 }
 
+function clerkCookieHeaders() {
+  const cookie = localStorage.getItem('suno_clerk_cookie');
+  return cookie ? { 'x-clerk-cookie': cookie } : {};
+}
+
 async function fetchWavBlob(clipId) {
   const convResp = await fetch(`/api/wav/convert/${clipId}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...clerkCookieHeaders() },
   });
   if (convResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
   if (convResp.status === 403) throw new Error(t('wavProRequired'));
@@ -45,7 +50,7 @@ async function fetchWavBlob(clipId) {
 
   for (let attempt = 0; attempt < 30; attempt++) {
     await sleep(2000);
-    const urlResp = await fetch(`/api/wav/url/${clipId}`);
+    const urlResp = await fetch(`/api/wav/url/${clipId}`, { headers: clerkCookieHeaders() });
     if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
     if (!urlResp.ok) continue;
     const data = await urlResp.json();
@@ -64,7 +69,7 @@ async function fetchWavBlob(clipId) {
 async function startWavConvert(clipId) {
   const resp = await fetch(`/api/wav/convert/${clipId}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...clerkCookieHeaders() },
   });
   if (resp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
   if (resp.status === 403) throw new Error(t('wavProRequired'));
@@ -145,7 +150,7 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
         const filename = `${String(i + 1).padStart(2, '0')} - ${sanitize(song.title)}.wav`;
         for (let attempt = 0; attempt < 30; attempt++) {
           await sleep(2000);
-          const urlResp = await fetch(`/api/wav/url/${song.id}`);
+          const urlResp = await fetch(`/api/wav/url/${song.id}`, { headers: clerkCookieHeaders() });
           if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
           if (!urlResp.ok) continue;
           const data = await urlResp.json();
@@ -266,7 +271,7 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
                   ? (
                     <img
                       className="s-img"
-                      src={song.img}
+                      src={`/api/image?url=${encodeURIComponent(song.img)}`}
                       alt=""
                       loading="lazy"
                       onError={(e) => { e.target.style.display = 'none'; }}
