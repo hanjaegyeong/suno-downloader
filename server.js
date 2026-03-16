@@ -343,7 +343,8 @@ app.get('/api/image', (req, res) => {
 
   const args = [
     '--silent', '--location', '--max-redirs', '5',
-    '--compressed', '--max-time', '30', '--fail',
+    '--max-time', '30', '--fail',
+    '--http2', '--tcp-nodelay',
   ];
   for (const [k, v] of Object.entries(headersObj)) {
     args.push('-H', `${k}: ${v}`);
@@ -401,8 +402,10 @@ function isAllowedHost(hostname) {
 function streamAudioCurl(targetUrl, headersObj, safeName, res) {
   const args = [
     '--silent', '--location', '--max-redirs', '5',
-    '--compressed', '--max-time', '600',
+    '--max-time', '600',
     '--fail',
+    '--http2',
+    '--tcp-nodelay',
   ];
   for (const [k, v] of Object.entries(headersObj)) {
     args.push('-H', `${k}: ${v}`);
