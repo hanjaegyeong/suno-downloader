@@ -44,6 +44,7 @@ const session = {
   jwt: '',
   refreshedAt: 0,
   timer: null,
+  _refreshLock: null,   // prevents concurrent JWT refreshes
 };
 
 function getJwt() { return session.jwt; }
@@ -59,7 +60,15 @@ async function clerkGetSessionId(cookie) {
   return sid;
 }
 
+// Locked refresh: only one refresh runs at a time, others wait for the same result
 async function clerkRefreshJwt() {
+  if (session._refreshLock) return session._refreshLock;
+  session._refreshLock = _doRefreshJwt();
+  try { return await session._refreshLock; }
+  finally { session._refreshLock = null; }
+}
+
+async function _doRefreshJwt() {
   const url = `${CLERK_URL}/v1/client/sessions/${session.sid}/tokens?_is_native=true&_clerk_js_version=${CLERK_VERSION}`;
   const headers = { 'Authorization': session.cookie, 'User-Agent': UA, 'Content-Type': 'application/json' };
   const { status, body } = await curlFetch(url, headers, { method: 'POST', body: '{}' });
@@ -212,13 +221,28 @@ app.get('/api/playlist/:id', async (req, res) => {
   }
 });
 
+// ─── Ensure fresh JWT (with lock, safe for concurrent calls) ────────────────
+async function ensureFreshJwt() {
+  // If JWT was refreshed within the last 30 seconds, it's still good
+  if (session.jwt && (Date.now() - session.refreshedAt) < 30_000) return session.jwt;
+
+  if (session.jwt && session.sid) {
+    try {
+      return await clerkRefreshJwt();
+    } catch (_) { /* fall through to recovery */ }
+  }
+
+  if (session.cookie) {
+    const recovered = await tryAutoRecover();
+    if (recovered) return session.jwt;
+  }
+
+  return null;
+}
+
 // ─── WAV middleware: require active Clerk session ──────────────────────────
 async function requireSession(req, res, next) {
-  let jwt = getJwt();
-  if (!jwt) {
-    const recovered = await tryAutoRecover();
-    if (recovered) jwt = getJwt();
-  }
+  const jwt = await ensureFreshJwt();
   if (!jwt) return res.status(401).json({ error: 'Suno Pro 쿠키를 먼저 설정해주세요.' });
   req.sunoJwt = jwt;
   next();
@@ -230,19 +254,11 @@ async function sunoFetch(url, headersObj, opts = {}) {
 
   if (result.status === 401 && session.cookie) {
     console.log('[suno] 401 received, refreshing JWT and retrying...');
-    try {
-      await clerkRefreshJwt();
-      headersObj['Authorization'] = `Bearer ${session.jwt}`;
+    const freshJwt = await ensureFreshJwt();
+    if (freshJwt) {
+      headersObj['Authorization'] = `Bearer ${freshJwt}`;
       result = await curlFetch(url, headersObj, opts);
       console.log(`[suno] retry ← ${result.status}`);
-    } catch (refreshErr) {
-      console.error('[suno] JWT refresh failed, trying full recovery...');
-      const recovered = await tryAutoRecover();
-      if (recovered) {
-        headersObj['Authorization'] = `Bearer ${session.jwt}`;
-        result = await curlFetch(url, headersObj, opts);
-        console.log(`[suno] recovery retry ← ${result.status}`);
-      }
     }
   }
 
