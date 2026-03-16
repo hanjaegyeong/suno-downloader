@@ -60,6 +60,30 @@ async function fetchWavBlob(clipId) {
   throw new Error(t('wavTimeout'));
 }
 
+// Kick off WAV conversion without waiting for result (fire-and-forget)
+async function startWavConvert(clipId) {
+  const resp = await fetch(`/api/wav/convert/${clipId}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (resp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
+  if (resp.status === 403) throw new Error(t('wavProRequired'));
+}
+
+// Run tasks with concurrency limit
+async function pooledMap(items, fn, concurrency = 3) {
+  const results = new Array(items.length);
+  let idx = 0;
+  const worker = async () => {
+    while (idx < items.length) {
+      const i = idx++;
+      results[i] = await fn(items[i], i).catch((e) => ({ __error: e }));
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker));
+  return results;
+}
+
 export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }) {
   const [btnStates, setBtnStates] = useState({});
   const [dlProgress, setDlProgress] = useState(null);
@@ -107,30 +131,75 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
     const zip = new JSZip();
     const total = songs.length;
     let failed = 0;
+    let completed = 0;
 
     setDlProgress({ current: 0, total, phase: 'download' });
 
-    for (let i = 0; i < total; i++) {
-      const song = songs[i];
-      const filename = `${String(i + 1).padStart(2, '0')} - ${sanitize(song.title)}.${fmt}`;
-      setDlProgress({ current: i + 1, total, phase: 'download' });
+    // For WAV: fire ALL conversions + downloads simultaneously, collect into zip
+    if (fmt === 'wav') {
+      // Phase 1: Start all conversions at once
+      await Promise.allSettled(songs.map((song) => startWavConvert(song.id)));
 
-      try {
-        const blob = await downloadBlob(song, fmt);
-        zip.file(filename, blob);
-      } catch (e) {
-        if (e instanceof CookieExpiredError && onCookieExpired) {
-          onStatus({ msg: t('cookieExpired'), type: 'error' });
-          const reconnected = await onCookieExpired();
-          if (reconnected) {
-            i--;
-            continue;
+      // Phase 2: Poll + download with concurrency limit (5 simultaneous)
+      const results = await pooledMap(songs, async (song, i) => {
+        const filename = `${String(i + 1).padStart(2, '0')} - ${sanitize(song.title)}.wav`;
+        for (let attempt = 0; attempt < 30; attempt++) {
+          await sleep(2000);
+          const urlResp = await fetch(`/api/wav/url/${song.id}`);
+          if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
+          if (!urlResp.ok) continue;
+          const data = await urlResp.json();
+          const wavUrl = data.wav_file_url;
+          if (wavUrl) {
+            const name = `${song.id}.wav`;
+            const audioResp = await fetch(`/api/audio?url=${encodeURIComponent(wavUrl)}&name=${encodeURIComponent(name)}`);
+            if (!audioResp.ok) throw new Error(`${t('wavDownloadFail')} ${audioResp.status}`);
+            const blob = await audioResp.blob();
+            completed++;
+            setDlProgress({ current: completed, total, phase: 'download' });
+            return { filename, blob };
           }
-          setDlProgress(null);
-          return;
         }
-        failed++;
-        console.warn(`Download failed: ${song.title}`, e);
+        throw new Error(t('wavTimeout'));
+      }, 5);
+
+      for (const r of results) {
+        if (r && r.__error) {
+          if (r.__error instanceof CookieExpiredError && onCookieExpired) {
+            onStatus({ msg: t('cookieExpired'), type: 'error' });
+            await onCookieExpired();
+            setDlProgress(null);
+            return;
+          }
+          failed++;
+        } else if (r && r.filename) {
+          zip.file(r.filename, r.blob);
+        }
+      }
+    } else {
+      // MP3: sequential (already fast, no conversion needed)
+      for (let i = 0; i < total; i++) {
+        const song = songs[i];
+        const filename = `${String(i + 1).padStart(2, '0')} - ${sanitize(song.title)}.${fmt}`;
+        setDlProgress({ current: i + 1, total, phase: 'download' });
+
+        try {
+          const blob = await downloadBlob(song, fmt);
+          zip.file(filename, blob);
+        } catch (e) {
+          if (e instanceof CookieExpiredError && onCookieExpired) {
+            onStatus({ msg: t('cookieExpired'), type: 'error' });
+            const reconnected = await onCookieExpired();
+            if (reconnected) {
+              i--;
+              continue;
+            }
+            setDlProgress(null);
+            return;
+          }
+          failed++;
+          console.warn(`Download failed: ${song.title}`, e);
+        }
       }
     }
 
