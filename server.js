@@ -1,8 +1,7 @@
 'use strict';
 
 const express        = require('express');
-const https          = require('https');
-const { execFile }   = require('child_process');
+const { execFile, spawn } = require('child_process');
 const path           = require('path');
 const { URL }        = require('url');
 
@@ -337,31 +336,35 @@ app.get('/api/image', (req, res) => {
     return res.status(403).json({ error: 'Forbidden CDN host' });
   }
 
-  const headers = {
+  const headersObj = {
     ...sunoHeaders(),
     'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
   };
 
-  const upReq = https.request(
-    { hostname: parsed.hostname, port: 443, path: parsed.pathname + parsed.search, method: 'GET', headers },
-    (upRes) => {
-      if ([301, 302, 303, 307, 308].includes(upRes.statusCode)) {
-        const loc = upRes.headers['location'];
-        upRes.resume();
-        if (!loc) return res.status(502).json({ error: 'Redirect with no location' });
-        return res.redirect(loc);
-      }
-      res.status(upRes.statusCode);
-      res.set('Content-Type', upRes.headers['content-type'] || 'image/jpeg');
-      res.set('Cache-Control', 'public, max-age=86400');
-      if (upRes.headers['content-length']) res.set('Content-Length', upRes.headers['content-length']);
-      upRes.pipe(res);
-    }
-  );
-  upReq.on('error', (err) => {
+  const args = [
+    '--silent', '--location', '--max-redirs', '5',
+    '--compressed', '--max-time', '30', '--fail',
+  ];
+  for (const [k, v] of Object.entries(headersObj)) {
+    args.push('-H', `${k}: ${v}`);
+  }
+  args.push(parsed.href);
+
+  const ext = parsed.pathname.split('.').pop()?.toLowerCase();
+  const ct = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[ext] || 'image/jpeg';
+
+  res.set('Content-Type', ct);
+  res.set('Cache-Control', 'public, max-age=86400');
+
+  const proc = spawn('curl', args);
+  proc.stdout.pipe(res);
+  proc.on('close', (code) => {
+    if (code !== 0 && !res.headersSent) res.status(502).json({ error: 'Image fetch failed' });
+  });
+  proc.on('error', (err) => {
     if (!res.headersSent) res.status(502).json({ error: err.message });
   });
-  upReq.end();
+  res.on('close', () => { proc.kill(); });
 });
 
 // ─── GET /api/audio?url=<encoded>&name=<encoded> ──────────────────────────
@@ -387,47 +390,55 @@ app.get('/api/audio', (req, res) => {
   };
 
   console.log(`[audio] → ${parsed.hostname}${parsed.pathname}`);
-  streamAudio(parsed.href, headers, safeName, res);
+  streamAudioCurl(parsed.href, headers, safeName, res);
 });
 
 function isAllowedHost(hostname) {
   return hostname.endsWith('.suno.ai') || hostname.endsWith('.suno.com');
 }
 
-function streamAudio(targetUrl, headers, safeName, res, redirectCount = 0) {
-  if (redirectCount > 5) return res.status(508).json({ error: 'Too many redirects' });
-  let parsed;
-  try { parsed = new URL(targetUrl); }
-  catch { return res.status(400).json({ error: 'Invalid redirect URL' }); }
+// curl-based streaming — avoids Cloudflare blocking Node's TLS fingerprint
+function streamAudioCurl(targetUrl, headersObj, safeName, res) {
+  const args = [
+    '--silent', '--location', '--max-redirs', '5',
+    '--compressed', '--max-time', '600',
+    '--fail',
+  ];
+  for (const [k, v] of Object.entries(headersObj)) {
+    args.push('-H', `${k}: ${v}`);
+  }
+  args.push(targetUrl);
 
-  const upReq = https.request(
-    { hostname: parsed.hostname, port: 443, path: parsed.pathname + parsed.search, method: 'GET', headers },
-    (upRes) => {
-      console.log(`[audio] ← ${upRes.statusCode}`);
+  const ext = safeName.split('.').pop()?.toLowerCase();
+  const ct = { mp3: 'audio/mpeg', wav: 'audio/wav', m4a: 'audio/mp4' }[ext] || 'application/octet-stream';
 
-      if ([301, 302, 303, 307, 308].includes(upRes.statusCode)) {
-        const loc = upRes.headers['location'];
-        upRes.resume();
-        if (!loc) return res.status(502).json({ error: 'Redirect with no location' });
-        let rParsed;
-        try { rParsed = new URL(loc); } catch { return res.status(502).json({ error: 'Bad redirect URL' }); }
-        if (!isAllowedHost(rParsed.hostname)) return res.status(403).json({ error: 'Redirect to forbidden host' });
-        return streamAudio(loc, headers, safeName, res, redirectCount + 1);
+  res.set('Content-Type', ct);
+  res.set('Content-Disposition', `attachment; filename="${safeName}"`);
+
+  const proc = spawn('curl', args);
+
+  proc.stdout.pipe(res);
+
+  proc.stderr.on('data', (d) => {
+    const msg = d.toString().trim();
+    if (msg) console.error('[audio-curl] stderr:', msg);
+  });
+
+  proc.on('close', (code) => {
+    if (code !== 0) {
+      console.error(`[audio-curl] exit code ${code} for ${targetUrl}`);
+      if (!res.headersSent) {
+        res.status(502).json({ error: 'Download failed' });
       }
-
-      res.status(upRes.statusCode);
-      res.set('Content-Type', upRes.headers['content-type'] || 'audio/mpeg');
-      res.set('Content-Disposition', `attachment; filename="${safeName}"`);
-      if (upRes.headers['content-length']) res.set('Content-Length', upRes.headers['content-length']);
-      upRes.pipe(res);
     }
-  );
+  });
 
-  upReq.on('error', (err) => {
-    console.error('[audio] error:', err.message);
+  proc.on('error', (err) => {
+    console.error('[audio-curl] spawn error:', err.message);
     if (!res.headersSent) res.status(502).json({ error: err.message });
   });
-  upReq.end();
+
+  res.on('close', () => { proc.kill(); });
 }
 
 // ─── Production: serve Vite build ─────────────────────────────────────────
