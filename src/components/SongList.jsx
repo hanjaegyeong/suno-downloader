@@ -48,21 +48,37 @@ async function fetchWavBlob(clipId) {
   if (convResp.status === 403) throw new Error(t('wavProRequired'));
   if (!convResp.ok) throw new Error(`${t('wavConvertFail')} ${convResp.status}`);
 
-  for (let attempt = 0; attempt < 30; attempt++) {
-    await sleep(2000);
-    const urlResp = await fetch(`/api/wav/url/${clipId}`, { headers: clerkCookieHeaders() });
-    if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
-    if (!urlResp.ok) continue;
-    const data = await urlResp.json();
-    const wavUrl = data.wav_file_url;
-    if (wavUrl) {
-      const name = `${clipId}.wav`;
-      const audioResp = await fetch(`/api/audio?url=${encodeURIComponent(wavUrl)}&name=${encodeURIComponent(name)}`);
-      if (!audioResp.ok) throw new Error(`${t('wavDownloadFail')} ${audioResp.status}`);
-      return audioResp.blob();
+  let consecutiveErrors = 0;
+  let delay = 4000;
+  while (true) {
+    await sleep(delay);
+    try {
+      const urlResp = await fetch(`/api/wav/url/${clipId}`, { headers: clerkCookieHeaders() });
+      if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
+      if (urlResp.status === 429) {
+        consecutiveErrors++;
+        delay = Math.min(delay * 2, 30000);
+        continue;
+      }
+      if (!urlResp.ok) { consecutiveErrors++; }
+      else {
+        consecutiveErrors = 0;
+        delay = 4000;
+        const data = await urlResp.json();
+        const wavUrl = data.wav_file_url;
+        if (wavUrl) {
+          const name = `${clipId}.wav`;
+          const audioResp = await fetch(`/api/audio?url=${encodeURIComponent(wavUrl)}&name=${encodeURIComponent(name)}`);
+          if (!audioResp.ok) throw new Error(`${t('wavDownloadFail')} ${audioResp.status}`);
+          return audioResp.blob();
+        }
+      }
+    } catch (e) {
+      if (e instanceof CookieExpiredError) throw e;
+      consecutiveErrors++;
     }
+    if (consecutiveErrors >= 15) throw new Error(t('wavTimeout'));
   }
-  throw new Error(t('wavTimeout'));
 }
 
 // Kick off WAV conversion without waiting for result (fire-and-forget)
@@ -145,30 +161,47 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
       // Phase 1: Start all conversions at once (lightweight POSTs)
       await Promise.allSettled(songs.map((song) => startWavConvert(song.id)));
 
-      // Phase 2: Poll + download with concurrency limit
+      // Phase 2: Poll + download with concurrency limit (staggered start)
       const results = await pooledMap(songs, async (song, i) => {
+        // Stagger workers to avoid thundering herd
+        await sleep(i * 800);
         const filename = `${String(i + 1).padStart(2, '0')} - ${sanitize(song.title)}.wav`;
 
-        for (let attempt = 0; attempt < 60; attempt++) {
-          await sleep(1000);
-          const urlResp = await fetch(`/api/wav/url/${song.id}`, { headers: clerkCookieHeaders() });
-          if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
-          if (!urlResp.ok) continue;
-          const data = await urlResp.json();
-          const wavUrl = data.wav_file_url;
-          if (wavUrl) {
-            // 3) Download immediately
-            const name = `${song.id}.wav`;
-            const audioResp = await fetch(`/api/audio?url=${encodeURIComponent(wavUrl)}&name=${encodeURIComponent(name)}`);
-            if (!audioResp.ok) throw new Error(`${t('wavDownloadFail')} ${audioResp.status}`);
-            const blob = await audioResp.blob();
-            completed++;
-            setDlProgress({ current: completed, total, phase: 'download' });
-            return { filename, blob };
+        let consecutiveErrors = 0;
+        let delay = 4000;
+        while (true) {
+          await sleep(delay);
+          try {
+            const urlResp = await fetch(`/api/wav/url/${song.id}`, { headers: clerkCookieHeaders() });
+            if (urlResp.status === 401) throw new CookieExpiredError(t('proCookieRequired'));
+            if (urlResp.status === 429) {
+              consecutiveErrors++;
+              delay = Math.min(delay * 2, 30000);
+              continue;
+            }
+            if (!urlResp.ok) { consecutiveErrors++; }
+            else {
+              consecutiveErrors = 0;
+              delay = 4000;
+              const data = await urlResp.json();
+              const wavUrl = data.wav_file_url;
+              if (wavUrl) {
+                const name = `${song.id}.wav`;
+                const audioResp = await fetch(`/api/audio?url=${encodeURIComponent(wavUrl)}&name=${encodeURIComponent(name)}`);
+                if (!audioResp.ok) throw new Error(`${t('wavDownloadFail')} ${audioResp.status}`);
+                const blob = await audioResp.blob();
+                completed++;
+                setDlProgress({ current: completed, total, phase: 'download' });
+                return { filename, blob };
+              }
+            }
+          } catch (e) {
+            if (e instanceof CookieExpiredError) throw e;
+            consecutiveErrors++;
           }
+          if (consecutiveErrors >= 15) throw new Error(t('wavTimeout'));
         }
-        throw new Error(t('wavTimeout'));
-      }, 8);
+      }, 3);
 
       for (const r of results) {
         if (r && r.__error) {
