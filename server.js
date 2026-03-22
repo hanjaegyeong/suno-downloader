@@ -447,8 +447,20 @@ function streamAudioCurl(targetUrl, headersObj, safeName, res) {
 // ─── Production: serve Vite build ─────────────────────────────────────────
 if (isProd) {
   const distDir = path.join(__dirname, 'dist');
-  app.use(express.static(distDir));
-  app.get('*', (_req, res) => res.sendFile(path.join(distDir, 'index.html')));
+  app.use(express.static(distDir, {
+    maxAge: '7d',
+    setHeaders(res, filePath) {
+      if (filePath.endsWith('.html')) {
+        res.set('Cache-Control', 'public, max-age=3600');
+        res.set('X-Robots-Tag', 'index, follow');
+      }
+    },
+  }));
+  app.get('*', (_req, res) => {
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('X-Robots-Tag', 'index, follow');
+    res.sendFile(path.join(distDir, 'index.html'));
+  });
 }
 
 app.listen(PORT, () => {

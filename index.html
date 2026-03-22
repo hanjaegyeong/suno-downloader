@@ -6,10 +6,16 @@
 
     <!-- Primary SEO -->
     <title>SunoDL – Suno 플레이리스트 다운로드 | Free Suno Playlist MP3 & WAV Downloader</title>
-    <meta name="description" content="Suno AI 라이브러리 플레이리스트 전곡을 MP3, WAV로 무료 다운로드. URL 붙여넣기만 하면 끝. 회원가입 불필요. Free Suno library playlist downloader - download all tracks as MP3 or WAV." />
-    <meta name="keywords" content="suno 플레이리스트 다운, suno 다운로드, suno 여러개 다운, suno mp3 다운, suno wav 다운, suno 노래 다운로드, suno ai 다운로드, suno 음악 다운로드, suno downloader, suno playlist download, suno mp3 download, suno wav download, suno ai music download, suno free download, 수노 다운로드, 수노 플레이리스트 다운로드" />
+    <meta name="description" content="Suno AI 라이브러리 플레이리스트 전곡을 MP3, WAV로 무료 다운로드. URL 붙여넣기만 하면 끝. 회원가입 불필요. ZIP 일괄 다운로드 지원. Free Suno library playlist downloader - download all tracks as MP3 or WAV instantly." />
+    <meta name="keywords" content="suno 플레이리스트 다운, suno 다운로드, suno 여러개 다운, suno mp3 다운, suno wav 다운, suno 노래 다운로드, suno ai 다운로드, suno 음악 다운로드, suno downloader, suno playlist download, suno mp3 download, suno wav download, suno ai music download, suno free download, 수노 다운로드, 수노 플레이리스트 다운로드, suno bulk download, suno zip download" />
     <meta name="author" content="SunoDL" />
     <link rel="canonical" href="https://suno-dl-kr.fly.dev/" />
+
+    <!-- Hreflang: multi-language support -->
+    <link rel="alternate" hreflang="ko" href="https://suno-dl-kr.fly.dev/" />
+    <link rel="alternate" hreflang="en" href="https://suno-dl-kr.fly.dev/" />
+    <link rel="alternate" hreflang="ja" href="https://suno-dl-kr.fly.dev/" />
+    <link rel="alternate" hreflang="x-default" href="https://suno-dl-kr.fly.dev/" />
 
     <!-- Open Graph (Facebook, Discord, KakaoTalk) -->
     <meta property="og:type" content="website" />
@@ -39,16 +45,17 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="googlebot" content="index, follow" />
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data: WebApplication -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "SunoDL",
       "url": "https://suno-dl-kr.fly.dev",
-      "description": "Suno AI 라이브러리 플레이리스트 전곡 MP3 WAV 무료 다운로드. Free Suno library playlist downloader.",
+      "description": "Suno AI 라이브러리 플레이리스트 전곡을 MP3, WAV로 무료 다운로드할 수 있는 웹 애플리케이션. Free web tool to download all tracks from Suno AI playlists as MP3 or WAV.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Web",
+      "browserRequirements": "Requires JavaScript. Works on Chrome, Firefox, Safari, Edge.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -56,9 +63,148 @@
       },
       "creator": {
         "@type": "Organization",
-        "name": "SunoDL"
+        "name": "SunoDL",
+        "url": "https://suno-dl-kr.fly.dev"
       },
-      "inLanguage": ["ko", "en", "ja"]
+      "inLanguage": ["ko", "en", "ja"],
+      "featureList": [
+        "Suno AI 플레이리스트 전곡 MP3 다운로드",
+        "WAV 고음질 다운로드 (Suno Pro)",
+        "ZIP 일괄 다운로드",
+        "회원가입 불필요",
+        "한국어, English, 日本語 지원"
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "SunoDL은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SunoDL은 Suno AI에서 만든 음악 플레이리스트의 모든 곡을 MP3 또는 WAV 형식으로 무료 다운로드할 수 있는 웹 서비스입니다. 플레이리스트 URL만 붙여넣으면 전곡을 한 번에 다운로드할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SunoDL은 무료인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, MP3 다운로드는 완전 무료이며 회원가입도 필요 없습니다. WAV 고음질 다운로드는 Suno Pro 또는 Premier 계정의 쿠키 연동이 필요하지만, SunoDL 자체는 무료입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "어떤 파일 형식을 지원하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MP3와 WAV 두 가지 형식을 지원합니다. MP3는 누구나 바로 다운로드할 수 있고, WAV는 Suno Pro 계정 연동 후 사용 가능합니다. 여러 곡을 ZIP 파일로 한 번에 다운로드하는 기능도 제공합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "회원가입이 필요한가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요, MP3 다운로드에는 회원가입이 전혀 필요 없습니다. 플레이리스트 URL만 붙여넣으면 바로 다운로드됩니다. WAV 다운로드 시에만 Suno Pro 계정 쿠키 연동이 필요합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "한 번에 몇 곡까지 다운로드할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "플레이리스트에 포함된 모든 곡을 다운로드할 수 있습니다. 곡 수 제한이 없으며, ZIP 일괄 다운로드 기능으로 전곡을 한 번에 받을 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is SunoDL?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SunoDL is a free web tool that lets you download all tracks from any Suno AI music playlist as MP3 or WAV files. Just paste a playlist URL and download all songs instantly — no sign-up required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is SunoDL free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, MP3 downloads are completely free with no sign-up needed. WAV high-quality downloads require linking a Suno Pro or Premier account cookie, but SunoDL itself is free."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I download a Suno playlist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply copy your Suno playlist URL (e.g., suno.com/playlist/fe85c062-...), paste it into SunoDL, and click 'Load'. All tracks will appear, and you can download them individually or as a ZIP bundle."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: HowTo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Suno AI 플레이리스트 전곡 다운로드하는 방법",
+      "description": "SunoDL을 사용하여 Suno AI 플레이리스트의 모든 곡을 MP3 또는 WAV로 다운로드하는 단계별 가이드입니다.",
+      "totalTime": "PT2M",
+      "tool": {
+        "@type": "HowToTool",
+        "name": "웹 브라우저 (Chrome, Firefox, Safari, Edge)"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Suno 플레이리스트 URL 복사",
+          "text": "Suno 웹사이트(suno.com)에서 다운로드하려는 플레이리스트를 열고, 브라우저 주소창의 URL을 복사합니다. 예: https://suno.com/playlist/fe85c062-..."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "SunoDL에 URL 붙여넣기",
+          "text": "SunoDL 웹사이트(suno-dl-kr.fly.dev)의 입력란에 복사한 플레이리스트 URL을 붙여넣습니다. 플레이리스트 ID만 입력해도 됩니다."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "트랙 목록 불러오기",
+          "text": "'불러오기' 버튼을 클릭하면 플레이리스트의 모든 트랙이 표시됩니다."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "다운로드 형식 선택 및 다운로드",
+          "text": "MP3 또는 WAV 형식을 선택하고, 개별 곡을 다운로드하거나 'ZIP 전체 다운로드' 버튼으로 전곡을 한 번에 다운로드합니다."
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "SunoDL",
+          "item": "https://suno-dl-kr.fly.dev/"
+        }
+      ]
     }
     </script>
 
@@ -75,52 +221,174 @@
   <body>
     <div id="root">
       <!-- Static fallback for SEO crawlers — replaced by React on mount -->
-      <header style="background:#111119;padding:16px 24px;text-align:center">
-        <h1 style="color:#c084fc;font-size:1.6rem;margin:0">SunoDL<span style="color:#22d3ee">.</span> <span style="background:#8b5cf6;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.7rem">FREE</span></h1>
+      <header style="background:#111119;padding:14px 24px;border-bottom:1px solid #242430">
+        <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between">
+          <h1 style="color:#c084fc;font-size:1.5rem;margin:0;font-weight:900;letter-spacing:-.03em">SunoDL<span style="color:#22d3ee">.</span> <span style="background:#8b5cf6;color:#fff;padding:2px 8px;border-radius:99px;font-size:0.65rem;font-weight:700;vertical-align:2px">FREE</span></h1>
+          <nav style="font-size:0.8rem;color:#6b6b80" aria-label="언어 선택">
+            <span>한국어</span> · <span>English</span> · <span>日本語</span>
+          </nav>
+        </div>
       </header>
-      <main style="max-width:700px;margin:0 auto;padding:32px 16px;color:#e2e0f0;font-family:sans-serif;background:#08080f">
-        <section style="text-align:center;margin-bottom:24px">
-          <h2 style="font-size:2rem;color:#fff;margin:0 0 8px">Suno 플레이리스트<br><em style="color:#c084fc">전곡 다운로드</em></h2>
-          <p>플레이리스트 URL만 붙여넣으면 MP3 · WAV 무료 다운로드</p>
+
+      <main style="max-width:900px;margin:0 auto;padding:40px 18px;color:#ededf5;font-family:'Outfit',sans-serif;background:#08080f">
+
+        <!-- Hero -->
+        <section style="text-align:center;margin-bottom:40px">
+          <h2 style="font-size:clamp(28px,6vw,48px);color:#fff;margin:0 0 12px;font-weight:900;line-height:1.1;letter-spacing:-.03em">
+            Suno 플레이리스트<br><em style="background:linear-gradient(120deg,#c084fc,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">전곡 다운로드</em>
+          </h2>
+          <p style="color:#6b6b80;font-size:16px;line-height:1.65;max-width:500px;margin:0 auto">플레이리스트 URL만 붙여넣으면<br>MP3 · WAV 무료 다운로드</p>
         </section>
-        <section style="margin-bottom:32px">
-          <h3>How to Use / 사용법</h3>
-          <ol>
-            <li>Suno 플레이리스트 URL을 복사합니다 (예: suno.com/playlist/fe85c062-…)</li>
-            <li>위 입력란에 붙여넣고 "불러오기" 클릭</li>
-            <li>MP3 또는 WAV 형식으로 전곡 다운로드</li>
+
+        <!-- About / 소개 -->
+        <section style="margin-bottom:36px">
+          <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:12px;color:#fff">SunoDL이란?</h3>
+          <p style="line-height:1.8;color:#c0c0d0;font-size:15px">
+            <strong>SunoDL</strong>은 <strong>Suno AI</strong>에서 생성한 음악 플레이리스트의 전곡을 <strong>MP3</strong> 또는 <strong>WAV</strong> 형식으로 무료 다운로드할 수 있는 웹 도구입니다.
+            복잡한 과정 없이 플레이리스트 URL 하나만 붙여넣으면 모든 곡을 한 번에 다운로드할 수 있습니다.
+            회원가입이나 소프트웨어 설치 없이 웹 브라우저에서 바로 사용하세요.
+          </p>
+        </section>
+
+        <!-- 사용법 (How to Use) -->
+        <section style="background:#111119;border:1px solid #242430;border-radius:16px;padding:28px;margin-bottom:36px">
+          <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:18px;color:#fff">사용 방법</h3>
+          <ol style="line-height:2.2;color:#c0c0d0;font-size:14.5px;padding-left:20px">
+            <li><strong style="color:#22d3ee">플레이리스트 URL 복사</strong> — Suno 웹사이트에서 다운로드할 플레이리스트를 열고 주소창의 URL을 복사합니다. (예: suno.com/playlist/fe85c062-…)</li>
+            <li><strong style="color:#22d3ee">URL 붙여넣기</strong> — SunoDL 입력란에 복사한 URL을 붙여넣고 "불러오기" 버튼을 클릭합니다. 플레이리스트 ID만 입력해도 됩니다.</li>
+            <li><strong style="color:#22d3ee">형식 선택</strong> — MP3(무료) 또는 WAV(Suno Pro 계정 필요) 중 원하는 형식을 선택합니다.</li>
+            <li><strong style="color:#22d3ee">다운로드</strong> — 개별 곡을 하나씩 다운로드하거나 "ZIP 전체 다운로드"로 전곡을 한 번에 받습니다.</li>
           </ol>
-          <h3>Features / 특징</h3>
-          <ul>
-            <li>Suno AI 라이브러리 플레이리스트 전곡 무료 다운로드</li>
-            <li>MP3, WAV 형식 지원</li>
-            <li>ZIP 일괄 다운로드</li>
-            <li>회원가입 불필요 · No sign-up required</li>
-            <li>한국어, English, 日本語 지원</li>
+        </section>
+
+        <!-- 주요 기능 (Features) -->
+        <section style="margin-bottom:36px">
+          <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:16px;color:#fff">주요 기능</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px">
+            <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
+              <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">MP3 무료 다운로드</h4>
+              <p style="font-size:13px;color:#6b6b80;line-height:1.6">Suno AI 플레이리스트의 모든 곡을 MP3 형식으로 무료 다운로드. 회원가입 없이 바로 사용 가능합니다.</p>
+            </div>
+            <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
+              <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">WAV 고음질 다운로드</h4>
+              <p style="font-size:13px;color:#6b6b80;line-height:1.6">Suno Pro 또는 Premier 계정을 연동하면 무손실 WAV 형식으로 다운로드할 수 있습니다.</p>
+            </div>
+            <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
+              <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">ZIP 일괄 다운로드</h4>
+              <p style="font-size:13px;color:#6b6b80;line-height:1.6">플레이리스트의 전곡을 ZIP 파일 하나로 묶어서 한 번에 다운로드합니다. 곡 수 제한이 없습니다.</p>
+            </div>
+            <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
+              <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">다국어 지원</h4>
+              <p style="font-size:13px;color:#6b6b80;line-height:1.6">한국어, English, 日本語 3개 국어를 지원합니다. 브라우저 언어에 따라 자동 감지됩니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ 한국어 -->
+        <section style="margin-bottom:36px">
+          <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:16px;color:#fff">자주 묻는 질문 (FAQ)</h3>
+          <dl style="line-height:1.8;color:#c0c0d0;font-size:14.5px">
+            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. SunoDL은 무료인가요?</dt>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">네, MP3 다운로드는 완전 무료이며 회원가입도 필요 없습니다. WAV 고음질 다운로드는 Suno Pro 또는 Premier 계정의 쿠키를 연동하면 사용할 수 있습니다. SunoDL 서비스 자체에 비용은 없습니다.</dd>
+
+            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 회원가입이 필요한가요?</dt>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">아닙니다. MP3 다운로드에는 어떠한 계정이나 회원가입도 필요 없습니다. 플레이리스트 URL만 붙여넣으면 바로 다운로드할 수 있습니다.</dd>
+
+            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 어떤 파일 형식을 지원하나요?</dt>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">MP3와 WAV 두 가지 형식을 지원합니다. MP3는 누구나 무료로 다운로드할 수 있고, WAV는 Suno Pro 계정 연동 후 사용할 수 있습니다. 여러 곡을 ZIP 파일로 일괄 다운로드하는 기능도 제공합니다.</dd>
+
+            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 한 번에 몇 곡까지 다운로드할 수 있나요?</dt>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">플레이리스트에 포함된 모든 곡을 다운로드할 수 있습니다. 곡 수에 제한이 없으며, ZIP 일괄 다운로드 기능으로 수십~수백 곡도 한 번에 받을 수 있습니다.</dd>
+
+            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. WAV 다운로드는 어떻게 하나요?</dt>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">WAV 다운로드에는 Suno Pro 또는 Premier 계정이 필요합니다. 헤더의 "Pro 연결" 버튼을 클릭하고, suno.com에서 <code style="background:rgba(139,92,246,.15);padding:2px 6px;border-radius:4px;color:#22d3ee;font-size:12px">__client</code> 쿠키 값을 복사하여 붙여넣으면 됩니다.</dd>
+
+            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 안전한가요? 개인정보는 어떻게 처리되나요?</dt>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">SunoDL은 쿠키를 서버 메모리에만 임시 저장하며, 데이터베이스에 기록하지 않습니다. 서버 세션이 종료되면 모든 데이터가 자동으로 삭제됩니다. 어떤 개인정보도 수집하지 않습니다.</dd>
+          </dl>
+        </section>
+
+        <!-- English Section -->
+        <section style="margin-bottom:36px" lang="en">
+          <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:12px;color:#fff">What is SunoDL?</h3>
+          <p style="line-height:1.8;color:#c0c0d0;font-size:15px;margin-bottom:16px">
+            <strong>SunoDL</strong> is a free web tool that allows you to download all tracks from any <strong>Suno AI</strong> music playlist as <strong>MP3</strong> or <strong>WAV</strong> files.
+            Simply paste a Suno playlist URL and download every song instantly. No sign-up, no software installation — just paste and download directly in your browser.
+          </p>
+
+          <h4 style="font-size:1rem;font-weight:700;margin-bottom:10px;color:#c084fc">How to Download Suno Playlists</h4>
+          <ol style="line-height:2;color:#c0c0d0;font-size:14px;padding-left:20px;margin-bottom:16px">
+            <li><strong>Copy the playlist URL</strong> from suno.com (e.g., suno.com/playlist/fe85c062-…)</li>
+            <li><strong>Paste the URL</strong> into SunoDL and click "Load"</li>
+            <li><strong>Choose your format</strong> — MP3 (free) or WAV (requires Suno Pro)</li>
+            <li><strong>Download</strong> individual tracks or all at once as a ZIP bundle</li>
+          </ol>
+
+          <h4 style="font-size:1rem;font-weight:700;margin-bottom:10px;color:#c084fc">Key Features</h4>
+          <ul style="line-height:2;color:#c0c0d0;font-size:14px;padding-left:20px;margin-bottom:16px">
+            <li><strong>Free MP3 Downloads</strong> — Download all playlist tracks as MP3 with no account needed</li>
+            <li><strong>WAV Lossless Quality</strong> — High-quality WAV downloads with Suno Pro account</li>
+            <li><strong>ZIP Bulk Download</strong> — Get all tracks in a single ZIP file</li>
+            <li><strong>No Sign-up Required</strong> — Start downloading immediately, no registration</li>
+            <li><strong>Multi-language</strong> — Available in Korean, English, and Japanese</li>
+          </ul>
+
+          <h4 style="font-size:1rem;font-weight:700;margin-bottom:10px;color:#c084fc">Frequently Asked Questions</h4>
+          <dl style="line-height:1.8;color:#c0c0d0;font-size:14px">
+            <dt style="font-weight:700;color:#fff;margin-bottom:2px">Is SunoDL really free?</dt>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">Yes, MP3 downloads are completely free. WAV downloads require a Suno Pro or Premier account cookie, but SunoDL itself charges nothing.</dd>
+
+            <dt style="font-weight:700;color:#fff;margin-bottom:2px">How many songs can I download at once?</dt>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">There is no song limit. You can download every track in a playlist, whether it has 10 or 500 songs. The ZIP download bundles them all together.</dd>
+
+            <dt style="font-weight:700;color:#fff;margin-bottom:2px">Is it safe to use?</dt>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">Yes. SunoDL stores cookies only in server memory (never in a database) and automatically deletes them when the session ends. No personal data is collected.</dd>
+          </dl>
+        </section>
+
+        <!-- Japanese Section -->
+        <section style="margin-bottom:36px" lang="ja">
+          <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:12px;color:#fff">SunoDLとは？</h3>
+          <p style="line-height:1.8;color:#c0c0d0;font-size:15px;margin-bottom:12px">
+            <strong>SunoDL</strong>は、<strong>Suno AI</strong>で作成した音楽プレイリストの全曲を<strong>MP3</strong>または<strong>WAV</strong>形式で無料ダウンロードできるWebツールです。
+            プレイリストURLを貼り付けるだけで、全曲を一括ダウンロードできます。会員登録不要、ソフトウェアのインストールも不要です。
+          </p>
+          <h4 style="font-size:1rem;font-weight:700;margin-bottom:8px;color:#c084fc">主な機能</h4>
+          <ul style="line-height:2;color:#c0c0d0;font-size:14px;padding-left:20px">
+            <li>Suno AIプレイリスト全曲のMP3無料ダウンロード</li>
+            <li>WAV高音質ダウンロード（Suno Proアカウント必要）</li>
+            <li>ZIP一括ダウンロード対応</li>
+            <li>登録不要 — URLを貼り付けるだけ</li>
+            <li>日本語・韓国語・英語対応</li>
           </ul>
         </section>
-        <section>
-          <h3>SunoDL – Free Suno Playlist MP3 & WAV Downloader</h3>
-          <p>Download all tracks from any Suno AI library playlist as MP3 or WAV for free. Just paste a playlist URL. No sign-up required. Supports bulk ZIP download.</p>
-          <p>Suno AIライブラリ プレイリストの全曲をMP3・WAVで無料ダウンロード。URLを貼り付けるだけ。登録不要。</p>
-        </section>
+
       </main>
-      <footer style="text-align:center;padding:16px;color:#888;font-size:0.8rem;background:#08080f">
-        <p>SunoDL · Suno AI와 무관한 독립 서비스입니다.</p>
-        <p>음악 저작권은 각 제작자에게 있습니다. 개인 용도로만 사용하세요.</p>
+
+      <footer style="text-align:center;padding:20px 18px;color:#6b6b80;font-size:0.75rem;background:#08080f;border-top:1px solid #242430;line-height:1.9">
+        <p>SunoDL · Suno AI와 무관한 독립 서비스입니다. (Independent service, not affiliated with Suno AI.)</p>
+        <p>음악 저작권은 각 제작자에게 있습니다. 개인 용도로만 사용하세요. (Music copyrights belong to their creators. For personal use only.)</p>
       </footer>
     </div>
+
     <noscript>
-      <div style="max-width:700px;margin:0 auto;padding:32px 16px;color:#e2e0f0;font-family:sans-serif;background:#08080f">
-        <h1>SunoDL – Suno 플레이리스트 전체 MP3 & WAV 무료 다운로드</h1>
-        <p>이 사이트는 JavaScript가 필요합니다. 브라우저에서 JavaScript를 활성화해주세요.</p>
-        <p>This site requires JavaScript. Please enable JavaScript in your browser.</p>
-        <h2>Features</h2>
-        <ul>
-          <li>Suno AI 라이브러리 플레이리스트 전곡 무료 MP3/WAV 다운로드</li>
-          <li>ZIP 일괄 다운로드 지원</li>
-          <li>회원가입 불필요</li>
-          <li>한국어, English, 日本語 지원</li>
+      <div style="max-width:900px;margin:0 auto;padding:40px 18px;color:#ededf5;font-family:sans-serif;background:#08080f">
+        <h1 style="font-size:1.8rem;margin-bottom:12px">SunoDL – Suno 플레이리스트 전곡 MP3 & WAV 무료 다운로드</h1>
+        <p style="color:#c0c0d0;line-height:1.8;margin-bottom:20px">
+          SunoDL은 Suno AI 플레이리스트의 모든 곡을 MP3, WAV로 무료 다운로드할 수 있는 웹 서비스입니다.
+          이 사이트는 JavaScript가 필요합니다. 브라우저에서 JavaScript를 활성화해주세요.
+        </p>
+        <p style="color:#c0c0d0;line-height:1.8;margin-bottom:20px" lang="en">
+          SunoDL is a free web tool to download all tracks from Suno AI playlists as MP3 or WAV.
+          This site requires JavaScript. Please enable JavaScript in your browser.
+        </p>
+        <h2 style="font-size:1.2rem;margin-bottom:8px">Features / 주요 기능</h2>
+        <ul style="line-height:2;color:#c0c0d0;padding-left:20px">
+          <li>Suno AI 플레이리스트 전곡 무료 MP3 다운로드 (Free MP3 downloads from Suno playlists)</li>
+          <li>WAV 고음질 다운로드 지원 (Lossless WAV downloads with Suno Pro)</li>
+          <li>ZIP 일괄 다운로드 (Bulk ZIP download)</li>
+          <li>회원가입 불필요 (No sign-up required)</li>
+          <li>한국어, English, 日本語 지원 (Multi-language support)</li>
         </ul>
       </div>
     </noscript>
