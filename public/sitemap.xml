@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://suno-dl-kr.fly.dev/</loc>
-    <lastmod>2026-03-22</lastmod>
+    <loc>https://suno-down.kro.kr/</loc>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-dl-kr.fly.dev/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://suno-dl-kr.fly.dev/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-dl-kr.fly.dev/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-dl-kr.fly.dev/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.kro.kr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.kro.kr/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.kro.kr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.kro.kr/" />
   </url>
 </urlset>

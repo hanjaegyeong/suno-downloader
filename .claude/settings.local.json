@@ -12,7 +12,13 @@
       "Bash(gh secret:*)",
       "Bash(where gh:*)",
       "Bash(npx vite:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git push:*)",
+      "Bash(fly certs:*)",
+      "Bash(dig suno-down.kro.kr A +short)",
+      "Bash(dig suno-down.kro.kr AAAA +short)",
+      "Bash(dig:*)",
+      "Bash(fly deploy:*)"
     ]
   }
 }

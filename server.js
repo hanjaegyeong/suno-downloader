@@ -11,6 +11,16 @@ const isProd = process.env.NODE_ENV === 'production';
 
 app.use(express.json());
 
+// ─── Redirect fly.dev → custom domain ───
+if (isProd) {
+  app.use((req, res, next) => {
+    if (req.hostname === 'suno-dl-kr.fly.dev' || req.hostname === 'suno-down.kro.kr') {
+      return res.redirect(301, `https://suno-down.com${req.originalUrl}`);
+    }
+    next();
+  });
+}
+
 // ─── Chrome-like headers ───
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
            '(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
