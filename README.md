@@ -1,10 +1,10 @@
-# SunoDL
+# SunoDown
 
 Suno AI 플레이리스트 전곡을 MP3/WAV로 무료 다운로드할 수 있는 웹앱입니다.
 
 ## Live
 
-**https://suno-dl-kr.fly.dev**
+**https://suno-down.com**
 
 ## Features
 
@@ -42,5 +42,5 @@ fly deploy
 ## How to Use
 
 1. [suno.com](https://suno.com)에서 플레이리스트 URL 복사
-2. SunoDL에 붙여넣기
+2. SunoDown에 붙여넣기
 3. MP3 또는 WAV로 다운로드

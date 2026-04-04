@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for suno-dl-kr on 2026-03-02T20:42:23+09:00
+# fly.toml app configuration file generated for suno-down on 2026-03-02T20:42:23+09:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'suno-dl-kr'
+app = 'suno-down'
 primary_region = 'nrt'
 
 [env]

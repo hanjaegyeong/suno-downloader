@@ -102,7 +102,7 @@ export default function App() {
         <div className="wrap">
           <div className="header-inner">
             <div className="logo">
-              SunoDL<span className="logo-dot">.</span>{' '}
+              SunoDown<span className="logo-dot">.</span>{' '}
               <span className="pill">FREE</span>
             </div>
             <div className="header-right">
