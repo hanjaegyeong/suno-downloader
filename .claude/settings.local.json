@@ -6,19 +6,57 @@
       "Bash(node:*)",
       "Bash(curl:*)",
       "Bash(fly version:*)",
+      "Bash(fly certs:*)",
+      "Bash(fly deploy:*)",
       "Bash(powershell:*)",
       "Bash(export:*)",
-      "WebFetch(domain:suno-dl-kr.fly.dev)",
+      "Bash(ls:*)",
+      "Bash(dig:*)",
+      "Bash(npx vite:*)",
+      "Bash(chmod +x:*)",
+      "Bash(open:*)",
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
       "Bash(gh secret:*)",
       "Bash(where gh:*)",
-      "Bash(npx vite:*)",
-      "Bash(ls:*)",
-      "Bash(git push:*)",
-      "Bash(fly certs:*)",
-      "Bash(dig suno-down.kro.kr A +short)",
-      "Bash(dig suno-down.kro.kr AAAA +short)",
-      "Bash(dig:*)",
-      "Bash(fly deploy:*)"
+      "WebFetch(domain:suno-dl-kr.fly.dev)",
+      "WebSearch",
+      "mcp__plugin_oh-my-claudecode_t__lsp_diagnostics"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/sync-claude-md.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/check-plan-update.sh",
+            "statusMessage": "플랜 진행 상황 확인 중..."
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/sync-plan.sh",
+            "statusMessage": "플랜 동기화 확인 중..."
+          }
+        ]
+      }
     ]
   }
 }
