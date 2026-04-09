@@ -468,6 +468,8 @@ header {
 }
 .btn-all:hover { opacity: .85; }
 .btn-all:disabled { opacity: .45; cursor: not-allowed; }
+.btn-all.btn-cancel { background: linear-gradient(135deg, #dc2626, #991b1b); }
+.btn-all.btn-cancel:hover { opacity: .9; }
 
 .song-list { display: flex; flex-direction: column; gap: 8px; }
 
