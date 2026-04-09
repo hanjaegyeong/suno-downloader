@@ -1,7 +1,7 @@
 const messages = {
   ko: {
-    pageTitle: 'SunoDown – Suno 플레이리스트 전체 MP3 & WAV ZIP파일로 무료 다운로드',
-    pageDesc: 'Suno AI 라이브러리 플레이리스트 전곡을 MP3, WAV ZIP파일로 한 번에 다운로드. URL 붙여넣기만 하면 끝.',
+    pageTitle: '수노 다운로더 SunoDown – Suno 플레이리스트 MP3 & WAV 무료 다운로드',
+    pageDesc: '수노 다운로드 무료 도구. Suno AI 플레이리스트 전곡 MP3·WAV ZIP 일괄 다운로드. URL만 붙여넣으면 끝. 회원가입 불필요.',
     heroTitle1: 'Suno 플레이리스트',
     heroTitle2: '전곡 다운로드',
     heroDesc: '플레이리스트 URL만 붙여넣으면\nMP3 · WAV 무료 다운로드',
@@ -60,8 +60,8 @@ const messages = {
     footerRight: '음악 저작권은 각 제작자에게 있습니다. 개인 용도로만 사용하세요.',
   },
   en: {
-    pageTitle: 'SunoDown – Free Suno Playlist MP3 & WAV Downloader',
-    pageDesc: 'Download all tracks from any Suno AI library playlist as MP3 or WAV for free. Just paste a playlist URL. No sign-up required.',
+    pageTitle: 'Suno Downloader – Free Suno Playlist MP3 & WAV Download | SunoDown',
+    pageDesc: 'Free Suno downloader: download all Suno AI playlist songs as MP3 or WAV. Bulk ZIP download, no sign-up. The best free Suno music downloader online.',
     heroTitle1: 'Suno Playlist',
     heroTitle2: 'Full Download',
     heroDesc: 'Just paste a playlist URL\nFree MP3 · WAV download',
@@ -120,8 +120,8 @@ const messages = {
     footerRight: 'Music copyrights belong to their creators. For personal use only.',
   },
   ja: {
-    pageTitle: 'SunoDown – Sunoプレイリスト MP3 & WAV 無料ダウンローダー',
-    pageDesc: 'Suno AIライブラリ プレイリストの全曲をMP3・WAVで無料ダウンロード。URLを貼り付けるだけ。登録不要。',
+    pageTitle: 'Sunoダウンローダー – Suno AI MP3 & WAV 無料ダウンロード | SunoDown',
+    pageDesc: 'Suno AIプレイリスト全曲をMP3・WAVで無料ダウンロード。ZIP一括ダウンロード対応。登録不要の無料Sunoダウンローダー。',
     heroTitle1: 'Sunoプレイリスト',
     heroTitle2: '全曲ダウンロード',
     heroDesc: 'プレイリストURLを貼り付けるだけ\nMP3 · WAV 無料ダウンロード',
