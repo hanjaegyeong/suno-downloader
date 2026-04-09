@@ -2,6 +2,7 @@
 
 const express        = require('express');
 const { execFile, spawn } = require('child_process');
+const crypto         = require('crypto');
 const path           = require('path');
 const { URL }        = require('url');
 
@@ -42,21 +43,40 @@ function sunoHeaders(token) {
   return h;
 }
 
-// ─── Clerk Session Manager ─────────────────────────────────────────────
-const CLERK_URL     = 'https://clerk.suno.com';
-const CLERK_VERSION = '5.15.0';
+// ─── Clerk Multi-Session Manager ──────────────────────────────────────
+const CLERK_URL      = 'https://clerk.suno.com';
+const CLERK_VERSION  = '5.15.0';
 const JWT_REFRESH_MS = 50_000;
+const SESSION_TTL    = 2 * 60 * 60 * 1000; // 2 hours
 
-const session = {
-  cookie: '',
-  sid: '',
-  jwt: '',
-  refreshedAt: 0,
-  timer: null,
-  _refreshLock: null,   // prevents concurrent JWT refreshes
-};
+const sessions = new Map();
 
-function getJwt() { return session.jwt; }
+function createSession() {
+  const id = crypto.randomUUID();
+  const sess = { id, cookie: '', sid: '', jwt: '', refreshedAt: 0, timer: null, _refreshLock: null };
+  sessions.set(id, sess);
+  return sess;
+}
+
+function getSession(id) { return id ? sessions.get(id) || null : null; }
+
+function destroySession(id) {
+  const sess = sessions.get(id);
+  if (!sess) return;
+  if (sess.timer) clearInterval(sess.timer);
+  sessions.delete(id);
+}
+
+// Cleanup expired sessions every 5 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [id, sess] of sessions) {
+    if (now - (sess.refreshedAt || sess._createdAt || now) > SESSION_TTL) {
+      console.log(`[clerk] Expired session ${id.slice(0, 8)}…`);
+      destroySession(id);
+    }
+  }
+}, 5 * 60 * 1000);
 
 async function clerkGetSessionId(cookie) {
   const url = `${CLERK_URL}/v1/client?_is_native=true&_clerk_js_version=${CLERK_VERSION}`;
@@ -69,67 +89,63 @@ async function clerkGetSessionId(cookie) {
   return sid;
 }
 
-// Locked refresh: only one refresh runs at a time, others wait for the same result
-async function clerkRefreshJwt() {
-  if (session._refreshLock) return session._refreshLock;
-  session._refreshLock = _doRefreshJwt();
-  try { return await session._refreshLock; }
-  finally { session._refreshLock = null; }
+async function clerkRefreshJwt(sess) {
+  if (sess._refreshLock) return sess._refreshLock;
+  sess._refreshLock = _doRefreshJwt(sess);
+  try { return await sess._refreshLock; }
+  finally { sess._refreshLock = null; }
 }
 
-async function _doRefreshJwt() {
-  const url = `${CLERK_URL}/v1/client/sessions/${session.sid}/tokens?_is_native=true&_clerk_js_version=${CLERK_VERSION}`;
-  const headers = { 'Authorization': session.cookie, 'User-Agent': UA, 'Content-Type': 'application/json' };
+async function _doRefreshJwt(sess) {
+  const url = `${CLERK_URL}/v1/client/sessions/${sess.sid}/tokens?_is_native=true&_clerk_js_version=${CLERK_VERSION}`;
+  const headers = { 'Authorization': sess.cookie, 'User-Agent': UA, 'Content-Type': 'application/json' };
   const { status, body } = await curlFetch(url, headers, { method: 'POST', body: '{}' });
   if (status !== 200) throw new Error(`Clerk token refresh failed (${status})`);
   const data = JSON.parse(body);
   const jwt = data?.jwt;
   if (!jwt) throw new Error('Clerk: JWT not found in response');
-  session.jwt = jwt;
-  session.refreshedAt = Date.now();
+  sess.jwt = jwt;
+  sess.refreshedAt = Date.now();
   return jwt;
 }
 
-function stopSession(keepCookie = false) {
-  if (session.timer) { clearInterval(session.timer); session.timer = null; }
-  if (!keepCookie) session.cookie = '';
-  session.sid = '';
-  session.jwt = '';
-  session.refreshedAt = 0;
+function stopSess(sess, keepCookie = false) {
+  if (!sess) return;
+  if (sess.timer) { clearInterval(sess.timer); sess.timer = null; }
+  if (!keepCookie) sess.cookie = '';
+  sess.sid = '';
+  sess.jwt = '';
+  sess.refreshedAt = 0;
 }
 
-function startRefreshTimer() {
-  if (session.timer) clearInterval(session.timer);
-  session.timer = setInterval(async () => {
+function startRefreshTimer(sess) {
+  if (sess.timer) clearInterval(sess.timer);
+  sess.timer = setInterval(async () => {
     try {
-      await clerkRefreshJwt();
-      console.log('[clerk] JWT auto-refreshed');
+      await clerkRefreshJwt(sess);
     } catch (err) {
-      console.error('[clerk] JWT refresh failed, retrying with new session ID:', err.message);
+      console.error(`[clerk:${sess.id.slice(0, 8)}] JWT refresh failed:`, err.message);
       try {
-        session.sid = await clerkGetSessionId(session.cookie);
-        await clerkRefreshJwt();
-        console.log('[clerk] JWT recovered after session ID refresh');
+        sess.sid = await clerkGetSessionId(sess.cookie);
+        await clerkRefreshJwt(sess);
       } catch (retryErr) {
-        console.error('[clerk] Recovery failed, keeping cookie for auto-recovery:', retryErr.message);
-        stopSession(true);
+        console.error(`[clerk:${sess.id.slice(0, 8)}] Recovery failed:`, retryErr.message);
+        stopSess(sess, true);
       }
     }
   }, JWT_REFRESH_MS);
 }
 
-async function tryAutoRecover() {
-  if (!session.cookie) return false;
-  console.log('[clerk] Attempting auto-recovery with stored cookie...');
+async function tryAutoRecover(sess) {
+  if (!sess?.cookie) return false;
   try {
-    session.sid = await clerkGetSessionId(session.cookie);
-    await clerkRefreshJwt();
-    startRefreshTimer();
-    console.log(`[clerk] Auto-recovery OK (sid=${session.sid.slice(0, 12)}…)`);
+    sess.sid = await clerkGetSessionId(sess.cookie);
+    await clerkRefreshJwt(sess);
+    startRefreshTimer(sess);
     return true;
   } catch (err) {
-    console.error('[clerk] Auto-recovery failed:', err.message);
-    stopSession(false);
+    console.error(`[clerk:${sess.id.slice(0, 8)}] Auto-recovery failed:`, err.message);
+    stopSess(sess, false);
     return false;
   }
 }
@@ -139,26 +155,26 @@ app.post('/api/auth/cookie', async (req, res) => {
   const { cookie } = req.body;
   if (!cookie) return res.status(400).json({ error: 'cookie is required' });
 
-  stopSession();
+  const sess = createSession();
 
   try {
-    session.cookie = cookie;
-    session.sid = await clerkGetSessionId(cookie);
-    await clerkRefreshJwt();
+    sess.cookie = cookie;
+    sess.sid = await clerkGetSessionId(cookie);
+    await clerkRefreshJwt(sess);
 
     // Check if the account has a Pro/Premier subscription
     const billingUrl = 'https://studio-api.prod.suno.com/api/billing/info/';
-    const billingHeaders = { ...sunoHeaders(session.jwt), 'Accept': 'application/json, text/plain, */*' };
+    const billingHeaders = { ...sunoHeaders(sess.jwt), 'Accept': 'application/json, text/plain, */*' };
     const { status: bStatus, body: bBody } = await curlFetch(billingUrl, billingHeaders);
-    console.log(`[clerk] Billing check ← ${bStatus}`);
+    console.log(`[clerk:${sess.id.slice(0, 8)}] Billing ← ${bStatus}`);
 
     if (bStatus === 200) {
       try {
         const billing = JSON.parse(bBody);
         const plan = billing?.plan?.id || billing?.subscription_type || '';
-        console.log(`[clerk] Plan: ${plan || '(free)'}`);
+        console.log(`[clerk:${sess.id.slice(0, 8)}] Plan: ${plan || '(free)'}`);
         if (!plan || plan === 'free' || plan === 'basic') {
-          stopSession();
+          destroySession(sess.id);
           return res.status(403).json({ error: 'WAV 다운로드는 Suno Pro 또는 Premier 플랜이 필요합니다. / WAV download requires Suno Pro or Premier plan.' });
         }
       } catch (parseErr) {
@@ -168,30 +184,63 @@ app.post('/api/auth/cookie', async (req, res) => {
       console.warn(`[clerk] Billing check failed (${bStatus}), allowing session`);
     }
 
-    startRefreshTimer();
+    startRefreshTimer(sess);
 
-    console.log(`[clerk] Session OK (sid=${session.sid.slice(0, 12)}…)`);
-    res.json({ ok: true });
+    console.log(`[clerk:${sess.id.slice(0, 8)}] Session OK`);
+    res.json({ ok: true, sessionId: sess.id });
   } catch (err) {
-    stopSession();
+    destroySession(sess.id);
     console.error('[clerk] Init failed:', err.message);
     res.status(401).json({ error: err.message });
   }
 });
 
 // GET /api/auth/status — check session health
-app.get('/api/auth/status', (_req, res) => {
-  const active = !!(session.jwt && session.timer);
-  const canRecover = !active && !!session.cookie;
-  const age = active ? Math.round((Date.now() - session.refreshedAt) / 1000) : -1;
+app.get('/api/auth/status', (req, res) => {
+  const sess = getSession(req.headers['x-session-id']);
+  if (!sess) return res.json({ active: false, canRecover: false, tokenAgeSec: -1 });
+  const active = !!(sess.jwt && sess.timer);
+  const canRecover = !active && !!sess.cookie;
+  const age = active ? Math.round((Date.now() - sess.refreshedAt) / 1000) : -1;
   res.json({ active, canRecover, tokenAgeSec: age });
 });
 
 // DELETE /api/auth — logout
-app.delete('/api/auth', (_req, res) => {
-  stopSession();
+app.delete('/api/auth', (req, res) => {
+  const sessId = req.headers['x-session-id'];
+  if (sessId) destroySession(sessId);
   res.json({ ok: true });
 });
+
+// ─── Global Suno API rate limiter ─────────────────────────────────────────
+// Limits concurrent outgoing requests to Suno to prevent IP ban
+const SUNO_MAX_CONCURRENT = 10;
+const SUNO_MIN_DELAY_MS   = 100; // minimum gap between requests
+let sunoInFlight = 0;
+const sunoQueue  = [];
+
+function sunoThrottle(fn) {
+  return new Promise((resolve, reject) => {
+    const run = async () => {
+      sunoInFlight++;
+      try { resolve(await fn()); }
+      catch (e) { reject(e); }
+      finally {
+        sunoInFlight--;
+        setTimeout(() => {
+          if (sunoQueue.length > 0 && sunoInFlight < SUNO_MAX_CONCURRENT) {
+            sunoQueue.shift()();
+          }
+        }, SUNO_MIN_DELAY_MS);
+      }
+    };
+    if (sunoInFlight < SUNO_MAX_CONCURRENT) {
+      run();
+    } else {
+      sunoQueue.push(run);
+    }
+  });
+}
 
 // ─── curl-based fetch ──────────────────────────────────────────────────────
 // curl's TLS fingerprint is whitelisted by Cloudflare; Node's https/undici
@@ -253,19 +302,18 @@ app.get('/api/playlist/:id', async (req, res) => {
 });
 
 // ─── Ensure fresh JWT (with lock, safe for concurrent calls) ────────────────
-async function ensureFreshJwt() {
-  // If JWT was refreshed within the last 30 seconds, it's still good
-  if (session.jwt && (Date.now() - session.refreshedAt) < 30_000) return session.jwt;
+async function ensureFreshJwt(sess) {
+  if (!sess) return null;
+  if (sess.jwt && (Date.now() - sess.refreshedAt) < 30_000) return sess.jwt;
 
-  if (session.jwt && session.sid) {
-    try {
-      return await clerkRefreshJwt();
-    } catch (_) { /* fall through to recovery */ }
+  if (sess.jwt && sess.sid) {
+    try { return await clerkRefreshJwt(sess); }
+    catch (_) { /* fall through to recovery */ }
   }
 
-  if (session.cookie) {
-    const recovered = await tryAutoRecover();
-    if (recovered) return session.jwt;
+  if (sess.cookie) {
+    const recovered = await tryAutoRecover(sess);
+    if (recovered) return sess.jwt;
   }
 
   return null;
@@ -273,43 +321,50 @@ async function ensureFreshJwt() {
 
 // ─── WAV middleware: require active Clerk session ──────────────────────────
 async function requireSession(req, res, next) {
-  let jwt = await ensureFreshJwt();
+  const sessId = req.headers['x-session-id'];
+  let sess = getSession(sessId);
 
-  // If session is dead but client sent the cookie header, auto-recover
-  if (!jwt) {
-    const cookieHeader = req.headers['x-clerk-cookie'];
-    if (cookieHeader) {
-      console.log('[clerk] Session lost, auto-recovering from request cookie...');
-      stopSession();
-      try {
-        session.cookie = cookieHeader;
-        session.sid = await clerkGetSessionId(cookieHeader);
-        await clerkRefreshJwt();
-        startRefreshTimer();
-        jwt = session.jwt;
-        console.log(`[clerk] Auto-recovery from header OK (sid=${session.sid.slice(0, 12)}…)`);
-      } catch (err) {
-        console.error('[clerk] Auto-recovery from header failed:', err.message);
-        stopSession();
-      }
+  if (sess) {
+    const jwt = await ensureFreshJwt(sess);
+    if (jwt) {
+      req.sunoJwt = jwt;
+      req.sunoSession = sess;
+      return next();
     }
   }
 
-  if (!jwt) return res.status(401).json({ error: 'Suno Pro 쿠키를 먼저 설정해주세요.' });
-  req.sunoJwt = jwt;
-  next();
+  // Auto-recover from cookie header if no valid session
+  const cookieHeader = req.headers['x-clerk-cookie'];
+  if (cookieHeader) {
+    const newSess = createSession();
+    try {
+      newSess.cookie = cookieHeader;
+      newSess.sid = await clerkGetSessionId(cookieHeader);
+      await clerkRefreshJwt(newSess);
+      startRefreshTimer(newSess);
+      req.sunoJwt = newSess.jwt;
+      req.sunoSession = newSess;
+      res.set('x-new-session-id', newSess.id);
+      return next();
+    } catch (err) {
+      console.error('[clerk] Auto-recovery failed:', err.message);
+      destroySession(newSess.id);
+    }
+  }
+
+  return res.status(401).json({ error: 'Suno Pro 쿠키를 먼저 설정해주세요.' });
 }
 
 // ─── Helper: call Suno API with auto-retry on 401 ──────────────────────────
-async function sunoFetch(url, headersObj, opts = {}) {
-  let result = await curlFetch(url, headersObj, opts);
+async function sunoFetch(url, headersObj, opts = {}, sess = null) {
+  let result = await sunoThrottle(() => curlFetch(url, headersObj, opts));
 
-  if (result.status === 401 && session.cookie) {
+  if (result.status === 401 && sess?.cookie) {
     console.log('[suno] 401 received, refreshing JWT and retrying...');
-    const freshJwt = await ensureFreshJwt();
+    const freshJwt = await ensureFreshJwt(sess);
     if (freshJwt) {
       headersObj['Authorization'] = `Bearer ${freshJwt}`;
-      result = await curlFetch(url, headersObj, opts);
+      result = await sunoThrottle(() => curlFetch(url, headersObj, opts));
       console.log(`[suno] retry ← ${result.status}`);
     }
   }
@@ -329,7 +384,7 @@ app.post('/api/wav/convert/:clipId', requireSession, async (req, res) => {
 
   console.log(`[wav-convert] curl POST → ${targetUrl}`);
   try {
-    const { status, body } = await sunoFetch(targetUrl, headers, { method: 'POST', body: '{}' });
+    const { status, body } = await sunoFetch(targetUrl, headers, { method: 'POST', body: '{}' }, req.sunoSession);
     console.log(`[wav-convert] curl ← ${status}`);
     res.status(status).set('Content-Type', 'application/json').send(body || '{}');
   } catch (err) {
@@ -346,7 +401,7 @@ app.get('/api/wav/url/:clipId', requireSession, async (req, res) => {
 
   console.log(`[wav-url] curl → ${targetUrl}`);
   try {
-    const { status, body } = await sunoFetch(targetUrl, headers);
+    const { status, body } = await sunoFetch(targetUrl, headers, {}, req.sunoSession);
     console.log(`[wav-url] curl ← ${status}`);
     res.status(status).set('Content-Type', 'application/json').send(body);
   } catch (err) {

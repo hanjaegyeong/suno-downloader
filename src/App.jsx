@@ -25,7 +25,10 @@ export default function App() {
       })
         .then((r) => r.json())
         .then((data) => {
-          if (data.ok) setProActive(true);
+          if (data.ok) {
+            setProActive(true);
+            if (data.sessionId) localStorage.setItem('suno_session_id', data.sessionId);
+          }
         })
         .catch(() => {});
     }
@@ -50,6 +53,7 @@ export default function App() {
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
       localStorage.setItem('suno_clerk_cookie', val);
+      if (data.sessionId) localStorage.setItem('suno_session_id', data.sessionId);
       setProActive(true);
       setShowCookie(false);
       setStatus({ msg: t('connectOk'), type: 'ok' });
@@ -77,8 +81,10 @@ export default function App() {
   }, [lang]);
 
   const disconnectCookie = useCallback(async () => {
-    await fetch('/api/auth', { method: 'DELETE' }).catch(() => {});
+    const sessId = localStorage.getItem('suno_session_id');
+    await fetch('/api/auth', { method: 'DELETE', headers: sessId ? { 'x-session-id': sessId } : {} }).catch(() => {});
     localStorage.removeItem('suno_clerk_cookie');
+    localStorage.removeItem('suno_session_id');
     setProActive(false);
     setCookieInput('');
     setFmt('mp3');
