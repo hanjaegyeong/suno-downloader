@@ -146,6 +146,28 @@ app.post('/api/auth/cookie', async (req, res) => {
     session.sid = await clerkGetSessionId(cookie);
     await clerkRefreshJwt();
 
+    // Check if the account has a Pro/Premier subscription
+    const billingUrl = 'https://studio-api.prod.suno.com/api/billing/info/';
+    const billingHeaders = { ...sunoHeaders(session.jwt), 'Accept': 'application/json, text/plain, */*' };
+    const { status: bStatus, body: bBody } = await curlFetch(billingUrl, billingHeaders);
+    console.log(`[clerk] Billing check ← ${bStatus}`);
+
+    if (bStatus === 200) {
+      try {
+        const billing = JSON.parse(bBody);
+        const plan = billing?.plan?.id || billing?.subscription_type || '';
+        console.log(`[clerk] Plan: ${plan || '(free)'}`);
+        if (!plan || plan === 'free' || plan === 'basic') {
+          stopSession();
+          return res.status(403).json({ error: 'WAV 다운로드는 Suno Pro 또는 Premier 플랜이 필요합니다. / WAV download requires Suno Pro or Premier plan.' });
+        }
+      } catch (parseErr) {
+        console.warn('[clerk] Billing parse failed, allowing session:', parseErr.message);
+      }
+    } else {
+      console.warn(`[clerk] Billing check failed (${bStatus}), allowing session`);
+    }
+
     startRefreshTimer();
 
     console.log(`[clerk] Session OK (sid=${session.sid.slice(0, 12)}…)`);
