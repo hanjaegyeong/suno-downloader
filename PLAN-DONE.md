@@ -2,6 +2,38 @@
 
 ---
 
+## `/privacy` 정적 페이지(개인정보 처리 방침) + 정적 페이지 빌드 전략 결정 (2026-05-18 완료)
+
+### 체크리스트
+- [x] `public/privacy/index.html` 작성 (3개 언어 콘텐츠 inline + 메타·canonical)
+- [x] 언어 토글 vanilla JS (localStorage `sunodown-lang` 키 공유)
+- [x] `server.js`: `/privacy` 라우트 명시 응답 (express.static 앞에 배치, 301 회피)
+- [x] 메인 페이지(`src/App.jsx`) 푸터에 `/privacy` 링크 추가 + i18n 키 `footerPrivacy`
+- [x] 정적 폴백 `index.html` 푸터에도 `/privacy` 링크 추가 (크롤러 가시성)
+- [x] `npm run build` 성공, `dist/privacy/index.html` 26KB 정상 복사
+- [x] curl 검증: `/privacy` 200 (no redirect), `/privacy/` 200, `/` 200, `/nonexistent` SPA fallback 200
+- [x] 페이지 콘텐츠 검증: title, og, h1, 3개 lang-block, 연락처 이메일 3× 포함
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-18 | CMP 보류 (AdSense 등록 전), /privacy로 전환 |
+| 2026-05-18 | vite-react-ssg 검토 → 메인 SEO 폴백 500줄을 React로 마이그레이션해야 하는 비용이 과대 → 기각 |
+| 2026-05-18 | **빌드 전략 확정: `public/` 디렉토리 정적 HTML** — 의존성 0 추가, 메인 페이지 무손상 |
+| 2026-05-18 | `public/privacy/index.html` 작성 (ko/en/ja 인라인, vanilla JS 언어 토글) |
+| 2026-05-18 | `server.js` `CONTENT_PAGES` 배열로 라우트 일반화 (express.static 앞에 배치하여 301 회피) |
+| 2026-05-18 | 빌드·prod 서버 curl 검증 모두 통과, 의존성 추가 없음 확인 |
+
+### 메모
+- 본 플랜으로 백로그의 **"정적 페이지 빌드 전략 결정"** 항목도 동시 해소.
+- 향후 `/terms`, `/about`, `/guide/*`, `/faq` 모두 동일 패턴(`public/<slug>/index.html` + `CONTENT_PAGES` 배열 추가) — 한 줄 라우팅 등록으로 확장 가능.
+- 광고 조항은 "도입 예정" 톤으로 작성 — **AdSense 실제 등록 시 본 방침 갱신 필요**.
+- 연락처 이메일: `hjg000223@naver.com` (사용자 지정).
+- 시행일: 2026-05-18.
+- 블로그가 본격화되면 그때 정적 사이트 생성기(예: Astro·11ty) 도입을 다시 검토 — 현 시점은 콘텐츠 페이지 1~10개 규모라 정적 HTML이 best.
+
+---
+
 ## `public/ads.txt` 추가로 AdSense 게시자 ID 인증 (2026-05-18 완료)
 
 ### 체크리스트
