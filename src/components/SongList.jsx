@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef, Fragment } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import JSZip from 'jszip';
-import AdSlot from './AdSlot';
 import { t } from '../i18n';
 
 function cdnUrl(id, fmt) {
@@ -333,61 +332,48 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
           const mainKey = `${i}-${fmt}`;
 
           return (
-            <Fragment key={song.id}>
-              <div className="song-card">
-                <span className="s-num">{String(i + 1).padStart(2, '0')}</span>
+            <div className="song-card" key={song.id}>
+              <span className="s-num">{String(i + 1).padStart(2, '0')}</span>
 
-                {song.img
-                  ? (
-                    <img
-                      className="s-img"
-                      src={`/api/image?url=${encodeURIComponent(song.img)}`}
-                      alt=""
-                      loading="lazy"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                  )
-                  : <div className="s-placeholder">🎵</div>
-                }
+              {song.img
+                ? (
+                  <img
+                    className="s-img"
+                    src={`/api/image?url=${encodeURIComponent(song.img)}`}
+                    alt=""
+                    loading="lazy"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                )
+                : <div className="s-placeholder">🎵</div>
+              }
 
-                <div className="s-info">
-                  <div className="s-title" title={song.title}>{song.title}</div>
-                  <div className="s-id">{song.id}</div>
-                </div>
-
-                <div className="s-btns">
-                  <button
-                    className="s-btn"
-                    onClick={() => dlOne(song, fmt, mainKey)}
-                    disabled={btnStates[mainKey] === 'loading'}
-                  >
-                    {btnLabel(btnStates[mainKey], `⬇ ${fmt.toUpperCase()}`)}
-                  </button>
-
-                  <a
-                    className="s-btn suno"
-                    href={`https://suno.com/song/${song.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    🔗
-                  </a>
-                </div>
+              <div className="s-info">
+                <div className="s-title" title={song.title}>{song.title}</div>
+                <div className="s-id">{song.id}</div>
               </div>
 
-              {(i + 1) % 5 === 0 && i + 1 < songs.length && (
-                <div className="in-list-ad">
-                  <AdSlot type="468" label="In-list Banner" />
-                </div>
-              )}
-            </Fragment>
+              <div className="s-btns">
+                <button
+                  className="s-btn"
+                  onClick={() => dlOne(song, fmt, mainKey)}
+                  disabled={btnStates[mainKey] === 'loading'}
+                >
+                  {btnLabel(btnStates[mainKey], `⬇ ${fmt.toUpperCase()}`)}
+                </button>
+
+                <a
+                  className="s-btn suno"
+                  href={`https://suno.com/song/${song.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🔗
+                </a>
+              </div>
+            </div>
           );
         })}
-      </div>
-
-      <div className="ad-row">
-        <AdSlot type="336" label="④ Large Rectangle 336×280" />
-        <AdSlot type="300" label="⑤ Medium Rectangle 300×250" />
       </div>
     </div>
   );

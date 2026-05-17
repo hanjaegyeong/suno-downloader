@@ -29,35 +29,6 @@ body {
 /* ─── LAYOUT ─── */
 .wrap { max-width: 900px; margin: 0 auto; padding: 0 18px; }
 
-/* ─── AD PLACEHOLDERS ─── */
-.ad {
-  background: #0d0d17;
-  border: 1px dashed #2a2a40;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  color: var(--muted);
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  position: relative;
-}
-.ad::after {
-  content: 'ADVERTISEMENT';
-  position: absolute;
-  top: 5px; left: 8px;
-  font-size: 8px;
-  opacity: .4;
-}
-.ad-728 { width: 100%; height: 90px; }
-.ad-336 { width: 336px; height: 280px; max-width: 100%; }
-.ad-300 { width: 300px; height: 250px; max-width: 100%; }
-.ad-468 { width: 100%; height: 60px; }
-
 /* ─── TOKEN BANNER ─── */
 .token-banner {
   background: rgba(251, 113, 133, 0.1);
@@ -550,18 +521,6 @@ header {
 .s-btn.suno:hover     { background: var(--surface2); border-color: var(--acc2); color: var(--acc2); }
 .s-btn:disabled       { opacity: .45; cursor: not-allowed; }
 
-/* ─── IN-LIST AD ─── */
-.in-list-ad { margin: 6px 0; display: flex; justify-content: center; }
-
-/* ─── POST-RESULTS AD ROW ─── */
-.ad-row {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin: 32px 0;
-}
-
 /* ─── HOW-TO ─── */
 .howto {
   background: var(--surface);
@@ -588,8 +547,6 @@ header {
 .step-t b { color: var(--acc3); }
 
 /* ─── FOOTER ─── */
-.footer-ads { padding: 28px 0 0; }
-
 footer {
   border-top: 1px solid var(--border);
   padding: 22px 0;
@@ -618,6 +575,5 @@ footer a { color: var(--acc2); text-decoration: none; }
   .row { flex-direction: column; }
   .song-card { flex-wrap: wrap; }
   .s-btns { width: 100%; justify-content: flex-end; }
-  .ad-728 { height: 60px; }
   .token-panel { padding: 20px; }
 }

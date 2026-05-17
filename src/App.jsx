@@ -1,7 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import Downloader from './components/Downloader';
 import SongList from './components/SongList';
-import AdSlot from './components/AdSlot';
 import { t, getLang, setLang, LANGS } from './i18n';
 
 export default function App() {
@@ -97,13 +96,6 @@ export default function App() {
 
   return (
     <>
-      {/* Top Leaderboard */}
-      <div style={{ background: '#0a0a12', padding: '8px 18px 4px' }}>
-        <div className="wrap">
-          <AdSlot type="728" label="① Leaderboard 728×90" />
-        </div>
-      </div>
-
       <header>
         <div className="wrap">
           <div className="header-inner">
@@ -236,16 +228,6 @@ export default function App() {
               onCookieExpired={handleCookieExpired}
             />
           )}
-
-          <div style={{ display: 'flex', justifyContent: 'center', margin: '0 0 16px' }}>
-            <AdSlot type="728" label="② Mid-page Leaderboard 728×90" />
-          </div>
-
-          <div className="footer-ads">
-            <div className="ad-row">
-              <AdSlot type="336" label="③ Footer Rectangle 336×280" />
-            </div>
-          </div>
         </div>
       </main>
 
