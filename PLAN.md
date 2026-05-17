@@ -1,0 +1,17 @@
+- `<meta name="keywords">` 축소와 본문 키워드 밀도 자연화
+- `public/ads.txt` 추가로 AdSense 게시자 ID 인증
+- Google CMP 동의 메시지 스크립트 삽입 (EEA·UK·스위스 대응)
+- /privacy 정적 페이지 (개인정보 처리 방침)
+- /terms 정적 페이지 (이용약관·면책 조항)
+- /about 정적 페이지 (운영자·서비스 소개)
+- 정적 페이지 빌드 전략 결정 (Vite SSG · vite-plugin-prerender · 별도 정적 HTML)
+- /guide/how-to-download-suno-playlist (영문 How-To, 한·일 hreflang)
+- /guide/suno-mp3-vs-wav (포맷 비교 가이드)
+- /guide/suno-pro-cookie-setup (Pro 쿠키 설정 튜토리얼)
+- /faq 정적 페이지 (메인 FAQ 분리·확장, 페이지별 FAQ Schema)
+- 페이지별 OG 이미지·title·description·canonical 개별화
+- 이미지 alt 텍스트 정비와 404 페이지 라우트 처리
+- /blog 블로그 시스템 구축 + 첫 글 /blog/suno-ai-music-copyright
+- README.md 정비 (사용법·스크린샷·기여 가이드)
+- Google Analytics 4 스니펫 삽입과 Core Web Vitals 측정 코드
+- robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)
