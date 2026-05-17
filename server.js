@@ -542,7 +542,7 @@ if (isProd) {
 
   // Clean URLs for static content pages (must precede express.static
   // to avoid its built-in trailing-slash 301 redirect for directories)
-  const CONTENT_PAGES = ['privacy'];
+  const CONTENT_PAGES = ['privacy', 'terms'];
   CONTENT_PAGES.forEach((slug) => {
     app.get([`/${slug}`, `/${slug}/`], (_req, res) => {
       res.set('Cache-Control', 'public, max-age=3600');
