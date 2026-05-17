@@ -557,6 +557,8 @@ footer {
   line-height: 1.9;
 }
 footer a { color: var(--acc2); text-decoration: none; }
+footer a:hover { color: var(--acc1); text-decoration: underline; }
+.footer-links { margin-bottom: 6px; }
 
 /* ─── SPINNER ─── */
 @keyframes spin { to { transform: rotate(360deg); } }

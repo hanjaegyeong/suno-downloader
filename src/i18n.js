@@ -58,6 +58,7 @@ const messages = {
     wavTimeout: 'WAV 변환 시간 초과 (60초)',
     footerCopy: 'SunoDown · Suno AI와 무관한 독립 서비스입니다.',
     footerRight: '음악 저작권은 각 제작자에게 있습니다. 개인 용도로만 사용하세요.',
+    footerPrivacy: '개인정보 처리 방침',
   },
   en: {
     pageTitle: 'Suno Downloader – Free Suno AI Playlist MP3 & WAV Download',
@@ -118,6 +119,7 @@ const messages = {
     wavTimeout: 'WAV conversion timed out (60s)',
     footerCopy: 'SunoDown · Independent service, not affiliated with Suno AI.',
     footerRight: 'Music copyrights belong to their creators. For personal use only.',
+    footerPrivacy: 'Privacy Policy',
   },
   ja: {
     pageTitle: 'Sunoダウンローダー – Suno AI MP3 & WAV 無料ダウンロード | SunoDown',
@@ -178,6 +180,7 @@ const messages = {
     wavTimeout: 'WAV変換タイムアウト（60秒）',
     footerCopy: 'SunoDown · Suno AIとは無関係の独立サービスです。',
     footerRight: '音楽の著作権は各制作者に帰属します。個人使用のみ。',
+    footerPrivacy: 'プライバシーポリシー',
   },
 };
 

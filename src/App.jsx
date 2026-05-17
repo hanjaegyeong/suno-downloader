@@ -233,6 +233,9 @@ export default function App() {
 
       <footer>
         <div className="wrap">
+          <p className="footer-links">
+            <a href="/privacy">{t('footerPrivacy')}</a>
+          </p>
           <p>{t('footerCopy')}</p>
           <p>{t('footerRight')}</p>
         </div>

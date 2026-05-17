@@ -539,6 +539,18 @@ function streamAudioCurl(targetUrl, headersObj, safeName, res) {
 // ─── Production: serve Vite build ─────────────────────────────────────────
 if (isProd) {
   const distDir = path.join(__dirname, 'dist');
+
+  // Clean URLs for static content pages (must precede express.static
+  // to avoid its built-in trailing-slash 301 redirect for directories)
+  const CONTENT_PAGES = ['privacy'];
+  CONTENT_PAGES.forEach((slug) => {
+    app.get([`/${slug}`, `/${slug}/`], (_req, res) => {
+      res.set('Cache-Control', 'public, max-age=3600');
+      res.set('X-Robots-Tag', 'index, follow');
+      res.sendFile(path.join(distDir, slug, 'index.html'));
+    });
+  });
+
   app.use(express.static(distDir, {
     maxAge: '7d',
     setHeaders(res, filePath) {
@@ -548,6 +560,7 @@ if (isProd) {
       }
     },
   }));
+
   app.get('*', (_req, res) => {
     res.set('Cache-Control', 'public, max-age=3600');
     res.set('X-Robots-Tag', 'index, follow');
