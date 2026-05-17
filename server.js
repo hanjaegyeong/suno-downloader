@@ -12,10 +12,15 @@ const isProd = process.env.NODE_ENV === 'production';
 
 app.use(express.json());
 
-// ─── Redirect fly.dev → custom domain ───
+// ─── Redirect non-canonical hosts → apex domain ───
+const REDIRECT_HOSTS = new Set([
+  'suno-dl-kr.fly.dev',
+  'suno-down.kro.kr',
+  'www.suno-down.com',
+]);
 if (isProd) {
   app.use((req, res, next) => {
-    if (req.hostname === 'suno-dl-kr.fly.dev' || req.hostname === 'suno-down.kro.kr') {
+    if (REDIRECT_HOSTS.has(req.hostname)) {
       return res.redirect(301, `https://suno-down.com${req.originalUrl}`);
     }
     next();
