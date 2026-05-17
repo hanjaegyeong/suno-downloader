@@ -1,4 +1,3 @@
-- `<meta name="keywords">` 축소와 본문 키워드 밀도 자연화
 - `public/ads.txt` 추가로 AdSense 게시자 ID 인증
 - Google CMP 동의 메시지 스크립트 삽입 (EEA·UK·스위스 대응)
 - /privacy 정적 페이지 (개인정보 처리 방침)
