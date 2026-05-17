@@ -1,4 +1,3 @@
-- /terms 정적 페이지 (이용약관·면책 조항)
 - /about 정적 페이지 (운영자·서비스 소개)
 - /guide/how-to-download-suno-playlist (영문 How-To, 한·일 hreflang)
 - /guide/suno-mp3-vs-wav (포맷 비교 가이드)

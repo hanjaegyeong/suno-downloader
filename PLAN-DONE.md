@@ -2,6 +2,37 @@
 
 ---
 
+## `/terms` 정적 페이지(이용약관·면책 조항) (2026-05-18 완료)
+
+### 체크리스트
+- [x] /privacy 페이지 구조 분석 (HTML, 스타일, 다국어 처리 방식 확인)
+- [x] `public/terms/index.html` 작성 (ko/en/ja, /privacy와 일관된 다크 테마 + 언어 토글 vanilla JS)
+- [x] 약관 본문 16개 섹션 — 서비스 설명, Suno 비제휴 고지, 이용 자격, 허용/금지 행위, 책임, IP, 제3자 서비스, 보증 부인, 책임 제한, 면책 보장, 변경·중단, 약관 변경, 준거법·관할, 개인정보 링크, 문의
+- [x] `server.js` `CONTENT_PAGES`에 `'terms'` 추가 (한 줄 확장)
+- [x] `src/i18n.js`에 `footerTerms` 키 ko/en/ja 추가 (이용약관 / Terms of Service / 利用規約)
+- [x] `src/App.jsx` 푸터에 `/terms` 링크 추가
+- [x] `public/sitemap.xml`에 `/terms` 및 누락됐던 `/privacy` 항목 동시 보강 (hreflang 4종)
+- [x] `public/privacy/index.html` 자체 푸터에도 `/terms` 링크 추가 (페이지 간 일관성)
+- [x] `npm run build` 성공 (570ms, `dist/terms/index.html` 생성)
+- [x] 로컬 prod 서버 curl 검증: `/terms` 200, `/terms/` 200, `/privacy` 200, `/` 200; 한국어 title/og 정상 노출
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-18 | /start-phase로 항목 시작 |
+| 2026-05-18 | /privacy 구조 분석 후 동일 스타일로 public/terms/index.html 작성 (16개 섹션, ko/en/ja) |
+| 2026-05-18 | server.js CONTENT_PAGES, i18n footerTerms, App.jsx 푸터, sitemap.xml 동시 갱신; /privacy 푸터에도 /terms 링크 추가 |
+| 2026-05-18 | npm run build 성공 → 로컬 server.js 기동 후 /terms, /terms/, /privacy 모두 200 응답 확인 |
+
+### 메모
+- /privacy 작업에서 확립한 **`public/<slug>/index.html` + `CONTENT_PAGES` 배열** 패턴이 그대로 적용 — 신규 의존성 0, 코드 변경 최소.
+- 준거법: 대한민국, 1심 전속관할: 운영자 주소지 (소비자 강행법규 우선 단서 포함).
+- 책임 한도 USD 0 명시 (무료 서비스). AdSense 도입 시 광고 조항도 본 약관과 함께 재검토 필요.
+- 시행일: 2026-05-18.
+- 다음 자연 후속 작업은 `/about`(운영자·서비스 소개) — 동일 패턴으로 30분 내 가능.
+
+---
+
 ## `/privacy` 정적 페이지(개인정보 처리 방침) + 정적 페이지 빌드 전략 결정 (2026-05-18 완료)
 
 ### 체크리스트
