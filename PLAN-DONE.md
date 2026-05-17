@@ -2,6 +2,29 @@
 
 ---
 
+## `public/ads.txt` 추가로 AdSense 게시자 ID 인증 (2026-05-18 완료)
+
+### 체크리스트
+- [x] `public/ads.txt` 작성 — `google.com, pub-7817461938422229, DIRECT, f08c47fec0942fa0`
+- [x] `npm run build` → `dist/ads.txt` 59B 정상 복사 확인
+- [x] 로컬 prod 서버 `curl /ads.txt` → 200 OK + `Content-Type: text/plain; charset=UTF-8` + 본문 일치
+- [x] `file` 검사 `ASCII text`, `od -c` 검사 BOM 없음·LF 정상
+- [x] `server.js` 추가 분기 불필요 — Express static이 기본 text/plain 처리
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-18 | 플랜 시작, AdSense publisher ID `pub-7817461938422229` 확인 |
+| 2026-05-18 | `public/ads.txt` 작성, `npm run build` → `dist/ads.txt` 복사 확인 |
+| 2026-05-18 | prod 서버 curl 검증 200 OK / text/plain / 59B / Cache-Control 1주 |
+
+### 메모
+- TAG ID `f08c47fec0942fa0`는 Google 전체 publisher 공통 식별자.
+- 향후 다른 광고 네트워크(Ezoic·Mediavine 등) 도입 시 ads.txt에 한 줄씩 추가하면 됨.
+- AdSense Console 반영까지 보통 24시간 ~ 며칠 소요. 실제 인증 확인은 배포 후 별도 모니터링.
+
+---
+
 ## `<meta name="keywords">` 축소와 본문 키워드 밀도 자연화 (2026-05-18 완료)
 
 ### 체크리스트
