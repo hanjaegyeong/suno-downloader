@@ -2,6 +2,46 @@
 
 ---
 
+## `/guide/how-to-download-suno-playlist` 한·영·일 분리 URL 가이드 페이지 (2026-05-25 완료)
+
+### 체크리스트
+- [x] `public/guide/how-to-download-suno-playlist/index.html` (en, self canonical, lang=en)
+- [x] `public/ko/guide/how-to-download-suno-playlist/index.html` (ko, lang=ko)
+- [x] `public/ja/guide/how-to-download-suno-playlist/index.html` (ja, lang=ja)
+- [x] 3개 페이지 모두 HowTo JSON-LD 삽입 (5단계, position/name/text/url) + BreadcrumbList
+- [x] 3개 페이지 모두 hreflang 4종(en/ko/ja/x-default) + self canonical
+- [x] 본문 5단계 — URL 복사 / 붙여넣기 / 트랙 불러오기 / MP3·WAV 선택 / 개별·ZIP 다운로드
+- [x] 메인 페이지 ↔ 가이드 양방향 내부 링크 (App.jsx 푸터 lang별 URL, 정적 폴백·privacy·terms에 가이드 링크)
+- [x] `server.js` `CONTENT_PAGES`에 3개 라우트(중첩 경로) 등록 + curl 200 검증
+- [x] `public/sitemap.xml`에 3개 URL 각각 + hreflang alternate 추가
+- [x] `npm run build` 성공, 3개 `dist/.../index.html` 생성 확인 (각 17~18KB)
+- [x] 로컬 prod curl 검증 — 3개 URL 200, lang/canonical/4 hreflang 정상, JSON-LD 2 blocks/page 유효, 메인 회귀 없음
+- [ ] Google Rich Results Test로 HowTo 스키마 유효성 확인 (3개 언어 모두) — 배포 후 외부 검증 작업
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-18 | /start-phase로 항목 시작 |
+| 2026-05-18 | URL 구조 확정: 분리 URL + `/[lang]/` prefix (SEO 효과 최대화) |
+| 2026-05-25 | 3개 가이드 페이지 작성 — privacy/terms 디자인 시스템 재사용, 단일 언어 분리 구조 |
+| 2026-05-25 | HowTo JSON-LD 5단계 + BreadcrumbList per page, 4 hreflang(en/ko/ja/x-default) self-canonical |
+| 2026-05-25 | server.js CONTENT_PAGES 확장 (중첩 경로 5개), sitemap.xml에 3 URL × 4 hreflang 추가 |
+| 2026-05-25 | i18n.js footerGuide/footerGuideUrl 키 ko/en/ja 추가, App.jsx 푸터에 lang별 가이드 링크 |
+| 2026-05-25 | index.html 정적 폴백·privacy·terms 푸터 모두에 가이드 링크 추가 (양방향 PageRank) |
+| 2026-05-25 | npm run build 600ms 성공 → prod 서버 curl 검증: 3개 URL + main + privacy + terms + sitemap 전부 200, JSON-LD 6 blocks 전체 유효 |
+
+### 메모
+- GSC 데이터(약 7주간 노출 ~50, 클릭 5)로 콘텐츠 매칭 표면 부재가 진단된 직후의 첫 콘텐츠 페이지 — "도구 + 정보 분리" 전략의 시작점.
+- **URL 구조 결정**: privacy/terms는 단일 URL + 인라인 언어 토글이지만, 가이드는 분리 URL + `/[lang]/` prefix. 이유: privacy/terms는 SEO 가치보다 의무 표시 성격이지만 가이드는 명확한 검색 의도 키워드("how to download suno playlist", "suno 플레이리스트 다운로드 방법", "suno プレイリスト ダウンロード")를 잡아야 하므로 hreflang 효과 극대화가 필요.
+- 메인 페이지에 이미 HowTo JSON-LD가 ko/en/ja 3개 들어있는데(인덱스 페이지) 가이드와 충돌 가능성 → 가이드 본문은 메인보다 훨씬 상세하게(긴 본문, 단계별 카드, FAQ, CTA, 관련 링크) 작성해 정보 의도 페이지로 차별화. 메인은 "도구" 의도 페이지로 유지.
+- 신규 의존성 0 — 기존 `public/<slug>/index.html` + `CONTENT_PAGES` 패턴이 중첩 경로(`guide/how-to-download-suno-playlist`, `ko/guide/...`, `ja/guide/...`)도 그대로 지원.
+- i18n 새 키 `footerGuideUrl`은 단순 텍스트가 아니라 URL — 각 언어 사용자가 자기 언어 가이드로 정확히 가도록 설계.
+- 정적 폴백(노JS 크롤러용)에는 3개 언어 가이드 링크를 모두 노출 — 크롤러가 hreflang 신호와 동시에 양방향 링크로도 페이지 그래프 파악 가능.
+- 페이지당 17~18KB로 메인 정적 폴백(~32KB) 대비 가벼움. Core Web Vitals LCP에 유리.
+- 다음 자연 후속 작업은 PLAN.md 상단 `/guide/suno-mp3-vs-wav` — 동일 분리 URL 패턴으로 30~40분 내 가능.
+
+---
+
 ## `/terms` 정적 페이지(이용약관·면책 조항) (2026-05-18 완료)
 
 ### 체크리스트

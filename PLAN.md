@@ -1,12 +1,14 @@
-- /about 정적 페이지 (운영자·서비스 소개)
-- /guide/how-to-download-suno-playlist (영문 How-To, 한·일 hreflang)
 - /guide/suno-mp3-vs-wav (포맷 비교 가이드)
 - /guide/suno-pro-cookie-setup (Pro 쿠키 설정 튜토리얼)
 - /faq 정적 페이지 (메인 FAQ 분리·확장, 페이지별 FAQ Schema)
 - 페이지별 OG 이미지·title·description·canonical 개별화
-- 이미지 alt 텍스트 정비와 404 페이지 라우트 처리
+- 이미지 alt 텍스트 정비 (이미지 검색 노출)
 - /blog 블로그 시스템 구축 + 첫 글 /blog/suno-ai-music-copyright
-- README.md 정비 (사용법·스크린샷·기여 가이드)
-- Google Analytics 4 스니펫 삽입과 Core Web Vitals 측정 코드
 - robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)
-- Google CMP 동의 메시지 스크립트 삽입 (EEA·UK·스위스 대응) — AdSense 등록 후 진행
+- 메인 페이지 본문 텍스트 강화 — 도구 UI 외 정보성 텍스트가 거의 없어 매칭할 검색어 표면이 부족 (GSC 노출 ~50/7주)
+- 타깃 키워드 검증 — GSC 검색어 리포트·외부 키워드 도구로 현재 추측 기반 타깃을 실데이터로 교체
+- 외부 자연 노출 채널 — Reddit r/SunoAI·Suno Discord·ProductHunt에 자연스러운 등장으로 첫 백링크·도메인 권위 확보
+- SoftwareApplication / WebApplication JSON-LD — 도구 사이트 분류 시그널, sitelinks 후보 진입
+- Naver·Bing 웹마스터 등록 — 한국어·국제 검색 보조 채널 노출 확장
+- Core Web Vitals 점검 — LCP·CLS·INP 실측 (PageSpeed Insights / web-vitals 라이브러리) — 순위 직접 영향 요소
+- 메인 페이지 다국어 URL 분리 검토 — 현 단일 URL inline 방식은 hreflang 효과 미미, /ko/·/ja/ 분리 시 비용·식인 트레이드오프 평가
