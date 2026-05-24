@@ -60,6 +60,8 @@ const messages = {
     footerRight: '음악 저작권은 각 제작자에게 있습니다. 개인 용도로만 사용하세요.',
     footerPrivacy: '개인정보 처리 방침',
     footerTerms: '이용약관',
+    footerGuide: '다운로드 방법 가이드',
+    footerGuideUrl: '/ko/guide/how-to-download-suno-playlist',
   },
   en: {
     pageTitle: 'Suno Downloader – Free Suno AI Playlist MP3 & WAV Download',
@@ -122,6 +124,8 @@ const messages = {
     footerRight: 'Music copyrights belong to their creators. For personal use only.',
     footerPrivacy: 'Privacy Policy',
     footerTerms: 'Terms of Service',
+    footerGuide: 'How-to Download Guide',
+    footerGuideUrl: '/guide/how-to-download-suno-playlist',
   },
   ja: {
     pageTitle: 'Sunoダウンローダー – Suno AI MP3 & WAV 無料ダウンロード | SunoDown',
@@ -184,6 +188,8 @@ const messages = {
     footerRight: '音楽の著作権は各制作者に帰属します。個人使用のみ。',
     footerPrivacy: 'プライバシーポリシー',
     footerTerms: '利用規約',
+    footerGuide: 'ダウンロード方法ガイド',
+    footerGuideUrl: '/ja/guide/how-to-download-suno-playlist',
   },
 };
 

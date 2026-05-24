@@ -542,7 +542,13 @@ if (isProd) {
 
   // Clean URLs for static content pages (must precede express.static
   // to avoid its built-in trailing-slash 301 redirect for directories)
-  const CONTENT_PAGES = ['privacy', 'terms'];
+  const CONTENT_PAGES = [
+    'privacy',
+    'terms',
+    'guide/how-to-download-suno-playlist',
+    'ko/guide/how-to-download-suno-playlist',
+    'ja/guide/how-to-download-suno-playlist',
+  ];
   CONTENT_PAGES.forEach((slug) => {
     app.get([`/${slug}`, `/${slug}/`], (_req, res) => {
       res.set('Cache-Control', 'public, max-age=3600');
