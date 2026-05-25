@@ -72,6 +72,36 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/suno-mp3-vs-wav" />
   </url>
   <url>
+    <loc>https://suno-down.com/guide/suno-pro-cookie-setup</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/suno-pro-cookie-setup" />
+  </url>
+  <url>
+    <loc>https://suno-down.com/ko/guide/suno-pro-cookie-setup</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/suno-pro-cookie-setup" />
+  </url>
+  <url>
+    <loc>https://suno-down.com/ja/guide/suno-pro-cookie-setup</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/guide/suno-pro-cookie-setup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/suno-pro-cookie-setup" />
+  </url>
+  <url>
     <loc>https://suno-down.com/privacy</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>yearly</changefreq>

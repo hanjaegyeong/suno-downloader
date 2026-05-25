@@ -551,6 +551,9 @@ if (isProd) {
     'guide/suno-mp3-vs-wav',
     'ko/guide/suno-mp3-vs-wav',
     'ja/guide/suno-mp3-vs-wav',
+    'guide/suno-pro-cookie-setup',
+    'ko/guide/suno-pro-cookie-setup',
+    'ja/guide/suno-pro-cookie-setup',
   ];
   CONTENT_PAGES.forEach((slug) => {
     app.get([`/${slug}`, `/${slug}/`], (_req, res) => {

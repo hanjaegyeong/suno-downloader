@@ -64,6 +64,8 @@ const messages = {
     footerGuideUrl: '/ko/guide/how-to-download-suno-playlist',
     footerGuide2: 'MP3 vs WAV 비교',
     footerGuide2Url: '/ko/guide/suno-mp3-vs-wav',
+    footerGuide3: 'Pro 쿠키 설정',
+    footerGuide3Url: '/ko/guide/suno-pro-cookie-setup',
   },
   en: {
     pageTitle: 'Suno Downloader – Free Suno AI Playlist MP3 & WAV Download',
@@ -130,6 +132,8 @@ const messages = {
     footerGuideUrl: '/guide/how-to-download-suno-playlist',
     footerGuide2: 'MP3 vs WAV Comparison',
     footerGuide2Url: '/guide/suno-mp3-vs-wav',
+    footerGuide3: 'Pro Cookie Setup',
+    footerGuide3Url: '/guide/suno-pro-cookie-setup',
   },
   ja: {
     pageTitle: 'Sunoダウンローダー – Suno AI MP3 & WAV 無料ダウンロード | SunoDown',
@@ -196,6 +200,8 @@ const messages = {
     footerGuideUrl: '/ja/guide/how-to-download-suno-playlist',
     footerGuide2: 'MP3 vs WAV 比較',
     footerGuide2Url: '/ja/guide/suno-mp3-vs-wav',
+    footerGuide3: 'Pro クッキー設定',
+    footerGuide3Url: '/ja/guide/suno-pro-cookie-setup',
   },
 };
 
