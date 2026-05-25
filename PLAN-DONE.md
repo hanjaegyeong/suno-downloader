@@ -2,6 +2,51 @@
 
 ---
 
+## `/guide/suno-pro-cookie-setup` 한·영·일 분리 URL Pro 쿠키 설정 튜토리얼 (2026-05-26 완료)
+
+### 체크리스트
+- [x] `public/guide/suno-pro-cookie-setup/index.html` (en, self canonical, lang=en, 26 KB)
+- [x] `public/ko/guide/suno-pro-cookie-setup/index.html` (ko, lang=ko, 27 KB)
+- [x] `public/ja/guide/suno-pro-cookie-setup/index.html` (ja, lang=ja, 29 KB)
+- [x] 3개 페이지 HowTo + FAQPage(6 Q&A) + BreadcrumbList JSON-LD
+- [x] 3개 페이지 hreflang 4종(en/ko/ja/x-default) + self canonical
+- [x] 본문 핵심 섹션 — 사전 안내 / 5단계 / 4 브라우저 분기 카드 / 보안 모델 5포인트 / 만료·재연결 / 트러블슈팅 5케이스 / FAQ 6개 / 관련 링크
+- [x] `server.js` `CONTENT_PAGES`에 3개 라우트 등록 + curl 200 검증
+- [x] `public/sitemap.xml`에 3개 URL + hreflang alternate 추가
+- [x] 기존 2개 가이드(how-to·mp3-vs-wav) 6개 페이지에 본 가이드 cross-link (관련 링크 + 푸터, 페이지당 2건)
+- [x] `src/i18n.js` ko/en/ja에 `footerGuide3`/`footerGuide3Url` 키 추가
+- [x] `src/App.jsx` 푸터에 본 가이드 링크 노출, `index.html` 정적 폴백·`/privacy`·`/terms` 푸터 동기화
+- [x] `npm run build` 658ms 성공, 3개 `dist/.../index.html` (26~29 KB) 생성
+- [x] 로컬 prod curl 검증 — 13개 URL 전부 200, lang/canonical/4 hreflang/JSON-LD 3종 정상, cross-link 페이지당 2건·메인 폴백 3건 정상
+- [ ] Google Rich Results Test로 HowTo·FAQPage·BreadcrumbList 스키마 유효성 확인 (배포 후 외부 검증 작업)
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-26 | /start-phase로 항목 시작, PLAN-CURRENT 작성 (브라우저 분기·보안 톤·트러블슈팅 범위 의사결정 항목 명시) |
+| 2026-05-26 | "SEO에 도움되면 다 하고, 쓸데없는 건 다 지워" 합의 — 의사결정 5개 SEO 유리한 방향으로 고정, 본문 작성 시 keyword stuffing·모달 반복·일반론 배제 원칙 확립 |
+| 2026-05-26 | EN/KO/JA 3개 페이지 작성 — 사전 안내 + 5단계 + 4 브라우저 카드 + 보안 5포인트 + 만료 + 트러블슈팅 5케이스 + FAQ 6개 + 관련 링크 |
+| 2026-05-26 | server.js CONTENT_PAGES 3개 라우트 추가, sitemap.xml 3 URL × 4 hreflang 추가 |
+| 2026-05-26 | how-to·mp3-vs-wav 6개 페이지에 본 가이드 cross-link (관련 링크 1 + 푸터 1, 페이지당 2건) |
+| 2026-05-26 | i18n.js footerGuide3/footerGuide3Url 키 ko/en/ja 추가, App.jsx 푸터 노출, index.html 정적 폴백·privacy·terms 푸터 동기화 |
+| 2026-05-26 | npm run build 658ms 성공 → prod 서버 curl 검증: 신규 3 URL + mp3-vs-wav 3 + how-to 3 + main + privacy + terms + sitemap 전부 200, JSON-LD 3종 유효, cross-link 12건 + 메인 폴백 3건 + privacy/terms 푸터 2건 모두 정상 |
+| 2026-05-26 | JA mp3-vs-wav 푸터 마지막 줄에 잘못 들어간 한글 문구를 일본어로 즉시 수정 (회귀 차단) |
+| 2026-05-26 | /complete-phase로 아카이빙 |
+
+### 메모
+- 직전 두 가이드의 패턴(분리 URL + CONTENT_PAGES + sitemap + hreflang + 동일 CSS 변수)을 그대로 재사용. 신규 의존성 0.
+- **메인 모달 식인 회피**: 같은 5단계가 두 곳에 있는 것은 불가피하지만, 본 페이지는 모달이 다루지 않는 **브라우저별 카드 · 보안 모델 5포인트 · 세션 만료 동작 · 5개 트러블슈팅**으로 차별화. 모달은 "즉시 연결" / 본 페이지는 "처음 켜기 + 깊은 이해"로 의도 분리.
+- **보안 톤**: server.js의 in-memory `Map` · 50초 JWT 갱신 · 세션 종료 시 즉시 폐기를 평문으로 명시. 의심을 인정하고 사실로 답하는 방식 — 이런 정보성 신뢰 신호가 LLM·검색엔진의 페이지 평가에 유리.
+- 4개 브라우저 카드(Chrome/Edge · Firefox · Safari · Brave/Arc/Opera)는 한 줄씩만 — long-tail 키워드 표면 확보 + 페이지 비대화 방지의 균형.
+- 페이지 용량 26~29 KB로 mp3-vs-wav(25~27 KB)와 유사. 여전히 JS·이미지 0, LCP 영향 미미.
+- 푸터 노출은 가이드 3개째 — 한 줄에 모두 노출(다운로드 방법 + MP3 vs WAV + Pro 쿠키 + 개인정보 + 이용약관). `/guides` 인덱스 페이지 도입은 가이드 5개 시점에 재검토하기로 합의 유지.
+- **WAV 가이드의 위임 약속 이행** — mp3-vs-wav 가이드의 "Pro 설정만 다루는 별도 페이지는 다음 가이드" 약속을 지킴. 두 가이드 모두에서 본 페이지로의 직접 진입 경로 확보.
+- 회귀 차단: 마지막 Edit에서 JA mp3-vs-wav 푸터에 한국어 "독립 서비스입니다"가 잘못 들어간 것을 검증 단계에서 발견 → 일본어 "独立サービスです"로 즉시 복원. 이런 multi-lang 페이지 동시 편집의 위험 신호.
+- PLAN.md 백로그의 "SoftwareApplication / WebApplication JSON-LD" 항목은 이미 `index.html`에 WebApplication 스키마가 있음을 발견 → 부분 중복이라 추후 별건으로 정리하면 됨.
+- 다음 자연 후속 작업: PLAN.md 상단 `/faq` 정적 페이지(메인 FAQ 분리·확장) — 가이드 3개와 메인 FAQ 사이에 검색 표면 분산을 정리하는 작업.
+
+---
+
 ## `/guide/suno-mp3-vs-wav` 한·영·일 분리 URL 포맷 비교 가이드 (2026-05-26 완료)
 
 ### 체크리스트
