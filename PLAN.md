@@ -1,4 +1,3 @@
-- 이미지 alt 텍스트 정비 (이미지 검색 노출)
 - /blog 블로그 시스템 구축 + 첫 글 /blog/suno-ai-music-copyright
 - robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)
 - 메인 페이지 본문 텍스트 강화 — 도구 UI 외 정보성 텍스트가 거의 없어 매칭할 검색어 표면이 부족 (GSC 노출 ~50/7주)
@@ -7,4 +6,4 @@
 - SoftwareApplication / WebApplication JSON-LD — 도구 사이트 분류 시그널, sitelinks 후보 진입
 - Naver·Bing 웹마스터 등록 — 한국어·국제 검색 보조 채널 노출 확장
 - Core Web Vitals 점검 — LCP·CLS·INP 실측 (PageSpeed Insights / web-vitals 라이브러리) — 순위 직접 영향 요소
-- 메인 페이지 다국어 URL 분리 검토 — 현 단일 URL inline 방식은 hreflang 효과 미미, /ko/·/ja/ 분리 시 비용·식인 트레이드오프 평가
+- 메인 페이지 다국어 URL 분리 검토 — 현 단일 URL inline 방식은 hreflang 효과 미미, /ko/· /ja/ 분리 시 비용·식인 트레이드오프 평가

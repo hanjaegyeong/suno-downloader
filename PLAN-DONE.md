@@ -2,6 +2,60 @@
 
 ---
 
+## 이미지 alt 텍스트 정비 (2026-05-26 완료)
+
+### 결정 사항
+- **인벤토리 결과**: 본문 `<img>`는 `src/components/SongList.jsx`의 곡 썸네일 1곳뿐이고 가이드/FAQ/정책 페이지에는 본문 이미지가 전혀 없음. 따라서 작업의 실질 SEO 임팩트는 (1) 곡 썸네일 alt에 곡명 노출 (2) og:image:alt + twitter:image:alt 13개 페이지 보강에 집중
+- **언어 전략**: alt 텍스트는 페이지의 콘텐츠 언어(ko/en/ja)를 따라가되, og:image PNG 자체는 영문(이전 라운드 결정 유지)이라 alt가 실제 의미 정보 전달자 역할
+- **og:image 안정성 추가**: 모든 페이지에 `og:image:type` `image/png`, `og:image:width` 1200, `og:image:height` 630 동시 명시 (페북/디스코드 스크래퍼 렌더 안정성)
+
+### 체크리스트
+- [x] 사이트 내 모든 `<img>` 인벤토리 수집 (src/components, src/pages, index.html, public/og-images 등)
+- [x] 현재 alt 텍스트 현황 평가 (없음 / 빈 값 / 부적절 / 양호)
+- [x] 의미 있는 이미지 vs 장식용 이미지 분류
+- [x] 메인 페이지 (Downloader/SongList/TokenSetup/AdSlot 등) alt 정비
+- [x] /guide/* 가이드 페이지 이미지 alt 정비
+- [x] /faq, /blog 등 추가 페이지 이미지 alt 정비
+- [x] 다국어(ko/en/ja) alt 텍스트 i18n 키 정리 또는 페이지별 분기
+- [x] 장식용 이미지에 `alt=""` 명시 처리
+- [x] OG 이미지 메타데이터(`og:image:alt`) 페이지별로 적용 확인
+- [x] 빌드(`npm run build`) 후 dist 결과물에서 alt 누락 점검
+
+### 산출물
+
+| 파일 | 변경 내용 |
+|---|---|
+| `src/components/SongList.jsx` | 곡 썸네일 `alt=""` → `alt={`${song.title} — Suno AI cover art`}` |
+| `public/faq/index.html` | og:image:type/width/height/alt + twitter:image:alt (영문) |
+| `public/ko/faq/index.html` | 동일 패턴 (한국어 alt) |
+| `public/ja/faq/index.html` | 동일 패턴 (일본어 alt) |
+| `public/privacy/index.html` | 동일 패턴 (영문 alt, 단일 다국어 페이지) |
+| `public/terms/index.html` | 동일 패턴 (영문 alt, 단일 다국어 페이지) |
+| `public/guide/{how-to-download-suno-playlist,suno-mp3-vs-wav,suno-pro-cookie-setup}/index.html` | 영문 alt 3개 |
+| `public/ko/guide/{같음 ×3}/index.html` | 한국어 alt 3개 |
+| `public/ja/guide/{같음 ×3}/index.html` | 일본어 alt 3개 |
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-26 | /start-phase로 시작, 인벤토리 — 본문 `<img>` 1개(SongList), 정적 HTML 15개 중 index.html만 og:image:alt + twitter:image:alt 보유 |
+| 2026-05-26 | SongList.jsx 곡 썸네일 alt에 곡명 + "Suno AI cover art" 적용 |
+| 2026-05-26 | FAQ 3개 언어 og:image:type/width/height/alt + twitter:image:alt 추가 |
+| 2026-05-26 | Privacy·Terms 페이지에 같은 메타 추가 (영문 alt) |
+| 2026-05-26 | 가이드 9개(en/ko/ja × 3종) 메타 추가, 각 언어별 키워드 반영 |
+| 2026-05-26 | `npm run build` 통과, dist 15개 모두 `og:image:alt` 1회 출현 / 곡명 alt도 번들 JS 검증 |
+| 2026-05-26 | /complete-phase로 아카이빙 |
+
+### 메모
+- **본문 이미지 부재가 본질적 한계**: 가이드/FAQ 페이지에 스크린샷·다이어그램 같은 실제 콘텐츠 이미지가 없어 Google 이미지 검색 노출 자체의 surface가 매우 작음. og:image는 SNS 카드용이지 이미지 검색용은 아님. 진짜 이미지 검색 트래픽을 노리려면 향후 가이드에 실제 스크린샷(Suno 플레이리스트 페이지, SunoDown UI, 쿠키 추출 스크린샷 등)을 추가해야 함. 본 라운드는 "현재 자산 한도 내 최대치"에 해당.
+- **곡 썸네일 alt의 가치**: SongList 썸네일은 사용자가 플레이리스트를 로드할 때만 렌더되므로 크롤러가 직접 인덱싱하지는 않지만, 향후 SSR/프리렌더로 전환하거나 인기 플레이리스트 페이지를 SEO 페이지로 만들 때 즉시 효과가 작동하도록 미리 정비.
+- **og:image:width/height 효과**: 페북 스크래퍼는 dims가 메타에 없으면 이미지를 직접 다운로드해 측정하는데, 이게 첫 공유 시 지연·캐싱 누락을 유발. 명시하면 즉시 카드 렌더. 13개 페이지에 일괄 적용해 SNS 카드 안정성 확보.
+- **언어별 키워드 매핑**: ko alt에는 "전곡 MP3·WAV", "무손실 WAV", "쿠키 설정" 같은 한국어 검색어, ja alt에는 "ロスレス WAV", "クッキー設定" 같은 일본어 검색어를 자연스럽게 포함. og:title과 중복되지 않게 약간 다른 표현 사용.
+- **alt vs og:image:alt 구분**: 본문 `<img alt>`는 이미지 검색·접근성용, `og:image:alt`는 SNS 카드 접근성(스크린리더)용. 둘은 별개 목적이라 같은 페이지여도 다르게 작성하는 게 자연스러움.
+- **다음 자연 후속**: PLAN.md 최상단 "/blog 블로그 시스템 구축". 블로그가 생기면 글마다 OG 이미지·alt·본문 이미지를 함께 설계하는 표준 패턴이 필요.
+
+---
+
 ## 페이지별 OG 이미지·title·description·canonical 개별화 (2026-05-26 완료)
 
 ### 결정 사항
