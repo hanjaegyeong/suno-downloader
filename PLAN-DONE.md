@@ -2,6 +2,47 @@
 
 ---
 
+## `/guide/suno-mp3-vs-wav` 한·영·일 분리 URL 포맷 비교 가이드 (2026-05-26 완료)
+
+### 체크리스트
+- [x] `public/guide/suno-mp3-vs-wav/index.html` 작성 (en, self canonical, lang=en, 25 KB)
+- [x] `public/ko/guide/suno-mp3-vs-wav/index.html` 작성 (ko, lang=ko, 26 KB)
+- [x] `public/ja/guide/suno-mp3-vs-wav/index.html` 작성 (ja, lang=ja, 27 KB)
+- [x] 3개 페이지 모두 Article + FAQPage(6 Q&A) + BreadcrumbList JSON-LD 삽입
+- [x] 3개 페이지 모두 hreflang 4종(en/ko/ja/x-default) + self canonical
+- [x] 본문 핵심 섹션 — 결론 / 비교표 / MP3·WAV 카드 / 용량 추산 / 기술 깊이 / 청취 변수 / 의사결정 플로우 / FAQ / 관련 링크
+- [x] `server.js` `CONTENT_PAGES`에 3개 라우트 등록
+- [x] `public/sitemap.xml`에 3개 URL + hreflang alternate 추가
+- [x] `/guide/how-to-download-suno-playlist` 3개 페이지에 본 가이드 cross-link (관련 링크 + 푸터, 페이지당 2개)
+- [x] `src/i18n.js` ko/en/ja에 `footerGuide2`/`footerGuide2Url` 키 추가
+- [x] `src/App.jsx` 푸터 본 가이드 링크 노출, `index.html` 정적 폴백·`/privacy`·`/terms` 푸터에도 동기화
+- [x] `npm run build` 622ms 성공, 3개 `dist/.../index.html` (25~27 KB) 생성
+- [x] 로컬 prod curl 검증 — 10개 URL 200, lang/canonical/4 hreflang/3종 JSON-LD 전부 정상, cross-link 페이지당 2건 확인
+- [ ] Google Rich Results Test로 Article·FAQPage·BreadcrumbList 스키마 유효성 확인 (배포 후 외부 검증 작업)
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-25 | /start-phase로 항목 시작, PLAN-CURRENT 작성 (스키마·구조 의사결정 항목 명시) |
+| 2026-05-25 | "전부 SEO 가치"로 사용자 확정 → 스키마 Article+FAQPage+BreadcrumbList, 본문 구조·푸터 노출 방식 모두 SEO 유리한 방향으로 고정 |
+| 2026-05-25 | EN/KO/JA 3개 페이지 작성 — 비교표 10행 + MP3/WAV 카드 + 용량 추산 + 기술 깊이 + 청취 변수 + 의사결정 플로우 + FAQ 6개 |
+| 2026-05-25 | server.js CONTENT_PAGES 3개 라우트 추가, sitemap.xml 3 URL × 4 hreflang 추가 |
+| 2026-05-25 | how-to 가이드 3개 페이지에 본 가이드 cross-link (관련 링크 1 + 푸터 1, 페이지당 2건) |
+| 2026-05-25 | i18n.js footerGuide2/footerGuide2Url 키 ko/en/ja 추가, App.jsx 푸터 노출, index.html 정적 폴백·privacy·terms 푸터 동기화 |
+| 2026-05-25 | npm run build 622ms 성공 → prod 서버 curl 검증: 신규 6 URL + how-to 3 + main + privacy + terms + sitemap 전부 200, JSON-LD 9 blocks 유효, cross-link 6건·푸터 노출 정상 |
+| 2026-05-26 | /complete-phase로 아카이빙 |
+
+### 메모
+- 직전 `/guide/how-to-download-suno-playlist` 작업이 만든 패턴(분리 URL + CONTENT_PAGES + sitemap + hreflang + 동일 CSS 변수)을 그대로 재사용 — 신규 의존성 0.
+- HowTo 스키마는 부적합 → **Article + FAQPage** 조합으로 변경. FAQ Rich Result는 클릭률이 높고 본 페이지의 의사결정 의도와 잘 맞음. 사용자가 "SEO에 도움되면 다 진행"으로 확정해 의사결정 항목 5개 전부 SEO 유리한 방향으로 고정.
+- 페이지 용량 25~27 KB로 직전 가이드(17~18 KB)보다 1.5배 — 비교표·카드·기술 깊이 섹션 추가가 원인. 여전히 단일 HTML(JS·이미지 0)이라 LCP 영향 미미.
+- 메인 페이지와의 식인 회피: 본 페이지를 **"기술적 깊이"**(비트레이트·실측 용량·DAW 워크플로우·플랫폼 재인코딩 동작)로 차별화. 메인은 "도구 의도" 유지.
+- Pro 쿠키 설정은 본 페이지에서 한 줄 + how-to 4단계 링크로 위임. 다음 백로그 항목 `/guide/suno-pro-cookie-setup`이 별도 페이지 담당.
+- 푸터 노출은 가이드 2개째라 직접 한 줄씩 노출. `/guides` 인덱스 페이지 도입은 가이드 5개 시점에 재검토하기로 합의.
+- 다음 자연 후속 작업: PLAN.md 상단 `/guide/suno-pro-cookie-setup` — 동일 분리 URL 패턴으로 30~40분 가능.
+
+---
+
 ## `/guide/how-to-download-suno-playlist` 한·영·일 분리 URL 가이드 페이지 (2026-05-25 완료)
 
 ### 체크리스트
