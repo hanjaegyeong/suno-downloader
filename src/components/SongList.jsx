@@ -340,7 +340,7 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
                   <img
                     className="s-img"
                     src={`/api/image?url=${encodeURIComponent(song.img)}`}
-                    alt=""
+                    alt={`${song.title} — Suno AI cover art`}
                     loading="lazy"
                     onError={(e) => { e.target.style.display = 'none'; }}
                   />
