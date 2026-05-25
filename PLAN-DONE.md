@@ -2,6 +2,52 @@
 
 ---
 
+## `/faq` 정적 페이지 — 메인 FAQ 분리·확장, 페이지별 FAQ Schema (2026-05-26 완료)
+
+### 체크리스트
+- [x] 메인 FAQ 위치·개수·톤 파악 — `index.html`에 FAQPage JSON-LD 19 Q&A(KO+EN+JA 혼재) + 시각 KO 6 / EN 3 / JA 3, App.jsx에는 FAQ 없음
+- [x] Q&A 카테고리 설계 — 가이드 18개와 비중복 도구·서비스 질문 15개 도출 (5 카테고리 × 3)
+- [x] `public/faq/index.html` (en, self canonical, lang=en, FAQPage+BreadcrumbList JSON-LD, 15 Q&A)
+- [x] `public/ko/faq/index.html` (ko, lang=ko)
+- [x] `public/ja/faq/index.html` (ja, lang=ja)
+- [x] 3개 페이지 hreflang 4종(en/ko/ja/x-default) + self canonical
+- [x] `server.js` `CONTENT_PAGES`에 3개 라우트 등록
+- [x] `public/sitemap.xml`에 3개 URL + hreflang alternate 추가
+- [x] 메인 페이지 처리 — FAQPage JSON-LD 통째 삭제, 각 lang FAQ 섹션 끝 "전체 FAQ 보기 →" CTA 추가, 푸터에 /faq 3개 lang 줄 신설
+- [x] 기존 가이드 3개 × 3개 언어 = 9개 페이지 푸터에 /faq cross-link 추가 (sed 일괄)
+- [x] `src/i18n.js` ko/en/ja에 `footerFaq`/`footerFaqUrl` 키 추가
+- [x] `src/App.jsx` 푸터 맨 앞에 FAQ 링크 노출
+- [x] `public/privacy/index.html` · `public/terms/index.html` 푸터에 /faq 링크 추가
+- [x] `npm run build` 1.64s 성공, dist에 3개 신규 페이지 산출 확인
+- [x] 로컬 prod curl 검증 — 신규 3 URL 200 + lang/canonical/4 hreflang/FAQPage+BreadcrumbList 정상, 가이드 9개·privacy·terms /faq 링크 1개씩, 메인 /faq 링크 6건(3 CTA + 3 푸터), 메인 FAQPage 스키마 0건(중복 제거 확인), sitemap /faq 매칭 15회
+- [x] 3개 언어 페이지 푸터·본문 언어 일관성 회귀 검수 — KO에 가나 0, JA의 한글은 의도된 언어 스위처 라벨(`한국어`) 뿐
+- [ ] Google Rich Results Test로 FAQPage·BreadcrumbList 스키마 유효성 확인 (배포 후 외부 검증 작업)
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-26 | /start-phase로 항목 시작, PLAN-CURRENT 작성 (의사결정 9개 명시) |
+| 2026-05-26 | "SEO 가치 우선, 쓸데없는 것 제외" 원칙 합의 → 의사결정 9개 모두 SEO 유리한 방향으로 고정 |
+| 2026-05-26 | index.html 정적 폴백 FAQ 파악 — FAQPage JSON-LD에 19 Q&A 혼재(KO+EN+JA), 시각 HTML은 lang별 분리. App.jsx에는 FAQ 없음 |
+| 2026-05-26 | EN/KO/JA 3개 FAQ 페이지 작성 — 5 카테고리(서비스&요금/다운로드&호환/계정&인증/안전&약관/오류&트러블슈팅) × 3 Q&A = 15개, h2 헤딩 그룹화, FAQPage+BreadcrumbList JSON-LD, 4 hreflang, self canonical |
+| 2026-05-26 | server.js CONTENT_PAGES 3개 라우트 추가, sitemap.xml 3 URL × 4 hreflang 추가 |
+| 2026-05-26 | index.html 메인 페이지 처리 — FAQPage JSON-LD 블록(141줄) 통째 sed 삭제, 각 lang 시각 FAQ 끝에 "전체 FAQ 15개 보기" CTA 추가, 푸터에 /faq 3개 lang 줄 신설 |
+| 2026-05-26 | 기존 9개 가이드 페이지 푸터에 /faq 링크 sed 일괄 삽입 (BSD sed \xc2\xb7 escape 이슈 발견 → 후속 sed로 정상화) |
+| 2026-05-26 | i18n.js ko/en/ja에 footerFaq/footerFaqUrl 키 추가, App.jsx 푸터 맨 앞에 FAQ 링크 노출, privacy/terms 푸터에 /faq 줄 동기화 |
+| 2026-05-26 | npm run build 1.64s 성공 → 로컬 prod curl 검증: 신규 3 FAQ URL + 9 가이드 + privacy/terms + 메인 + sitemap 전부 200, lang/canonical/4 hreflang/JSON-LD 정상, 메인 FAQPage 스키마 0(제거 확인), 가이드 9개 FAQ 링크 각 1건, 메인 6건, lang 회귀 없음 |
+| 2026-05-26 | /complete-phase로 아카이빙 |
+
+### 메모
+- **메인 FAQPage 스키마 통째 제거가 이번 작업의 핵심 의사결정**. 한 도메인 안에서 동일·유사 FAQPage가 여러 URL에 중복되면 스키마 가중치가 분산되거나 (최악의 경우) 무시될 수 있어, `/faq`가 단일 FAQPage 소스가 되도록 정리. 메인의 시각 FAQ HTML은 본문 콘텐츠로서 유지하되 스키마는 떼어냄 — 본문 텍스트(검색엔진 본문 매칭)와 스키마(리치 결과 후보)를 분리한 접근.
+- **가이드 18 Q&A와의 차별화**: 가이드는 "단계·절차·기술 깊이", `/faq`는 "서비스·계정·법·오류" — 의도 분리. 가이드와 동일 주제일 때는 짧게 답하고 가이드 링크로 위임해 식인 회피.
+- **카테고리 5개 × 3 Q&A 구조**: 단일 흐름 대신 h2 헤딩 그룹화. long-tail 키워드 표면 ↑(섹션 제목 자체가 키워드), 사용자 스캔성 ↑, 페이지 길이 ↑ 트레이드오프는 4분 읽기 시간 내라 허용.
+- **법·저작권 면책 톤**: "Suno 공식 약관 확인 권장" / "개인 용도만" / "Suno AI와 무관한 독립 서비스" 일관 명시. 단정적 법적 진술 회피.
+- **BSD sed escape 함정**: macOS sed는 `\xc2\xb7` 시퀀스를 리터럴 문자열로 삽입. UTF-8 바이트 escape는 GNU sed 전용 → 일단 placeholder로 삽입 후 후속 sed 치환으로 실제 `·` 문자 주입. 다음 작업에서 동일 패턴 쓸 때 처음부터 실제 문자 사용 권장.
+- **푸터 줄 수 확장**: 가이드 3 + FAQ 1 + privacy/terms = 4줄. 5번째 가이드 추가 시 `/guides` 인덱스 페이지 도입 재검토 약속은 그대로 유효.
+- 다음 자연 후속 작업: PLAN.md 상단 "페이지별 OG 이미지·title·description·canonical 개별화" — `/faq`·가이드·privacy·terms가 모두 동일 og-image.png를 쓰고 있어 OG 차별화 + 검색 결과 시각 차별화 기회.
+
+---
+
 ## `/guide/suno-pro-cookie-setup` 한·영·일 분리 URL Pro 쿠키 설정 튜토리얼 (2026-05-26 완료)
 
 ### 체크리스트
