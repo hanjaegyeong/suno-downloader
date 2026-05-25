@@ -548,6 +548,9 @@ if (isProd) {
     'guide/how-to-download-suno-playlist',
     'ko/guide/how-to-download-suno-playlist',
     'ja/guide/how-to-download-suno-playlist',
+    'guide/suno-mp3-vs-wav',
+    'ko/guide/suno-mp3-vs-wav',
+    'ja/guide/suno-mp3-vs-wav',
   ];
   CONTENT_PAGES.forEach((slug) => {
     app.get([`/${slug}`, `/${slug}/`], (_req, res) => {

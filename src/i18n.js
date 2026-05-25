@@ -62,6 +62,8 @@ const messages = {
     footerTerms: '이용약관',
     footerGuide: '다운로드 방법 가이드',
     footerGuideUrl: '/ko/guide/how-to-download-suno-playlist',
+    footerGuide2: 'MP3 vs WAV 비교',
+    footerGuide2Url: '/ko/guide/suno-mp3-vs-wav',
   },
   en: {
     pageTitle: 'Suno Downloader – Free Suno AI Playlist MP3 & WAV Download',
@@ -126,6 +128,8 @@ const messages = {
     footerTerms: 'Terms of Service',
     footerGuide: 'How-to Download Guide',
     footerGuideUrl: '/guide/how-to-download-suno-playlist',
+    footerGuide2: 'MP3 vs WAV Comparison',
+    footerGuide2Url: '/guide/suno-mp3-vs-wav',
   },
   ja: {
     pageTitle: 'Sunoダウンローダー – Suno AI MP3 & WAV 無料ダウンロード | SunoDown',
@@ -190,6 +194,8 @@ const messages = {
     footerTerms: '利用規約',
     footerGuide: 'ダウンロード方法ガイド',
     footerGuideUrl: '/ja/guide/how-to-download-suno-playlist',
+    footerGuide2: 'MP3 vs WAV 比較',
+    footerGuide2Url: '/ja/guide/suno-mp3-vs-wav',
   },
 };
 

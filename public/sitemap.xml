@@ -42,6 +42,36 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/how-to-download-suno-playlist" />
   </url>
   <url>
+    <loc>https://suno-down.com/guide/suno-mp3-vs-wav</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/suno-mp3-vs-wav" />
+  </url>
+  <url>
+    <loc>https://suno-down.com/ko/guide/suno-mp3-vs-wav</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/suno-mp3-vs-wav" />
+  </url>
+  <url>
+    <loc>https://suno-down.com/ja/guide/suno-mp3-vs-wav</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/guide/suno-mp3-vs-wav" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/guide/suno-mp3-vs-wav" />
+  </url>
+  <url>
     <loc>https://suno-down.com/privacy</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>yearly</changefreq>
