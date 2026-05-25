@@ -1,4 +1,3 @@
-- 페이지별 OG 이미지·title·description·canonical 개별화
 - 이미지 alt 텍스트 정비 (이미지 검색 노출)
 - /blog 블로그 시스템 구축 + 첫 글 /blog/suno-ai-music-copyright
 - robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)

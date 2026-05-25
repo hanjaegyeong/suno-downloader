@@ -2,6 +2,56 @@
 
 ---
 
+## 페이지별 OG 이미지·title·description·canonical 개별화 (2026-05-26 완료)
+
+### 결정 사항
+- **og:image 전략**: SVG 템플릿 + 빌드 시 PNG 생성. 렌더러는 `@resvg/resvg-js` (devDep), 폰트는 `scripts/og/fonts/Outfit-*.ttf` 5개 두께 번들 커밋. 텍스트는 영문 ASCII로 통일 (CJK 폰트 무게 회피, og:title이 페이지별로 한·일을 이미 표시)
+- **출력**: `public/og/<slug>.png` 15개 — 빌드 시 Vite가 `dist/og/`로 복사
+- **PNG 커밋 여부**: 커밋함 (배포 안정성 우선, 1.4MB 추가는 허용 범위)
+
+### 체크리스트
+- [x] 현 15개 페이지의 title·description·canonical을 표로 정리해 길이·중복·키워드 매칭 1차 감사 — 모두 페이지별 개별화 완료 확인
+- [x] hreflang: 모든 언어 분리 페이지(/faq, /ko/faq 등)가 자기 형제 3개를 정확히 가리키도록 점검 — 모두 정상 (privacy/terms는 단일 다국어 페이지라 자기 자신을 가리키는 게 맞음)
+- [x] og:image 전략 결정 — SVG 템플릿 + `@resvg/resvg-js` 빌드 시 생성
+- [x] og:image 결정안 구현 + 각 페이지 og:image / twitter:image 절대 URL 교체 (15개 페이지)
+- [x] og:url / canonical 마지막 슬래시 일관성 점검 — 전부 슬래시 없음으로 통일
+- [x] /privacy, /terms index 정책 재확인 — `index, follow` 유지 (신뢰 시그널)
+- [x] 빌드 후 dist/ 산출물에서 15개 페이지의 메타 태그를 grep으로 일괄 검증 — `/og-image.png` 잔재 0건, 페이지별 `/og/<slug>.png` 정확히 적용
+- [x] guide/suno-mp3-vs-wav 3종(en/ko/ja)의 JSON-LD `"image"` 필드도 함께 교체 (Article 스키마 일관성)
+- [ ] og:image:alt 페이지별 다르게 — 현재 root만 보유. og:title 폴백으로 동작하므로 후속 접근성 라운드(PLAN.md "이미지 alt 텍스트 정비")에 묶음
+- [ ] 변경 후 opengraph.xyz 등 실제 카드 미리보기 확인 — 배포 후 외부 검증 작업
+
+### 산출물
+
+| 파일/디렉터리 | 역할 |
+|---|---|
+| `scripts/og/pages.mjs` | 15개 페이지 메타(slug·title·subtitle·badge) 데이터 |
+| `scripts/og/render-svg.mjs` | 페이지 메타 → SVG 문자열 변환 |
+| `scripts/og/build-og.mjs` | SVG → PNG 렌더 + `public/og/<slug>.png` 출력 |
+| `scripts/og/fonts/Outfit-*.ttf` | 번들 폰트 (Regular/Medium/SemiBold/Bold/Black) ~375KB |
+| `public/og/*.png` | 생성된 15개 OG 이미지 (각 ~95KB) |
+| `package.json` | `build:og` 스크립트 신설 + `build`에 체이닝 |
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-26 | /start-phase로 시작, 현 상태 감사 → title/desc/canonical은 페이지별 거의 개별화돼 있고 og:image만 단일 PNG 공유 상태 |
+| 2026-05-26 | og:image 전략 SVG 템플릿+빌드 시 PNG 생성으로 결정, `@resvg/resvg-js` 도입 |
+| 2026-05-26 | woff2 폰트 텍스트 렌더 실패 → Outfit TTF 5종을 GitHub raw에서 다운로드해 `scripts/og/fonts/`에 커밋, 정상 렌더 확인 |
+| 2026-05-26 | 15개 페이지 HTML의 `og:image`/`twitter:image`(+ mp3-vs-wav 3종 JSON-LD `image`) 일괄 sed 교체 |
+| 2026-05-26 | `npm run build` 통과 (build:og 277ms + vite 612ms), dist 산출물 grep 검증 완료 |
+| 2026-05-26 | /complete-phase로 아카이빙 |
+
+### 메모
+- **woff2 폰트 함정**: `@fontsource/outfit`은 `.woff/.woff2`만 제공. `@resvg/resvg-js`가 woff2 로딩에 실패해 텍스트가 안 그려져 첫 산출물은 텍스트 없는 카드였음. GitHub `Outfitio/Outfit-Fonts` raw에서 TTF 5종(Regular/Medium/SemiBold/Bold/Black) 직접 다운로드해 `scripts/og/fonts/`에 커밋하는 방향으로 전환. `@fontsource/outfit`은 미사용이 됐으니 devDeps에서 제거. resvg에 woff2를 쓰려면 별도 처리가 필요할 수 있다는 점 기록.
+- **CJK 폰트 회피**: og:image 텍스트는 영문 ASCII로 통일 (FAQ/GUIDE/LEGAL 뱃지 + 영문 타이틀). 한·일 페이지도 같은 영문 카드를 쓰되 뱃지에 `KO · GUIDE` / `JA · FAQ` 같은 언어 힌트만 노출. CJK 폰트(Noto Sans CJK 등)는 ~10MB+로 무거워 빌드 산출물·Docker 이미지에 부담. og:title 메타가 이미 페이지별 한·일을 노출하므로 SNS 카드에서 언어 정보 손실은 미미.
+- **JSON-LD `image` 동기화**: `guide/suno-mp3-vs-wav` 3종은 Article 스키마에 `image` 필드를 별도로 갖고 있어 og:image와 함께 일괄 치환. 다음에 schema에 이미지를 추가할 때도 og 도메인 룰과 동일 URL을 유지해야 일관성 유지.
+- **PNG 커밋 트레이드오프**: 1.4MB 추가지만 배포 안정성(빌드 실패해도 직전 PNG 유지)과 dev 모드 OG 프리뷰 가능. 향후 페이지 추가 시 `build:og`만 다시 돌리면 됨.
+- **hreflang 감사 부수 결과**: 모든 분리 페이지가 이미 형제 3개를 정확히 지목하고 있어 추가 수정 없었음. privacy/terms가 ko/en/ja 모두 자기 URL을 가리키는 건 단일 다국어 페이지 패턴이라 의도된 동작. 메인 index.html도 동일 패턴.
+- **다음 자연 후속**: PLAN.md 두 번째 줄 "이미지 alt 텍스트 정비"에 og:image:alt 페이지별 추가 작업을 끼워넣으면 접근성 라운드로 묶기 좋음.
+
+---
+
 ## `/faq` 정적 페이지 — 메인 FAQ 분리·확장, 페이지별 FAQ Schema (2026-05-26 완료)
 
 ### 체크리스트
