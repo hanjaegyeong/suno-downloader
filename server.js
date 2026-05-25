@@ -545,6 +545,9 @@ if (isProd) {
   const CONTENT_PAGES = [
     'privacy',
     'terms',
+    'faq',
+    'ko/faq',
+    'ja/faq',
     'guide/how-to-download-suno-playlist',
     'ko/guide/how-to-download-suno-playlist',
     'ja/guide/how-to-download-suno-playlist',
