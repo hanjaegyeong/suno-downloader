@@ -2,6 +2,54 @@
 
 ---
 
+## 사이트 톤 리프레이밍 + 메인 본문 강화 (2026-05-29 완료)
+
+### 결정 사항
+- **포지셔닝 전환**: "다운로더" 일변도 → "Suno AI 라이브러리 백업 & 활용 허브" — AdSense 콘텐츠 정책 친화, 도구 정체성 리스크 완화
+- **SEO 키워드 보존**: title·description·hero에서 "플레이리스트·다운로드·MP3·WAV" 검색 키워드는 유지하고, 톤만 백업·허브로 리프레이밍 (검색 트래픽 손실 방지)
+- **정보성 본문 배치**: hero 위가 아닌 Downloader 아래, `songs.length === 0` 일 때만 표시 — 도구 접근성 보존 + 첫 방문자에게 콘텐츠 비중 확보
+- **다국어 처리**: i18n.js에는 메타·hero 카피만 키 추가, 본문은 BackupInfo.jsx 컴포넌트 내부 COPY 객체로 분리 (i18n 파일 비대화 방지)
+- **3축 정보성 본문**: (1) 클라우드 의존의 한계·생성 결과 일회성, (2) Suno Pro 구독자 무손실 WAV 권리, (3) 개인 청취·창작 자료 활용 + 책임감 있는 사용 톤
+
+### 체크리스트
+- [x] 현재 메인 hero·카피·메타 톤 인벤토리 (ko/en/ja — i18n.js + index.html SSR fallback)
+- [x] "Suno 활용 허브" 포지셔닝 카피 라인 결정 (title·description·hero — "라이브러리 백업 & 활용 허브" 톤)
+- [x] 정보성 본문 800~1500단어 초안 — BackupInfo.jsx (3개 언어, 3개 블록 각 200~300단어)
+- [x] 본문 배치 위치 결정 — Downloader 아래, songs.length === 0 일 때만 표시
+- [x] 본문 ko/en/ja 다국어 번역 — BackupInfo.jsx 내부 COPY 객체 구조
+- [x] App.jsx·index.html에서 톤 일관 적용 (heroTitle2·heroDesc·footer 카피 유지)
+- [x] 메타 태그 갱신 — title/description/og:title/og:description/twitter:title/twitter:description/WebApplication JSON-LD
+- [x] AdSense 정책 관점 자가 점검 — 백업 가치·Pro 권리·개인 청취 톤이 hero·about·BackupInfo·footer 4개 지점에 일관 노출
+
+### 산출물
+
+| 파일 | 변경 내용 |
+|---|---|
+| `src/components/BackupInfo.jsx` | 신규 — 3개 언어 정보성 본문 (백업 가치·Pro 권리·개인 청취 3축, 블록당 200~300단어), 다크 보라/시안 스타일 |
+| `src/App.jsx` | BackupInfo import + `songs.length === 0` 조건부 렌더 |
+| `src/i18n.js` | pageTitle·pageDesc·heroTitle2·heroDesc 3개 언어 톤 리프레이밍 ("내 손에 백업" / "Back Up Locally" / "手元にバックアップ") |
+| `src/styles.css` | `.backup-info` 다크 보라/시안 톤 스타일 (intro·blocks·footnote·hover) |
+| `index.html` | title·description·og:title·og:description·twitter:title·twitter:description·WebApplication JSON-LD description 6곳 동기화, SSR fallback에 한국어 3블록 정보성 본문 + 영문/일문 백업 톤 단락 추가 |
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-29 | /start-phase — PLAN.md에서 PLAN-CURRENT.md로 이동, 8개 체크리스트 + 6개 생각 문제 정리 |
+| 2026-05-29 | i18n.js·App.jsx·index.html·server.js·styles.css 5개 파일 인벤토리 완료 |
+| 2026-05-29 | BackupInfo.jsx 신규 컴포넌트 — 3개 언어, 3개 블록 정보성 본문 작성 |
+| 2026-05-29 | i18n.js pageTitle·pageDesc·heroTitle2·heroDesc 톤 리프레이밍 (ko·en·ja) |
+| 2026-05-29 | App.jsx에 BackupInfo 조건부 렌더 + styles.css `.backup-info` 스타일 추가 |
+| 2026-05-29 | index.html 메타 6곳 + SSR fallback 본문 (한국어 3블록 + 영문/일문 백업 단락) 동기화 |
+| 2026-05-29 | `npm run build` 성공 — 38 modules, dist/index.html 32KB·CSS 12KB·JS 273KB |
+| 2026-05-29 | 프로덕션 서버 검증 — / 응답 약 2,887 단어, 핵심 키워드 9개 노출 확인, JS 번들 내 3개 언어 BackupInfo 본문 모두 포함 |
+
+### 향후 후속 작업 후보 (PLAN.md에 이미 등재)
+- /blog 시스템 + 정보성 글 7~10편 (도구 사용법이 아닌 주제 — AdSense "주된 목적 = 정보" 시그널)
+- 기존 가이드 3편 본문 스크린샷 5~10장씩 추가
+- 책임감 있는 사용·저작권 톤 사이트 전반 감사 (이번 항목은 메인 페이지만 다룸)
+
+---
+
 ## /about 페이지 — 운영 주체 신뢰 신호 (2026-05-29 완료)
 
 ### 결정 사항
