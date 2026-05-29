@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import Downloader from './components/Downloader';
 import SongList from './components/SongList';
+import BackupInfo from './components/BackupInfo';
 import { t, getLang, setLang, LANGS } from './i18n';
 
 export default function App() {
@@ -228,6 +229,8 @@ export default function App() {
               onCookieExpired={handleCookieExpired}
             />
           )}
+
+          {songs.length === 0 && <BackupInfo lang={lang} />}
         </div>
       </main>
 

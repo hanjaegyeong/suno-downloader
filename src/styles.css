@@ -572,6 +572,67 @@ footer a:hover { color: var(--acc1); text-decoration: underline; }
   flex-shrink: 0;
 }
 
+/* ─── BACKUP INFO (정보성 본문) ─── */
+.backup-info {
+  margin: 32px 0 40px;
+  padding: 32px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.backup-info h2 {
+  font-size: clamp(20px, 3.4vw, 26px);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+.backup-info .backup-intro {
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: #c0c0d0;
+  margin-bottom: 22px;
+}
+.backup-info .backup-intro b { color: var(--acc2); font-weight: 700; }
+.backup-info .backup-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+.backup-info .backup-block {
+  padding: 18px 20px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.backup-info .backup-block h3 {
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 10px;
+  color: var(--acc3);
+}
+.backup-info .backup-block p {
+  font-size: 14px;
+  line-height: 1.85;
+  color: #c0c0d0;
+}
+.backup-info .backup-block b { color: var(--acc2); font-weight: 700; }
+.backup-info .backup-footnote {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+  padding-top: 18px;
+  border-top: 1px dashed var(--border);
+}
+.backup-info .backup-footnote a {
+  color: var(--acc2);
+  text-decoration: none;
+  font-weight: 600;
+}
+.backup-info .backup-footnote a:hover { text-decoration: underline; }
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 540px) {
   .row { flex-direction: column; }
