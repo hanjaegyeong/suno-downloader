@@ -79,3 +79,13 @@ Phase A에서 구축한 마크다운→정적 HTML 빌드 파이프라인(`scrip
 | 2026-05-29 | **첫 글 derisking 완료** — `content/blog/suno-lyrics-prompt-tips.ko.md` 작성 (1500+ 어절, 9개 h2 섹션, 5개 스크린샷 placeholder, 3개 내부 링크) + 빌드 통과 + HTML 렌더 검증 (canonical/hreflang ko·en·x-default/OG/Twitter/Article+Breadcrumb JSON-LD/blockquote 16건/내부 링크 박스) |
 | 2026-05-29 | **나머지 6편 병렬 작성 완료** — 3개 에이전트가 각 2편씩 분담: (A) ai-music-genre-catalog(1928어절) + ai-music-copyright-guide(1620어절), (B) suno-vs-udio-comparison(1544어절) + suno-pro-value-analysis(1574어절), (C) daw-post-processing(2051어절) + youtube-content-with-ai-music(1780어절) — 모두 1500~3000 범위 |
 | 2026-05-29 | **Phase B 전체 빌드 검증** — `npm run build` 통과 (build:blog 7편 + build:sitemap zero drift + build:og 32장 + vite 38 modules / 616ms) + sitemap `--verify` OK + dist/blog 7개·dist/ko/blog 7개 디렉터리 생성 |
+| 2026-05-30 | **AdSense 거절 사유 진단** — "가치가 별로 없는 콘텐츠" 거절 통지 수령. 핵심 문제 3가지 식별: ①본문에 `📸 [SCREENSHOT:]` placeholder 텍스트 30+ 노출(미완성 신호) ②영어 URL이 한국어 본문 서빙(영어권 콘텐츠 부재 신호) ③메인 BackupInfo 조건부 렌더로 도구 위주 판정 |
+| 2026-05-30 | **사용자 결정: 전부 한 번에 진행, 완벽하게** — Phase C 사용자 스크린샷·1인칭 보강은 보류, 그 외 모든 차단 이슈 동시 처리 |
+| 2026-05-30 | **placeholder HTML 주석화** — 7편 `> 📸 [SCREENSHOT]` (36개) → `<!-- TODO SCREENSHOT -->` perl 일괄 변환. 프로덕션 HTML에 미완성 텍스트 노출 0건. Phase C 사용자 한 줄 교체로 실제 이미지 추가 가능 |
+| 2026-05-30 | **Phase D 영어 번역 7편 완료** — 3개 병렬 에이전트 분담 (각 영어 단어 1943~2433, 모두 1500~3000 범위). 직역 X 영어권 검색 의도·이디엄 반영, AI cliché 회피, HTML 주석 placeholder 위치 유지, 내부 링크 `/ko/blog`→`/blog` 변환 |
+| 2026-05-30 | **AdSense·SEO 사이트 전반 감사** — 별도 에이전트 read-only 감사. 🔴 즉시 차단 4건 / 🟡 우선 수정 6건 / 🟢 추가 강화 5건 식별. 핵심 결함: BackupInfo 조건부 렌더, BlogPosting 미적용, ja 블로그 부재 hreflang 비대칭, 메인 title 90자 |
+| 2026-05-30 | **메인·구조화 데이터·hreflang 일관화** — App.jsx BackupInfo 항상 노출 / index.html title 62자·description 134자 / HowTo JSON-LD 3개→1개 통합 / Organization contactPoint 추가 / 정적 폴백 footer about·blog 동기화 / BackupInfo 3언어 footnote에 블로그 링크 / build-blog.mjs Article→BlogPosting + isPartOf + mainEntityOfPage / build-sitemap.mjs 블로그 priority 0.7→0.8 / i18n.js ja 라벨 'ブログ (EN)' 명시 |
+| 2026-05-30 | **4편 책임 톤 보강** — lyrics·genre·vs-udio·daw 결론에 본인 창작물·Pro 권리·개인 활용·재배포 금지 4축 자연 변주 단락 추가 (한·영 8개 파일) |
+| 2026-05-30 | **정적 페이지 → 블로그 cross-link** — 가이드 9 + FAQ 3 = 12 페이지에 총 28개 cross-link 추가. ja 페이지는 hreflang 정합성 유지 위해 footer 한 줄만 (본문 카드 X). 블로그 내부 PageRank 양방향화 |
+| 2026-05-30 | **최종 빌드·검증** — `npm run build` 통과 (38 modules, 32 OG, 623ms), `sitemap --verify` OK, BlogPosting 1건/페이지 적용 확인, placeholder 본문 노출 0건, 영어 URL 영어 본문 정상 (한국어 fallback 해소) |
+| 2026-05-30 | **3개 기능별 커밋·푸시** — `8f84359` Phase D + 톤 보강 / `2ac78d2` AdSense·SEO 인프라 / `e420387` cross-link. Fly.io 자동 배포 트리거 |
