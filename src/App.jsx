@@ -230,7 +230,7 @@ export default function App() {
             />
           )}
 
-          {songs.length === 0 && <BackupInfo lang={lang} />}
+          <BackupInfo lang={lang} />
         </div>
       </main>
 

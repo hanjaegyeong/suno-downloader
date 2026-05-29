@@ -214,7 +214,7 @@ const messages = {
     footerGuide3Url: '/ja/guide/suno-pro-cookie-setup',
     footerFaq: 'よくある質問 (FAQ)',
     footerFaqUrl: '/ja/faq',
-    footerBlog: 'ブログ',
+    footerBlog: 'ブログ (EN)',
     footerBlogUrl: '/blog',
     footerAbout: 'サイトについて',
   },

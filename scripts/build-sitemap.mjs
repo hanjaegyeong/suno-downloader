@@ -293,7 +293,7 @@ async function discoverBlogEntries() {
       loc: `${BASE}/blog/${slug}`,
       lastmod: publishedAt,
       changefreq: 'monthly',
-      priority: '0.7',
+      priority: '0.8',
       alternates: [
         { hreflang: 'en', href: `${BASE}/blog/${slug}` },
         { hreflang: 'ko', href: `${BASE}/ko/blog/${slug}` },
@@ -306,7 +306,7 @@ async function discoverBlogEntries() {
       loc: `${BASE}/ko/blog/${slug}`,
       lastmod: publishedAt,
       changefreq: 'monthly',
-      priority: '0.7',
+      priority: '0.8',
       alternates: [
         { hreflang: 'en', href: `${BASE}/blog/${slug}` },
         { hreflang: 'ko', href: `${BASE}/ko/blog/${slug}` },

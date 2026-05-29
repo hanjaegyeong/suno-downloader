@@ -100,17 +100,25 @@ function substitute(template, tokens) {
 // --- HTML builders ---
 
 function buildArticleJson(opts) {
+  const blogUrl = opts.lang === 'ko' ? `${SITE_URL}/ko/blog` : `${SITE_URL}/blog`;
   return JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: opts.title,
     description: opts.summary,
     datePublished: opts.publishedAt,
     inLanguage: opts.lang,
-    author: { '@type': 'Organization', name: 'SunoDown' },
-    publisher: { '@type': 'Organization', name: 'SunoDown', url: SITE_URL },
+    author: { '@type': 'Organization', name: 'SunoDown', url: SITE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: 'SunoDown',
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/og/blog.png` },
+    },
     url: opts.canonicalUrl,
     image: opts.ogImage,
+    isPartOf: { '@type': 'Blog', '@id': blogUrl, name: opts.lang === 'ko' ? '블로그' : 'Blog' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': opts.canonicalUrl },
   }, null, 2).replace(/<\//g, '<\\/');
 }
 

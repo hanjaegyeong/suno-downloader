@@ -76,6 +76,7 @@ const COPY = {
         💡 처음 사용하시나요? <a href="/ko/guide/how-to-download-suno-playlist">다운로드 방법 가이드</a>,
         <a href="/ko/guide/suno-mp3-vs-wav"> MP3 vs WAV 비교</a>,
         <a href="/ko/guide/suno-pro-cookie-setup"> Suno Pro 쿠키 설정</a>에서 자세한 사용법을 확인할 수 있습니다.
+        AI 음악 제작 팁·장르·저작권·DAW 후처리 같은 주제는 <a href="/ko/blog">블로그</a>에서 다룹니다.
       </>
     ),
   },
@@ -161,6 +162,7 @@ const COPY = {
         💡 New here? See our <a href="/guide/how-to-download-suno-playlist">step-by-step download guide</a>,
         <a href="/guide/suno-mp3-vs-wav"> MP3 vs WAV comparison</a>, and
         <a href="/guide/suno-pro-cookie-setup"> Suno Pro cookie setup walkthrough</a> for details.
+        Deeper topics — lyrics prompting, AI music genres, copyright, DAW post-processing — live on the <a href="/blog">blog</a>.
       </>
     ),
   },
@@ -244,6 +246,7 @@ const COPY = {
         💡 初めての方は <a href="/ja/guide/how-to-download-suno-playlist">ダウンロード方法ガイド</a>、
         <a href="/ja/guide/suno-mp3-vs-wav"> MP3 vs WAV 比較</a>、
         <a href="/ja/guide/suno-pro-cookie-setup"> Suno Pro クッキー設定</a>で詳しい使い方を確認できます。
+        歌詞プロンプト・ジャンル・著作権・DAW後処理などのトピックは <a href="/blog">Blog (EN)</a> に掲載しています。
       </>
     ),
   },
