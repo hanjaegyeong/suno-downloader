@@ -1,4 +1,4 @@
-- /blog 시스템 + 다운로드와 무관한 정보성 글 7~10편 — AdSense는 "사이트 주된 목적이 도구가 아닌 정보"라는 시그널을 요구, 가사 프롬프트·장르 카탈로그·AI 음악 저작권·Suno vs Udio·Suno Pro 가치 분석·DAW 후처리·유튜브 콘텐츠 활용 등 도구 사용법이 아닌 주제, 1500~3000단어 + 직접 스크린샷 3~5장, AI 생성 티 안 나게
+- /blog Phase B~F — 7편 한국어 초안(Claude 병렬) → 사용자 1인칭/스크린샷 보강 → 영어 번역 → 사용자 영어 마무리 → 빌드·배포. 합의된 스펙·플랜은 `.omc/specs/deep-interview-blog-system.md`, `.omc/plans/blog-infra-phase-a.md`. 7개 슬러그 확정 (lyric-prompting, ai-music-genres, ai-music-copyright, suno-vs-udio, suno-pro-value, daw-postprocessing, youtube-content-utilization). 인프라(Phase A)는 가동 준비 완료.
 - 기존 가이드 3편 본문 이미지 0건 → 실제 Suno UI 스크린샷 5~10장씩 — 본문 이미지 부재가 "노력·원본성 신호" 약하게 만들고 이미지 검색 surface도 부재
 - 책임감 있는 사용·저작권 톤 사이트 전반 점검 — 도구 정체성이 AdSense 최대 리스크, "본인 창작물 백업·Pro 구독자 권리·개인 청취" 톤이 메인·가이드·FAQ·블로그·about에 일관되게 표현되는지 감사
 - robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)

@@ -2,6 +2,58 @@
 
 ---
 
+## /blog Phase A — 인프라 구축 (2026-05-29 완료)
+
+### 결정 사항 (Deep Interview 7라운드, 최종 ambiguity 16.75%)
+- **언어 범위**: 한+영 2언어 (일본어 제외 — 메인 사이트 ja 유지하나 블로그는 미적용)
+- **저작 스택**: 마크다운 → `scripts/build-blog.mjs` → 정적 HTML (marked@^18.0.4 단일 의존성)
+- **편수·주제**: 7편 — 가사 프롬프트·장르 카탈로그·AI 음악 저작권·Suno vs Udio·Suno Pro 가치·DAW 후처리·유튜브 활용
+- **편당 분량**: 1500~3000단어 + 스크린샷 3~5장 + 내부 링크 2~3개
+- **출시 sequencing**: 7편 병렬 작성 후 일괄 출시
+- **워크플로우**: Claude 한국어 초안 → User 1인칭/스크린샷 보강 → Claude 영어 번역 → User 영어 마무리 → 빌드·배포
+- **경로 컨벤션**: 영어 bare(`/blog/{slug}`), 한국어 `/ko/blog/{slug}` — 기존 /guide 컨벤션 따름 (스펙의 `/en/` 명시는 의도적 일탈)
+
+### Phase A 체크리스트 (인프라)
+- [x] `marked` 의존성 추가 (devDependencies ^18.0.4)
+- [x] `scripts/build-blog.mjs` — 마크다운→HTML 빌더, frontmatter 검증, 워드카운트 경고, HTML/JSON-LD escape
+- [x] `scripts/build-sitemap.mjs` — 기존 16개 URL 1:1 보존 + 블로그 ko+en hreflang + `--verify` 회귀 가드 (H1)
+- [x] `public/sitemap.xml.bak` 베이스라인 스냅샷 (H1)
+- [x] `scripts/templates/blog-article.html` 공통 템플릿 (기존 /guide 페이지와 일관)
+- [x] `content/blog/_template.md` 프론트매터 예시 (schemaVersion: 1 — H4)
+- [x] `package.json` 빌드 체인 (`build:blog → build:sitemap → build:og → vite build`)
+- [x] `scripts/og/pages.mjs` 확장 — 블로그 OG 16개 엔트리 (7 슬러그 × 2언어 + 인덱스 2)
+- [x] `server.js` CONTENT_PAGES + glob 자동 발견 + 하드코드 fallback (H3)
+- [x] `src/i18n.js` blog 키 추가 (footerBlog, footerBlogUrl × 3 locales)
+- [x] `src/App.jsx` 3개 언어 푸터에 Blog 링크
+- [x] 블로그 목록 페이지 카드 레이아웃 (영어·한국어, 0편일 때 "곧 첫 글" 빈 상태)
+- [x] `.gitignore` 생성 HTML 패턴
+- [x] HTML/JSON-LD escape 적용 (code-reviewer 권고 — XSS 회귀 테스트 통과)
+
+### 검증 결과
+- `npm run build` 성공 (38 modules + 32 OG 이미지, 604ms)
+- `node scripts/build-sitemap.mjs --verify` 통과 (기존 16개 URL zero drift)
+- 12개 acceptance criteria 일괄 통과
+- End-to-end XSS escape 회귀 테스트 통과 (`<title>테스트 &quot;인용&quot; &amp; &lt;태그&gt;`)
+- JSON-LD `</script>` injection 방지 (`<\/script>` 변환)
+- 3개 reviewer 검증: Architect APPROVE / Security APPROVE / Code-reviewer MINOR_REVISIONS (3개 fix 모두 반영)
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-29 | Deep Interview 7라운드 완료, ambiguity 16.75% 달성, 핵심 결정 7건 |
+| 2026-05-29 | Ralplan 합의: Planner → Architect (APPROVE_WITH_MINOR_EDITS) → Critic (APPROVE), H1~H4 hardening |
+| 2026-05-29 | Autopilot Phase 2: 3개 병렬 executor (Stream A 빌드, B sitemap+OG, C 앱 통합) |
+| 2026-05-29 | Phase 3 QA: 12개 AC 통과, `npm run build` 성공 |
+| 2026-05-29 | Phase 4 검증: 3개 reviewer 평가 → MINOR_REVISIONS 3개 수정 |
+| 2026-05-29 | Phase A 완료 — Phase B(한국어 초안 7편) 별도 플랜으로 분리 |
+
+### 산출 파일
+- 신규: `scripts/build-blog.mjs`, `scripts/build-sitemap.mjs`, `scripts/templates/blog-article.html`, `content/blog/_template.md`, `public/sitemap.xml.bak`, 블로그 목록 페이지 2개
+- 수정: `package.json`, `scripts/og/pages.mjs`, `server.js`, `src/App.jsx`, `src/i18n.js`, `.gitignore`
+- 합의 산출물: `.omc/specs/deep-interview-blog-system.md`, `.omc/plans/blog-infra-phase-a.md`
+
+---
+
 ## 사이트 톤 리프레이밍 + 메인 본문 강화 (2026-05-29 완료)
 
 ### 결정 사항
