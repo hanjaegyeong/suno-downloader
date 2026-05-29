@@ -11,6 +11,12 @@ export const pages = [
     badge: 'FREE',
   },
   {
+    slug: 'about',
+    title: 'About SunoDown',
+    subtitle: 'Mission  ·  Principles  ·  Contact',
+    badge: 'ABOUT',
+  },
+  {
     slug: 'privacy',
     title: 'Privacy Policy',
     subtitle: 'How SunoDown handles your data and cookies',

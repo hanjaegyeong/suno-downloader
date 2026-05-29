@@ -543,6 +543,7 @@ if (isProd) {
   // Clean URLs for static content pages (must precede express.static
   // to avoid its built-in trailing-slash 301 redirect for directories)
   const CONTENT_PAGES = [
+    'about',
     'privacy',
     'terms',
     'faq',

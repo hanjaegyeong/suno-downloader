@@ -242,6 +242,8 @@ export default function App() {
             <span aria-hidden="true"> · </span>
             <a href={t('footerGuide3Url')}>{t('footerGuide3')}</a>
             <span aria-hidden="true"> · </span>
+            <a href="/about">{t('footerAbout')}</a>
+            <span aria-hidden="true"> · </span>
             <a href="/privacy">{t('footerPrivacy')}</a>
             <span aria-hidden="true"> · </span>
             <a href="/terms">{t('footerTerms')}</a>
