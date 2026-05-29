@@ -1,8 +1,10 @@
-- /blog 블로그 시스템 구축 + 첫 글 /blog/suno-ai-music-copyright
+- 사이트 톤 리프레이밍 + 메인 본문 강화 — 도메인 첫인상이 "다운로더"이면 AdSense 콘텐츠 정책에 걸리기 쉬움, 도구 UI 위로 "왜 로컬 백업이 필요한가·Pro 구독자 권리·개인 청취" 정보성 본문 800~1500단어 + 헤더 카피·hero·메타 톤을 "Suno 활용 허브"로 일관 조정
+- /blog 시스템 + 다운로드와 무관한 정보성 글 7~10편 — AdSense는 "사이트 주된 목적이 도구가 아닌 정보"라는 시그널을 요구, 가사 프롬프트·장르 카탈로그·AI 음악 저작권·Suno vs Udio·Suno Pro 가치 분석·DAW 후처리·유튜브 콘텐츠 활용 등 도구 사용법이 아닌 주제, 1500~3000단어 + 직접 스크린샷 3~5장, AI 생성 티 안 나게
+- 기존 가이드 3편 본문 이미지 0건 → 실제 Suno UI 스크린샷 5~10장씩 — 본문 이미지 부재가 "노력·원본성 신호" 약하게 만들고 이미지 검색 surface도 부재
+- 책임감 있는 사용·저작권 톤 사이트 전반 점검 — 도구 정체성이 AdSense 최대 리스크, "본인 창작물 백업·Pro 구독자 권리·개인 청취" 톤이 메인·가이드·FAQ·블로그·about에 일관되게 표현되는지 감사
 - robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)
-- 메인 페이지 본문 텍스트 강화 — 도구 UI 외 정보성 텍스트가 거의 없어 매칭할 검색어 표면이 부족 (GSC 노출 ~50/7주)
 - 타깃 키워드 검증 — GSC 검색어 리포트·외부 키워드 도구로 현재 추측 기반 타깃을 실데이터로 교체
-- 외부 자연 노출 채널 — Reddit r/SunoAI·Suno Discord·ProductHunt에 자연스러운 등장으로 첫 백링크·도메인 권위 확보
+- 외부 자연 노출 채널 — Reddit r/SunoAI·Suno Discord·ProductHunt에 자연스러운 등장으로 첫 백링크·도메인 권위 확보 (AdSense 외부 신뢰 신호로도 작동)
 - SoftwareApplication / WebApplication JSON-LD — 도구 사이트 분류 시그널, sitelinks 후보 진입
 - Naver·Bing 웹마스터 등록 — 한국어·국제 검색 보조 채널 노출 확장
 - Core Web Vitals 점검 — LCP·CLS·INP 실측 (PageSpeed Insights / web-vitals 라이브러리) — 순위 직접 영향 요소

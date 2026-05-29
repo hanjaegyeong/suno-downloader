@@ -2,6 +2,61 @@
 
 ---
 
+## /about 페이지 — 운영 주체 신뢰 신호 (2026-05-29 완료)
+
+### 결정 사항
+- **운영 주체**: 익명 개인 (실명·닉네임 비공개) — 사용자 결정
+- **운영자 약력**: 노출하지 않음 — 사용자 결정
+- **페이지 구조**: privacy/terms 패턴 채택 — 단일 `/about` URL, 3개 lang block JS 토글 (faq/guide 같은 locale 분리 안 함)
+- **운영 톤**: "Suno Pro 구독자가 자신이 만든 음악을 로컬에 백업할 권리"를 핵심 미션으로 정의 — 광고 정책(AdSense) 대응 + 도구 정체성 리스크 완화 일관 톤
+
+### 체크리스트
+- [x] /about 라우트 추가 — `server.js` CONTENT_PAGES에 `'about'` 추가, `public/about/index.html` 생성
+- [x] 운영 주체 정체성 — 익명 개인, 자비·광고로 운영비 충당 명시
+- [x] 미션 섹션 — Suno Pro 구독자의 로컬 백업·개인 청취·DAW 후처리 권리 행사
+- [x] ~~운영자 약력/배경 섹션~~ 제거 (사용자 결정)
+- [x] 책임감 있는 사용 원칙 — 본인 창작물 / 본인 계정 / 개인 청취 / 재배포·상업 활용 금지 / 저작권 준수
+- [x] 연락처 — `hjg000223@naver.com`
+- [x] 다국어 콘텐츠 — 한국어/English/日本語 3개 lang block + i18n.js footer 키
+- [x] SEO 메타 — title·description·canonical·hreflang·OG·Twitter Card·robots index
+- [x] OG 이미지 — `scripts/og/pages.mjs`에 `about` 슬러그 추가 → 빌드 시 `og/about.png` 자동 생성 (89.1 KB)
+- [x] 푸터 링크 노출 — `App.jsx` (메인) + 14개 정적 페이지 푸터에 /about 링크 추가
+- [x] sitemap.xml에 `/about` 포함 (priority 0.5, monthly)
+- [x] JSON-LD `AboutPage` 스키마 + Organization publisher
+
+### 산출물
+
+| 파일 | 변경 내용 |
+|---|---|
+| `public/about/index.html` | 신규 — 3개 lang block, AboutPage JSON-LD, OG/Twitter 메타, 미션·원칙·관계·연락 섹션 |
+| `server.js` | CONTENT_PAGES에 `'about'` 추가 |
+| `scripts/og/pages.mjs` | `about` 슬러그 엔트리 추가 (badge: ABOUT) |
+| `public/sitemap.xml` | `/about` URL 추가 (3개 hreflang) |
+| `src/i18n.js` | `footerAbout` 키 ko/en/ja 추가 |
+| `src/App.jsx` | 푸터에 `<a href="/about">{t('footerAbout')}</a>` 추가 |
+| `public/{privacy,terms,faq,ko/faq,ja/faq}/index.html` | 푸터에 about 링크 추가 |
+| `public/guide/{how-to-download-suno-playlist,suno-mp3-vs-wav,suno-pro-cookie-setup}/index.html` × 3 locales | 푸터에 about 링크 추가 (총 9개) |
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-29 | /start-phase — PLAN.md에서 PLAN-CURRENT.md로 이동 |
+| 2026-05-29 | 사용자 결정 수신: 익명 운영 / 약력 미노출 → 컨텐츠 스코프 확정 |
+| 2026-05-29 | `public/about/index.html` 생성 (3 lang block, AboutPage JSON-LD) |
+| 2026-05-29 | `server.js` CONTENT_PAGES + `sitemap.xml` + `pages.mjs` 동시 갱신 |
+| 2026-05-29 | `i18n.js` footerAbout 키 3개 언어 + `App.jsx` 푸터 링크 |
+| 2026-05-29 | 14개 정적 페이지 푸터에 about 링크 일괄 추가 (en/ko/ja 라벨 분기) |
+| 2026-05-29 | `npm run build` 검증 — OG 16장 생성, vite build 성공 |
+| 2026-05-29 | 로컬 서버 `/about` 200 OK + canonical/og:url/title 정상 확인 |
+| 2026-05-29 | /complete-phase로 아카이빙 |
+
+### 메모
+- **트러스트 시그널 보강 완료**: 운영자·미션·원칙·연락처·법적 면책의 5개 신호가 AdSense 운영자 신뢰성 평가 시 평가 포인트. 익명 운영을 유지하면서도 "왜·어떤 자격으로" 정도는 충분히 노출.
+- **약력 미노출의 트레이드오프**: AdSense는 "운영자가 실존하는가" 신호를 선호하지만, 익명 + 미션·원칙·연락 가능한 이메일이 명시되면 1인 개발 도구 카테고리에서는 충분히 통과 가능. 차후 거절 시 약력 추가가 다음 카드.
+- **다음 작업 후보**: PLAN.md 최상단 "사이트 톤 리프레이밍 + 메인 본문 강화" — /about에서 정의한 톤("Suno 활용 허브" 정체성)을 메인 페이지 본문에 800~1500단어로 확장해야 일관성이 완성됨.
+
+---
+
 ## 이미지 alt 텍스트 정비 (2026-05-26 완료)
 
 ### 결정 사항
