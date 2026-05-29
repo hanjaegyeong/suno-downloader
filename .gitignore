@@ -5,3 +5,15 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# Generated blog HTML (build output — sources are content/blog/*.md)
+public/blog/index.html
+public/ko/blog/index.html
+public/blog/*/index.html
+public/ko/blog/*/index.html
+
+# OMC workspace (specs and plans tracked, runtime state ignored)
+.omc/state/
+.omc/sessions/
+.omc/project-memory.json
+.omc/plans/open-questions.md

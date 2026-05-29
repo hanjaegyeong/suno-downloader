@@ -68,6 +68,8 @@ const messages = {
     footerGuide3Url: '/ko/guide/suno-pro-cookie-setup',
     footerFaq: '자주 묻는 질문 (FAQ)',
     footerFaqUrl: '/ko/faq',
+    footerBlog: '블로그',
+    footerBlogUrl: '/ko/blog',
     footerAbout: '소개',
   },
   en: {
@@ -139,6 +141,8 @@ const messages = {
     footerGuide3Url: '/guide/suno-pro-cookie-setup',
     footerFaq: 'FAQ',
     footerFaqUrl: '/faq',
+    footerBlog: 'Blog',
+    footerBlogUrl: '/blog',
     footerAbout: 'About',
   },
   ja: {
@@ -210,6 +214,8 @@ const messages = {
     footerGuide3Url: '/ja/guide/suno-pro-cookie-setup',
     footerFaq: 'よくある質問 (FAQ)',
     footerFaqUrl: '/ja/faq',
+    footerBlog: 'ブログ',
+    footerBlogUrl: '/blog',
     footerAbout: 'サイトについて',
   },
 };

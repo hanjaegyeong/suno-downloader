@@ -558,7 +558,47 @@ if (isProd) {
     'guide/suno-pro-cookie-setup',
     'ko/guide/suno-pro-cookie-setup',
     'ja/guide/suno-pro-cookie-setup',
+    'blog',
+    'ko/blog',
   ];
+
+  // Discover blog article slugs from dist/ at startup; fall back to known list
+  const BLOG_FALLBACK_SLUGS = [
+    'suno-lyrics-prompt-tips',
+    'ai-music-genre-catalog',
+    'ai-music-copyright-guide',
+    'suno-vs-udio-comparison',
+    'suno-pro-value-analysis',
+    'daw-post-processing',
+    'youtube-content-with-ai-music',
+  ];
+
+  function discoverBlogSlugs(prefix) {
+    const fs = require('fs');
+    const dir = path.join(distDir, prefix);
+    try {
+      return fs.readdirSync(dir, { withFileTypes: true })
+        .filter((e) => e.isDirectory())
+        .map((e) => e.name);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  const enSlugs = discoverBlogSlugs('blog');
+  const koSlugs = discoverBlogSlugs('ko/blog');
+
+  if (!enSlugs || enSlugs.length === 0) {
+    console.warn('[server] dist/blog not built — falling back to hardcoded blog list');
+    BLOG_FALLBACK_SLUGS.forEach((s) => {
+      CONTENT_PAGES.push(`blog/${s}`);
+      CONTENT_PAGES.push(`ko/blog/${s}`);
+    });
+  } else {
+    enSlugs.forEach((s) => CONTENT_PAGES.push(`blog/${s}`));
+    (koSlugs || enSlugs).forEach((s) => CONTENT_PAGES.push(`ko/blog/${s}`));
+  }
+
   CONTENT_PAGES.forEach((slug) => {
     app.get([`/${slug}`, `/${slug}/`], (_req, res) => {
       res.set('Cache-Control', 'public, max-age=3600');

@@ -239,6 +239,8 @@ export default function App() {
           <p className="footer-links">
             <a href={t('footerFaqUrl')}>{t('footerFaq')}</a>
             <span aria-hidden="true"> · </span>
+            <a href={t('footerBlogUrl')}>{t('footerBlog')}</a>
+            <span aria-hidden="true"> · </span>
             <a href={t('footerGuideUrl')}>{t('footerGuide')}</a>
             <span aria-hidden="true"> · </span>
             <a href={t('footerGuide2Url')}>{t('footerGuide2')}</a>

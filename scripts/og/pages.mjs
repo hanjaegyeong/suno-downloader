@@ -108,4 +108,116 @@ export const pages = [
     subtitle: 'Unlock WAV downloads in 2 minutes',
     badge: 'JA  ·  GUIDE',
   },
+
+  // Blog index pages
+  {
+    slug: 'blog',
+    title: 'SunoDown Blog',
+    subtitle: 'AI Music  ·  Tips  ·  Guides',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog',
+    title: 'SunoDown Blog',
+    subtitle: 'AI Music  ·  Tips  ·  Guides',
+    badge: 'KO  ·  BLOG',
+  },
+
+  // Blog: suno-lyrics-prompt-tips
+  {
+    slug: 'blog-suno-lyrics-prompt-tips',
+    title: 'Suno AI Lyrics Prompt Guide',
+    subtitle: 'Lyrics  ·  Prompts  ·  Quality Tips',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog-suno-lyrics-prompt-tips',
+    title: 'Suno AI Lyrics Prompt Guide',
+    subtitle: 'Lyrics  ·  Prompts  ·  Quality Tips',
+    badge: 'KO  ·  BLOG',
+  },
+
+  // Blog: ai-music-genre-catalog
+  {
+    slug: 'blog-ai-music-genre-catalog',
+    title: 'AI Music Genre Catalog',
+    subtitle: 'Styles  ·  Moods  ·  Prompts',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog-ai-music-genre-catalog',
+    title: 'AI Music Genre Catalog',
+    subtitle: 'Styles  ·  Moods  ·  Prompts',
+    badge: 'KO  ·  BLOG',
+  },
+
+  // Blog: ai-music-copyright-guide
+  {
+    slug: 'blog-ai-music-copyright-guide',
+    title: 'AI Music Copyright Guide',
+    subtitle: 'Ownership  ·  Licensing  ·  Commercial Use',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog-ai-music-copyright-guide',
+    title: 'AI Music Copyright Guide',
+    subtitle: 'Ownership  ·  Licensing  ·  Commercial Use',
+    badge: 'KO  ·  BLOG',
+  },
+
+  // Blog: suno-vs-udio-comparison
+  {
+    slug: 'blog-suno-vs-udio-comparison',
+    title: 'Suno vs Udio Comparison',
+    subtitle: 'Features  ·  Quality  ·  Pricing',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog-suno-vs-udio-comparison',
+    title: 'Suno vs Udio Comparison',
+    subtitle: 'Features  ·  Quality  ·  Pricing',
+    badge: 'KO  ·  BLOG',
+  },
+
+  // Blog: suno-pro-value-analysis
+  {
+    slug: 'blog-suno-pro-value-analysis',
+    title: 'Suno Pro Value Analysis',
+    subtitle: 'Credits  ·  WAV  ·  Is It Worth It?',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog-suno-pro-value-analysis',
+    title: 'Suno Pro Value Analysis',
+    subtitle: 'Credits  ·  WAV  ·  Is It Worth It?',
+    badge: 'KO  ·  BLOG',
+  },
+
+  // Blog: daw-post-processing
+  {
+    slug: 'blog-daw-post-processing',
+    title: 'DAW Post-Processing for AI Music',
+    subtitle: 'EQ  ·  Mastering  ·  Export',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog-daw-post-processing',
+    title: 'DAW Post-Processing for AI Music',
+    subtitle: 'EQ  ·  Mastering  ·  Export',
+    badge: 'KO  ·  BLOG',
+  },
+
+  // Blog: youtube-content-with-ai-music
+  {
+    slug: 'blog-youtube-content-with-ai-music',
+    title: 'YouTube Content with AI Music',
+    subtitle: 'Workflow  ·  Copyright  ·  Monetization',
+    badge: 'EN  ·  BLOG',
+  },
+  {
+    slug: 'ko-blog-youtube-content-with-ai-music',
+    title: 'YouTube Content with AI Music',
+    subtitle: 'Workflow  ·  Copyright  ·  Monetization',
+    badge: 'KO  ·  BLOG',
+  },
 ];
