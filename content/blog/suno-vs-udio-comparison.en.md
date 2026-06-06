@@ -2,14 +2,14 @@
 
 Suno and Udio both synthesize lyrics, vocals, and instrumental backing from a single text prompt. On the surface they look like the same tool wearing different paint. Generate a few tracks, though, and the gaps show up fast. Neither wins every scenario. This piece compares the two services across six axes and maps each use case to the better fit.
 
-Here's the one-line summary first. Pricing and policy reflect what's live as of May 2026.
+Here's the one-line summary first. Pricing and policy reflect what's live as of the March 26, 2026 revision.
 
 | Axis | Suno (v4.5) | Udio (v1.5) |
 |---|---|---|
 | Vocal synthesis | Very strong at lyric-driven vocals | Refined tone and texture |
 | Mix tone | Clean for pop, EDM, K-pop | Strong for jazz, R&B, experimental |
 | Track length | Up to 4 min per generation, unlimited Extend | Up to 2 min 15 sec, Extend supported |
-| Entry price (paid) | Plus at $8/mo | Standard at $10/mo |
+| Entry price (paid) | Pro at $8/mo | Standard at $10/mo |
 | Rights | Pro tier grants explicit commercial use | Standard tier grants explicit commercial use |
 | Workflow | Custom Mode with rich meta tags | Precise Extend and inpainting |
 
@@ -41,7 +41,7 @@ The table alone makes the point — the right pick depends on genre and the kind
 <rect x="540" y="86" width="14" height="14" fill="rgba(192,132,252,0.14)" stroke="#c084fc" stroke-width="2" stroke-dasharray="4 3"/>
 <text x="560" y="98" class="lg" fill="#c084fc">Udio v1.5</text>
 </svg>
-<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: 6-axis comparison — Suno leads on vocals, length, and pricing; Udio leads on mix tone and genre breadth (May 2026)</figcaption>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: 6-axis comparison — Suno leads on vocals, length, and pricing; Udio leads on mix tone and genre breadth (as of the March 26, 2026 revision)</figcaption>
 </figure>
 
 <!-- TODO SCREENSHOT: Side-by-side comparison of tracks generated from the same prompt in Suno and Udio -->
@@ -77,33 +77,32 @@ The short version: Suno does "longer one-shot with meta tags for structure"; Udi
 <!-- TODO SCREENSHOT: Side-by-side capture of Suno's Extend UI and Udio's inpainting UI -->
 ## Pricing and Generation Volume
 
-Pricing structures differ. Numbers below reflect May 2026.
+Pricing structures differ. Numbers below reflect the March 26, 2026 revision.
 
 **Suno**
 - Free — 50 credits/day (about 10 tracks), non-commercial
-- Plus — $8/mo, 2,500 credits/mo (about 500 tracks), commercial use
-- Pro — $24/mo, 10,000 credits/mo (about 2,000 tracks), priority queue, commercial use
-- Premier — $80/mo, 40,000 credits/mo (about 8,000 tracks)
+- Pro — $8/mo, 2,500 credits/mo (about 500 tracks), priority queue, commercial use
+- Premier — $24/mo, 10,000 credits/mo (about 2,000 tracks), Suno Studio, commercial use
 
 **Udio**
 - Free — 100 credits/mo (about 25 tracks), non-commercial
 - Standard — $10/mo, 1,200 credits/mo (about 300 tracks), commercial use
 - Pro — $30/mo, 4,800 credits/mo (about 1,200 tracks)
 
-On raw credit cost, Suno Plus ($8 for 2,500 credits) is the cheapest paid entry point. Udio Standard ($10 for 1,200 credits) has a higher per-credit price, but Udio also burns fewer credits per finished track, which narrows the real-world gap.
+On raw credit cost, Suno Pro ($8 for 2,500 credits) is the cheapest paid entry point. Udio Standard ($10 for 1,200 credits) has a higher per-credit price, but Udio also burns fewer credits per finished track, which narrows the real-world gap.
 
-If you crank out lots of tracks fast, Suno Plus stretches further. If you spend more time per track and lean on regeneration, Udio Standard balances out. The Suno plan-by-plan breakdown lives in [Is Suno Pro Worth It?](/blog/suno-pro-value-analysis).
+If you crank out lots of tracks fast, Suno Pro stretches further. If you spend more time per track and lean on regeneration, Udio Standard balances out. The Suno plan-by-plan breakdown lives in [Is Suno Pro Worth It?](/blog/suno-pro-value-analysis).
 
-<!-- TODO SCREENSHOT: Side-by-side capture of Suno's pricing page and Udio's pricing page -->
+![Suno official pricing page — Free / Pro $8 / Premier $24 (Udio pricing in the table above)](/blog/images/suno-vs-udio-comparison/04a-suno-pricing.png)
 ## Rights and Commercial Use
 
 Both services grant commercial use on paid tiers, but the fine print differs.
 
-**Suno** (May 2026 terms)
-- Free — personal, non-commercial use only. Suno retains copyright in the generated track and grants you a usage license
-- Plus and above — explicit commercial rights to the tracks you generate. Streaming platform release, ad placement, and YouTube monetization are all permitted
+**Suno** (terms as of the March 26, 2026 revision)
+- Free — personal, non-commercial use only, with attribution credit to Suno required. Suno retains copyright in the generated track and grants you a usage license
+- Pro and above — explicit commercial rights to the tracks you generate. Streaming platform release, ad placement, and YouTube monetization are all permitted
 
-**Udio** (May 2026 terms)
+**Udio** (terms as of the March 26, 2026 revision)
 - Free — personal, non-commercial use
 - Standard and above — commercial rights granted, with a recommendation (not a hard requirement) to label content as AI-generated
 
@@ -136,7 +135,7 @@ A map of which service tends to win in common situations. Not absolute — your 
 - Honestly, running both free tiers in parallel and comparing your own results is the most reliable way to choose
 
 **Streaming releases (Spotify, Apple Music)** — depends on genre
-- K-pop, pop, EDM releases: Suno Plus or higher
+- K-pop, pop, EDM releases: Suno Pro or higher
 - Jazz, R&B, ambient releases: Udio Standard or higher
 - Either way, a DAW pass (EQ, compression, mastering) before release is nearly mandatory
 
@@ -172,7 +171,7 @@ For serious commercial work, subscribe to one paid plan and keep the other as a 
 
 [SunoDown](/) supports batch lossless WAV and MP3 downloads for Suno playlists, which helps when you're moving Suno tracks into a DAW. Udio tracks can be downloaded through Udio's own interface.
 
-One last caveat — this is a May 2026 snapshot. Both services iterate models quickly, and the strengths and weaknesses shift on roughly six-month cycles. Suno's Korean pronunciation improved dramatically from v3 in 2024 to v4.5 in 2026, and Udio's vocal naturalness took a clear step up from v1.0 to v1.5. If you're serious about AI music as a tool, re-running this comparison on the latest builds every six months is worth the small effort.
+One last caveat — this reflects the March 26, 2026 revision. Both services iterate models quickly, and the strengths and weaknesses shift on roughly six-month cycles. Suno's Korean pronunciation improved dramatically from v3 in 2024 to v4.5 in 2026, and Udio's vocal naturalness took a clear step up from v1.0 to v1.5. If you're serious about AI music as a tool, re-running this comparison on the latest builds every six months is worth the small effort.
 
 Picking between the two is really a tooling decision for your own creative workflow. Whichever service you settle on, tracks you generated from your own prompt and lyric are fair game for personal listening, DAW post-processing, and your portfolio. Both services grant explicit commercial rights on their paid tiers, so Suno Pro and Udio Standard both give you a clean license to back up, release, or monetize the songs you created. Taking someone else's generation and redistributing or selling it is a separate matter — it needs its own agreement under both services' terms, and nothing on the comparison table changes that. The point of the comparison is to choose the tool that fits your own work, not to find a shortcut around other creators' rights.
 
