@@ -59,7 +59,7 @@ For AI music users, this position has two practical consequences. First, the raw
 
 The Office's stance isn't "AI music has no copyright, period." It's a case-by-case evaluation of how much human creative contribution exists. For specifics on whether your track is registrable, check the Copyright Office's published guidance and talk to a copyright attorney.
 
-<!-- TODO SCREENSHOT: U.S. Copyright Office official AI guidance page — Authorship section -->
+![U.S. Copyright Office's Copyright and Artificial Intelligence page — Federal Register notices and Report Parts 1, 2, and 3](/blog/images/ai-music-copyright-guide/02-uscopyright-office.png)
 ## Korean copyright law and AI-generated works
 
 Korea's Copyright Act (as of May 2026) defines a copyrighted work in Article 2 as "a creative work expressing human thoughts or emotions." The dominant reading of that definition is that pure AI-generated works don't qualify as protectable works in Korea either. The Ministry of Culture, Sports and Tourism and the Korea Copyright Commission released a "Guide to AI-Generated Outputs" across 2023 and 2024 that aligns with this reading.
@@ -142,5 +142,5 @@ The distribution itself works through any standard distributor. Whether to file 
 **What do I do if a dispute arises?**
 Get a lawyer. Copyright, platform policy, and contract disputes are separate specialties, and outcomes turn on the facts of each case. This article is general information, not legal advice.
 
-<!-- TODO SCREENSHOT: Korea Copyright Commission or Ministry of Culture page on AI-generated outputs -->
+![Korea Copyright Commission official homepage — AI usage and copyright-awareness guidance banners](/blog/images/ai-music-copyright-guide/03-korea-copyright-commission.png)
 Once the track is made and the rights position is sorted, the next step is using it. [Is Suno Pro Worth It?](/blog/suno-pro-value-analysis) breaks down the rights and feature value of the Pro plan, and [Using Suno AI Music in YouTube Content](/blog/youtube-content-with-ai-music) covers monetization workflow on YouTube. When the track is finished, [SunoDown](/) downloads your own creations in lossless WAV or MP3 in one click.
