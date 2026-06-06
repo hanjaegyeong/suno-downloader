@@ -28,8 +28,67 @@ const BAK_FILE = join(ROOT, 'public', 'sitemap.xml.bak');
 const VERIFY_MODE = process.argv.includes('--verify');
 
 // ---------------------------------------------------------------------------
-// Static page entries — hardcoded, must exactly match the 16 existing entries
-// in public/sitemap.xml.bak (changefreq, priority, lastmod, hreflang pattern)
+// Guide entry discovery from public/guide/*/index.html
+// ---------------------------------------------------------------------------
+
+// Known lastmod dates per slug. New/unknown slugs default to TODAY_DEFAULT.
+const GUIDE_LASTMOD = {
+  'how-to-download-suno-playlist': '2026-05-25',
+  'suno-mp3-vs-wav':               '2026-05-25',
+  'suno-pro-cookie-setup':         '2026-05-26',
+};
+const GUIDE_TODAY_DEFAULT = '2026-06-07';
+
+// Explicit ordering: slugs listed here come first (in this order).
+// Discovered slugs not in this list are appended sorted alphabetically.
+const GUIDE_ORDER = [
+  'how-to-download-suno-playlist',
+  'suno-mp3-vs-wav',
+  'suno-pro-cookie-setup',
+];
+
+const GUIDE_DIR = join(ROOT, 'public', 'guide');
+
+async function discoverGuideEntries() {
+  if (!existsSync(GUIDE_DIR)) return [];
+
+  let dirs;
+  try {
+    const entries = await readdir(GUIDE_DIR, { withFileTypes: true });
+    dirs = entries.filter(e => e.isDirectory()).map(e => e.name);
+  } catch {
+    return [];
+  }
+
+  // Sort: known order first, then remaining alphabetically
+  const known = GUIDE_ORDER.filter(s => dirs.includes(s));
+  const unknown = dirs.filter(s => !GUIDE_ORDER.includes(s)).sort();
+  const slugs = [...known, ...unknown];
+
+  const result = [];
+  for (const slug of slugs) {
+    const lastmod = GUIDE_LASTMOD[slug] ?? GUIDE_TODAY_DEFAULT;
+    const alts = [
+      { hreflang: 'en', href: `${BASE}/guide/${slug}` },
+      { hreflang: 'ko', href: `${BASE}/ko/guide/${slug}` },
+      { hreflang: 'ja', href: `${BASE}/ja/guide/${slug}` },
+      { hreflang: 'x-default', href: `${BASE}/guide/${slug}` },
+    ];
+    for (const [lang, prefix] of [['en', ''], ['ko', '/ko'], ['ja', '/ja']]) {
+      result.push({
+        loc: `${BASE}${prefix}/guide/${slug}`,
+        lastmod,
+        changefreq: 'monthly',
+        priority: '0.8',
+        alternates: alts,
+      });
+    }
+  }
+  return result;
+}
+
+// ---------------------------------------------------------------------------
+// Static page entries — home, faq, about, privacy, terms (no guides here)
 // ---------------------------------------------------------------------------
 
 const STATIC_ENTRIES = [
@@ -44,120 +103,6 @@ const STATIC_ENTRIES = [
       { hreflang: 'en', href: `${BASE}/` },
       { hreflang: 'ja', href: `${BASE}/` },
       { hreflang: 'x-default', href: `${BASE}/` },
-    ],
-  },
-
-  // Guide: how-to-download-suno-playlist (3 separate URL entries)
-  {
-    loc: `${BASE}/guide/how-to-download-suno-playlist`,
-    lastmod: '2026-05-25',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/how-to-download-suno-playlist` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/how-to-download-suno-playlist` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/how-to-download-suno-playlist` },
-      { hreflang: 'x-default', href: `${BASE}/guide/how-to-download-suno-playlist` },
-    ],
-  },
-  {
-    loc: `${BASE}/ko/guide/how-to-download-suno-playlist`,
-    lastmod: '2026-05-25',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/how-to-download-suno-playlist` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/how-to-download-suno-playlist` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/how-to-download-suno-playlist` },
-      { hreflang: 'x-default', href: `${BASE}/guide/how-to-download-suno-playlist` },
-    ],
-  },
-  {
-    loc: `${BASE}/ja/guide/how-to-download-suno-playlist`,
-    lastmod: '2026-05-25',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/how-to-download-suno-playlist` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/how-to-download-suno-playlist` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/how-to-download-suno-playlist` },
-      { hreflang: 'x-default', href: `${BASE}/guide/how-to-download-suno-playlist` },
-    ],
-  },
-
-  // Guide: suno-mp3-vs-wav (3 separate URL entries)
-  {
-    loc: `${BASE}/guide/suno-mp3-vs-wav`,
-    lastmod: '2026-05-25',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/suno-mp3-vs-wav` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/suno-mp3-vs-wav` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/suno-mp3-vs-wav` },
-      { hreflang: 'x-default', href: `${BASE}/guide/suno-mp3-vs-wav` },
-    ],
-  },
-  {
-    loc: `${BASE}/ko/guide/suno-mp3-vs-wav`,
-    lastmod: '2026-05-25',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/suno-mp3-vs-wav` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/suno-mp3-vs-wav` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/suno-mp3-vs-wav` },
-      { hreflang: 'x-default', href: `${BASE}/guide/suno-mp3-vs-wav` },
-    ],
-  },
-  {
-    loc: `${BASE}/ja/guide/suno-mp3-vs-wav`,
-    lastmod: '2026-05-25',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/suno-mp3-vs-wav` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/suno-mp3-vs-wav` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/suno-mp3-vs-wav` },
-      { hreflang: 'x-default', href: `${BASE}/guide/suno-mp3-vs-wav` },
-    ],
-  },
-
-  // Guide: suno-pro-cookie-setup (3 separate URL entries)
-  {
-    loc: `${BASE}/guide/suno-pro-cookie-setup`,
-    lastmod: '2026-05-26',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/suno-pro-cookie-setup` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/suno-pro-cookie-setup` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/suno-pro-cookie-setup` },
-      { hreflang: 'x-default', href: `${BASE}/guide/suno-pro-cookie-setup` },
-    ],
-  },
-  {
-    loc: `${BASE}/ko/guide/suno-pro-cookie-setup`,
-    lastmod: '2026-05-26',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/suno-pro-cookie-setup` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/suno-pro-cookie-setup` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/suno-pro-cookie-setup` },
-      { hreflang: 'x-default', href: `${BASE}/guide/suno-pro-cookie-setup` },
-    ],
-  },
-  {
-    loc: `${BASE}/ja/guide/suno-pro-cookie-setup`,
-    lastmod: '2026-05-26',
-    changefreq: 'monthly',
-    priority: '0.8',
-    alternates: [
-      { hreflang: 'en', href: `${BASE}/guide/suno-pro-cookie-setup` },
-      { hreflang: 'ko', href: `${BASE}/ko/guide/suno-pro-cookie-setup` },
-      { hreflang: 'ja', href: `${BASE}/ja/guide/suno-pro-cookie-setup` },
-      { hreflang: 'x-default', href: `${BASE}/guide/suno-pro-cookie-setup` },
     ],
   },
 
@@ -375,8 +320,9 @@ function extractNonBlogUrls(xml) {
 // ---------------------------------------------------------------------------
 
 async function main() {
+  const guideEntries = await discoverGuideEntries();
   const blogEntries = await discoverBlogEntries();
-  const allEntries = [...STATIC_ENTRIES, ...blogEntries];
+  const allEntries = [...STATIC_ENTRIES.slice(0, 1), ...guideEntries, ...STATIC_ENTRIES.slice(1), ...blogEntries];
   const xml = renderSitemap(allEntries);
 
   if (VERIFY_MODE) {
@@ -418,6 +364,7 @@ async function main() {
   await writeFile(OUT_FILE, xml, 'utf8');
 
   console.log(`static entries: ${STATIC_ENTRIES.length}`);
+  console.log(`guide entries:  ${guideEntries.length}`);
   console.log(`blog entries:   ${blogEntries.length}`);
   console.log(`total entries:  ${allEntries.length}`);
   console.log(`output:         public/sitemap.xml`);
