@@ -2,6 +2,87 @@
 
 ---
 
+## /blog Phase B~F — 7편 정보성 블로그 작성·번역·배포·AdSense 대응 (2026-06-06 완료)
+
+> 시작 2026-05-29 / 완료 2026-06-06 (8일). 합의 산출물: `.omc/specs/deep-interview-blog-system.md`, `.omc/plans/blog-infra-phase-a.md`, `.omc/plans/blog-phase-b-outline.md`
+
+### 핵심 성과
+- 7편 × 한·영 2언어 = 14개 정보성 블로그 글 발행 (각 1500~3000 단어/어절)
+- AdSense "가치 없는 콘텐츠" 1차 거절 → 차단 사유 4건 전면 해소 후 재제출 가능 수준 도달
+- **AI 생성 본문의 사실 오류를 사용자 캡처로 검증·정정** (Suno 가격 플랜 — 허구의 Plus/$80 삭제, 실제 Free/Pro $8/Premier $24로 정정)
+
+### 체크리스트 (완료/미완 실제 상태)
+
+**Phase B — 한국어 초안 7편 (Claude 병렬)** ✅ 전부 완료
+- [x] 7편 outline + 내부 링크 그래프 사전 합의 (`.omc/plans/blog-phase-b-outline.md`)
+- [x] 7편 한국어 초안 (frontmatter + 본문, 모두 1500~3000 어절)
+- [x] frontmatter 완성 (slug/title/title_en/summary/summary_en/publishedAt/ogSubtitle/tags/schemaVersion)
+- [x] 워드카운트 검증 (build-blog.mjs 경고 0)
+- [x] 내부 링크 그래프 매핑 (HUB: suno-lyrics-prompt-tips)
+- [x] AI 어투 baseline 1차 패스
+
+**Phase C — 한국어 보강 (User)** ◐ 부분 완료 → 남은 항목 백로그 이관
+- [x] 스크린샷 placeholder → HTML 주석화 (프로덕션 노출 0건)
+- [x] 실측 스크린샷 6장 연결 (미 저작권청·한국저작권위·Suno 가격·Custom Mode 가사·Styles 입력)
+- [x] 7편 핵심 SVG 다이어그램 자체 제작 (원본성 신호)
+- [ ] 1인칭 실제 경험 삽입 (사용자 미완 — 백로그)
+- [ ] 나머지 스크린샷 (Udio 가격·YT Studio·DAW 화면 — 백로그)
+- [ ] AI 어투 최종 사용자 검토 (백로그)
+
+**Phase D — 영어 번역 7편 (Claude)** ✅ 전부 완료
+- [x] 한국어 → 영어 재작성 (직역 X, 영어 검색 의도·이디엄 반영)
+- [x] AI cliché 회피, 내부 링크 `/ko/blog`→`/blog` 변환
+- [x] 7편 영어 1943~2433 단어 (모두 1500~3000 범위)
+
+**Phase E — 영어 마무리 (User)** ◐ 미완 → 백로그
+- [ ] 영어판 사용자 검토·다듬기 (백로그)
+
+**Phase F — 빌드·배포** ✅ 배포까지 완료 / GSC만 사용자 액션
+- [x] `npm run build` 통과 (build:blog → sitemap → og → vite)
+- [x] `build-sitemap.mjs --verify` zero drift
+- [x] 14개 블로그 HTML + 인덱스 2개 생성
+- [x] OG 이미지 32장 생성
+- [x] Fly.io 자동 배포 (master push)
+- [x] sitemap 블로그 URL ko+en hreflang 노출 (priority 0.8)
+- [ ] Google Search Console sitemap 재제출 (사용자 액션 — 백로그)
+
+### AdSense·SEO 대응 (Phase B~F 범위 초과분 — 거절 대응으로 추가 수행)
+- [x] AdSense 거절 사유 3대 진단 (placeholder 노출 / 영어 URL 한국어 본문 / 도구 위주 메인)
+- [x] placeholder 36개 HTML 주석화
+- [x] App.jsx BackupInfo 항상 노출 (조건부 렌더 제거)
+- [x] index.html title 90→62자, description 280→134자
+- [x] HowTo JSON-LD 3개→1개 통합 (중복 디스카운트 회피)
+- [x] Organization JSON-LD contactPoint 추가
+- [x] 블로그 Article→BlogPosting + isPartOf + mainEntityOfPage
+- [x] 정적 폴백 footer about·blog 동기화
+- [x] 가이드 9 + FAQ 3 = 12 페이지 → 블로그 cross-link 28개 (내부 PageRank 양방향)
+- [x] 4편 책임 톤 보강 (본인 창작물·Pro 권리·재배포 금지)
+- [x] **Suno 가격·약관 사실 정정** (실측 캡처·ToS 검증 — Plus/$80 허구 삭제, attribution 의무 추가, 약관 날짜 2026-03-26)
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-05-29 | /start-phase, 결정 7건 합의, 인프라 확인, 7편 outline + 내부 링크 그래프 |
+| 2026-05-29 | 첫 글 derisking (suno-lyrics-prompt-tips) → 나머지 6편 3에이전트 병렬 → 전체 빌드 검증 |
+| 2026-05-30 | AdSense 거절 진단 → placeholder 주석화 / Phase D 영어 번역 7편 / 사이트 전반 감사 |
+| 2026-05-30 | 메인·구조화 데이터·hreflang 일관화 / 책임 톤 4편 / cross-link 28개 / 커밋 3건 푸시 |
+| 2026-06-06 | 7편 SVG 다이어그램 자체 제작 (커밋 8d24b58) |
+| 2026-06-06 | 헤드리스 자동 캡처 — 미 저작권청·한국저작권위 2장 연결 (Suno/Udio는 Cloudflare 차단 확인) |
+| 2026-06-06 | 사용자 캡처 — Suno 가격표로 **본문 가격 오류 발견·정정** (Plus/$80 삭제 → 실제 3티어), 약관 전문 검증 후 attribution·날짜 정정 (커밋 5636b6b) |
+| 2026-06-06 | 사용자 캡처 — Custom Mode 가사·Styles 입력란 2장 연결 (커밋 cf6bdaf) |
+| 2026-06-06 | /complete-phase — Phase B~F 완료 처리, 남은 사용자 작업(1인칭·영어 마무리·추가 캡처·GSC) 백로그 이관 |
+
+### 산출 파일
+- 신규: `content/blog/{7슬러그}.{ko,en}.md` (14개), `public/blog/images/{슬러그}/*.png` (실측 6장), `.omc/plans/blog-phase-b-outline.md`
+- 수정: `index.html`, `src/App.jsx`, `src/i18n.js`, `src/components/BackupInfo.jsx`, `scripts/build-blog.mjs`, `scripts/build-sitemap.mjs`, `public/sitemap.xml`, 가이드·FAQ 12개 정적 페이지
+
+### 메모
+- **이번 라운드 최대 교훈**: AI가 작성한 본문에 사실 오류(Suno 가격 플랜 허구)가 박혀 있었고, 사용자 실측 캡처로만 발견됨. 정보성 사이트는 AI 초안의 사실 검증이 필수 — AdSense 정확성 평가에도 직결.
+- **Cloudflare 캡처 한계**: Suno·Udio는 헤드리스 캡처 불가(Cloudflare 챌린지). copyright.gov·copyright.or.kr 등 공개 정부·기관 페이지만 자동 캡처 가능.
+- **남은 사용자 작업은 품질 향상이지 차단 해소 아님**: 현 상태로 AdSense 재제출 가능. 1인칭·추가 캡처·영어 마무리는 통과율을 더 높이는 보강.
+
+---
+
 ## /blog Phase A — 인프라 구축 (2026-05-29 완료)
 
 ### 결정 사항 (Deep Interview 7라운드, 최종 ambiguity 16.75%)
