@@ -1,10 +1,6 @@
 - [x] 2026-06-06 /blog Phase B~F — 7편 한·영 블로그 작성·번역·배포 + AdSense 거절 대응 완료 (PLAN-DONE.md 참조)
 - [x] 2026-06-07 /blog Phase C·E 사용자 마무리 — 1인칭 경험 14개 삽입 + 실측 스크린샷 2장(Udio·YT 공식 페이지) + sitemap 검증 (PLAN-DONE.md 참조)
-- [승인] 책임감 있는 사용·저작권 톤 사이트 전반 점검 — 다운로더 정체성이 AdSense 거절 최대 리스크, "본인 창작물 백업·Pro 구독자 권리·개인 청취" 톤이 메인·가이드·FAQ·블로그·about에 일관된지 감사 (수익과 무관하게도 법적 보호장치)
-- [승인] AdSense 재심사 제출 — 위 톤 점검 반영 후, 거절 사유 4건 해소 상태로 재신청 (이게 풀려야 이하 트래픽 작업이 돈이 됨)
-- [트래픽] robots.txt / sitemap.xml 동적 생성 — 블로그·가이드 페이지 자동 포함, 검색 인덱싱 기반
-- [트래픽] 외부 자연 노출 채널 — Reddit r/SunoAI·Suno Discord·ProductHunt 자연 등장으로 첫 백링크·도메인 권위 (SEO보다 빠른 실유입 경로)
-- [트래픽] 타깃 키워드 검증 — GSC 검색어 리포트로 추측 기반 타깃을 실데이터로 교체 (유입 데이터 쌓인 뒤)
-- [보조] SoftwareApplication / WebApplication JSON-LD — 도구 사이트 분류 시그널, sitelinks 후보 (저비용 일회성)
-- [보조] Core Web Vitals 점검 — 실측해 실제 느릴 때만 대응, 광고 viewability·순위 보조 (PageSpeed Insights)
-- [보조] Naver·Bing 웹마스터 등록 — 한국어·국제 보조 검색 채널 (5분 일회성)
+- 책임감 있는 사용·저작권 톤 사이트 전반 점검 — 도구 정체성이 AdSense 최대 리스크, "본인 창작물 백업·Pro 구독자 권리·개인 청취" 톤이 메인·가이드·FAQ·블로그·about에 일관되게 표현되는지 감사
+- robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)
+- 타깃 키워드 검증 — GSC 검색어 리포트·외부 키워드 도구로 현재 추측 기반 타깃을 실데이터로 교체
+- 외부 자연 노출 채널 — Reddit r/SunoAI·Suno Discord·ProductHunt에 자연스러운 등장으로 첫 백링크·도메인 권위 확보 (AdSense 외부 신뢰 신호로도 작동)
