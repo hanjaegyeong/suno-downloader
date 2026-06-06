@@ -83,7 +83,7 @@ Start with the five most stable main genres and the sub-genres that consistently
 
 That's 55 descriptors. Knowing the five main families is enough to find a starting point for almost any track. Pick the family closest to what you're after, add one sub-genre, and you've got a safe launch position.
 
-<!-- TODO SCREENSHOT: Style of Music input UI — entering a genre descriptor in Custom Mode -->
+![Suno Custom Mode Styles field — entering the descriptor `synthwave, nostalgic, dreamy, 110 bpm, female vocal, analog synths`](/blog/images/ai-music-genre-catalog/02-style-of-music-ui.png)
 ## Instrument descriptors — "live drums" vs "808 trap drums"
 
 A genre descriptor pulls instrumentation along with it, but when you want to push a specific instrument into the foreground, add a dedicated descriptor. Fourteen instrument keywords that resolve well in Suno:

@@ -22,7 +22,7 @@ internalLinks:
 
 이 글은 Suno에서 자주 발견되는 실패 패턴 9가지를 정리하고, 각 패턴을 피하는 작성 규칙을 함께 제시한다. 메타태그·운율·음절·발음·한국어 특이사항·후렴 비율·글자수 한계까지 9개 항목을 한자리에 모았다.
 
-<!-- TODO SCREENSHOT: Custom Mode 가사 입력란 UI — Lyrics 필드와 Style of Music 필드가 분리된 화면 -->
+![Suno Custom Mode(Advanced) Lyrics 입력란 — [Verse]·[Pre-Chorus]·[Chorus] 구조 메타태그가 들어간 영어 가사 예시](/blog/images/suno-lyrics-prompt-tips/01-custom-mode-ui.png)
 ## 가사 프롬프트와 스타일 프롬프트는 역할이 다르다
 
 Suno Custom Mode에는 큰 입력란이 두 개 있다. 첫째는 `Lyrics`, 둘째는 `Style of Music`이다. 둘은 역할이 완전히 다르다.

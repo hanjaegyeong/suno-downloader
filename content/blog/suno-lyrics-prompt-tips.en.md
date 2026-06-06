@@ -6,7 +6,7 @@ In practice, roughly 70% of a Suno track's quality is decided by the lyric promp
 
 This guide collects the 9 failure patterns I keep running into, and the writing rules that avoid them. Meta tags, rhyme schemes, syllable counts, phonetic traps, Korean-specific quirks, chorus repetition, and the character limit are all covered in one place.
 
-<!-- TODO SCREENSHOT: Custom Mode lyrics input UI — Lyrics field and Style of Music field separated -->
+![Suno Custom Mode (Advanced) Lyrics field — English lyrics with [Verse], [Pre-Chorus], and [Chorus] structure meta tags](/blog/images/suno-lyrics-prompt-tips/01-custom-mode-ui.png)
 ## The Lyrics field and the Style field do different jobs
 
 Suno's Custom Mode shows two big text boxes. The first is `Lyrics`, the second is `Style of Music`. They're not interchangeable.
