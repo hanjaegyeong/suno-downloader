@@ -2,6 +2,45 @@
 
 ---
 
+## 다운로더 정체성의 AdSense 리스크 완화 — 톤 일관화 + sitemap 동적화 + GSC 틀 + 백링크 키트 (2026-06-07 완료)
+
+> 시작·완료 모두 2026-06-07. PLAN.md 한 섹션의 4개 항목을 "전부해" 지시로 일괄 완료. ①② 코드 완료, ③④는 소유자 수동 실행용 산출물 문서.
+
+### 목표
+"다운로더" 정체성이 AdSense 최대 리스크 — 저작권 우회 도구로 비치지 않도록 "Pro 구독자가 본인이 만든 곡을 개인 소장용으로 무손실 백업"이라는 톤을 전 면·전 언어에 일관화. 더불어 발견성(sitemap)·키워드 데이터화·첫 백링크 기반 마련.
+
+### 체크리스트 (①, 전부 완료)
+- [x] 현행 카피 실태 조사 — 앱/BackupInfo/about/FAQ/블로그 정렬 양호(~85%), 갭은 가이드 3종(특히 cookie-setup)
+- [x] 메시지 축 정의 — "Pro 구독자가 본인이 만든 곡을 개인 소장용으로 무손실 백업"으로 확정
+- [x] 가이드 3종에 정당 권리·개인 용도 프레이밍 블록 추가 (cookie-setup 최대 리스크 페이지 포함)
+- [x] mp3-vs-wav lede 개인 라이브러리 톤 보강
+- [x] ko/ja 동일 보강 — en/ko/ja × 3 = 9개 lede 전부
+- [x] 전 면·전 언어 톤 일관성 교차 검증 — grep·렌더 검증 통과
+
+### 같은 섹션 나머지 3개 항목
+- **② robots/sitemap 동적화** — 블로그는 이미 자동 발견. 가이드 3종을 하드코딩 → `discoverGuideEntries()` 자동 발견으로 전환(`public/guide/*/` 폴더 추가 시 자동 포함). 알려진 slug의 lastmod·순서는 `GUIDE_LASTMOD`/`GUIDE_ORDER`로 보존. 출력 sitemap.xml **byte-동일**(30 URL), `--verify` 통과. robots.txt는 이미 sitemap 지정 완료라 변경 불필요.
+- **③ GSC 실데이터 키워드** — `docs/seo/keyword-framework.md` 산출(추측 키워드 인벤토리 + GSC 가동 절차 + 무료 시그널 교차검증 + 검증 루프). 트래픽 누적 후 소유자 실행.
+- **④ 첫 백링크** — `docs/seo/backlink-launch-kit.md` 산출(Reddit/Discord 복붙 초안 + ProductHunt 패키지 + 스팸 방지 전략 + 추적 체크리스트). 소유자가 본인 계정으로 게시해야 효과 발생.
+
+### 진행 로그
+| 시간 | 작업 내용 |
+|------|----------|
+| 2026-06-07 | `/start-phase`로 항목 착수, PLAN-CURRENT.md 생성 |
+| 2026-06-07 | 현행 카피 실태 조사 완료 — 갭은 가이드 3종으로 좁혀짐 |
+| 2026-06-07 | ① 가이드 9개(en/ko/ja×3) lede 프레이밍 삽입, grep·렌더 검증 통과 |
+| 2026-06-07 | ② sitemap 가이드 자동발견화(byte-동일·verify OK), ③ keyword-framework.md, ④ backlink-launch-kit.md 산출 |
+
+### 산출 파일
+- `public/{,,ko/,ja/}guide/*/index.html` (9개 lede 수정)
+- `scripts/build-sitemap.mjs` (가이드 자동발견 + 카운트 로그 정정)
+- `docs/seo/keyword-framework.md`, `docs/seo/backlink-launch-kit.md` (신규)
+
+### 잔여 (소유자 수동 작업)
+- ③ GSC 검색어 리포트 추출·키워드 교체(트래픽 수 주 누적 후)
+- ④ 커뮤니티 게시(계정 신뢰도 확보 후 본인 게시)
+
+---
+
 ## /blog Phase C·E 사용자 마무리 — 블로그 7편 통과율·품질 보강 (2026-06-07 완료)
 
 > 시작 2026-06-06 / 완료 2026-06-07. 차단 해소가 아닌 통과율·품질(E-E-A-T·원본성) 보강 작업.
