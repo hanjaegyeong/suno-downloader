@@ -15,6 +15,8 @@ Here's the one-line summary first. Pricing and policy reflect what's live as of 
 
 The table alone makes the point — the right pick depends on genre and the kind of content you're making. Each axis gets the long version below.
 
+In my own workflow, switching between the two lands exactly where the table says it should: neither one wins every scenario. Run the same lyrics through both and one side feels stronger on vocals and length while the other feels stronger on mix tone and genre breadth, so which service I reach for ends up depending on the track. That's why this comparison splits the strengths axis by axis instead of crowning a single winner.
+
 <figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
 <svg width="100%" viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suno vs Udio 6-axis radar chart">
 <defs><style>.ax{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;fill:#c0c0d0;letter-spacing:.5px}.sc{font-family:'DM Mono',monospace;font-size:9px;fill:#6b6b80}.lg{font-family:'DM Mono',monospace;font-size:12px;font-weight:700}</style></defs>
@@ -93,7 +95,9 @@ On raw credit cost, Suno Pro ($8 for 2,500 credits) is the cheapest paid entry p
 
 If you crank out lots of tracks fast, Suno Pro stretches further. If you spend more time per track and lean on regeneration, Udio Standard balances out. The Suno plan-by-plan breakdown lives in [Is Suno Pro Worth It?](/blog/suno-pro-value-analysis).
 
-![Suno official pricing page — Free / Pro $8 / Premier $24 (Udio pricing in the table above)](/blog/images/suno-vs-udio-comparison/04a-suno-pricing.png)
+![Suno official pricing page — Free / Pro $8 / Premier $24](/blog/images/suno-vs-udio-comparison/04a-suno-pricing.png)
+
+![Udio official pricing page — Free $0 / Standard $10 ($8 billed annually) / Pro $30 ($24 billed annually), with the Compare Plans table. The displayed price changes with the monthly/annual toggle](/blog/images/suno-vs-udio-comparison/04b-udio-pricing.png)
 ## Rights and Commercial Use
 
 Both services grant commercial use on paid tiers, but the fine print differs.

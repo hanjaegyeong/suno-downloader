@@ -6,6 +6,8 @@ A genre descriptor isn't a tag — it's a meta-instruction. Suno's model infers 
 
 The catch is that some descriptors resolve well and some don't. A niche compound like `neoclassical darkwave` rarely appears in the model's training data, so results swing wildly. Standard genre names like `synthwave`, `trap`, or `bossa nova` almost always produce a consistent tone. This guide catalogs 87 descriptors that resolve reliably in Suno, organized into five categories.
 
+In my own workflow this gap is obvious the moment I start swapping descriptors. With a compound neologism the tone lurches around from one generation to the next on the same prompt, and picking a best take gets hard; narrow it to a single standard genre name and the outputs converge in one direction instead. So rather than spin my wheels on a niche compound, I now tend to start from a standard genre and tighten it with mood and instrument keywords.
+
 <!-- TODO SCREENSHOT: Same lyric, three different style descriptors — comparison of how the Style of Music field alone changes the output -->
 ## 5 main genres + their reliable sub-genres
 

@@ -2,6 +2,8 @@
 
 Drop a fresh Suno WAV straight into YouTube or Spotify and it'll usually sound quieter and a bit muffled next to commercially mastered tracks. The reason is simple. Suno's automatic mastering aims for a generic middle ground, but it doesn't target the loudness, EQ balance, or dynamic shape that each streaming platform actually normalizes to. Most Suno exports land between -16 and -19 LUFS, so on a -14 LUFS reference like Spotify or YouTube your song lands a step below the neighbors.
 
+In my own workflow this plays out exactly as described. When I drop an untouched Suno WAV into a playlist next to other tracks, it lands a step quieter and a little muffled every single time. Pull up a LUFS meter and the export really is sitting below -14, so I keep arriving at the same conclusion: shipping it without a post-processing pass just isn't an option.
+
 Post-processing comes down to three goals. First, clean up the frequency clash between vocals and instrumentation. Second, tighten the dynamics so the average loudness can lift without distortion. Third, hit the platform's loudness target on the master bus. Get those three right and the same song feels almost twice as present.
 
 This guide walks through what to do once that WAV is on the timeline, in the order it actually happens: import, optional stem separation, EQ, compression, reverb, loudness matching, common problems, a free-plugin workflow, and a first-setup checklist for four DAWs. Ableton Live 12, Logic Pro 11, FL Studio 21, and REAPER 7 get equal time — the menu paths differ but the signal chain is the same.

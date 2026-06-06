@@ -109,6 +109,8 @@ Shorter waits do more than save patience. The standard AI-music workflow is "gen
 
 If you multitask while generations run, the gap matters less. If your workflow is "stay focused, A/B the takes back-to-back," priority processing is where you'll feel the upgrade most.
 
+In my own workflow I'm firmly in the second camp — I run the same prompt several times and compare takes, so the waiting stacks up while I'm finishing a single track. Following the math above at five takes per track, the time spent purely waiting on the free queue climbed fast as the track count grew. Someone who steps away and does other things during generation would barely notice the same difference.
+
 <!-- TODO SCREENSHOT: Timer comparison of Free, Pro, and Premier accounts generating a track at the same moment -->
 ## Pro ($8) — When It Breaks Even
 

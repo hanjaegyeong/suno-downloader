@@ -4,6 +4,8 @@ You can write the cleanest genre prompt in the world, and an awkward lyric will 
 
 In practice, roughly 70% of a Suno track's quality is decided by the lyric prompt. The other 30% is genre, instrumentation, and mood descriptors. The same rule holds whether you're on the free plan or paying for Pro — upgrading doesn't rescue a weak lyric.
 
+In my own workflow, I keep confirming this the hard way: leaving the genre prompt untouched and only reworking the lyric still shifts the result dramatically. When I generate the same input several times and compare takes, the vocal that kept stumbling almost always turns out to be a lyric problem, not a style one. That's why I now check the lyric first before touching anything else.
+
 This guide collects the 9 failure patterns I keep running into, and the writing rules that avoid them. Meta tags, rhyme schemes, syllable counts, phonetic traps, Korean-specific quirks, chorus repetition, and the character limit are all covered in one place.
 
 ![Suno Custom Mode (Advanced) Lyrics field — English lyrics with [Verse], [Pre-Chorus], and [Chorus] structure meta tags](/blog/images/suno-lyrics-prompt-tips/01-custom-mode-ui.png)

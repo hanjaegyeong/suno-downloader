@@ -6,10 +6,12 @@ YouTube introduced its AI-generated and synthetic content disclosure policy in 2
 
 A Suno track itself may carry certain rights under Suno's terms, but how those rights interact with YouTube's upload requirements is a separate question. The full picture on terms and copyright lives in the [AI Music Copyright Guide](/blog/ai-music-copyright-guide). This article stays focused on the YouTube operational side.
 
-<!-- TODO SCREENSHOT: YouTube Studio upload screen showing the "altered or synthetic content" disclosure toggle -->
+![YouTube official Help page "Disclosing use of generative AI content" — AI disclosure requirements, which altered/synthetic content must be disclosed, and how to disclose at upload time](/blog/images/youtube-content-with-ai-music/01-yt-synthetic-disclosure.png)
 ## Monetization Conditions — Pro vs Free
 
 For a YPP-enrolled channel to actually earn ad revenue, every element of a video has to be advertiser-friendly and free of disputed rights. AI music gets evaluated on two axes. The first is the Suno-side license tier (Free vs Pro). The second is how the music is used inside the video.
+
+In my own uploads, the two axes the article names — the Suno license tier and how the music sits in the video — play out exactly as described. The same track feels different at upload time depending on whether I'm posting it under Free-tier rights on a monetized channel or under Pro-tier rights with the source and license spelled out. So I've settled on treating Pro rights plus description metadata as the default from the point a channel starts earning.
 
 Suno's Free plan generates tracks under terms that can be read as leaning toward non-commercial use. Putting that same track on a monetized YouTube channel pulls you into a gray zone. Suno Pro and Premier plans grant explicit commercial-use rights, so a monetized video runs far less risk of a rights dispute. The detailed breakdown of Pro's rights lives in [Is Suno Pro Worth It?](/blog/suno-pro-value-analysis).
 

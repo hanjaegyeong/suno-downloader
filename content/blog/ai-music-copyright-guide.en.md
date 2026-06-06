@@ -7,6 +7,8 @@ The rights you get over a Suno-generated song depend heavily on which plan you'r
 
 The most common misconception is "I typed the prompt, so it's mine." Copyright ownership of an AI-generated work is a different legal question from the license you receive under the Terms — and the answer depends on which country's copyright law you're asking under. This article splits the topic into three layers: Suno's Terms, U.S. and Korean copyright law, and practical workflow. It's general information only. For specific disputes or commercial contracts, consult a lawyer.
 
+I fell into that same assumption when I first started — I wrote the prompt, so surely the song was mine. It wasn't until I sat down and read the Terms carefully that the distinction between a "usage right" and "copyright ownership" clicked, along with just how differently the Free and Pro plans are structured on rights. The reason I split this article into three separate layers is precisely that I went through that confusion once myself.
+
 <figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
 <svg width="100%" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suno Free vs Pro plan rights comparison">
 <defs><style>.t{font-family:'Outfit',sans-serif;fill:#ededf5}.h{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;fill:#fff;letter-spacing:.5px}.r{font-family:'DM Mono',monospace;font-size:11px;fill:#c0c0d0}.m{font-family:'Outfit',sans-serif;font-size:10px;fill:#6b6b80}</style></defs>
