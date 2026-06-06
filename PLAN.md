@@ -1,6 +1,18 @@
-- [x] 2026-06-06 /blog Phase B~F — 7편 한·영 블로그 작성·번역·배포 + AdSense 거절 대응 완료 (PLAN-DONE.md 참조)
-- [x] 2026-06-07 /blog Phase C·E 사용자 마무리 — 1인칭 경험 14개 삽입 + 실측 스크린샷 2장(Udio·YT 공식 페이지) + sitemap 검증 (PLAN-DONE.md 참조)
-- 책임감 있는 사용·저작권 톤 사이트 전반 점검 — 도구 정체성이 AdSense 최대 리스크, "본인 창작물 백업·Pro 구독자 권리·개인 청취" 톤이 메인·가이드·FAQ·블로그·about에 일관되게 표현되는지 감사
-- robots.txt / sitemap.xml 동적 생성 (블로그·가이드 페이지 자동 포함)
-- 타깃 키워드 검증 — GSC 검색어 리포트·외부 키워드 도구로 현재 추측 기반 타깃을 실데이터로 교체
-- 외부 자연 노출 채널 — Reddit r/SunoAI·Suno Discord·ProductHunt에 자연스러운 등장으로 첫 백링크·도메인 권위 확보 (AdSense 외부 신뢰 신호로도 작동)
+# SunoDown - 구현 플랜
+
+> 각 항목은 제목 없이 한 줄로만 작성한다. 부가 정보 없음.
+> 구체적 구현 계획은 `/start-phase`로 시작한 뒤 PLAN-CURRENT.md에서 진행.
+> 완료 내용은 PLAN-DONE.md에서 관리한다.
+> 설명에는 구현 방법이 아니라 생각해야 할 문제를 적는다.
+> CLAUDE.md가 프로젝트의 단일 진실 소스.
+> `/start-phase` 시 가장 상단의 플랜부터 실행
+> `/complete-phase` 시 진행 중이던 플랜 섹션은 PLAN.md에서 제거한다 (완료 기록은 PLAN-DONE.md에만 남김)
+
+---
+
+## AdSense 승인 + 검색 유입 (진행 중)
+
+- 다운로더라는 도구 정체성이 AdSense 최대 리스크인데 "본인 창작물 백업·Pro 구독자 권리·개인 청취" 톤을 메인·가이드·FAQ·블로그·about 전반에 어떻게 일관되게 심을 것인가
+- robots.txt / sitemap.xml을 블로그·가이드 페이지가 자동 포함되도록 어떻게 동적 생성할 것인가
+- 현재 추측 기반 타깃 키워드를 GSC 검색어 리포트·무료 시그널로 어떻게 실데이터 기반으로 교체할 것인가
+- 신규 저권위 도메인이 Reddit r/SunoAI·Suno Discord·ProductHunt 자연 등장으로 첫 백링크·신뢰 신호를 어떻게 확보할 것인가
