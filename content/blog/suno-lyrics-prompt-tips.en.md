@@ -64,6 +64,41 @@ Footsteps falling soft and sweet    ← B
 
 Syllables sit around 8/8/8/8, end words are out/street/doubt/sweet — straight ABAB. Feed that into Suno and the chorus melody locks in pretty cleanly.
 
+<figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
+<svg width="100%" viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ABAB rhyme aligning melody contours">
+<defs><style>.lab{font-family:'DM Mono',monospace;font-size:12px;fill:#c0c0d0}.tag{font-family:'DM Mono',monospace;font-size:14px;font-weight:700}.end{font-family:'DM Mono',monospace;font-size:11px;fill:#6b6b80}.cap{font-family:'Outfit',sans-serif;font-size:11px;fill:#6b6b80;letter-spacing:1px}</style></defs>
+<rect x="60" y="20" width="600" height="280" fill="none" stroke="#242430" stroke-dasharray="2 4"/>
+<text x="40" y="64" class="cap" transform="rotate(-90 40 64)">PITCH</text>
+<text x="370" y="316" text-anchor="middle" class="cap">TIME →</text>
+<line x1="60" y1="80" x2="660" y2="80" stroke="#242430" stroke-width="1"/>
+<line x1="60" y1="140" x2="660" y2="140" stroke="#242430" stroke-width="1"/>
+<line x1="60" y1="200" x2="660" y2="200" stroke="#242430" stroke-width="1"/>
+<line x1="60" y1="260" x2="660" y2="260" stroke="#242430" stroke-width="1"/>
+<text x="70" y="74" class="tag" fill="#c084fc">A</text>
+<path d="M90 80 Q160 50 230 70 T370 60 Q450 55 540 75 L600 70" fill="none" stroke="#c084fc" stroke-width="2.5"/>
+<circle cx="600" cy="70" r="4" fill="#c084fc"/>
+<text x="612" y="74" class="end">out</text>
+<text x="70" y="134" class="tag" fill="#22d3ee">B</text>
+<path d="M90 140 Q170 165 250 150 T390 160 Q470 170 550 145 L600 150" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
+<circle cx="600" cy="150" r="4" fill="#22d3ee"/>
+<text x="612" y="154" class="end">street</text>
+<text x="70" y="194" class="tag" fill="#c084fc">A</text>
+<path d="M90 200 Q160 170 230 190 T370 180 Q450 175 540 195 L600 190" fill="none" stroke="#c084fc" stroke-width="2.5" stroke-dasharray="0"/>
+<circle cx="600" cy="190" r="4" fill="#c084fc"/>
+<text x="612" y="194" class="end">doubt</text>
+<text x="70" y="254" class="tag" fill="#22d3ee">B</text>
+<path d="M90 260 Q170 285 250 270 T390 280 Q470 290 550 265 L600 270" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
+<circle cx="600" cy="270" r="4" fill="#22d3ee"/>
+<text x="612" y="274" class="end">sweet</text>
+<rect x="540" y="40" width="120" height="60" fill="none" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3 3" rx="4"/>
+<rect x="540" y="160" width="120" height="60" fill="none" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3 3" rx="4"/>
+<text x="670" y="74" class="lab" fill="#8b5cf6">↑</text>
+<text x="670" y="194" class="lab" fill="#8b5cf6">↑</text>
+<text x="370" y="305" text-anchor="middle" class="lab">A lines share contour · B lines share contour</text>
+</svg>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: ABAB rhyme aligning melody contours — A lines share pitch shape, B lines share another</figcaption>
+</figure>
+
 <!-- TODO SCREENSHOT: Two versions with the same melody and genre but different rhyme — vocal naturalness comparison -->
 ## Word patterns Suno can't sing well
 

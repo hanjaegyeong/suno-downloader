@@ -139,6 +139,42 @@ Suno 곡과 관련해 콘텐츠 ID에서 발생할 수 있는 시나리오는 �
 
 ## 안전한 워크플로우 — 한 장 요약
 
+<figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
+<svg width="100%" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YouTube upload safety decision tree for Suno AI music">
+<defs><style>.bx{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;fill:#ededf5}.lb{font-family:'Outfit',sans-serif;font-size:11px;fill:#c0c0d0;letter-spacing:.4px}.ok{fill:#22d3ee}.warn{fill:#c084fc}.bad{fill:#6b6b80}.ar{font-family:'DM Mono',monospace;font-size:9.5px;fill:#6b6b80}</style><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b80"/></marker></defs>
+<rect x="20" y="150" width="160" height="60" rx="8" fill="#08080f" stroke="#22d3ee" stroke-width="2"/>
+<text x="100" y="175" text-anchor="middle" class="bx">Suno track ready</text>
+<text x="100" y="193" text-anchor="middle" class="lb">+ DAW post-processed</text>
+<polygon points="200,180 260,140 320,180 260,220" fill="#08080f" stroke="#c084fc" stroke-width="2"/>
+<text x="260" y="178" text-anchor="middle" class="bx">Suno plan?</text>
+<text x="260" y="195" text-anchor="middle" class="lb">Free or Pro</text>
+<text x="195" y="135" text-anchor="end" class="ar">PRO</text>
+<text x="325" y="135" class="ar">FREE</text>
+<line x1="320" y1="180" x2="345" y2="180" stroke="#6b6b80" stroke-width="1.5"/>
+<line x1="345" y1="180" x2="345" y2="260" stroke="#6b6b80" stroke-width="1.5"/>
+<line x1="345" y1="260" x2="370" y2="260" stroke="#6b6b80" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="260" y1="140" x2="260" y2="105" stroke="#6b6b80" stroke-width="1.5"/>
+<line x1="260" y1="105" x2="370" y2="105" stroke="#6b6b80" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="180" y1="180" x2="200" y2="180" stroke="#6b6b80" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="380" y="75" width="170" height="60" rx="8" fill="#0a1a2a" stroke="#22d3ee" stroke-width="2"/>
+<text x="465" y="100" text-anchor="middle" class="bx">Disclose · Credit · License</text>
+<text x="465" y="118" text-anchor="middle" class="lb">Pro tier explicit grant</text>
+<rect x="380" y="230" width="170" height="60" rx="8" fill="#1a0a1a" stroke="#c084fc" stroke-width="2"/>
+<text x="465" y="255" text-anchor="middle" class="bx">Personal channel only</text>
+<text x="465" y="273" text-anchor="middle" class="lb">commercial = gray zone</text>
+<line x1="550" y1="105" x2="585" y2="105" stroke="#6b6b80" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="550" y1="260" x2="585" y2="260" stroke="#6b6b80" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="590" y="75" width="110" height="60" rx="8" fill="#0a1a14" stroke="#22d3ee" stroke-width="2"/>
+<text x="645" y="100" text-anchor="middle" class="bx" fill="#22d3ee">SAFE ✓</text>
+<text x="645" y="118" text-anchor="middle" class="lb">monetize OK</text>
+<rect x="590" y="230" width="110" height="60" rx="8" fill="#1a1410" stroke="#c084fc" stroke-width="2"/>
+<text x="645" y="255" text-anchor="middle" class="bx" fill="#c084fc">RISKY ⚠</text>
+<text x="645" y="273" text-anchor="middle" class="lb">claim / limit</text>
+<text x="360" y="335" class="lb" fill="#6b6b80">Always: synthetic-content disclosure ON · description credit · 2026-05 policy</text>
+</svg>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: 업로드 전 분기 결정 트리 — Pro 명시 라이선스 vs Free 회색지대 경로 (2026-05 기준)</figcaption>
+</figure>
+
 매 영상 업로드 직전 점검하는 9개 항목이다.
 
 1. Suno 플랜이 Free인가 Pro인가 — 채널 수익화 시 Pro 권장

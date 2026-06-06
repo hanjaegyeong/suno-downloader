@@ -11,6 +11,57 @@ Suno Plus ($8/mo) and above add exactly four things over the free tier:
 
 How much each of those four is worth to your specific use depends entirely on the workflow you have. Each item gets its own section.
 
+<figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
+<svg width="100%" viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suno plan tier comparison Free Plus Pro Premier">
+<defs><style>.tn{font-family:'Outfit',sans-serif;font-weight:900;font-size:14px;letter-spacing:.6px}.pr{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;fill:#fff}.lb{font-family:'DM Mono',monospace;font-size:10.5px;fill:#c0c0d0}.fn{font-family:'Outfit',sans-serif;font-size:10px;fill:#6b6b80}</style></defs>
+<rect x="20" y="20" width="160" height="300" rx="10" fill="#08080f" stroke="#242430"/>
+<rect x="190" y="20" width="160" height="300" rx="10" fill="#08080f" stroke="#22d3ee"/>
+<rect x="360" y="20" width="160" height="300" rx="10" fill="#08080f" stroke="#c084fc" stroke-width="2"/>
+<rect x="530" y="20" width="160" height="300" rx="10" fill="#08080f" stroke="#8b5cf6"/>
+<text x="100" y="50" text-anchor="middle" class="tn" fill="#6b6b80">FREE</text>
+<text x="270" y="50" text-anchor="middle" class="tn" fill="#22d3ee">PLUS</text>
+<text x="440" y="50" text-anchor="middle" class="tn" fill="#c084fc">PRO</text>
+<text x="610" y="50" text-anchor="middle" class="tn" fill="#8b5cf6">PREMIER</text>
+<text x="100" y="84" text-anchor="middle" class="pr">$0</text>
+<text x="270" y="84" text-anchor="middle" class="pr">$8</text>
+<text x="440" y="84" text-anchor="middle" class="pr">$24</text>
+<text x="610" y="84" text-anchor="middle" class="pr">$80</text>
+<text x="100" y="100" text-anchor="middle" class="fn">/ mo</text>
+<text x="270" y="100" text-anchor="middle" class="fn">/ mo</text>
+<text x="440" y="100" text-anchor="middle" class="fn">/ mo</text>
+<text x="610" y="100" text-anchor="middle" class="fn">/ mo</text>
+<line x1="35" y1="116" x2="165" y2="116" stroke="#242430"/>
+<line x1="205" y1="116" x2="335" y2="116" stroke="#242430"/>
+<line x1="375" y1="116" x2="505" y2="116" stroke="#242430"/>
+<line x1="545" y1="116" x2="675" y2="116" stroke="#242430"/>
+<text x="100" y="140" text-anchor="middle" class="lb">~50 credits / day</text>
+<text x="270" y="140" text-anchor="middle" class="lb">2,500 / mo</text>
+<text x="440" y="140" text-anchor="middle" class="lb">10,000 / mo</text>
+<text x="610" y="140" text-anchor="middle" class="lb">40,000 / mo</text>
+<text x="100" y="172" text-anchor="middle" class="lb" fill="#6b6b80">MP3 only</text>
+<text x="270" y="172" text-anchor="middle" class="lb" fill="#22d3ee">MP3 + WAV</text>
+<text x="440" y="172" text-anchor="middle" class="lb" fill="#22d3ee">MP3 + WAV</text>
+<text x="610" y="172" text-anchor="middle" class="lb" fill="#22d3ee">MP3 + WAV</text>
+<text x="100" y="204" text-anchor="middle" class="lb" fill="#c084fc">gray zone</text>
+<text x="270" y="204" text-anchor="middle" class="lb" fill="#22d3ee">commercial OK</text>
+<text x="440" y="204" text-anchor="middle" class="lb" fill="#22d3ee">commercial OK</text>
+<text x="610" y="204" text-anchor="middle" class="lb" fill="#22d3ee">commercial OK</text>
+<text x="100" y="236" text-anchor="middle" class="lb">standard queue</text>
+<text x="270" y="236" text-anchor="middle" class="lb">priority</text>
+<text x="440" y="236" text-anchor="middle" class="lb">priority+</text>
+<text x="610" y="236" text-anchor="middle" class="lb">top priority</text>
+<text x="100" y="268" text-anchor="middle" class="lb" fill="#6b6b80">no resale</text>
+<text x="270" y="268" text-anchor="middle" class="lb">standard sync</text>
+<text x="440" y="268" text-anchor="middle" class="lb">extended sync</text>
+<text x="610" y="268" text-anchor="middle" class="lb">enterprise sync</text>
+<text x="100" y="300" text-anchor="middle" class="fn">light personal</text>
+<text x="270" y="300" text-anchor="middle" class="fn">creators · demos</text>
+<text x="440" y="300" text-anchor="middle" class="fn">commercial work</text>
+<text x="610" y="300" text-anchor="middle" class="fn">labels · studios</text>
+</svg>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: Four-tier plan comparison (May 2026) — pricing, credits, format, license, queue priority, sync rights</figcaption>
+</figure>
+
 <!-- TODO SCREENSHOT: Suno pricing page showing Plus, Pro, and Premier plan comparison table -->
 ## Lossless WAV vs. MP3 — Listening vs. DAW Work
 

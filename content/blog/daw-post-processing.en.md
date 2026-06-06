@@ -33,6 +33,40 @@ EQ is the first move. Three problems show up repeatedly in Suno tracks, and each
 
 Keep master-bus EQ moves under 1.5 dB. Heavy EQ on the master pushes the whole tone into unnatural territory. Do the big cuts on the stems, and reserve the master EQ for tiny corrections.
 
+<figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
+<svg width="100%" viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recommended Suno post-processing EQ curve">
+<defs><style>.ax{font-family:'DM Mono',monospace;font-size:10px;fill:#6b6b80}.ti{font-family:'Outfit',sans-serif;font-size:11px;fill:#c0c0d0;letter-spacing:.5px}.an{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;fill:#c084fc}</style></defs>
+<rect x="80" y="40" width="600" height="220" fill="#08080f" stroke="#242430"/>
+<line x1="80" y1="112" x2="680" y2="112" stroke="#242430" stroke-dasharray="2 4"/>
+<line x1="80" y1="160" x2="680" y2="160" stroke="#22d3ee" stroke-width="1" opacity="0.4"/>
+<line x1="80" y1="208" x2="680" y2="208" stroke="#242430" stroke-dasharray="2 4"/>
+<line x1="80" y1="256" x2="680" y2="256" stroke="#242430" stroke-dasharray="2 4"/>
+<line x1="220" y1="40" x2="220" y2="260" stroke="#242430" stroke-dasharray="2 4"/>
+<line x1="420" y1="40" x2="420" y2="260" stroke="#242430" stroke-dasharray="2 4"/>
+<line x1="620" y1="40" x2="620" y2="260" stroke="#242430" stroke-dasharray="2 4"/>
+<text x="72" y="115" text-anchor="end" class="ax">+3 dB</text>
+<text x="72" y="163" text-anchor="end" class="ax">0 dB</text>
+<text x="72" y="211" text-anchor="end" class="ax">-3 dB</text>
+<text x="72" y="259" text-anchor="end" class="ax">-6 dB</text>
+<text x="80" y="278" class="ax">20</text>
+<text x="220" y="278" text-anchor="middle" class="ax">100</text>
+<text x="420" y="278" text-anchor="middle" class="ax">1k</text>
+<text x="620" y="278" text-anchor="middle" class="ax">10k</text>
+<text x="680" y="278" text-anchor="end" class="ax">20k Hz</text>
+<polyline points="80,260 100,232 115,208 130,196 160,176 200,164 220,160 280,171 315,192 360,176 420,160 480,160 540,160 575,184 595,192 615,184 640,152 660,144 680,144" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="115" cy="208" r="4" fill="#c084fc"/>
+<text x="125" y="220" class="an">HPF 30 Hz</text>
+<circle cx="315" cy="192" r="4" fill="#c084fc"/>
+<text x="325" y="204" class="an">-2 dB · 300 Hz (boxy cut)</text>
+<circle cx="595" cy="192" r="4" fill="#c084fc"/>
+<text x="540" y="220" class="an">-2 dB · 7.5 kHz (tame harshness)</text>
+<circle cx="660" cy="144" r="4" fill="#c084fc"/>
+<text x="500" y="135" class="an">+1 dB · 12 kHz air shelf</text>
+<text x="380" y="35" text-anchor="middle" class="ti">SUNO MASTER BUS — RECOMMENDED EQ CURVE</text>
+</svg>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: Four EQ correction points — 30 Hz HPF, 300 Hz boxy cut, 7.5 kHz harsh tame, 12 kHz air shelf</figcaption>
+</figure>
+
 <!-- TODO SCREENSHOT: Channel EQ in Logic Pro — high-pass at 30 Hz, 300 Hz -2 dB bell, and a +1 dB Air shelf at 12 kHz -->
 ## Compression — Taming Vocal Dynamics
 

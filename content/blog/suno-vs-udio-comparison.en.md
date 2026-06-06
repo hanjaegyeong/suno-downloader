@@ -15,6 +15,35 @@ Here's the one-line summary first. Pricing and policy reflect what's live as of 
 
 The table alone makes the point — the right pick depends on genre and the kind of content you're making. Each axis gets the long version below.
 
+<figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
+<svg width="100%" viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suno vs Udio 6-axis radar chart">
+<defs><style>.ax{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;fill:#c0c0d0;letter-spacing:.5px}.sc{font-family:'DM Mono',monospace;font-size:9px;fill:#6b6b80}.lg{font-family:'DM Mono',monospace;font-size:12px;font-weight:700}</style></defs>
+<polygon points="360,70 481,140 481,280 360,350 239,280 239,140" fill="none" stroke="#242430"/>
+<polygon points="360,112 441,159 441,261 360,308 279,261 279,159" fill="none" stroke="#242430" stroke-dasharray="2 3"/>
+<polygon points="360,154 401,177 401,243 360,266 319,243 319,177" fill="none" stroke="#242430" stroke-dasharray="2 3"/>
+<polygon points="360,196 381,196 381,224 360,224 339,224 339,196" fill="none" stroke="#242430" stroke-dasharray="2 3"/>
+<line x1="360" y1="70" x2="360" y2="350" stroke="#242430"/>
+<line x1="239" y1="140" x2="481" y2="280" stroke="#242430"/>
+<line x1="481" y1="140" x2="239" y2="280" stroke="#242430"/>
+<polygon points="360,84 457,154 469,273 360,336 251,273 275,161" fill="rgba(34,211,238,0.18)" stroke="#22d3ee" stroke-width="2"/>
+<polygon points="360,112 469,147 433,252 360,308 263,266 263,154" fill="rgba(192,132,252,0.14)" stroke="#c084fc" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="360" y="55" text-anchor="middle" class="ax">Vocal Clarity</text>
+<text x="495" y="135" class="ax">Mix Tone</text>
+<text x="495" y="293" class="ax">Track Length</text>
+<text x="360" y="372" text-anchor="middle" class="ax">Pricing Entry</text>
+<text x="225" y="293" text-anchor="end" class="ax">Workflow</text>
+<text x="225" y="135" text-anchor="end" class="ax">Genre Breadth</text>
+<text x="364" y="200" class="sc">5</text>
+<text x="364" y="158" class="sc">7</text>
+<text x="364" y="116" class="sc">9</text>
+<rect x="540" y="60" width="14" height="14" fill="rgba(34,211,238,0.18)" stroke="#22d3ee" stroke-width="2"/>
+<text x="560" y="72" class="lg" fill="#22d3ee">Suno v4.5</text>
+<rect x="540" y="86" width="14" height="14" fill="rgba(192,132,252,0.14)" stroke="#c084fc" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="560" y="98" class="lg" fill="#c084fc">Udio v1.5</text>
+</svg>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: 6-axis comparison — Suno leads on vocals, length, and pricing; Udio leads on mix tone and genre breadth (May 2026)</figcaption>
+</figure>
+
 <!-- TODO SCREENSHOT: Side-by-side comparison of tracks generated from the same prompt in Suno and Udio -->
 ## Vocals — Lyric Clarity in Suno vs. Tonal Detail in Udio
 

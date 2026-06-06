@@ -7,6 +7,35 @@ The rights you get over a Suno-generated song depend heavily on which plan you'r
 
 The most common misconception is "I typed the prompt, so it's mine." Copyright ownership of an AI-generated work is a different legal question from the license you receive under the Terms — and the answer depends on which country's copyright law you're asking under. This article splits the topic into three layers: Suno's Terms, U.S. and Korean copyright law, and practical workflow. It's general information only. For specific disputes or commercial contracts, consult a lawyer.
 
+<figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
+<svg width="100%" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suno Free vs Pro plan rights comparison">
+<defs><style>.t{font-family:'Outfit',sans-serif;fill:#ededf5}.h{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;fill:#fff;letter-spacing:.5px}.r{font-family:'DM Mono',monospace;font-size:11px;fill:#c0c0d0}.m{font-family:'Outfit',sans-serif;font-size:10px;fill:#6b6b80}</style></defs>
+<rect x="20" y="20" width="330" height="320" rx="10" fill="#08080f" stroke="#242430"/>
+<rect x="370" y="20" width="330" height="320" rx="10" fill="#08080f" stroke="#8b5cf6"/>
+<rect x="20" y="20" width="330" height="44" rx="10" fill="#1a1a26"/>
+<rect x="370" y="20" width="330" height="44" rx="10" fill="#2a1d4d"/>
+<text x="40" y="50" class="h" fill="#c0c0d0">FREE PLAN</text>
+<text x="390" y="50" class="h" fill="#c084fc">PRO / PREMIER</text>
+<text x="40" y="92" class="r">Personal use</text><text x="320" y="92" text-anchor="end" class="r" fill="#22d3ee">✓</text>
+<text x="390" y="92" class="r">Personal use</text><text x="680" y="92" text-anchor="end" class="r" fill="#22d3ee">✓</text>
+<text x="40" y="124" class="r">Commercial use</text><text x="320" y="124" text-anchor="end" class="r" fill="#c084fc">gray zone</text>
+<text x="390" y="124" class="r">Commercial use</text><text x="680" y="124" text-anchor="end" class="r" fill="#22d3ee">explicit</text>
+<text x="40" y="156" class="r">Lossless WAV</text><text x="320" y="156" text-anchor="end" class="r" fill="#6b6b80">✗</text>
+<text x="390" y="156" class="r">Lossless WAV</text><text x="680" y="156" text-anchor="end" class="r" fill="#22d3ee">✓</text>
+<text x="40" y="188" class="r">Resale / sync license</text><text x="320" y="188" text-anchor="end" class="r" fill="#6b6b80">restricted</text>
+<text x="390" y="188" class="r">Resale / sync license</text><text x="680" y="188" text-anchor="end" class="r" fill="#22d3ee">permitted</text>
+<text x="40" y="220" class="r">Suno may reuse outputs</text><text x="320" y="220" text-anchor="end" class="r" fill="#c084fc">possible</text>
+<text x="390" y="220" class="r">Suno may reuse outputs</text><text x="680" y="220" text-anchor="end" class="r" fill="#22d3ee">narrowed</text>
+<text x="40" y="252" class="r">Training data use</text><text x="320" y="252" text-anchor="end" class="r" fill="#c084fc">check Terms</text>
+<text x="390" y="252" class="r">Training data use</text><text x="680" y="252" text-anchor="end" class="r" fill="#22d3ee">opt-out clearer</text>
+<text x="40" y="284" class="r">Copyright registration</text><text x="320" y="284" text-anchor="end" class="r" fill="#c084fc">limited *</text>
+<text x="390" y="284" class="r">Copyright registration</text><text x="680" y="284" text-anchor="end" class="r" fill="#c084fc">limited *</text>
+<text x="40" y="320" class="m">* Both plans face the same U.S. Copyright Office</text>
+<text x="40" y="335" class="m">  limits on AI-generated portions (human authorship rule)</text>
+</svg>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: License and rights differences between Free and Pro/Premier. Terms-based; copyright ownership is a separate question</figcaption>
+</figure>
+
 <!-- TODO SCREENSHOT: Suno official Terms of Service page — Plan-specific Rights section -->
 ## What Suno's Terms actually say
 

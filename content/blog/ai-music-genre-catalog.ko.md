@@ -144,6 +144,43 @@ Suno의 `Style of Music` 입력란에 적는 한 단어가 곡 전체의 방향�
 
 `synthwave nostalgic dreamy` 같은 조합은 톤을 정확히 잡아낸다. 무드는 2~3개까지 안전하다. 4개 이상 적으면 서로 충돌해 결과가 흐려진다.
 
+<figure style="margin:28px 0;background:#111119;border:1px solid #242430;border-radius:10px;padding:22px 24px;">
+<svg width="100%" viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mood and Energy matrix of Suno genres">
+<defs><style>.ax{font-family:'Outfit',sans-serif;font-size:11px;fill:#6b6b80;letter-spacing:1.5px}.al{font-family:'DM Mono',monospace;font-size:11px;fill:#c0c0d0}.gl{font-family:'DM Mono',monospace;font-size:12px;font-weight:600}.cor{font-family:'Outfit',sans-serif;font-size:10px;fill:#6b6b80;font-style:italic}</style></defs>
+<rect x="80" y="40" width="580" height="360" fill="none" stroke="#242430"/>
+<line x1="370" y1="40" x2="370" y2="400" stroke="#242430" stroke-dasharray="3 4"/>
+<line x1="80" y1="220" x2="660" y2="220" stroke="#242430" stroke-dasharray="3 4"/>
+<text x="370" y="430" text-anchor="middle" class="ax">ENERGY →</text>
+<text x="90" y="412" class="al">low</text>
+<text x="650" y="412" text-anchor="end" class="al">high</text>
+<text x="50" y="220" text-anchor="middle" class="ax" transform="rotate(-90 50 220)">MOOD →</text>
+<text x="65" y="46" text-anchor="end" class="al">bright</text>
+<text x="65" y="398" text-anchor="end" class="al">dark</text>
+<text x="225" y="58" text-anchor="middle" class="cor">bright · low</text>
+<text x="515" y="58" text-anchor="middle" class="cor">bright · high</text>
+<text x="225" y="395" text-anchor="middle" class="cor">dark · low</text>
+<text x="515" y="395" text-anchor="middle" class="cor">dark · high</text>
+<circle cx="160" cy="115" r="5" fill="#c084fc"/><text x="170" y="119" class="gl" fill="#ededf5">dream pop</text>
+<circle cx="240" cy="160" r="5" fill="#c084fc"/><text x="250" y="164" class="gl" fill="#ededf5">chillwave</text>
+<circle cx="200" cy="195" r="5" fill="#c084fc"/><text x="210" y="199" class="gl" fill="#ededf5">bossa nova</text>
+<circle cx="310" cy="135" r="5" fill="#c084fc"/><text x="320" y="139" class="gl" fill="#ededf5">indie pop</text>
+<circle cx="460" cy="105" r="5" fill="#22d3ee"/><text x="470" y="109" class="gl" fill="#ededf5">k-pop dance</text>
+<circle cx="555" cy="135" r="5" fill="#22d3ee"/><text x="565" y="139" class="gl" fill="#ededf5">future bass</text>
+<circle cx="520" cy="175" r="5" fill="#22d3ee"/><text x="530" y="179" class="gl" fill="#ededf5">house</text>
+<circle cx="610" cy="195" r="5" fill="#22d3ee"/><text x="500" y="210" class="gl" fill="#ededf5">trance</text>
+<circle cx="170" cy="270" r="5" fill="#8b5cf6"/><text x="180" y="274" class="gl" fill="#ededf5">lo-fi hip hop</text>
+<circle cx="120" cy="320" r="5" fill="#8b5cf6"/><text x="130" y="324" class="gl" fill="#ededf5">ambient</text>
+<circle cx="260" cy="355" r="5" fill="#8b5cf6"/><text x="270" y="359" class="gl" fill="#ededf5">vaporwave</text>
+<circle cx="225" cy="300" r="5" fill="#8b5cf6"/><text x="235" y="304" class="gl" fill="#ededf5">jazz</text>
+<circle cx="465" cy="265" r="5" fill="#c084fc"/><text x="475" y="269" class="gl" fill="#ededf5">trap</text>
+<circle cx="540" cy="305" r="5" fill="#c084fc"/><text x="550" y="309" class="gl" fill="#ededf5">drill</text>
+<circle cx="600" cy="340" r="5" fill="#c084fc"/><text x="455" y="345" class="gl" fill="#ededf5">hardstyle</text>
+<circle cx="425" cy="350" r="5" fill="#c084fc"/><text x="345" y="370" class="gl" fill="#ededf5">techno</text>
+<circle cx="500" cy="380" r="5" fill="#c084fc"/><text x="510" y="384" class="gl" fill="#ededf5">synthwave</text>
+</svg>
+<figcaption style="margin-top:12px;color:#6b6b80;font-size:13px;text-align:center;">Figure: Mood × Energy 매트릭스 — 장르 디스크립터의 위치가 무드 키워드 선택을 안내한다</figcaption>
+</figure>
+
 <!-- TODO SCREENSHOT: 같은 장르 디스크립터에 무드 키워드만 다르게 한 비교 — dreamy vs aggressive -->
 ## 시대·지역 디스크립터 — 80s synthwave, lo-fi Korean indie
 
