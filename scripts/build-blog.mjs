@@ -238,10 +238,12 @@ async function generateArticle(template, fm, bodyHtml, lang, enUrl, koUrl, wordC
 
 function buildIndexPage(articles, lang) {
   const isKo = lang === 'ko';
-  const pageTitle = isKo ? '블로그 — SunoDown' : 'Blog — SunoDown';
+  const pageTitle = isKo
+    ? 'Suno AI 음악 블로그 — 프롬프트·장르·저작권 가이드 | SunoDown'
+    : 'Suno AI Music Blog — Prompt Tips, Genres & Copyright Guides | SunoDown';
   const pageDesc = isKo
-    ? 'Suno AI 음악 제작 팁, 장르 가이드, 저작권 정보 등을 다루는 블로그입니다.'
-    : 'Articles on Suno AI music creation, genre guides, copyright, and more.';
+    ? 'Suno AI 음악 제작 팁과 가이드 — 프롬프트 작성, 장르 카탈로그, 저작권, Suno vs Udio, DAW 후처리까지. AI 음악을 200% 활용하세요.'
+    : 'Suno AI music tips and guides — prompt writing, genre catalog, copyright, Suno vs Udio, and DAW post-processing. Get more from your AI music.';
   const canonicalUrl = isKo ? `${SITE_URL}/ko/blog` : `${SITE_URL}/blog`;
   const hreflangEn = `${SITE_URL}/blog`;
   const hreflangKo = `${SITE_URL}/ko/blog`;
