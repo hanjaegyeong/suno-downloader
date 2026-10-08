@@ -17,3 +17,5 @@ public/ko/blog/*/index.html
 .omc/sessions/
 .omc/project-memory.json
 .omc/plans/open-questions.md
+# OMC runtime state written outside the repo root (e.g. a session started in public/)
+public/.omc/

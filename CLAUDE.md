@@ -31,7 +31,8 @@ Suno 플레이리스트 URL만 입력하면 **전곡 일괄 다운로드**(ZIP) 
 │       ├── Downloader.jsx     — 플레이리스트 URL 입력 & 페칭
 │       ├── SongList.jsx       — 트랙 목록 & 다운로드 UI
 │       ├── TokenSetup.jsx     — Suno Pro 인증 토큰 설정
-│       └── AdSlot.jsx         — 광고 컴포넌트
+│       ├── HomeGuide.jsx      — 홈 사용법·주요 기능·FAQ 섹션 (ko/en/ja)
+│       └── BackupInfo.jsx     — 홈 백업 필요성·저작권 안내 섹션 (ko/en/ja)
 ├── vite.config.js             — Vite 빌드 설정 (dev proxy /api → :3000)
 ├── Dockerfile                 — 멀티스테이지 Docker 빌드
 ├── fly.toml                   — Fly.io 배포 설정
@@ -58,6 +59,9 @@ Suno 플레이리스트 URL만 입력하면 **전곡 일괄 다운로드**(ZIP) 
 - **Clerk 세션 관리**: JWT 50초 자동 갱신, 동시 리프레시 락, 쿠키 기반 자동 복구
 - **허용 호스트**: `*.suno.ai`, `*.suno.com` CDN만 허용 (SSRF 방지)
 - **프로덕션 리다이렉트**: fly.dev, kro.kr → suno-down.com 301 리다이렉트
+- **404 처리**: 미등록 경로는 404 + `X-Robots-Tag: noindex`로 404.html 응답 (soft-404 금지)
+- **광고**: AdSense 자동 광고. 로더는 홈·블로그·가이드·FAQ·about에만 (개인정보·약관·문의·404 제외)
+- **날짜 표기**: 페이지 "업데이트" 날짜·sitemap lastmod는 실제 내용 변경 시에만 갱신 (Docker 빌드에 .git 없음 → 날짜는 명시값)
 
 ## 코딩 컨벤션
 
