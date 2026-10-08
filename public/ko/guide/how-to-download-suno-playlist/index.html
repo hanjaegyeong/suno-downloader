@@ -89,8 +89,8 @@
         {
           "@type": "HowToStep",
           "position": 5,
-          "name": "개별 다운로드 또는 ZIP 일괄 다운로드",
-          "text": "각 트랙별 다운로드 버튼을 사용하거나 '전체 ZIP 다운로드'로 한 번에 받습니다. 곡 수 제한 없음 — 수백 곡 플레이리스트도 가능합니다.",
+          "name": "개별 다운로드 또는 ZIP 다운로드",
+          "text": "각 트랙별 다운로드 버튼을 사용하거나 '전체 ZIP 다운로드'로 여러 곡을 ZIP 파일 하나에 묶어 받습니다.",
           "url": "https://suno-down.com/ko/guide/how-to-download-suno-playlist#step-5"
         }
       ]
@@ -157,8 +157,11 @@
       }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link { color: var(--text-mute); text-decoration: none; font-size: 13px; font-weight: 500; }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -231,6 +234,7 @@
       footer a { color: var(--text-mute); margin: 0 8px; }
       footer a:hover { color: var(--acc2); }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -238,7 +242,7 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">← 홈으로</a>
+            <nav class="site-nav" aria-label="사이트 메뉴"><a href="/ko/blog">블로그</a><a href="/ko/guide/how-to-download-suno-playlist" aria-current="page">가이드</a><a href="/ko/faq">FAQ</a><a href="/about">소개</a></nav>
             <nav class="lang-switch" aria-label="언어 선택">
               <a href="/guide/how-to-download-suno-playlist" hreflang="en">EN</a>
               <a href="/ko/guide/how-to-download-suno-playlist" class="current" hreflang="ko">한국어</a>
@@ -254,7 +258,7 @@
         <article>
           <h1>Suno 플레이리스트 다운로드 방법 (MP3·WAV 무료)</h1>
           <p class="lede"><a href="/">SunoDown</a>으로 Suno AI 플레이리스트의 모든 곡을 저장하는 5단계 가이드 — 무료, 회원가입 불필요, Suno Pro 연동 시 무손실 WAV까지. 저장 대상은 본인이 만든 Suno 곡이며, 개인 용도 보관을 전제로 합니다.</p>
-          <p class="meta">업데이트: 2026-05-25 · 소요 시간 약 3분 · 필요한 것: 웹 브라우저, SunoDown</p>
+          <p class="meta">업데이트: 2026-10-08 · 소요 시간 약 3분 · 필요한 것: 웹 브라우저, SunoDown</p>
 
           <h2>시작하기 전에</h2>
           <p>필요한 건 두 가지뿐입니다 — Suno AI 플레이리스트 URL(예: <code>https://suno.com/playlist/&lt;id&gt;</code>)과 최신 브라우저. MP3 다운로드는 완전 무료에 계정도 필요 없습니다. WAV 다운로드만 Suno Pro/Premier 구독 쿠키가 필요하며, 4단계에서 다룹니다.</p>
@@ -293,7 +297,7 @@
           <section class="step" id="step-5">
             <span class="step-num">5단계</span>
             <h3>개별 다운로드 또는 전체 ZIP</h3>
-            <p>각 트랙에 다운로드 버튼이 있습니다. 한 번에 받으려면 <strong>전체 ZIP 다운로드</strong>를 누르세요 — SunoDown이 모든 파일을 스트리밍해 브라우저에서 ZIP으로 묶은 뒤 다운로드를 트리거합니다. 곡 수 제한은 없습니다. 수백 곡짜리 플레이리스트도 가능하며, 용량이 클수록 시간이 더 걸리는 정도입니다.</p>
+            <p>각 트랙에 다운로드 버튼이 있습니다. 여러 곡을 파일 하나로 받으려면 <strong>전체 ZIP 다운로드</strong>를 누르세요 — SunoDown이 파일을 가져와 브라우저에서 ZIP으로 묶은 뒤 다운로드를 시작합니다. 용량이 클수록 ZIP 생성에 시간이 더 걸립니다.</p>
           </section>
 
           <div class="cta">
@@ -309,8 +313,8 @@
             <dt>입력한 Suno 쿠키는 어디에 저장되나요?</dt>
             <dd>붙여넣은 <code>__client</code> 쿠키는 서버 메모리에만 보관되며 로그아웃·세션 만료·서버 재시작 시 즉시 폐기됩니다. 데이터베이스나 로그에 기록되지 않습니다. 자세한 내용은 <a href="/privacy">개인정보 처리 방침</a>을 참고하세요.</dd>
 
-            <dt>플레이리스트당 곡 수 제한이 있나요?</dt>
-            <dd>없습니다. SunoDown이 Suno API 페이지네이션을 자동 처리해 모든 곡을 ZIP 하나로 묶습니다. 수백 곡 플레이리스트도 가능하며, 용량 비례로 시간이 더 걸릴 뿐입니다.</dd>
+            <dt>일부 곡 다운로드에 실패하면 어떻게 되나요?</dt>
+            <dd>성공한 곡만으로 ZIP이 만들어지고, 상태 메시지에 성공·실패 곡 수가 표시됩니다. 한 곡도 받지 못하면 ZIP은 생성되지 않습니다. 실패한 곡은 해당 트랙의 다운로드 버튼으로 다시 시도할 수 있습니다.</dd>
 
             <dt>WAV는 왜 Pro 계정이 필요한가요?</dt>
             <dd>Suno가 무손실 WAV를 인증된 Pro/Premier 세션에만 제공하기 때문입니다. SunoDown은 사용자 계정이 이미 접근 가능한 것만 프록시할 뿐 이 제한을 우회할 수 없습니다.</dd>

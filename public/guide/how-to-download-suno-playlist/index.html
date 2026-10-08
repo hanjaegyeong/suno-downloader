@@ -90,7 +90,7 @@
           "@type": "HowToStep",
           "position": 5,
           "name": "Download individually or bundle as ZIP",
-          "text": "Click the download button on any track to grab a single file, or hit 'Download All as ZIP' to bundle the entire playlist. There is no song limit — playlists with hundreds of tracks work.",
+          "text": "Click the download button on any track to grab a single file, or hit 'Download All as ZIP' to save the tracks together in one ZIP file.",
           "url": "https://suno-down.com/guide/how-to-download-suno-playlist#step-5"
         }
       ]
@@ -174,13 +174,11 @@
       }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link {
-        color: var(--text-mute);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -304,6 +302,7 @@
       footer a { color: var(--text-mute); margin: 0 8px; }
       footer a:hover { color: var(--acc2); }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -311,7 +310,7 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">← Home</a>
+            <nav class="site-nav" aria-label="Site"><a href="/blog">Blog</a><a href="/guide/how-to-download-suno-playlist" aria-current="page">Guides</a><a href="/faq">FAQ</a><a href="/about">About</a></nav>
             <nav class="lang-switch" aria-label="Language">
               <a href="/guide/how-to-download-suno-playlist" class="current" hreflang="en">EN</a>
               <a href="/ko/guide/how-to-download-suno-playlist" hreflang="ko">한국어</a>
@@ -327,7 +326,7 @@
         <article>
           <h1>How to Download a Suno AI Playlist (Free MP3 &amp; WAV)</h1>
           <p class="lede">A five-step walkthrough to save every track from any Suno AI playlist using <a href="/">SunoDown</a> — free, no sign-up, with optional lossless WAV via Suno Pro. It assumes the tracks are your own Suno creations, saved for personal use.</p>
-          <p class="meta">Updated: 2026-05-25 · Reading time ~3 min · Tools: web browser, SunoDown</p>
+          <p class="meta">Updated: 2026-10-08 · Reading time ~3 min · Tools: web browser, SunoDown</p>
 
           <h2>Before you start</h2>
           <p>You need exactly two things: a Suno AI playlist URL (e.g. <code>https://suno.com/playlist/&lt;id&gt;</code>) and a modern browser. MP3 downloads are completely free and require no account. WAV downloads require a Suno Pro or Premier subscription cookie, covered in step 4.</p>
@@ -366,7 +365,7 @@
           <section class="step" id="step-5">
             <span class="step-num">Step 5</span>
             <h3>Download one by one — or grab the whole ZIP</h3>
-            <p>Each track has its own download button. For bulk download, click <strong>Download All as ZIP</strong>: SunoDown streams every file, packs them into a single archive in the browser, and triggers a download. There is no track-count limit; playlists with hundreds of songs work, though larger archives naturally take longer.</p>
+            <p>Each track has its own download button. To save several of your tracks in one file, click <strong>Download All as ZIP</strong>: SunoDown fetches the files, packs them into a single archive in the browser, and triggers a download. Larger archives naturally take longer to build.</p>
           </section>
 
           <div class="cta">
@@ -377,13 +376,13 @@
           <h2>Frequently asked questions</h2>
           <dl class="faq">
             <dt>Is SunoDown really free?</dt>
-            <dd>Yes. MP3 downloads — including the bulk ZIP option — are free with no account. Only lossless WAV downloads require an existing Suno Pro or Premier subscription (the cost is on Suno&rsquo;s side, not ours).</dd>
+            <dd>Yes. MP3 downloads — including the ZIP option — are free with no account. Only lossless WAV downloads require an existing Suno Pro or Premier subscription (the cost is on Suno&rsquo;s side, not ours).</dd>
 
             <dt>Does SunoDown store my Suno cookie?</dt>
             <dd>The <code>__client</code> cookie you paste is held in server memory only and discarded on logout, session expiry, or server restart. It is never written to a database or log. See the <a href="/privacy">privacy policy</a> for details.</dd>
 
-            <dt>Is there a song-count limit per playlist?</dt>
-            <dd>No. SunoDown paginates the Suno API automatically and packs everything into one ZIP. Playlists with hundreds of tracks work — they just take proportionally longer to bundle.</dd>
+            <dt>What happens if some tracks fail to download?</dt>
+            <dd>The ZIP is still built from the tracks that succeeded, and the status message shows how many succeeded and how many failed. If no track succeeds, no ZIP is created. You can retry a failed track with its own download button.</dd>
 
             <dt>Why does WAV need a Pro account?</dt>
             <dd>Suno serves lossless WAV only to authenticated Pro/Premier sessions. SunoDown can only proxy what your account already has access to — it cannot bypass that gate.</dd>

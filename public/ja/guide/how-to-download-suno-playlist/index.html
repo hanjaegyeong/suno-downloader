@@ -89,8 +89,8 @@
         {
           "@type": "HowToStep",
           "position": 5,
-          "name": "個別ダウンロードまたはZIP一括ダウンロード",
-          "text": "各トラックのダウンロードボタンか「ZIP一括ダウンロード」を使用します。曲数制限なし — 数百曲のプレイリストにも対応します。",
+          "name": "個別ダウンロードまたはZIPダウンロード",
+          "text": "各トラックのダウンロードボタンか「全曲ZIPダウンロード」を使い、ひとつのZIPファイルにまとめて保存します。",
           "url": "https://suno-down.com/ja/guide/how-to-download-suno-playlist#step-5"
         }
       ]
@@ -154,8 +154,11 @@
       }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link { color: var(--text-mute); text-decoration: none; font-size: 13px; font-weight: 500; }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -228,6 +231,7 @@
       footer a { color: var(--text-mute); margin: 0 8px; }
       footer a:hover { color: var(--acc2); }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -235,7 +239,7 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">← ホーム</a>
+            <nav class="site-nav" aria-label="サイトメニュー"><a href="/blog">ブログ</a><a href="/ja/guide/how-to-download-suno-playlist" aria-current="page">ガイド</a><a href="/ja/faq">FAQ</a><a href="/about">サイトについて</a></nav>
             <nav class="lang-switch" aria-label="言語選択">
               <a href="/guide/how-to-download-suno-playlist" hreflang="en">EN</a>
               <a href="/ko/guide/how-to-download-suno-playlist" hreflang="ko">한국어</a>
@@ -251,7 +255,7 @@
         <article>
           <h1>Sunoプレイリストのダウンロード方法（MP3·WAV無料）</h1>
           <p class="lede"><a href="/">SunoDown</a>でSuno AIプレイリストの全曲を保存する5ステップガイド — 無料、会員登録不要、Suno Pro連携でロスレスWAVも対応。保存対象はご自身が作成したSuno楽曲で、個人利用を前提としています。</p>
-          <p class="meta">更新日: 2026-05-25 · 所要時間 約3分 · 必要なもの: Webブラウザ、SunoDown</p>
+          <p class="meta">更新日: 2026-10-08 · 所要時間 約3分 · 必要なもの: Webブラウザ、SunoDown</p>
 
           <h2>始める前に</h2>
           <p>必要なのは2つだけです — Suno AIプレイリストのURL（例: <code>https://suno.com/playlist/&lt;id&gt;</code>）と最新ブラウザ。MP3ダウンロードは完全無料でアカウントも不要です。WAVダウンロードだけがSuno Pro/Premier サブスクリプションのクッキーを必要とし、ステップ4で説明します。</p>
@@ -289,8 +293,8 @@
 
           <section class="step" id="step-5">
             <span class="step-num">ステップ5</span>
-            <h3>個別ダウンロードまたはZIP一括</h3>
-            <p>各トラックにダウンロードボタンがあります。一括ダウンロードは<strong>ZIP一括ダウンロード</strong>を押してください — SunoDownが全ファイルをストリーミングし、ブラウザ内でZIPにまとめてダウンロードを開始します。曲数制限はありません。数百曲のプレイリストにも対応し、容量に比例して時間がかかるだけです。</p>
+            <h3>個別ダウンロードまたはZIP</h3>
+            <p>各トラックにダウンロードボタンがあります。複数の曲をひとつのファイルで保存するには<strong>全曲ZIPダウンロード</strong>を押してください — SunoDownがファイルを取得し、ブラウザ内でZIPにまとめてダウンロードを開始します。容量が大きいほどZIPの作成に時間がかかります。</p>
           </section>
 
           <div class="cta">
@@ -301,13 +305,13 @@
           <h2>よくある質問</h2>
           <dl class="faq">
             <dt>SunoDownは本当に無料ですか？</dt>
-            <dd>はい。MP3ダウンロード（全曲ZIP含む）はアカウント不要で完全無料です。ロスレスWAVのみ既存のSuno Pro/Premier サブスクリプションが必要で、その費用はSuno側のもので SunoDown側ではありません。</dd>
+            <dd>はい。MP3ダウンロード（ZIP含む）はアカウント不要で完全無料です。ロスレスWAVのみ既存のSuno Pro/Premier サブスクリプションが必要で、その費用はSuno側のもので SunoDown側ではありません。</dd>
 
             <dt>入力したSunoクッキーはどこに保存されますか？</dt>
             <dd>貼り付けた <code>__client</code> クッキーはサーバーメモリにのみ保持され、ログアウト・セッション期限切れ・サーバー再起動時に即時破棄されます。データベースやログには記録されません。詳細は<a href="/privacy">プライバシーポリシー</a>をご覧ください。</dd>
 
-            <dt>プレイリストあたりの曲数制限はありますか？</dt>
-            <dd>ありません。SunoDownがSuno APIのページネーションを自動処理し、すべてを1つのZIPにまとめます。数百曲のプレイリストも対応し、容量に比例して時間がかかるだけです。</dd>
+            <dt>一部の曲のダウンロードに失敗した場合は？</dt>
+            <dd>成功した曲だけでZIPが作成され、ステータスメッセージに成功・失敗の曲数が表示されます。1曲も取得できなかった場合、ZIPは作成されません。失敗した曲は各トラックのダウンロードボタンから再試行できます。</dd>
 
             <dt>なぜWAVはProアカウントが必要ですか？</dt>
             <dd>SunoがロスレスWAVを認証されたPro/Premierセッションにのみ提供するためです。SunoDownはユーザーのアカウントが既にアクセスできるものをプロキシするだけで、この制限を回避することはできません。</dd>

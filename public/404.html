@@ -49,8 +49,11 @@
       .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: -0.03em; color: var(--acc1); text-decoration: none; }
       .logo-dot { color: var(--acc2); }
       .pill { background: var(--acc3); color: #fff; padding: 2px 8px; border-radius: 99px; font-size: 0.65rem; font-weight: 700; vertical-align: 2px; margin-left: 4px; }
-      .back-link { color: var(--text-mute); text-decoration: none; font-size: 13px; font-weight: 500; }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } }
 
       main { flex: 1 0 auto; padding: 72px 0 80px; text-align: center; }
       .code {
@@ -92,7 +95,7 @@
       <div class="wrap">
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
-          <a href="/" class="back-link">← Home</a>
+          <nav class="site-nav" aria-label="Site"><a href="/blog">Blog</a><a href="/guide/how-to-download-suno-playlist">Guides</a><a href="/faq">FAQ</a><a href="/about">About</a></nav>
         </div>
       </div>
     </header>
