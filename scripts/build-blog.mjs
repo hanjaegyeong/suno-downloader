@@ -219,6 +219,8 @@ async function generateArticle(template, fm, bodyHtml, lang, enUrl, koUrl, wordC
     FOOTER_HOME: isKo ? '홈' : 'Home',
     FOOTER_ABOUT_URL: '/about',
     FOOTER_ABOUT: isKo ? '소개' : 'About',
+    FOOTER_CONTACT_URL: isKo ? '/ko/contact' : '/contact',
+    FOOTER_CONTACT: isKo ? '문의' : 'Contact',
     FOOTER_BLOG_URL: isKo ? '/ko/blog' : '/blog',
     FOOTER_BLOG: isKo ? '블로그' : 'Blog',
     FOOTER_FAQ_URL: isKo ? '/ko/faq' : '/faq',
@@ -279,8 +281,8 @@ function buildIndexPage(articles, lang) {
     : 'Guides, genre deep-dives, and practical tips for Suno AI music creators.';
 
   const footerLinks = isKo
-    ? `<a href="/">홈</a> · <a href="/about">소개</a> · <a href="/ko/blog">블로그</a> · <a href="/ko/faq">FAQ</a> · <a href="/ko/guide/how-to-download-suno-playlist">가이드</a> · <a href="/privacy">개인정보</a> · <a href="/terms">이용약관</a>`
-    : `<a href="/">Home</a> · <a href="/about">About</a> · <a href="/blog">Blog</a> · <a href="/faq">FAQ</a> · <a href="/guide/how-to-download-suno-playlist">Guide</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a>`;
+    ? `<a href="/">홈</a> · <a href="/about">소개</a> · <a href="/ko/contact">문의</a> · <a href="/ko/blog">블로그</a> · <a href="/ko/faq">FAQ</a> · <a href="/ko/guide/how-to-download-suno-playlist">가이드</a> · <a href="/privacy">개인정보</a> · <a href="/terms">이용약관</a>`
+    : `<a href="/">Home</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/blog">Blog</a> · <a href="/faq">FAQ</a> · <a href="/guide/how-to-download-suno-playlist">Guide</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a>`;
 
   const footerCopy = isKo
     ? 'SunoDown · Suno AI와 무관한 독립 서비스입니다.'

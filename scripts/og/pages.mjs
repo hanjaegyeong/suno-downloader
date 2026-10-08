@@ -29,6 +29,26 @@ export const pages = [
     badge: 'LEGAL',
   },
 
+  // Contact — 3 languages
+  {
+    slug: 'contact',
+    title: 'Contact SunoDown',
+    subtitle: 'Support  ·  Bug Reports  ·  Copyright / DMCA',
+    badge: 'EN  ·  CONTACT',
+  },
+  {
+    slug: 'ko-contact',
+    title: 'Contact SunoDown',
+    subtitle: 'Support  ·  Bug Reports  ·  Copyright / DMCA',
+    badge: 'KO  ·  CONTACT',
+  },
+  {
+    slug: 'ja-contact',
+    title: 'Contact SunoDown',
+    subtitle: 'Support  ·  Bug Reports  ·  Copyright / DMCA',
+    badge: 'JA  ·  CONTACT',
+  },
+
   // FAQ — 3 languages
   {
     slug: 'faq',

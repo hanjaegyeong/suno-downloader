@@ -71,6 +71,8 @@ const messages = {
     footerBlog: '블로그',
     footerBlogUrl: '/ko/blog',
     footerAbout: '소개',
+    footerContact: '문의',
+    footerContactUrl: '/ko/contact',
   },
   en: {
     pageTitle: 'Suno Downloader — Free Suno AI Music Download | MP3 & WAV',
@@ -144,6 +146,8 @@ const messages = {
     footerBlog: 'Blog',
     footerBlogUrl: '/blog',
     footerAbout: 'About',
+    footerContact: 'Contact',
+    footerContactUrl: '/contact',
   },
   ja: {
     pageTitle: 'Suno ダウンローダー — Suno AI 音楽 無料ダウンロード | MP3·WAV',
@@ -217,6 +221,8 @@ const messages = {
     footerBlog: 'ブログ (EN)',
     footerBlogUrl: '/blog',
     footerAbout: 'サイトについて',
+    footerContact: 'お問い合わせ',
+    footerContactUrl: '/ja/contact',
   },
 };
 
