@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import JSZip from 'jszip';
 import { t } from '../i18n';
 
 function cdnUrl(id, fmt) {
@@ -170,7 +169,6 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
     abortRef.current = ac;
     const { signal } = ac;
 
-    const zip = new JSZip();
     const total = songs.length;
     let failed = 0;
     let completed = 0;
@@ -178,6 +176,9 @@ export default function SongList({ songs, fmt, onStatus, lang, onCookieExpired }
     setDlProgress({ current: 0, total, phase: 'download' });
 
     try {
+      const { default: JSZip } = await import('jszip');
+      const zip = new JSZip();
+
       // WAV: pipeline — each worker does convert → poll → download
       if (fmt === 'wav') {
         const results = await pooledMap(songs, async (song, i) => {

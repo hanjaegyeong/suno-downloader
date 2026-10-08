@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import Downloader from './components/Downloader';
 import SongList from './components/SongList';
+import HomeGuide from './components/HomeGuide';
 import BackupInfo from './components/BackupInfo';
 import { t, getLang, setLang, LANGS } from './i18n';
 
@@ -100,10 +101,16 @@ export default function App() {
       <header>
         <div className="wrap">
           <div className="header-inner">
-            <div className="logo">
+            <a href="/" className="logo">
               SunoDown<span className="logo-dot">.</span>{' '}
               <span className="pill">FREE</span>
-            </div>
+            </a>
+            <nav className="site-nav" aria-label={t('navLabel')}>
+              <a href={t('navBlogUrl')}>{t('navBlog')}</a>
+              <a href={t('navGuideUrl')}>{t('navGuide')}</a>
+              <a href={t('navFaqUrl')}>{t('navFaq')}</a>
+              <a href="/about">{t('navAbout')}</a>
+            </nav>
             <div className="header-right">
               <div className="lang-wrapper">
                 <span className="lang-label">Language</span>
@@ -229,6 +236,8 @@ export default function App() {
               onCookieExpired={handleCookieExpired}
             />
           )}
+
+          <HomeGuide lang={lang} />
 
           <BackupInfo lang={lang} />
         </div>

@@ -25,8 +25,8 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="SunoDown - Free Suno AI Playlist MP3 & WAV Downloader" />
-    <meta property="og:locale" content="ko_KR" />
-    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ko_KR" />
     <meta property="og:locale:alternate" content="ja_JP" />
 
     <!-- Twitter Card -->
@@ -81,48 +81,9 @@
     }
     </script>
 
-    <!-- FAQPage JSON-LD intentionally lives only on /faq, /ko/faq, /ja/faq (CONTENT_PAGES in server.js) to avoid duplicate-schema penalties. The home page links there instead. -->
-
-    <!-- Structured Data: HowTo (canonical English version — KO/JA HowTo lives on /ko/guide/* and /ja/guide/* per-language) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "How to Download Suno AI Playlist Songs for Free",
-      "description": "Step-by-step guide to download all tracks from a Suno AI playlist as MP3 or WAV using SunoDown, the free Suno downloader.",
-      "totalTime": "PT2M",
-      "tool": {
-        "@type": "HowToTool",
-        "name": "Web browser (Chrome, Firefox, Safari, Edge)"
-      },
-      "step": [
-        {
-          "@type": "HowToStep",
-          "position": 1,
-          "name": "Copy the Suno playlist URL",
-          "text": "Go to suno.com, open the playlist you want to download, and copy the URL from the browser address bar. Example: https://suno.com/playlist/fe85c062-..."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 2,
-          "name": "Paste URL into SunoDown",
-          "text": "Visit suno-down.com and paste the copied playlist URL into the input field. You can also paste just the playlist ID."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 3,
-          "name": "Load the track list",
-          "text": "Click the 'Load' button. All tracks in the playlist will appear with their titles, artists, and durations."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 4,
-          "name": "Choose format and download",
-          "text": "Select MP3 (free) or WAV (requires Suno Pro). Download tracks individually or click 'Download All as ZIP' for bulk download."
-        }
-      ]
-    }
-    </script>
+    <!-- The home page intentionally carries no FAQPage/HowTo/BreadcrumbList schema.
+         FAQPage JSON-LD lives in the static FAQ pages (public/faq, public/ko/faq, public/ja/faq)
+         and the mp3-vs-wav / pro-cookie-setup guide pages, next to the questions they describe. -->
 
     <!-- Structured Data: Organization -->
     <script type="application/ld+json">
@@ -143,22 +104,6 @@
     }
     </script>
 
-    <!-- Structured Data: BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "SunoDown",
-          "item": "https://suno-down.com/"
-        }
-      ]
-    }
-    </script>
-
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -176,13 +121,14 @@
       <header>
         <div class="wrap">
           <div class="header-inner">
-            <div class="logo">SunoDown<span class="logo-dot">.</span> <span class="pill">FREE</span></div>
-            <nav class="header-right" aria-label="언어 선택">
+            <a href="/" class="logo">SunoDown<span class="logo-dot">.</span> <span class="pill">FREE</span></a>
+            <nav class="site-nav" aria-label="Site"><a href="/blog">Blog</a><a href="/guide/how-to-download-suno-playlist">Guides</a><a href="/faq">FAQ</a><a href="/about">About</a></nav>
+            <div class="header-right">
               <div class="lang-wrapper">
                 <span class="lang-label">Language</span>
                 <span class="lang-select">한국어 · English · 日本語</span>
               </div>
-            </nav>
+            </div>
           </div>
         </div>
       </header>
@@ -204,12 +150,12 @@
           <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:12px;color:#fff">SunoDown — Suno 다운로더 | Suno AI 플레이리스트·라이브러리 MP3·WAV 다운로드</h3>
           <p style="line-height:1.8;color:#c0c0d0;font-size:15px">
             <strong>SunoDown</strong>은 <strong>Suno AI</strong>에서 생성한 음악을 <strong>MP3</strong> 또는 <strong>WAV</strong> 형식으로 안전하게 백업하고, Suno 활용 가이드·FAQ·MP3 vs WAV 비교까지 모아둔 허브입니다.
-            플레이리스트 URL 하나만 붙여넣으면 모든 곡을 ZIP으로 일괄 백업할 수 있고, Suno Pro 또는 Premier 구독자라면 <strong>무손실 WAV</strong>로 본인 창작물을 보관할 수 있습니다.
+            본인 플레이리스트 URL을 붙여넣으면 직접 만든 곡을 ZIP 파일 하나로 백업할 수 있고, Suno Pro 또는 Premier 구독자라면 <strong>무손실 WAV</strong>로 본인 창작물을 보관할 수 있습니다.
             회원가입이나 소프트웨어 설치 없이 웹 브라우저에서 바로 사용 가능합니다.
           </p>
         </section>
 
-        <!-- Why Backup — 정보성 본문 (AdSense 콘텐츠 비중) -->
+        <!-- Why Backup — 정보성 본문 -->
         <section style="margin-bottom:36px">
           <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:14px;color:#fff">왜 Suno 라이브러리를 직접 백업해야 할까?</h3>
           <p style="line-height:1.85;color:#c0c0d0;font-size:14.5px;margin-bottom:22px">
@@ -260,8 +206,8 @@
           <ol style="line-height:2.2;color:#c0c0d0;font-size:14.5px;padding-left:20px">
             <li><strong style="color:#22d3ee">플레이리스트 URL 복사</strong> — Suno 웹사이트에서 다운로드할 플레이리스트를 열고 주소창의 URL을 복사합니다. (예: suno.com/playlist/fe85c062-…)</li>
             <li><strong style="color:#22d3ee">URL 붙여넣기</strong> — SunoDown 입력란에 복사한 URL을 붙여넣고 "불러오기" 버튼을 클릭합니다. 플레이리스트 ID만 입력해도 됩니다.</li>
-            <li><strong style="color:#22d3ee">형식 선택</strong> — MP3(무료) 또는 WAV(Suno Pro 계정 필요) 중 원하는 형식을 선택합니다.</li>
-            <li><strong style="color:#22d3ee">다운로드</strong> — 개별 곡을 하나씩 다운로드하거나 "ZIP 전체 다운로드"로 전곡을 한 번에 받습니다.</li>
+            <li><strong style="color:#22d3ee">형식 선택</strong> — MP3(무료) 또는 WAV(본인의 Suno Pro·Premier 계정 필요) 중 원하는 형식을 선택합니다.</li>
+            <li><strong style="color:#22d3ee">다운로드</strong> — 개별 곡을 하나씩 다운로드하거나 "전체 ZIP 다운로드"로 여러 곡을 ZIP 파일 하나에 묶어 받습니다.</li>
           </ol>
         </section>
 
@@ -271,15 +217,15 @@
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px">
             <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
               <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">MP3 무료 다운로드</h4>
-              <p style="font-size:13px;color:#6b6b80;line-height:1.6">Suno AI 플레이리스트의 모든 곡을 MP3 형식으로 무료 다운로드. 회원가입 없이 바로 사용 가능합니다.</p>
+              <p style="font-size:13px;color:#6b6b80;line-height:1.6">직접 만든 Suno AI 곡을 MP3 형식으로 무료 다운로드. 회원가입 없이 바로 사용 가능합니다.</p>
             </div>
             <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
               <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">WAV 고음질 다운로드</h4>
-              <p style="font-size:13px;color:#6b6b80;line-height:1.6">Suno Pro 또는 Premier 계정을 연동하면 무손실 WAV 형식으로 다운로드할 수 있습니다.</p>
+              <p style="font-size:13px;color:#6b6b80;line-height:1.6">본인의 Suno Pro 또는 Premier 계정을 연동하면 무손실 WAV 형식으로 다운로드할 수 있습니다.</p>
             </div>
             <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
-              <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">ZIP 일괄 다운로드</h4>
-              <p style="font-size:13px;color:#6b6b80;line-height:1.6">플레이리스트의 전곡을 ZIP 파일 하나로 묶어서 한 번에 다운로드합니다. 곡 수 제한이 없습니다.</p>
+              <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">ZIP으로 백업</h4>
+              <p style="font-size:13px;color:#6b6b80;line-height:1.6">본인 라이브러리의 곡을 ZIP 파일 하나로 묶어 편리하게 백업할 수 있습니다.</p>
             </div>
             <div style="background:#111119;border:1px solid #242430;border-radius:12px;padding:18px">
               <h4 style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px">다국어 지원</h4>
@@ -293,22 +239,22 @@
           <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:16px;color:#fff">자주 묻는 질문 (FAQ)</h3>
           <dl style="line-height:1.8;color:#c0c0d0;font-size:14.5px">
             <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. SunoDown은 무료인가요?</dt>
-            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">네, MP3 다운로드는 완전 무료이며 회원가입도 필요 없습니다. WAV 고음질 다운로드는 Suno Pro 또는 Premier 계정의 쿠키를 연동하면 사용할 수 있습니다. SunoDown 서비스 자체에 비용은 없습니다.</dd>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">네, MP3 다운로드는 완전 무료이며 회원가입도 필요 없습니다. WAV 고음질 다운로드는 본인의 Suno Pro 또는 Premier 계정 쿠키를 연동하면 사용할 수 있습니다. SunoDown 서비스 자체에 비용은 없습니다.</dd>
 
             <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 회원가입이 필요한가요?</dt>
             <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">아닙니다. MP3 다운로드에는 어떠한 계정이나 회원가입도 필요 없습니다. 플레이리스트 URL만 붙여넣으면 바로 다운로드할 수 있습니다.</dd>
 
             <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 어떤 파일 형식을 지원하나요?</dt>
-            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">MP3와 WAV 두 가지 형식을 지원합니다. MP3는 누구나 무료로 다운로드할 수 있고, WAV는 Suno Pro 계정 연동 후 사용할 수 있습니다. 여러 곡을 ZIP 파일로 일괄 다운로드하는 기능도 제공합니다.</dd>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">MP3와 WAV 두 가지 형식을 지원합니다. MP3는 계정 없이 무료로 다운로드할 수 있고, WAV는 본인의 Suno Pro·Premier 계정 연동 후 사용할 수 있습니다. 여러 곡을 ZIP 파일 하나로 묶어 받는 기능도 제공합니다.</dd>
 
-            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 한 번에 몇 곡까지 다운로드할 수 있나요?</dt>
-            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">플레이리스트에 포함된 모든 곡을 다운로드할 수 있습니다. 곡 수에 제한이 없으며, ZIP 일괄 다운로드 기능으로 수십~수백 곡도 한 번에 받을 수 있습니다.</dd>
+            <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 다른 사람의 곡도 다운로드할 수 있나요?</dt>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">SunoDown은 본인의 Suno 계정으로 생성했거나 적법한 다운로드 권한을 가진 음악을 백업하기 위한 보조 도구입니다. 타인의 저작물을 무단으로 다운로드·재배포하거나 상업적으로 이용하는 행위는 금지되며, 그 책임은 사용자 본인에게 있습니다. 권리 침해가 의심되는 콘텐츠는 <a href="/ko/contact" style="color:#22d3ee;font-weight:600;text-decoration:none">문의 페이지</a>로 신고해 주세요.</dd>
 
             <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. WAV 다운로드는 어떻게 하나요?</dt>
-            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">WAV 다운로드에는 Suno Pro 또는 Premier 계정이 필요합니다. 헤더의 "Pro 연결" 버튼을 클릭하고, suno.com에서 <code style="background:rgba(139,92,246,.15);padding:2px 6px;border-radius:4px;color:#22d3ee;font-size:12px">__client</code> 쿠키 값을 복사하여 붙여넣으면 됩니다.</dd>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">WAV 다운로드에는 본인의 Suno Pro 또는 Premier 계정이 필요합니다. 헤더의 "WAV용 Pro 연결" 버튼을 클릭하고, suno.com에서 <code style="background:rgba(139,92,246,.15);padding:2px 6px;border-radius:4px;color:#22d3ee;font-size:12px">__client</code> 쿠키 값을 복사하여 붙여넣으면 됩니다.</dd>
 
             <dt style="font-weight:700;color:#fff;margin-bottom:4px">Q. 안전한가요? 개인정보는 어떻게 처리되나요?</dt>
-            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">SunoDown은 쿠키를 서버 메모리에만 임시 저장하며, 데이터베이스에 기록하지 않습니다. 서버 세션이 종료되면 모든 데이터가 자동으로 삭제됩니다. 어떤 개인정보도 수집하지 않습니다.</dd>
+            <dd style="margin:0 0 16px 0;padding-left:16px;border-left:2px solid #8b5cf6">SunoDown은 쿠키를 서버 메모리에만 임시 저장하며, 데이터베이스에 기록하지 않습니다. 서버 세션이 종료되면 모든 데이터가 자동으로 삭제됩니다. SunoDown은 회원 정보를 받지 않으며, 광고 제공을 위해 Google AdSense가 쿠키를 사용할 수 있습니다. 자세한 내용은 <a href="/privacy" style="color:#22d3ee;font-weight:600;text-decoration:none">개인정보 처리 방침</a>을 참고하세요.</dd>
           </dl>
           <p style="margin:18px 0 0;font-size:14px"><a href="/ko/faq" style="color:#22d3ee;font-weight:600;text-decoration:none">→ 전체 FAQ 15개 보기 (요금·모바일·약관·저작권·오류 해결)</a></p>
         </section>
@@ -345,15 +291,15 @@
           <ol style="line-height:2;color:#c0c0d0;font-size:14px;padding-left:20px;margin-bottom:16px">
             <li><strong>Copy the playlist URL</strong> from suno.com (e.g., suno.com/playlist/fe85c062-…)</li>
             <li><strong>Paste the URL</strong> into SunoDown and click "Load"</li>
-            <li><strong>Choose your format</strong> — MP3 (free) or WAV (requires Suno Pro)</li>
-            <li><strong>Download</strong> individual tracks or all at once as a ZIP bundle</li>
+            <li><strong>Choose your format</strong> — MP3 (free) or WAV (requires your own Suno Pro or Premier account)</li>
+            <li><strong>Download</strong> individual tracks, or save them together in a single ZIP file</li>
           </ol>
 
           <h4 style="font-size:1rem;font-weight:700;margin-bottom:10px;color:#c084fc">Key Features</h4>
           <ul style="line-height:2;color:#c0c0d0;font-size:14px;padding-left:20px;margin-bottom:16px">
-            <li><strong>Free MP3 Downloads</strong> — Download all playlist tracks as MP3 with no account needed</li>
-            <li><strong>WAV Lossless Quality</strong> — High-quality WAV downloads with Suno Pro account</li>
-            <li><strong>ZIP Bulk Download</strong> — Get all tracks in a single ZIP file</li>
+            <li><strong>Free MP3 Downloads</strong> — Download tracks you made with Suno AI as MP3, free, with no account needed</li>
+            <li><strong>WAV Lossless Quality</strong> — High-quality WAV downloads with your own Suno Pro or Premier account</li>
+            <li><strong>ZIP Backup</strong> — Bundle tracks from your own library into a single ZIP file</li>
             <li><strong>No Sign-up Required</strong> — Start downloading immediately, no registration</li>
             <li><strong>Multi-language</strong> — Available in Korean, English, and Japanese</li>
           </ul>
@@ -361,13 +307,13 @@
           <h4 style="font-size:1rem;font-weight:700;margin-bottom:10px;color:#c084fc">Frequently Asked Questions</h4>
           <dl style="line-height:1.8;color:#c0c0d0;font-size:14px">
             <dt style="font-weight:700;color:#fff;margin-bottom:2px">Is SunoDown really free?</dt>
-            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">Yes, MP3 downloads are completely free. WAV downloads require a Suno Pro or Premier account cookie, but SunoDown itself charges nothing.</dd>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">Yes, MP3 downloads are completely free. WAV downloads require the cookie from your own Suno Pro or Premier account, but SunoDown itself charges nothing.</dd>
 
-            <dt style="font-weight:700;color:#fff;margin-bottom:2px">How many songs can I download at once?</dt>
-            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">There is no song limit. You can download every track in a playlist, whether it has 10 or 500 songs. The ZIP download bundles them all together.</dd>
+            <dt style="font-weight:700;color:#fff;margin-bottom:2px">Can I download other people&rsquo;s songs?</dt>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">SunoDown is a helper tool for backing up music you generated with your own Suno account or otherwise have a lawful right to download. Downloading, redistributing, or commercially exploiting other people&rsquo;s work without permission is prohibited, and responsibility rests with the user. To report suspected infringement, use the <a href="/contact" style="color:#22d3ee;font-weight:600;text-decoration:none">contact page</a>.</dd>
 
             <dt style="font-weight:700;color:#fff;margin-bottom:2px">Is it safe to use?</dt>
-            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">Yes. SunoDown stores cookies only in server memory (never in a database) and automatically deletes them when the session ends. No personal data is collected.</dd>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">Yes. SunoDown stores cookies only in server memory (never in a database) and automatically deletes them when the session ends. SunoDown does not ask for account details; Google AdSense may use cookies to serve ads — see the <a href="/privacy" style="color:#22d3ee;font-weight:600;text-decoration:none">privacy policy</a>.</dd>
           </dl>
           <p style="margin:18px 0 0;font-size:14px"><a href="/faq" style="color:#22d3ee;font-weight:600;text-decoration:none">→ Read the full FAQ (15 questions on pricing, mobile, terms, copyright, troubleshooting)</a></p>
         </section>
@@ -377,7 +323,7 @@
           <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:12px;color:#fff">SunoDown — Suno ダウンローダー | Suno AI プレイリスト・ライブラリ MP3·WAV ダウンロード</h3>
           <p style="line-height:1.8;color:#c0c0d0;font-size:15px;margin-bottom:12px">
             <strong>SunoDown</strong>は、<strong>Suno AI</strong>で生成した音楽を<strong>MP3</strong>または<strong>WAV</strong>形式で安全にバックアップし、使い方ガイド・FAQ・MP3 vs WAV比較もまとめたハブです。
-            プレイリストURLを貼り付けるだけで全曲をZIPで一括取得でき、Suno ProまたはPremier加入者は<strong>無損失WAV</strong>で自分の創作物を保管できます。
+            ご自身のプレイリストURLを貼り付けるだけで、作成した曲をひとつのZIPファイルにバックアップでき、Suno ProまたはPremier加入者は<strong>無損失WAV</strong>で自分の創作物を保管できます。
             会員登録不要、ソフトウェアのインストールも不要です。
           </p>
           <p style="line-height:1.8;color:#c0c0d0;font-size:14px;margin-bottom:14px">
@@ -391,15 +337,15 @@
           <ol style="line-height:2.2;color:#c0c0d0;font-size:14px;padding-left:20px;margin-bottom:16px">
             <li><strong style="color:#22d3ee">URLをコピー</strong> — suno.comでダウンロードしたいプレイリストを開き、URLをコピー</li>
             <li><strong style="color:#22d3ee">URLを貼り付け</strong> — SunoDownの入力欄にURLを貼り付け、「読み込み」をクリック</li>
-            <li><strong style="color:#22d3ee">形式を選択</strong> — MP3（無料）またはWAV（Suno Proアカウント必要）を選択</li>
-            <li><strong style="color:#22d3ee">ダウンロード</strong> — 個別ダウンロードまたは「ZIP一括ダウンロード」で全曲を取得</li>
+            <li><strong style="color:#22d3ee">形式を選択</strong> — MP3（無料）またはWAV（ご自身のSuno Pro・Premierアカウントが必要）を選択</li>
+            <li><strong style="color:#22d3ee">ダウンロード</strong> — 個別ダウンロード、または「全曲ZIPダウンロード」でひとつのZIPファイルにまとめて保存</li>
           </ol>
 
           <h4 style="font-size:1rem;font-weight:700;margin-bottom:8px;color:#c084fc">主な機能</h4>
           <ul style="line-height:2;color:#c0c0d0;font-size:14px;padding-left:20px;margin-bottom:16px">
-            <li><strong>MP3無料ダウンロード</strong> — Suno AIプレイリスト全曲をアカウント不要で無料ダウンロード</li>
-            <li><strong>WAV高音質ダウンロード</strong> — ロスレス音質でダウンロード（Suno Proアカウント必要）</li>
-            <li><strong>ZIP一括ダウンロード</strong> — 全トラックをZIPファイルでまとめてダウンロード</li>
+            <li><strong>MP3無料ダウンロード</strong> — Suno AIで作った曲をアカウント不要・無料でダウンロード</li>
+            <li><strong>WAV高音質ダウンロード</strong> — ロスレス音質でダウンロード（ご自身のSuno Pro・Premierアカウントが必要）</li>
+            <li><strong>ZIPでバックアップ</strong> — ご自身のライブラリの曲をひとつのZIPファイルにまとめて保存</li>
             <li><strong>登録不要</strong> — URLを貼り付けるだけですぐ使える</li>
             <li><strong>多言語対応</strong> — 日本語・韓国語・英語対応</li>
           </ul>
@@ -407,10 +353,10 @@
           <h4 style="font-size:1rem;font-weight:700;margin-bottom:10px;color:#c084fc">よくある質問（FAQ）</h4>
           <dl style="line-height:1.8;color:#c0c0d0;font-size:14px">
             <dt style="font-weight:700;color:#fff;margin-bottom:2px">SunoDownは無料ですか？</dt>
-            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">はい、MP3ダウンロードは完全無料で、会員登録も不要です。WAV高音質ダウンロードはSuno ProまたはPremierアカウントのクッキー連携が必要ですが、SunoDown自体に料金はかかりません。</dd>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">はい、MP3ダウンロードは完全無料で、会員登録も不要です。WAV高音質ダウンロードにはご自身のSuno ProまたはPremierアカウントのクッキー連携が必要ですが、SunoDown自体に料金はかかりません。</dd>
 
-            <dt style="font-weight:700;color:#fff;margin-bottom:2px">Suno AIの曲を一括ダウンロードできますか？</dt>
-            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">はい、「ZIP一括ダウンロード」機能で、プレイリストの全曲をZIPファイルにまとめてダウンロードできます。曲数の制限はありません。</dd>
+            <dt style="font-weight:700;color:#fff;margin-bottom:2px">他の人の曲もダウンロードできますか？</dt>
+            <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">SunoDownは、ご自身のSunoアカウントで生成した、または適法なダウンロード権利を持つ音楽をバックアップするための補助ツールです。他者の著作物を無断でダウンロード・再配布・商用利用する行為は禁止されており、その責任は利用者本人にあります。権利侵害が疑われるコンテンツは<a href="/ja/contact" style="color:#22d3ee;font-weight:600;text-decoration:none">お問い合わせページ</a>からご報告ください。</dd>
 
             <dt style="font-weight:700;color:#fff;margin-bottom:2px">アカウント登録は必要ですか？</dt>
             <dd style="margin:0 0 12px 0;padding-left:14px;border-left:2px solid #8b5cf6">いいえ、MP3ダウンロードにはアカウントも登録も不要です。プレイリストURLを貼り付けるだけですぐにダウンロードできます。</dd>
@@ -472,20 +418,20 @@
 
     <noscript>
       <div style="max-width:900px;margin:0 auto;padding:40px 18px;color:#ededf5;font-family:sans-serif;background:#08080f">
-        <h1 style="font-size:1.8rem;margin-bottom:12px">SunoDown – Suno 다운로더 | Suno AI 플레이리스트 전곡 MP3 & WAV 무료 다운로드</h1>
+        <h1 style="font-size:1.8rem;margin-bottom:12px">SunoDown – Suno 다운로더 | 직접 만든 Suno AI 곡 MP3 & WAV 백업</h1>
         <p style="color:#c0c0d0;line-height:1.8;margin-bottom:20px">
-          SunoDown은 Suno AI 플레이리스트의 모든 곡을 MP3, WAV로 무료 다운로드할 수 있는 웹 서비스입니다.
+          SunoDown은 본인이 Suno AI로 만든 곡을 MP3, WAV로 백업할 수 있는 무료 웹 서비스입니다.
           이 사이트는 JavaScript가 필요합니다. 브라우저에서 JavaScript를 활성화해주세요.
         </p>
         <p style="color:#c0c0d0;line-height:1.8;margin-bottom:20px" lang="en">
-          SunoDown is a free web tool to download all tracks from Suno AI playlists as MP3 or WAV.
+          SunoDown is a free web tool for backing up tracks you made with Suno AI as MP3 or WAV.
           This site requires JavaScript. Please enable JavaScript in your browser.
         </p>
         <h2 style="font-size:1.2rem;margin-bottom:8px">Features / 주요 기능</h2>
         <ul style="line-height:2;color:#c0c0d0;padding-left:20px">
-          <li>Suno AI 플레이리스트 전곡 무료 MP3 다운로드 (Free MP3 downloads from Suno playlists)</li>
-          <li>WAV 고음질 다운로드 지원 (Lossless WAV downloads with Suno Pro)</li>
-          <li>ZIP 일괄 다운로드 (Bulk ZIP download)</li>
+          <li>직접 만든 곡 무료 MP3 다운로드 (Free MP3 downloads of your own tracks)</li>
+          <li>본인 Suno Pro·Premier 계정으로 WAV 고음질 다운로드 (Lossless WAV with your own Suno Pro or Premier account)</li>
+          <li>ZIP 파일로 백업 (ZIP backup of your own library)</li>
           <li>회원가입 불필요 (No sign-up required)</li>
           <li>한국어, English, 日本語 지원 (Multi-language support)</li>
         </ul>
