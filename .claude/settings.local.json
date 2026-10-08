@@ -27,7 +27,8 @@
       "Bash(where gh:*)",
       "WebFetch(domain:suno-dl-kr.fly.dev)",
       "WebSearch",
-      "mcp__plugin_oh-my-claudecode_t__lsp_diagnostics"
+      "mcp__plugin_oh-my-claudecode_t__lsp_diagnostics",
+      "Skill(commit)"
     ]
   },
   "hooks": {
