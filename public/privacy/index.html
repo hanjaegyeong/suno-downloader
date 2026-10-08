@@ -102,13 +102,11 @@
         font-family: inherit;
         cursor: pointer;
       }
-      .back-link {
-        color: var(--text-mute);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current="page"] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -184,7 +182,12 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link" data-back>← <span data-t="back">홈으로</span></a>
+            <nav class="site-nav" aria-label="Site">
+              <a href="/ko/blog" data-nav="blog">블로그</a>
+              <a href="/ko/guide/how-to-download-suno-playlist" data-nav="guide">가이드</a>
+              <a href="/ko/faq" data-nav="faq">FAQ</a>
+              <a href="/about" data-nav="about">소개</a>
+            </nav>
             <select class="lang-select" id="langSelect" aria-label="Language">
               <option value="ko">한국어</option>
               <option value="en">English</option>
@@ -201,7 +204,7 @@
         <!-- ───────── 한국어 ───────── -->
         <article class="lang-block" data-lang="ko" lang="ko">
           <h1>개인정보 처리 방침</h1>
-          <p class="effective">시행일: 2026년 5월 18일 · suno-down.com</p>
+          <p class="effective">시행일: 2026년 10월 8일 · suno-down.com</p>
 
           <p>SunoDown(이하 "본 서비스")은 Suno AI 플레이리스트를 MP3·WAV 파일로 다운로드할 수 있는 무료 웹 도구입니다. 본 방침은 본 서비스가 어떤 정보를 처리하는지, 그 정보를 어떻게 보호하는지를 설명합니다.</p>
 
@@ -212,6 +215,7 @@
             <li><strong>플레이리스트 URL</strong>: 사용자가 직접 입력한 Suno 플레이리스트 URL. 요청 처리 중에만 사용되며 저장되지 않습니다.</li>
             <li><strong>접속 로그</strong>: 호스팅 인프라(Fly.io) 기본 로그 — IP 주소, User-Agent, 요청 경로·시각. 보안·디버깅 목적으로 단기 보관됩니다.</li>
             <li><strong>브라우저 로컬 스토리지</strong>: 언어 설정, 사용자 동의 시 Suno 쿠키 자동 재접속용 키. 사용자 브라우저에만 저장됩니다.</li>
+            <li><strong>광고 관련 정보 (Google 수집)</strong>: Google AdSense가 광고 게재를 위해 쿠키·기기 식별자·IP 주소·방문 페이지 URL 등을 수집할 수 있습니다. 이 정보는 Google이 직접 처리하며, 운영자는 개별 사용자를 식별할 수 있는 정보를 Google로부터 제공받지 않습니다. 자세한 내용은 6항을 참고하세요.</li>
           </ul>
 
           <h2>2. 정보 사용 목적</h2>
@@ -220,6 +224,7 @@
             <li>WAV 변환 요청 및 변환 완료 폴링 (Suno Pro 사용자)</li>
             <li>오디오·이미지 스트리밍 다운로드 (CDN 호스트 화이트리스트 검증 포함)</li>
             <li>다국어 UI 설정 유지</li>
+            <li>운영비 충당을 위한 광고 게재 (Google AdSense)</li>
           </ul>
 
           <h2>3. 정보 보관 및 삭제</h2>
@@ -227,16 +232,17 @@
             <li><strong>Suno 쿠키</strong>: 서버 메모리에만 보관. 세션 종료·서버 재시작·"연결 해제" 클릭 시 즉시 삭제. 데이터베이스 미저장.</li>
             <li><strong>접속 로그</strong>: Fly.io 호스팅 인프라 정책에 따라 단기 보관 후 자동 삭제.</li>
             <li><strong>로컬 스토리지</strong>: 사용자 브라우저에 저장되며, 사용자가 브라우저 설정에서 언제든 삭제할 수 있습니다.</li>
+            <li><strong>광고 쿠키</strong>: Google 등 광고 사업자의 정책에 따라 보관되며, 사용자가 브라우저 설정에서 언제든 삭제하거나 차단할 수 있습니다.</li>
           </ul>
 
           <h2>4. 제3자 제공·이용</h2>
           <ul>
             <li><strong>Suno AI (suno.com)</strong>: 사용자가 입력한 쿠키를 사용하여 사용자 명의로 suno.com에 메타데이터·오디오 요청을 프록시합니다. 이는 사용자가 직접 suno.com과 통신하는 것과 동등합니다. 본 서비스는 사용자의 Suno 활동을 저장하지 않습니다.</li>
             <li><strong>Cloudflare</strong>: 도메인 등록·일부 트래픽 라우팅을 담당합니다.</li>
-            <li><strong>Google AdSense (도입 예정)</strong>: 사이트 수익화를 위해 추후 Google AdSense를 도입할 수 있습니다. 도입 시 Google이 광고 송출을 위해 쿠키·디바이스 식별자·페이지 URL 등을 처리할 수 있으며, EEA·영국·스위스 사용자에게는 동의 메시지(CMP)가 표시됩니다. 자세한 사항은 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google 광고 정책</a>을 참고하세요.</li>
+            <li><strong>Google AdSense</strong>: 본 서비스는 운영비 충당을 위해 Google AdSense 광고를 게재합니다. Google은 광고 게재와 성과 측정을 위해 쿠키·기기 식별자·페이지 URL 등을 처리합니다. 광고 쿠키와 맞춤 광고 해제 방법은 6항에서 설명합니다.</li>
           </ul>
           <div class="note">
-            <p>본 서비스는 사용자 정보를 광고주·데이터 브로커·기타 제3자에게 판매하거나 제공하지 않습니다.</p>
+            <p>운영자는 사용자 정보를 광고주·데이터 브로커·기타 제3자에게 판매하거나 제공하지 않습니다. 다만 4항과 6항에 설명한 대로 Google 등 광고 사업자는 자체 쿠키를 통해 정보를 직접 수집할 수 있습니다.</p>
           </div>
 
           <h2>5. 쿠키 및 로컬 스토리지</h2>
@@ -244,33 +250,47 @@
             <li><code>__client</code> (Suno 쿠키): 사용자가 명시적으로 입력해 WAV 다운로드에 사용. 서버 메모리에만 보관.</li>
             <li><code>suno_clerk_cookie</code>, <code>suno_session_id</code> (로컬 스토리지): 다음 방문 시 자동 재접속을 위해 사용자 브라우저에만 저장.</li>
             <li><code>sunodown-lang</code> (로컬 스토리지): 선택한 UI 언어를 기억하기 위해 사용.</li>
-            <li>AdSense 도입 시 Google이 사용하는 광고 쿠키가 추가될 수 있습니다.</li>
+            <li>Google 광고 쿠키 (제3자 쿠키): Google과 파트너가 광고 게재·노출 빈도 제한·성과 측정·맞춤 광고를 위해 설정합니다. 6항을 참고하세요.</li>
           </ul>
 
-          <h2>6. 사용자 권리</h2>
+          <h2>6. 광고(Google AdSense)와 광고 쿠키</h2>
+          <p>본 서비스는 운영비 충당을 위해 Google AdSense 광고를 게재하고 있습니다. 광고 게재와 관련하여 다음 사항을 알려 드립니다.</p>
+          <ul>
+            <li>Google을 포함한 제3자 광고 사업자는 쿠키를 사용하여 사용자가 본 웹사이트 또는 다른 웹사이트를 이전에 방문한 기록을 바탕으로 광고를 게재합니다.</li>
+            <li>Google은 광고 쿠키를 사용하여, 사용자가 본 사이트 및/또는 인터넷상의 다른 사이트를 방문한 기록을 바탕으로 Google과 파트너가 사용자에게 광고를 게재할 수 있도록 합니다.</li>
+            <li>사용자는 <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Google 내 광고 센터</a> 또는 <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google 광고 설정</a>에서 맞춤 광고를 해제할 수 있습니다.</li>
+            <li>일부 제3자 광고 사업자의 맞춤 광고용 쿠키 사용은 <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info/choices</a>에서 거부할 수 있습니다(EU 사용자는 <a href="https://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer">www.youronlinechoices.eu</a>).</li>
+            <li>Google이 이러한 정보를 사용하는 방식은 <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google 서비스를 사용하는 사이트 또는 앱에서 Google이 정보를 사용하는 방법</a>과 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google의 광고 쿠키 사용 방식</a>에서 확인할 수 있습니다.</li>
+            <li>유럽경제지역(EEA)·영국·스위스 사용자의 경우, 관련 법령이 요구하는 때에는 Google 인증 동의 관리 플랫폼(CMP)을 통해 광고 쿠키 사용에 대한 동의를 요청합니다.</li>
+            <li>맞춤 광고를 해제해도 광고는 계속 표시될 수 있으며, 이때는 보고 있는 페이지의 내용 등 일반적인 정보를 바탕으로 한 광고가 표시됩니다.</li>
+          </ul>
+
+          <h2>7. 사용자 권리</h2>
           <ul>
             <li>헤더 Pro 배지 → "연결 해제"로 서버 메모리의 Suno 쿠키를 즉시 삭제</li>
             <li>브라우저 사이트 데이터 삭제로 로컬 스토리지를 초기화</li>
+            <li>6항의 Google 광고 설정 또는 aboutads.info·youronlinechoices.eu에서 맞춤 광고 해제</li>
             <li>본 서비스 사용 자체를 언제든 중단</li>
           </ul>
 
-          <h2>7. 어린이 개인정보</h2>
+          <h2>8. 어린이 개인정보</h2>
           <p>본 서비스는 만 13세(또는 해당 국가의 디지털 동의 연령) 미만의 어린이를 대상으로 하지 않으며, 어린이로부터 의도적으로 정보를 수집하지 않습니다.</p>
 
-          <h2>8. 정책 변경</h2>
+          <h2>9. 정책 변경</h2>
           <p>본 방침이 변경될 경우 본 페이지 상단의 시행일을 갱신하여 공지합니다. 중요한 변경은 메인 페이지 또는 적절한 위치에 공지할 수 있습니다.</p>
+          <p>개정 이력: 2026-05-18 최초 시행 · 2026-10-08 광고(Google AdSense)·광고 쿠키 고지 갱신</p>
 
-          <h2>9. 문의</h2>
+          <h2>10. 문의</h2>
           <p>본 방침이나 개인정보 처리에 관한 문의는 다음으로 연락해 주세요: <a href="mailto:hjg000223@naver.com">hjg000223@naver.com</a></p>
 
-          <h2>10. 면책</h2>
+          <h2>11. 면책</h2>
           <p>SunoDown은 Suno AI와 무관한 독립 서비스입니다. 다운로드한 음악의 저작권은 각 제작자에게 있으며, 사용자는 개인적 용도로만 사용해야 합니다.</p>
         </article>
 
         <!-- ───────── English ───────── -->
         <article class="lang-block" data-lang="en" lang="en">
           <h1>Privacy Policy</h1>
-          <p class="effective">Effective: May 18, 2026 · suno-down.com</p>
+          <p class="effective">Effective: October 8, 2026 · suno-down.com</p>
 
           <p>SunoDown ("the Service") is a free web tool that lets you download Suno AI playlists as MP3 or WAV files. This policy explains what information the Service handles and how it is protected.</p>
 
@@ -281,6 +301,7 @@
             <li><strong>Playlist URL</strong>: The Suno playlist URL you paste. Used only for the request in progress and not persisted.</li>
             <li><strong>Access logs</strong>: Default hosting-infrastructure (Fly.io) logs — IP address, User-Agent, request path and timestamp. Retained briefly for security and debugging.</li>
             <li><strong>Browser localStorage</strong>: Language preference and, if you opt in, keys used to re-establish your Suno cookie on next visit. Stored only in your browser.</li>
+            <li><strong>Advertising data (collected by Google)</strong>: Google AdSense may collect cookies, device identifiers, IP address, and the URL of the page you visit in order to serve ads. Google processes this information directly; the operator does not receive information from Google that identifies individual users. See Section 6 for details.</li>
           </ul>
 
           <h2>2. How We Use Information</h2>
@@ -289,6 +310,7 @@
             <li>To trigger WAV conversion and poll for completion (Suno Pro users)</li>
             <li>To stream audio and image files through a host whitelist that blocks SSRF</li>
             <li>To remember your selected UI language</li>
+            <li>To display ads that help cover running costs (Google AdSense)</li>
           </ul>
 
           <h2>3. Retention &amp; Deletion</h2>
@@ -296,16 +318,17 @@
             <li><strong>Suno cookie</strong>: In server memory only. Deleted immediately on session end, server restart, or when you click "Disconnect". Never persisted.</li>
             <li><strong>Access logs</strong>: Retained briefly per Fly.io hosting policy, then auto-deleted.</li>
             <li><strong>localStorage</strong>: Stays in your browser until you clear it via browser settings.</li>
+            <li><strong>Advertising cookies</strong>: Retained according to the policies of Google and other ad vendors. You can delete or block them at any time in your browser settings.</li>
           </ul>
 
           <h2>4. Third-Party Services</h2>
           <ul>
             <li><strong>Suno AI (suno.com)</strong>: When you provide your Suno cookie, we proxy metadata and audio requests to suno.com on your behalf. This is functionally equivalent to you communicating with suno.com directly. We do not track your Suno activity.</li>
             <li><strong>Cloudflare</strong>: Used for domain registration and some traffic routing.</li>
-            <li><strong>Google AdSense (planned)</strong>: We may introduce Google AdSense to support the Service. When that happens, Google may process cookies, device identifiers, and page URLs to serve ads, and users in the EEA, UK, and Switzerland will be shown a consent message (CMP). See <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google&rsquo;s advertising policies</a> for details.</li>
+            <li><strong>Google AdSense</strong>: The Service displays Google AdSense ads to help cover its running costs. Google processes cookies, device identifiers, and page URLs to serve and measure ads. Section 6 explains advertising cookies and how to opt out of personalized ads.</li>
           </ul>
           <div class="note">
-            <p>We do not sell or share your information with advertisers, data brokers, or other third parties.</p>
+            <p>The operator does not sell or share your information with advertisers, data brokers, or other third parties. However, as described in Sections 4 and 6, ad vendors such as Google may collect information directly through their own cookies.</p>
           </div>
 
           <h2>5. Cookies &amp; Local Storage</h2>
@@ -313,33 +336,47 @@
             <li><code>__client</code> (Suno cookie): Provided explicitly by you for WAV downloads. Stored only in server memory.</li>
             <li><code>suno_clerk_cookie</code>, <code>suno_session_id</code> (localStorage): Stored in your browser only, used to auto-reconnect on your next visit.</li>
             <li><code>sunodown-lang</code> (localStorage): Remembers your UI language.</li>
-            <li>If AdSense is introduced, additional Google advertising cookies may be set.</li>
+            <li>Google advertising cookies (third-party cookies): Set by Google and its partners for ad delivery, frequency capping, measurement, and personalized advertising. See Section 6.</li>
           </ul>
 
-          <h2>6. Your Rights</h2>
+          <h2>6. Advertising (Google AdSense) &amp; Ad Cookies</h2>
+          <p>The Service displays Google AdSense ads to help cover its running costs. In connection with these ads:</p>
+          <ul>
+            <li>Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites.</li>
+            <li>Google&rsquo;s use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the Internet.</li>
+            <li>You may opt out of personalized advertising in <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a> or <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</li>
+            <li>You can opt out of some third-party vendors&rsquo; use of cookies for personalized advertising at <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info/choices</a> (users in the EU: <a href="https://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer">www.youronlinechoices.eu</a>).</li>
+            <li>To learn how Google uses this information, see <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">How Google uses information from sites or apps that use our services</a> and <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">How Google uses cookies in advertising</a>.</li>
+            <li>For users in the European Economic Area (EEA), the UK, and Switzerland, consent for advertising cookies is requested through a Google-certified consent management platform (CMP) where required by law.</li>
+            <li>If you opt out of personalized ads, you may still see ads; they will be based on general information such as the content of the page you are viewing.</li>
+          </ul>
+
+          <h2>7. Your Rights</h2>
           <ul>
             <li>Click the Pro badge in the header and choose "Disconnect" to immediately delete your Suno cookie from server memory.</li>
             <li>Clear your browser&rsquo;s site data to reset localStorage.</li>
+            <li>Opt out of personalized ads via Google&rsquo;s ad settings or aboutads.info / youronlinechoices.eu, as described in Section 6.</li>
             <li>Stop using the Service at any time.</li>
           </ul>
 
-          <h2>7. Children</h2>
+          <h2>8. Children</h2>
           <p>The Service is not directed to children under 13 (or the digital consent age applicable in your country) and we do not knowingly collect information from them.</p>
 
-          <h2>8. Changes</h2>
+          <h2>9. Changes</h2>
           <p>When this policy changes, the effective date at the top of this page will be updated. Material changes may be announced on the home page or another suitable location.</p>
+          <p>Revision history: 2026-05-18 initial version · 2026-10-08 advertising (Google AdSense) and ad-cookie disclosure updated</p>
 
-          <h2>9. Contact</h2>
+          <h2>10. Contact</h2>
           <p>Questions about this policy or how data is handled? Reach us at <a href="mailto:hjg000223@naver.com">hjg000223@naver.com</a>.</p>
 
-          <h2>10. Disclaimer</h2>
+          <h2>11. Disclaimer</h2>
           <p>SunoDown is an independent service, not affiliated with Suno AI. Music copyrights belong to their respective creators; use the Service for personal purposes only.</p>
         </article>
 
         <!-- ───────── 日本語 ───────── -->
         <article class="lang-block" data-lang="ja" lang="ja">
           <h1>プライバシーポリシー</h1>
-          <p class="effective">施行日: 2026年5月18日 · suno-down.com</p>
+          <p class="effective">施行日: 2026年10月8日 · suno-down.com</p>
 
           <p>SunoDown（以下「本サービス」）は、Suno AIプレイリストをMP3・WAVで無料ダウンロードできるWebツールです。本ポリシーは、本サービスがどのような情報を扱い、どのように保護しているかを説明します。</p>
 
@@ -350,6 +387,7 @@
             <li><strong>プレイリストURL</strong>: 利用者が入力したSunoプレイリストURL。処理中のみ使用され、保存されません。</li>
             <li><strong>アクセスログ</strong>: ホスティング基盤（Fly.io）の標準ログ — IPアドレス、User-Agent、リクエストパス・時刻。セキュリティ・デバッグ目的で短期間のみ保持されます。</li>
             <li><strong>ブラウザのlocalStorage</strong>: 言語設定および、同意した場合の自動再接続用キー。利用者のブラウザにのみ保存されます。</li>
+            <li><strong>広告関連情報（Googleが収集）</strong>: Google AdSenseが広告配信のため、クッキー・端末識別子・IPアドレス・閲覧ページのURLなどを収集する場合があります。これらの情報はGoogleが直接処理し、運営者が個々の利用者を特定できる情報をGoogleから受け取ることはありません。詳細は第6項をご覧ください。</li>
           </ul>
 
           <h2>2. 利用目的</h2>
@@ -358,6 +396,7 @@
             <li>WAV変換リクエスト・完了ポーリング（Suno Pro利用者向け）</li>
             <li>ホスト許可リストによるSSRF防止付きの音源・画像ストリーミング</li>
             <li>選択した表示言語の保持</li>
+            <li>運営費をまかなうための広告掲載（Google AdSense）</li>
           </ul>
 
           <h2>3. 保持・削除</h2>
@@ -365,16 +404,17 @@
             <li><strong>Sunoクッキー</strong>: サーバーメモリにのみ保管。セッション終了・サーバー再起動・「接続解除」クリック時に即削除。データベースには保存されません。</li>
             <li><strong>アクセスログ</strong>: Fly.ioのホスティングポリシーに従い短期間保持され、自動削除されます。</li>
             <li><strong>localStorage</strong>: 利用者のブラウザに保存され、ブラウザ設定からいつでも削除できます。</li>
+            <li><strong>広告クッキー</strong>: Googleなど広告事業者のポリシーに従って保持されます。利用者はブラウザ設定からいつでも削除・ブロックできます。</li>
           </ul>
 
           <h2>4. 第三者サービス</h2>
           <ul>
             <li><strong>Suno AI (suno.com)</strong>: 利用者が提供したクッキーで、利用者の代わりにsuno.comへメタデータ・音源リクエストをプロキシします。これは利用者がsuno.comと直接通信することと機能的に同等です。本サービスはSuno上の活動を保存しません。</li>
             <li><strong>Cloudflare</strong>: ドメイン登録および一部トラフィックのルーティングを行います。</li>
-            <li><strong>Google AdSense（導入予定）</strong>: サイト運営のため将来Google AdSenseを導入する場合があります。導入時にはGoogleが広告配信のためクッキー・端末識別子・ページURLを処理することがあり、EEA・英国・スイスの利用者には同意メッセージ（CMP）が表示されます。詳細は <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Googleの広告に関するポリシー</a> を参照してください。</li>
+            <li><strong>Google AdSense</strong>: 本サービスは運営費をまかなうためGoogle AdSense広告を掲載しています。Googleは広告の配信と効果測定のため、クッキー・端末識別子・ページURLなどを処理します。広告クッキーとパーソナライズ広告の無効化方法は第6項で説明します。</li>
           </ul>
           <div class="note">
-            <p>本サービスは利用者情報を広告主・データブローカー・その他の第三者に販売・提供することはありません。</p>
+            <p>運営者は利用者情報を広告主・データブローカー・その他の第三者に販売・提供することはありません。ただし第4項・第6項で説明するとおり、Googleなどの広告事業者は自社のクッキーを通じて情報を直接収集する場合があります。</p>
           </div>
 
           <h2>5. クッキーおよびローカルストレージ</h2>
@@ -382,26 +422,40 @@
             <li><code>__client</code>（Sunoクッキー）: WAVダウンロードのため利用者が明示的に入力。サーバーメモリにのみ保管。</li>
             <li><code>suno_clerk_cookie</code>, <code>suno_session_id</code>（localStorage）: 次回訪問時の自動再接続のため、利用者のブラウザにのみ保存。</li>
             <li><code>sunodown-lang</code>（localStorage）: 表示言語の記憶用。</li>
-            <li>AdSense導入時には、Googleの広告クッキーが追加される場合があります。</li>
+            <li>Google広告クッキー（第三者クッキー）: Googleおよびパートナーが、広告配信・表示頻度の制御・効果測定・パーソナライズ広告のために設定します。第6項をご覧ください。</li>
           </ul>
 
-          <h2>6. 利用者の権利</h2>
+          <h2>6. 広告（Google AdSense）と広告クッキー</h2>
+          <p>本サービスは運営費をまかなうため、Google AdSense広告を掲載しています。広告の掲載に関して、次の事項をお知らせします。</p>
+          <ul>
+            <li>Googleなどの第三者配信事業者は、クッキーを使用して、利用者が本ウェブサイトや他のウェブサイトに過去にアクセスした際の情報に基づいて広告を配信します。</li>
+            <li>Googleが広告クッキーを使用することにより、利用者が本サイトや他のサイトにアクセスした際の情報に基づいて、Googleやそのパートナーが適切な広告を表示できます。</li>
+            <li>利用者は<a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Googleマイ アド センター</a>または<a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google広告設定</a>で、パーソナライズ広告を無効にできます。</li>
+            <li>一部の第三者配信事業者によるパーソナライズ広告用クッキーの使用は、<a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info/choices</a>で無効にできます（EUの利用者は<a href="https://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer">www.youronlinechoices.eu</a>）。</li>
+            <li>Googleによるこれらの情報の使用方法は、<a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Googleのサービスを使用するサイトやアプリから収集した情報のGoogleによる使用</a>および<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Googleによる広告でのCookieの使用</a>でご確認いただけます。</li>
+            <li>欧州経済領域（EEA）・英国・スイスの利用者については、法令で必要とされる場合、Google認定の同意管理プラットフォーム（CMP）を通じて広告クッキーの使用への同意をお願いします。</li>
+            <li>パーソナライズ広告を無効にしても広告は引き続き表示される場合があり、その際は閲覧中のページの内容など一般的な情報に基づく広告が表示されます。</li>
+          </ul>
+
+          <h2>7. 利用者の権利</h2>
           <ul>
             <li>ヘッダーのProバッジ →「接続解除」で、サーバーメモリのSunoクッキーを即削除</li>
             <li>ブラウザのサイトデータ削除でlocalStorageをリセット</li>
+            <li>第6項のGoogle広告設定またはaboutads.info・youronlinechoices.euでパーソナライズ広告を無効化</li>
             <li>本サービスの利用をいつでも停止可能</li>
           </ul>
 
-          <h2>7. 子どもの個人情報</h2>
+          <h2>8. 子どもの個人情報</h2>
           <p>本サービスは13歳未満（または各国のデジタル同意年齢未満）の子どもを対象としておらず、意図的に情報を収集しません。</p>
 
-          <h2>8. ポリシーの変更</h2>
+          <h2>9. ポリシーの変更</h2>
           <p>本ポリシーが変更される場合、本ページ上部の施行日を更新して告知します。重要な変更はメインページなど適切な場所に告知することがあります。</p>
+          <p>改定履歴: 2026-05-18 初版施行 · 2026-10-08 広告（Google AdSense）・広告クッキーに関する記載を更新</p>
 
-          <h2>9. お問い合わせ</h2>
+          <h2>10. お問い合わせ</h2>
           <p>本ポリシーや個人情報の取り扱いに関するお問い合わせは <a href="mailto:hjg000223@naver.com">hjg000223@naver.com</a> までご連絡ください。</p>
 
-          <h2>10. 免責事項</h2>
+          <h2>11. 免責事項</h2>
           <p>SunoDownはSuno AIとは無関係の独立サービスです。ダウンロードした音楽の著作権は各制作者に帰属し、利用者は個人使用のみを目的としてください。</p>
         </article>
 
@@ -428,7 +482,11 @@
     <script>
       (function () {
         var STORAGE_KEY = 'sunodown-lang';
-        var BACK_LABEL = { ko: '홈으로', en: 'Home', ja: 'ホーム' };
+        var NAV = {
+          ko: { blog: ['/ko/blog', '블로그'], guide: ['/ko/guide/how-to-download-suno-playlist', '가이드'], faq: ['/ko/faq', 'FAQ'], about: ['/about', '소개'] },
+          en: { blog: ['/blog', 'Blog'], guide: ['/guide/how-to-download-suno-playlist', 'Guides'], faq: ['/faq', 'FAQ'], about: ['/about', 'About'] },
+          ja: { blog: ['/blog', 'ブログ'], guide: ['/ja/guide/how-to-download-suno-playlist', 'ガイド'], faq: ['/ja/faq', 'FAQ'], about: ['/about', '概要'] },
+        };
         var TITLE = {
           ko: '개인정보 처리 방침 – SunoDown',
           en: 'Privacy Policy – SunoDown',
@@ -451,8 +509,12 @@
           }
           document.documentElement.lang = code;
           document.title = TITLE[code];
-          var labelEl = document.querySelector('[data-t="back"]');
-          if (labelEl) labelEl.textContent = BACK_LABEL[code];
+          var navLinks = document.querySelectorAll('[data-nav]');
+          for (var j = 0; j < navLinks.length; j++) {
+            var item = NAV[code][navLinks[j].dataset.nav];
+            navLinks[j].href = item[0];
+            navLinks[j].textContent = item[1];
+          }
           var sel = document.getElementById('langSelect');
           if (sel) sel.value = code;
         }

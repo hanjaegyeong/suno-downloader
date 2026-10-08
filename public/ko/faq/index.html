@@ -42,6 +42,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet" />
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -61,7 +63,7 @@
         {
           "@type": "Question",
           "name": "광고나 유료 티어, 숨겨진 비용이 있나요?",
-          "acceptedAnswer": { "@type": "Answer", "text": "광고 슬롯 한 개가 전부입니다. 유료 플랜·프리미엄 등급·사용량 상한·신용카드 요구는 없습니다. 광고는 호스팅 비용용이고 나머지는 전부 무료입니다." }
+          "acceptedAnswer": { "@type": "Answer", "text": "운영비 충당을 위해 Google AdSense 광고가 표시될 수 있습니다. 광고는 다운로드 기능의 이용 조건이 아니며, 결제나 회원가입을 요구하지 않습니다. 유료 플랜·프리미엄 등급·사용량 상한·신용카드 요구도 없습니다. 광고 쿠키의 작동 방식과 맞춤 광고 해제 방법은 개인정보 처리 방침에 정리되어 있습니다." }
         },
         {
           "@type": "Question",
@@ -169,8 +171,11 @@
       .lang-switch a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; border: 1px solid transparent; }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link { color: var(--text-mute); text-decoration: none; font-size: 13px; font-weight: 500; }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current="page"] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -210,7 +215,12 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">무료</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">← 홈</a>
+            <nav class="site-nav" aria-label="사이트">
+              <a href="/ko/blog">블로그</a>
+              <a href="/ko/guide/how-to-download-suno-playlist">가이드</a>
+              <a href="/ko/faq" aria-current="page">FAQ</a>
+              <a href="/about">소개</a>
+            </nav>
             <nav class="lang-switch" aria-label="언어">
               <a href="/faq" hreflang="en">EN</a>
               <a href="/ko/faq" class="current" hreflang="ko">한국어</a>
@@ -226,7 +236,7 @@
         <article>
           <h1>SunoDown 자주 묻는 질문 (FAQ)</h1>
           <p class="lede">요금, 브라우저, 모바일, Suno Pro/Premier, 쿠키 처리, Suno 약관, 저작권, 가장 자주 발생하는 오류까지 — 인앱 모달에서 다루지 않는 모든 질문을 한 페이지에 정리했습니다.</p>
-          <p class="meta">업데이트: 2026-05-26 · 읽는 시간 ~4분 · 5개 섹션 15개 질문</p>
+          <p class="meta">업데이트: 2026-10-08 · 읽는 시간 ~4분 · 5개 섹션 15개 질문</p>
 
           <p style="background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--acc2);border-radius:10px;padding:14px 18px;font-size:14.5px;color:var(--text-soft);margin:18px 0 8px">
             단계별 절차(URL 복사·쿠키 위치·MP3 vs WAV)는 하단의 가이드 3종에서 다룹니다. 이 페이지는 서비스·계정·법적·오류 관련 폭넓은 질문을 다룹니다.
@@ -242,7 +252,7 @@
             <dd>세 가지가 다릅니다. (1) <strong>플레이리스트 전체 ZIP 일괄 다운로드</strong> — 곡 수 제한 없음. (2) 본인 Suno Pro 쿠키로 <strong>WAV 무손실 다운로드</strong> 지원 — 대부분의 무료 도구는 불가능. (3) <strong>한국어·영어·일본어 풀 UI</strong>. 전부 브라우저에서 동작하며 설치도, MP3에는 가입도 필요 없습니다.</dd>
 
             <dt>광고나 유료 티어, 숨겨진 비용이 있나요?</dt>
-            <dd>광고 슬롯 한 개가 전부입니다. 유료 플랜·프리미엄 등급·사용량 상한·신용카드 요구는 없습니다. 광고는 호스팅 비용용이고 나머지는 전부 무료입니다.</dd>
+            <dd>운영비 충당을 위해 Google AdSense 광고가 표시될 수 있습니다. 광고는 다운로드 기능의 이용 조건이 아니며, 결제나 회원가입을 요구하지 않습니다. 유료 플랜·프리미엄 등급·사용량 상한·신용카드 요구도 없습니다. 광고 쿠키의 작동 방식과 맞춤 광고 해제 방법은 <a href="/privacy">개인정보 처리 방침</a>에 정리되어 있습니다.</dd>
           </dl>
 
           <h2>다운로드 &amp; 호환성</h2>

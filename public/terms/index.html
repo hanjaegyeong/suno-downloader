@@ -102,13 +102,11 @@
         font-family: inherit;
         cursor: pointer;
       }
-      .back-link {
-        color: var(--text-mute);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current="page"] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -184,7 +182,12 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link" data-back>← <span data-t="back">홈으로</span></a>
+            <nav class="site-nav" aria-label="Site">
+              <a href="/ko/blog" data-nav="blog">블로그</a>
+              <a href="/ko/guide/how-to-download-suno-playlist" data-nav="guide">가이드</a>
+              <a href="/ko/faq" data-nav="faq">FAQ</a>
+              <a href="/about" data-nav="about">소개</a>
+            </nav>
             <select class="lang-select" id="langSelect" aria-label="Language">
               <option value="ko">한국어</option>
               <option value="en">English</option>
@@ -201,7 +204,7 @@
         <!-- ───────── 한국어 ───────── -->
         <article class="lang-block" data-lang="ko" lang="ko">
           <h1>이용약관</h1>
-          <p class="effective">시행일: 2026년 5월 18일 · suno-down.com</p>
+          <p class="effective">시행일: 2026년 10월 8일 · suno-down.com</p>
 
           <p>본 약관은 SunoDown(이하 "본 서비스")의 이용 조건과 본 서비스 운영자(이하 "운영자")와 이용자 간의 권리·의무를 정합니다. 본 서비스에 접속하거나 본 서비스를 사용함으로써 이용자는 본 약관에 동의한 것으로 간주됩니다. 동의하지 않을 경우 본 서비스를 이용하지 마십시오.</p>
 
@@ -247,7 +250,7 @@
           <p>제3자의 저작권 등 권리를 침해하는 콘텐츠가 본 서비스를 통해 이용되고 있다고 판단되는 경우, 권리자 또는 그 정당한 대리인은 <a href="/contact">문의 페이지</a>를 통해 침해 사실을 신고할 수 있습니다. 운영자는 정당한 신고를 확인하는 즉시 관련 접근 차단 등 합리적인 조치를 취합니다.</p>
 
           <h2>8. 제3자 서비스</h2>
-          <p>본 서비스는 Suno AI(suno.com), Cloudflare, Fly.io, Google AdSense(도입 예정) 등 제3자 서비스에 의존합니다. 이들 서비스의 정책·약관·가용성·결함에 대해 운영자는 책임지지 않습니다. 제3자 서비스의 변경·중단·차단으로 본 서비스의 일부 또는 전부가 정상 작동하지 않을 수 있습니다.</p>
+          <p>본 서비스는 Suno AI(suno.com), Cloudflare, Fly.io, Google AdSense(광고 게재) 등 제3자 서비스에 의존합니다. 이들 서비스의 정책·약관·가용성·결함에 대해 운영자는 책임지지 않습니다. 제3자 서비스의 변경·중단·차단으로 본 서비스의 일부 또는 전부가 정상 작동하지 않을 수 있습니다.</p>
 
           <h2>9. 보증의 부인</h2>
           <p>본 서비스는 "있는 그대로(AS-IS)" 및 "이용 가능한 상태(AS-AVAILABLE)"로 제공됩니다. 운영자는 본 서비스의 완전성, 정확성, 신뢰성, 적시성, 특정 목적에의 적합성, 비침해, 중단 없음, 오류 없음, 보안성에 대해 명시적·묵시적 어떠한 보증도 하지 않습니다. 다운로드 결과물의 품질·완전성·이용 가능성을 보장하지 않습니다.</p>
@@ -263,6 +266,7 @@
 
           <h2>13. 약관 변경</h2>
           <p>본 약관은 수시로 변경될 수 있습니다. 변경 시 본 페이지 상단의 시행일이 갱신되며, 변경 후 본 서비스를 계속 이용하는 행위는 변경된 약관에 대한 동의로 간주됩니다.</p>
+          <p>개정 이력: 2026-05-18 최초 시행 · 2026-10-08 제7조(지적재산권)에 권리자 신고 절차 추가, 제8조 광고 서비스 표기 갱신</p>
 
           <h2>14. 준거법 및 분쟁 해결</h2>
           <p>본 약관은 대한민국 법률에 따라 해석·적용됩니다. 본 약관 또는 본 서비스와 관련하여 발생하는 분쟁은 운영자의 주소지를 관할하는 법원을 1심 전속관할 법원으로 합니다. 단, 강행법규에 의해 이용자의 거주지 법원이 관할권을 갖는 경우는 예외로 합니다.</p>
@@ -281,7 +285,7 @@
         <!-- ───────── English ───────── -->
         <article class="lang-block" data-lang="en" lang="en">
           <h1>Terms of Service</h1>
-          <p class="effective">Effective: May 18, 2026 · suno-down.com</p>
+          <p class="effective">Effective: October 8, 2026 · suno-down.com</p>
 
           <p>These Terms govern your use of SunoDown ("the Service") and define the rights and obligations between the operator of the Service ("we", "us") and you. By accessing or using the Service you agree to these Terms. If you do not agree, do not use the Service.</p>
 
@@ -327,7 +331,7 @@
           <p>If you believe content that infringes your copyright or other rights is being accessed through the Service, you or your authorized agent may report it via our <a href="/contact">contact page</a>. On confirming a valid report, we will take reasonable action, such as blocking the relevant access.</p>
 
           <h2>8. Third-Party Services</h2>
-          <p>The Service depends on third-party providers including Suno AI (suno.com), Cloudflare, Fly.io, and (planned) Google AdSense. We are not responsible for their policies, terms, availability, or defects. Changes, outages, or blocks by those providers may disable some or all functionality of the Service.</p>
+          <p>The Service depends on third-party providers including Suno AI (suno.com), Cloudflare, Fly.io, and Google AdSense (advertising). We are not responsible for their policies, terms, availability, or defects. Changes, outages, or blocks by those providers may disable some or all functionality of the Service.</p>
 
           <h2>9. Disclaimer of Warranties</h2>
           <p>The Service is provided "AS IS" and "AS AVAILABLE". To the maximum extent permitted by law, we disclaim all express and implied warranties, including merchantability, fitness for a particular purpose, non-infringement, accuracy, reliability, uninterrupted availability, error-free operation, and security. We do not warrant the quality, completeness, or availability of any downloaded output.</p>
@@ -343,6 +347,7 @@
 
           <h2>13. Changes to the Terms</h2>
           <p>We may revise these Terms from time to time. When we do, the effective date at the top of this page will be updated. Continued use of the Service after a change constitutes acceptance of the revised Terms.</p>
+          <p>Revision history: 2026-05-18 initial version · 2026-10-08 rights-holder reporting procedure added to Section 7 (Intellectual Property); advertising wording in Section 8 updated</p>
 
           <h2>14. Governing Law &amp; Disputes</h2>
           <p>These Terms are governed by and construed under the laws of the Republic of Korea. Disputes arising out of or relating to these Terms or the Service are subject to the exclusive jurisdiction of the court of competent jurisdiction at the operator&rsquo;s domicile, unless mandatory consumer-protection laws of your residence provide otherwise.</p>
@@ -361,7 +366,7 @@
         <!-- ───────── 日本語 ───────── -->
         <article class="lang-block" data-lang="ja" lang="ja">
           <h1>利用規約</h1>
-          <p class="effective">施行日: 2026年5月18日 · suno-down.com</p>
+          <p class="effective">施行日: 2026年10月8日 · suno-down.com</p>
 
           <p>本規約は、SunoDown（以下「本サービス」）の利用条件と、本サービスの運営者（以下「運営者」）と利用者との間の権利・義務を定めるものです。本サービスにアクセスし、または本サービスを利用することにより、利用者は本規約に同意したものとみなされます。同意できない場合は、本サービスを利用しないでください。</p>
 
@@ -407,7 +412,7 @@
           <p>第三者の著作権その他の権利を侵害するコンテンツが本サービスを通じて利用されていると思われる場合、権利者またはその正当な代理人は<a href="/contact">お問い合わせページ</a>から侵害の事実を報告できます。運営者は正当な報告を確認し次第、当該アクセスの遮断など合理的な措置を講じます。</p>
 
           <h2>8. 第三者サービス</h2>
-          <p>本サービスはSuno AI（suno.com）、Cloudflare、Fly.io、Google AdSense（導入予定）などの第三者サービスに依存しています。これら第三者のポリシー・規約・可用性・不具合について運営者は責任を負いません。第三者サービスの変更・停止・遮断により、本サービスの一部または全部が正常に動作しなくなる可能性があります。</p>
+          <p>本サービスはSuno AI（suno.com）、Cloudflare、Fly.io、Google AdSense（広告配信）などの第三者サービスに依存しています。これら第三者のポリシー・規約・可用性・不具合について運営者は責任を負いません。第三者サービスの変更・停止・遮断により、本サービスの一部または全部が正常に動作しなくなる可能性があります。</p>
 
           <h2>9. 保証の否認</h2>
           <p>本サービスは「現状有姿（AS-IS）」「利用可能な範囲で（AS-AVAILABLE）」提供されます。法令で許容される最大限の範囲で、運営者は本サービスの完全性・正確性・信頼性・特定目的適合性・非侵害性・無中断性・無誤動作性・安全性について、明示・黙示を問わず一切の保証を行いません。ダウンロード結果の品質・完全性・利用可能性も保証しません。</p>
@@ -423,6 +428,7 @@
 
           <h2>13. 規約の変更</h2>
           <p>本規約は随時変更される場合があります。変更時は本ページ上部の施行日が更新され、変更後も本サービスの利用を継続する行為は、変更後の規約への同意とみなされます。</p>
+          <p>改定履歴: 2026-05-18 初版施行 · 2026-10-08 第7条（知的財産権）に権利者による報告手続を追加、第8条の広告サービスの記載を更新</p>
 
           <h2>14. 準拠法および紛争解決</h2>
           <p>本規約は大韓民国の法律に従って解釈・適用されます。本規約または本サービスに関連して生じる紛争は、運営者の住所地を管轄する裁判所を第一審の専属的合意管轄裁判所とします。ただし、利用者の居住地の強行法規により別途の管轄が定められる場合はこの限りではありません。</p>
@@ -461,7 +467,11 @@
     <script>
       (function () {
         var STORAGE_KEY = 'sunodown-lang';
-        var BACK_LABEL = { ko: '홈으로', en: 'Home', ja: 'ホーム' };
+        var NAV = {
+          ko: { blog: ['/ko/blog', '블로그'], guide: ['/ko/guide/how-to-download-suno-playlist', '가이드'], faq: ['/ko/faq', 'FAQ'], about: ['/about', '소개'] },
+          en: { blog: ['/blog', 'Blog'], guide: ['/guide/how-to-download-suno-playlist', 'Guides'], faq: ['/faq', 'FAQ'], about: ['/about', 'About'] },
+          ja: { blog: ['/blog', 'ブログ'], guide: ['/ja/guide/how-to-download-suno-playlist', 'ガイド'], faq: ['/ja/faq', 'FAQ'], about: ['/about', '概要'] },
+        };
         var TITLE = {
           ko: '이용약관 – SunoDown',
           en: 'Terms of Service – SunoDown',
@@ -484,8 +494,12 @@
           }
           document.documentElement.lang = code;
           document.title = TITLE[code];
-          var labelEl = document.querySelector('[data-t="back"]');
-          if (labelEl) labelEl.textContent = BACK_LABEL[code];
+          var navLinks = document.querySelectorAll('[data-nav]');
+          for (var j = 0; j < navLinks.length; j++) {
+            var item = NAV[code][navLinks[j].dataset.nav];
+            navLinks[j].href = item[0];
+            navLinks[j].textContent = item[1];
+          }
           var sel = document.getElementById('langSelect');
           if (sel) sel.value = code;
         }

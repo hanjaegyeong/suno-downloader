@@ -40,6 +40,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet" />
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -48,6 +50,8 @@
       "name": "About SunoDown",
       "inLanguage": ["ko", "en", "ja"],
       "description": "Mission, responsible-use principles, and contact for SunoDown — a free Suno AI playlist backup tool.",
+      "datePublished": "2026-05-29",
+      "dateModified": "2026-10-08",
       "isPartOf": {
         "@type": "WebSite",
         "name": "SunoDown",
@@ -124,13 +128,11 @@
         font-family: inherit;
         cursor: pointer;
       }
-      .back-link {
-        color: var(--text-mute);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current="page"] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -206,7 +208,12 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link" data-back>← <span data-t="back">홈으로</span></a>
+            <nav class="site-nav" aria-label="Site">
+              <a href="/ko/blog" data-nav="blog">블로그</a>
+              <a href="/ko/guide/how-to-download-suno-playlist" data-nav="guide">가이드</a>
+              <a href="/ko/faq" data-nav="faq">FAQ</a>
+              <a href="/about" data-nav="about" aria-current="page">소개</a>
+            </nav>
             <select class="lang-select" id="langSelect" aria-label="Language">
               <option value="ko">한국어</option>
               <option value="en">English</option>
@@ -223,7 +230,7 @@
         <!-- ───────── 한국어 ───────── -->
         <article class="lang-block" data-lang="ko" lang="ko">
           <h1>SunoDown 소개</h1>
-          <p class="effective">갱신일: 2026년 5월 29일 · suno-down.com</p>
+          <p class="effective">갱신일: 2026년 10월 8일 · suno-down.com</p>
 
           <p>SunoDown은 Suno AI 플레이리스트를 자기 장치에 MP3·WAV로 내려받기 위한 무료 웹 도구입니다. Suno Pro 구독자가 자신이 생성한 음악에 대한 정당한 로컬 백업·개인 청취·후처리 권리를 행사할 수 있도록 돕는 것이 목적입니다.</p>
 
@@ -248,7 +255,15 @@
           </ul>
 
           <h2>운영 방식</h2>
-          <p>SunoDown은 익명의 개인이 자비로 운영하는 무료 도구입니다. 가입·결제·계정 시스템이 없으며, 사용자의 Suno 활동·다운로드 내역을 수집하거나 저장하지 않습니다. 호스팅 비용은 향후 도입 예정인 광고(Google AdSense)와 자비로 충당합니다.</p>
+          <p>SunoDown은 익명의 개인이 자비로 운영하는 무료 도구입니다. 가입·결제·계정 시스템이 없으며, 사용자의 Suno 활동·다운로드 내역을 수집하거나 저장하지 않습니다. 호스팅 비용은 Google AdSense 광고 수익과 운영자 자비로 충당합니다.</p>
+
+          <h2>사이트 운영·관리 방식</h2>
+          <ul>
+            <li><strong>변경 사항 반영</strong>: Suno의 이용약관·요금제·기능이 바뀌면 관련 가이드와 블로그 글을 확인하고 수정합니다.</li>
+            <li><strong>날짜 표시</strong>: 가이드·FAQ·블로그 글과 정책 문서에는 게시일 또는 마지막 업데이트 날짜를 표시합니다.</li>
+            <li><strong>오류 신고·정정 요청</strong>: 잘못된 정보나 작동 오류를 발견하시면 <a href="/ko/contact">문의 페이지</a>로 알려 주세요. 확인된 내용은 해당 페이지에 반영하고 날짜를 갱신합니다.</li>
+            <li><strong>변경 기록</strong>: 사이트의 주요 변경 사항은 아래 업데이트 내역에 기록합니다.</li>
+          </ul>
 
           <h2>Suno AI와의 관계</h2>
           <p>SunoDown은 Suno AI(suno.com)와 무관한 독립 서비스입니다. Suno의 상표·로고·서비스명은 식별 목적으로만 사용하며, Suno AI가 본 도구를 후원·승인·검토한 사실은 없습니다. 본 도구는 사용자가 직접 입력한 자신의 Suno 계정 쿠키로 사용자 명의의 요청을 suno.com에 프록시할 뿐이며, Suno 시스템의 보안·인증 정책을 우회하지 않습니다.</p>
@@ -261,8 +276,23 @@
             <li>다국어 UI: 한국어 / English / 日本語</li>
           </ul>
 
+          <h2>업데이트 내역</h2>
+          <ul>
+            <li><strong>2026-10-08</strong> — 문의 페이지(한·영·일) 신설, 존재하지 않는 주소에 정식 404 페이지 응답, 홈과 이용약관에 저작권·이용 책임 안내 및 권리자 신고 절차 추가, 개인정보 처리 방침의 광고 쿠키 고지 갱신</li>
+            <li><strong>2026-06-07</strong> — 홈 화면 로딩 중 레이아웃이 밀리는 현상 제거, 블로그 글에 직접 사용해 본 경험과 실제 화면 스크린샷 추가</li>
+            <li><strong>2026-06-06</strong> — 블로그 글의 Suno 요금·약관 관련 내용을 실제 요금 페이지·이용약관과 대조해 정정, 글마다 설명 다이어그램 추가</li>
+            <li><strong>2026-05-30</strong> — 블로그 개설: Suno 활용·AI 음악 저작권 등을 다룬 한국어·영어 글 7편 게시</li>
+            <li><strong>2026-05-29</strong> — 소개 페이지 게시</li>
+            <li><strong>2026-05-25 ~ 05-26</strong> — 가이드 3종(플레이리스트 다운로드 방법·MP3 vs WAV·Pro 쿠키 설정)과 FAQ를 한·영·일로 게시</li>
+            <li><strong>2026-05-18</strong> — 개인정보 처리 방침·이용약관 게시</li>
+            <li><strong>2026-04-10</strong> — ZIP 다운로드 중단 버튼 추가, WAV 다운로드 속도 개선, 여러 사용자가 동시에 접속할 때의 세션 분리 지원</li>
+            <li><strong>2026-04-05</strong> — 서비스명을 SunoDown으로 바꾸고 suno-down.com 도메인으로 이전</li>
+            <li><strong>2026년 3월</strong> — 서비스 시작: Suno 플레이리스트 MP3·WAV 다운로드</li>
+          </ul>
+
           <h2>연락처</h2>
           <p>오류 신고·기능 제안·법적 문의·일반 문의는 다음으로 보내 주세요: <a href="mailto:hjg000223@naver.com">hjg000223@naver.com</a></p>
+          <p>문의 유형별 안내와 저작권 침해 신고 절차는 <a href="/ko/contact">문의 페이지</a>에 정리되어 있습니다.</p>
 
           <div class="note">
             <p>사용 조건의 법적 세부 사항은 <a href="/terms">이용약관</a>, 데이터 처리에 관한 사항은 <a href="/privacy">개인정보 처리 방침</a>에 정리되어 있습니다.</p>
@@ -272,7 +302,7 @@
         <!-- ───────── English ───────── -->
         <article class="lang-block" data-lang="en" lang="en">
           <h1>About SunoDown</h1>
-          <p class="effective">Updated: May 29, 2026 · suno-down.com</p>
+          <p class="effective">Updated: October 8, 2026 · suno-down.com</p>
 
           <p>SunoDown is a free web tool that lets you download Suno AI playlists as MP3 or WAV files to your own device. Its purpose is to help Suno Pro subscribers exercise their legitimate right to back up, listen to, and post-process the music they created &mdash; locally and on their own terms.</p>
 
@@ -297,7 +327,15 @@
           </ul>
 
           <h2>How it&rsquo;s operated</h2>
-          <p>SunoDown is run anonymously, at personal expense, by an individual. There is no sign-up, no payment, no account system. We do not collect or store your Suno activity or your download history. Hosting is funded by the operator and, in the future, by Google AdSense ads.</p>
+          <p>SunoDown is run anonymously, at personal expense, by an individual. There is no sign-up, no payment, no account system. We do not collect or store your Suno activity or your download history. Hosting is funded by Google AdSense ad revenue and by the operator.</p>
+
+          <h2>How this site is maintained</h2>
+          <ul>
+            <li><strong>Keeping up with Suno</strong>: When Suno changes its terms, pricing, or features, the related guides and blog posts are reviewed and revised.</li>
+            <li><strong>Visible dates</strong>: Guides, the FAQ, blog posts, and policy pages show their publication or last-updated date.</li>
+            <li><strong>Error reports &amp; corrections</strong>: If you spot incorrect information or something that doesn&rsquo;t work, please let us know via the <a href="/contact">contact page</a>. Confirmed corrections are applied to the page and its date is updated.</li>
+            <li><strong>Change log</strong>: Notable changes to the site are recorded in the update history below.</li>
+          </ul>
 
           <h2>Relationship to Suno AI</h2>
           <p>SunoDown is an independent service and has no affiliation with Suno AI (suno.com). The Suno name, logo, and service marks are used only for identification. Suno AI does not sponsor, endorse, or review this tool. SunoDown only proxies requests to suno.com on your behalf using your own Suno cookie that you provide. It does not circumvent Suno&rsquo;s security, authentication, or entitlement systems.</p>
@@ -310,8 +348,23 @@
             <li>Multilingual UI: 한국어 / English / 日本語</li>
           </ul>
 
+          <h2>Update history</h2>
+          <ul>
+            <li><strong>2026-10-08</strong> — Added a Contact page (EN/KO/JA); unknown URLs now return a proper 404 page; added a copyright and responsible-use notice to the home page and a rights-holder reporting procedure to the Terms; updated the Privacy Policy&rsquo;s advertising-cookie disclosure</li>
+            <li><strong>2026-06-07</strong> — Removed the layout shift on the home page while it loads; added first-hand usage notes and real screenshots to blog posts</li>
+            <li><strong>2026-06-06</strong> — Corrected Suno pricing and terms details in blog posts after checking them against Suno&rsquo;s actual pricing page and Terms of Service; added explanatory diagrams to each post</li>
+            <li><strong>2026-05-30</strong> — Launched the blog: seven posts in Korean and English on using Suno, AI music copyright, and more</li>
+            <li><strong>2026-05-29</strong> — Published this About page</li>
+            <li><strong>2026-05-25 – 05-26</strong> — Published three guides (how to download a playlist, MP3 vs WAV, Pro cookie setup) and the FAQ in English, Korean, and Japanese</li>
+            <li><strong>2026-05-18</strong> — Published the Privacy Policy and Terms of Service</li>
+            <li><strong>2026-04-10</strong> — Added a button to stop a ZIP download in progress, sped up WAV downloads, and separated sessions for users connected at the same time</li>
+            <li><strong>2026-04-05</strong> — Renamed the service to SunoDown and moved to the suno-down.com domain</li>
+            <li><strong>March 2026</strong> — Service launched: MP3/WAV download for Suno playlists</li>
+          </ul>
+
           <h2>Contact</h2>
           <p>Bug reports, feature requests, legal inquiries, and general questions are welcome: <a href="mailto:hjg000223@naver.com">hjg000223@naver.com</a></p>
+          <p>What to include for each type of request, and how rights holders can report infringement, is explained on the <a href="/contact">contact page</a>.</p>
 
           <div class="note">
             <p>Legal details about permitted use are in the <a href="/terms">Terms of Service</a>; how your data is handled is in the <a href="/privacy">Privacy Policy</a>.</p>
@@ -321,7 +374,7 @@
         <!-- ───────── 日本語 ───────── -->
         <article class="lang-block" data-lang="ja" lang="ja">
           <h1>SunoDown について</h1>
-          <p class="effective">更新日: 2026年5月29日 · suno-down.com</p>
+          <p class="effective">更新日: 2026年10月8日 · suno-down.com</p>
 
           <p>SunoDownは、Suno AIのプレイリストを自分の端末にMP3・WAVで保存するための無料Webツールです。Suno Pro加入者が、自分が生成した音楽をローカルにバックアップし、個人で聴き、後処理する正当な権利を行使できるようにすることを目的としています。</p>
 
@@ -346,7 +399,15 @@
           </ul>
 
           <h2>運営方法</h2>
-          <p>SunoDownは、匿名の個人が自費で運営する無料ツールです。会員登録・決済・アカウントシステムはありません。利用者のSunoでの活動やダウンロード履歴は収集・保存しません。ホスティング費用は、運営者の自己負担と、今後導入予定のGoogle AdSense広告で賄います。</p>
+          <p>SunoDownは、匿名の個人が自費で運営する無料ツールです。会員登録・決済・アカウントシステムはありません。利用者のSunoでの活動やダウンロード履歴は収集・保存しません。ホスティング費用は、Google AdSense広告の収益と運営者の自己負担で賄っています。</p>
+
+          <h2>サイトの運営・管理方針</h2>
+          <ul>
+            <li><strong>変更への対応</strong>: Sunoの利用規約・料金プラン・機能が変わった場合、関連するガイドやブログ記事を確認し、修正します。</li>
+            <li><strong>日付の表示</strong>: ガイド・FAQ・ブログ記事・ポリシー文書には、公開日または最終更新日を表示しています。</li>
+            <li><strong>誤りの報告・訂正依頼</strong>: 誤った情報や不具合を見つけた場合は、<a href="/ja/contact">お問い合わせページ</a>からお知らせください。確認できた内容は該当ページに反映し、日付を更新します。</li>
+            <li><strong>変更の記録</strong>: サイトの主な変更点は、下記の更新履歴に記録しています。</li>
+          </ul>
 
           <h2>Suno AIとの関係</h2>
           <p>SunoDownはSuno AI（suno.com）とは無関係の独立サービスです。Sunoの名称・ロゴ・サービスマークは識別目的のみで使用しており、Suno AIによる本ツールの後援・承認・審査は受けていません。本ツールは、利用者が自ら提供したSunoクッキーを用いて、利用者の代わりにsuno.comへリクエストをプロキシするのみで、Sunoのセキュリティ・認証・権限システムを回避するものではありません。</p>
@@ -359,8 +420,23 @@
             <li>多言語UI: 한국어 / English / 日本語</li>
           </ul>
 
+          <h2>更新履歴</h2>
+          <ul>
+            <li><strong>2026-10-08</strong> — お問い合わせページ（日・英・韓）を新設、存在しないURLに正式な404ページを返すよう修正、ホームと利用規約に著作権・利用責任の案内と権利者による報告手続を追加、プライバシーポリシーの広告クッキーに関する記載を更新</li>
+            <li><strong>2026-06-07</strong> — ホーム画面の読み込み中に起きていたレイアウトのずれを解消、ブログ記事に実際に使ってみた経験と実際の画面のスクリーンショットを追加</li>
+            <li><strong>2026-06-06</strong> — ブログ記事のSunoの料金・利用規約に関する記述を、実際の料金ページ・利用規約と照合して訂正、各記事に解説図を追加</li>
+            <li><strong>2026-05-30</strong> — ブログを開設：Sunoの活用やAI音楽の著作権などを扱う韓国語・英語の記事7本を公開</li>
+            <li><strong>2026-05-29</strong> — このサイト概要ページを公開</li>
+            <li><strong>2026-05-25〜05-26</strong> — ガイド3本（プレイリストのダウンロード方法・MP3とWAVの比較・Proクッキー設定）とFAQを日・英・韓で公開</li>
+            <li><strong>2026-05-18</strong> — プライバシーポリシーと利用規約を公開</li>
+            <li><strong>2026-04-10</strong> — ZIPダウンロードの中断ボタンを追加、WAVダウンロードを高速化、複数ユーザーが同時に接続した際のセッション分離に対応</li>
+            <li><strong>2026-04-05</strong> — サービス名をSunoDownに変更し、suno-down.comドメインへ移行</li>
+            <li><strong>2026年3月</strong> — サービス開始：SunoプレイリストのMP3・WAVダウンロード</li>
+          </ul>
+
           <h2>お問い合わせ</h2>
           <p>不具合報告・機能要望・法務関連・一般的なお問い合わせは <a href="mailto:hjg000223@naver.com">hjg000223@naver.com</a> までお願いします。</p>
+          <p>お問い合わせの種類ごとのご案内と、権利者による著作権侵害の報告手続は<a href="/ja/contact">お問い合わせページ</a>にまとめています。</p>
 
           <div class="note">
             <p>利用条件の法的な詳細は <a href="/terms">利用規約</a>、データの取り扱いについては <a href="/privacy">プライバシーポリシー</a> にまとめています。</p>
@@ -390,7 +466,11 @@
     <script>
       (function () {
         var STORAGE_KEY = 'sunodown-lang';
-        var BACK_LABEL = { ko: '홈으로', en: 'Home', ja: 'ホーム' };
+        var NAV = {
+          ko: { blog: ['/ko/blog', '블로그'], guide: ['/ko/guide/how-to-download-suno-playlist', '가이드'], faq: ['/ko/faq', 'FAQ'], about: ['/about', '소개'] },
+          en: { blog: ['/blog', 'Blog'], guide: ['/guide/how-to-download-suno-playlist', 'Guides'], faq: ['/faq', 'FAQ'], about: ['/about', 'About'] },
+          ja: { blog: ['/blog', 'ブログ'], guide: ['/ja/guide/how-to-download-suno-playlist', 'ガイド'], faq: ['/ja/faq', 'FAQ'], about: ['/about', '概要'] },
+        };
         var TITLE = {
           ko: 'SunoDown 소개 – 미션 · 운영 원칙',
           en: 'About SunoDown — Mission, Principles & Contact',
@@ -413,8 +493,12 @@
           }
           document.documentElement.lang = code;
           document.title = TITLE[code];
-          var labelEl = document.querySelector('[data-t="back"]');
-          if (labelEl) labelEl.textContent = BACK_LABEL[code];
+          var navLinks = document.querySelectorAll('[data-nav]');
+          for (var j = 0; j < navLinks.length; j++) {
+            var item = NAV[code][navLinks[j].dataset.nav];
+            navLinks[j].href = item[0];
+            navLinks[j].textContent = item[1];
+          }
           var sel = document.getElementById('langSelect');
           if (sel) sel.value = code;
         }

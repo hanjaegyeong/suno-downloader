@@ -42,6 +42,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet" />
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -61,7 +63,7 @@
         {
           "@type": "Question",
           "name": "Are there ads, paid tiers, or hidden fees?",
-          "acceptedAnswer": { "@type": "Answer", "text": "There is a single small ad slot. There is no paid tier, no premium plan, no usage cap, and no credit card is ever requested. The ad covers hosting; everything else stays free." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Google AdSense ads may be shown to help cover running costs. Ads are not a condition for using the download features, and they never require payment or sign-up. There is no paid tier, no premium plan, no usage cap, and no credit card is ever requested. How ad cookies work and how to opt out of personalized ads is explained in the privacy policy." }
         },
         {
           "@type": "Question",
@@ -169,8 +171,11 @@
       .lang-switch a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; border: 1px solid transparent; }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link { color: var(--text-mute); text-decoration: none; font-size: 13px; font-weight: 500; }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current="page"] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -210,7 +215,12 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">← Home</a>
+            <nav class="site-nav" aria-label="Site">
+              <a href="/blog">Blog</a>
+              <a href="/guide/how-to-download-suno-playlist">Guides</a>
+              <a href="/faq" aria-current="page">FAQ</a>
+              <a href="/about">About</a>
+            </nav>
             <nav class="lang-switch" aria-label="Language">
               <a href="/faq" class="current" hreflang="en">EN</a>
               <a href="/ko/faq" hreflang="ko">한국어</a>
@@ -226,7 +236,7 @@
         <article>
           <h1>SunoDown FAQ — Everything answered in one page</h1>
           <p class="lede">Pricing, browsers, mobile, Suno Pro/Premier, cookie handling, Suno terms, copyright, and the most common errors — fifteen questions covering everything the in-app modals do not.</p>
-          <p class="meta">Updated: 2026-05-26 · Reading time ~4 min · 15 questions across 5 sections</p>
+          <p class="meta">Updated: 2026-10-08 · Reading time ~4 min · 15 questions across 5 sections</p>
 
           <p style="background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--acc2);border-radius:10px;padding:14px 18px;font-size:14.5px;color:var(--text-soft);margin:18px 0 8px">
             Step-by-step questions (how to copy the URL, where the cookie is, MP3 vs WAV) are answered in the three guides — links at the bottom. This page covers the broader service, account, legal and error questions.
@@ -242,7 +252,7 @@
             <dd>Three things: (1) <strong>ZIP bulk download</strong> for the whole playlist in one click, no song-count cap; (2) <strong>WAV lossless</strong> support via your own Suno Pro cookie — most free tools cannot do this; (3) full <strong>Korean, English and Japanese</strong> UI. Runs in the browser, no install, no sign-up for MP3.</dd>
 
             <dt>Are there ads, paid tiers, or hidden fees?</dt>
-            <dd>There is a single small ad slot. There is no paid tier, no premium plan, no usage cap, and no credit card is ever requested. The ad covers hosting; everything else stays free.</dd>
+            <dd>Google AdSense ads may be shown to help cover running costs. Ads are not a condition for using the download features, and they never require payment or sign-up. There is no paid tier, no premium plan, no usage cap, and no credit card is ever requested. How ad cookies work and how to opt out of personalized ads is explained in the <a href="/privacy">privacy policy</a>.</dd>
           </dl>
 
           <h2>Downloads &amp; Compatibility</h2>

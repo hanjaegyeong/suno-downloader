@@ -42,6 +42,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet" />
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -61,7 +63,7 @@
         {
           "@type": "Question",
           "name": "広告・有料プラン・隠れた費用はありますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "小さな広告スロットが1つだけです。有料プラン・プレミアム等級・使用量上限・クレジットカード要求は一切ありません。広告はホスティング費用のためで、それ以外は全て無料です。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "運営費をまかなうため、Google AdSenseの広告が表示される場合があります。広告はダウンロード機能の利用条件ではなく、支払いや会員登録を求めることもありません。有料プラン・プレミアム等級・使用量上限・クレジットカード要求も一切ありません。広告クッキーの仕組みとパーソナライズ広告の無効化方法はプライバシーポリシーで説明しています。" }
         },
         {
           "@type": "Question",
@@ -169,8 +171,11 @@
       .lang-switch a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; border: 1px solid transparent; }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link { color: var(--text-mute); text-decoration: none; font-size: 13px; font-weight: 500; }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current="page"] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -210,7 +215,12 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">無料</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">← ホーム</a>
+            <nav class="site-nav" aria-label="サイト">
+              <a href="/blog">ブログ</a>
+              <a href="/ja/guide/how-to-download-suno-playlist">ガイド</a>
+              <a href="/ja/faq" aria-current="page">FAQ</a>
+              <a href="/about">概要</a>
+            </nav>
             <nav class="lang-switch" aria-label="言語">
               <a href="/faq" hreflang="en">EN</a>
               <a href="/ko/faq" hreflang="ko">한국어</a>
@@ -226,7 +236,7 @@
         <article>
           <h1>SunoDown よくある質問（FAQ）</h1>
           <p class="lede">料金、ブラウザ、モバイル、Suno Pro/Premier、クッキーの取り扱い、Suno利用規約、著作権、最もよくあるエラーまで — アプリ内モーダルでは扱わない質問を1ページに集約しました。</p>
-          <p class="meta">更新: 2026-05-26 · 読了時間 約4分 · 5セクション 15質問</p>
+          <p class="meta">更新: 2026-10-08 · 読了時間 約4分 · 5セクション 15質問</p>
 
           <p style="background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--acc2);border-radius:10px;padding:14px 18px;font-size:14.5px;color:var(--text-soft);margin:18px 0 8px">
             手順系の質問(URLのコピー方法・クッキーの場所・MP3とWAVの違い)はページ下部のガイド3本で扱います。このページはサービス・アカウント・法的・エラー関連の幅広い質問を扱います。
@@ -242,7 +252,7 @@
             <dd>3点あります。(1) <strong>プレイリスト全体のZIP一括ダウンロード</strong> — 曲数制限なし。(2) 自分のSuno Proクッキーによる<strong>WAVロスレス対応</strong> — 無料ツールではほぼ不可能。(3) <strong>日本語・英語・韓国語のフルUI</strong>。すべてブラウザで動作し、インストール不要、MP3は登録不要です。</dd>
 
             <dt>広告・有料プラン・隠れた費用はありますか？</dt>
-            <dd>小さな広告スロットが1つだけです。有料プラン・プレミアム等級・使用量上限・クレジットカード要求は一切ありません。広告はホスティング費用のためで、それ以外は全て無料です。</dd>
+            <dd>運営費をまかなうため、Google AdSenseの広告が表示される場合があります。広告はダウンロード機能の利用条件ではなく、支払いや会員登録を求めることもありません。有料プラン・プレミアム等級・使用量上限・クレジットカード要求も一切ありません。広告クッキーの仕組みとパーソナライズ広告の無効化方法は<a href="/privacy">プライバシーポリシー</a>で説明しています。</dd>
           </dl>
 
           <h2>ダウンロード &amp; 互換性</h2>

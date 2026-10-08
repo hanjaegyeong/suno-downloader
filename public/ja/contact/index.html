@@ -119,8 +119,11 @@
       .lang-switch a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; border: 1px solid transparent; }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link { color: var(--text-mute); text-decoration: none; font-size: 13px; font-weight: 500; }
-      .back-link:hover { color: var(--acc2); }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current="page"] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) { .header-inner { flex-wrap: wrap; row-gap: 8px; } .header-right { flex-wrap: wrap; gap: 8px; } }
 
       main { padding: 48px 0 80px; }
 
@@ -161,7 +164,12 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">← ホーム</a>
+            <nav class="site-nav" aria-label="サイト">
+              <a href="/blog">ブログ</a>
+              <a href="/ja/guide/how-to-download-suno-playlist">ガイド</a>
+              <a href="/ja/faq">FAQ</a>
+              <a href="/about">概要</a>
+            </nav>
             <nav class="lang-switch" aria-label="Language">
               <a href="/contact" hreflang="en">EN</a>
               <a href="/ko/contact" hreflang="ko">한국어</a>
@@ -177,7 +185,7 @@
         <article>
           <h1>SunoDown お問い合わせ</h1>
           <p class="lede">ご質問、不具合報告、機能のご要望、著作権に関するご連絡、ビジネスのお問い合わせまで — このページでは、SunoDownの運営者への連絡方法と返信の目安をご案内します。</p>
-          <p class="meta">更新日: 2026-08-30 · Suno AIとは無関係の独立サービスです</p>
+          <p class="meta">更新日: 2026-10-08 · Suno AIとは無関係の独立サービスです</p>
 
           <div class="email-box">
             <p class="label">メールでのお問い合わせ</p>
