@@ -5,7 +5,9 @@ title: "Suno vs Udio 비교 2026: 어떤 AI 음악 서비스를 골라야 하나
 title_en: "Suno vs Udio 2026: Which AI Music Service Should You Pick?"
 summary: "Suno와 Udio는 비슷해 보이지만 보컬·믹스·길이·가격·저작권 정책이 다릅니다. 6개 축으로 두 서비스를 비교하고 사용 시나리오별 추천을 제시합니다."
 summary_en: "Suno and Udio look similar but differ in vocals, mix, length, pricing, and rights. A 6-axis comparison with scenario-based recommendations."
-publishedAt: 2026-06-04
+publishedAt: 2026-05-30
+updatedAt: 2026-06-07
+order: 4
 ogSubtitle: "Vocals · Mix · Pricing · Rights"
 tags: [suno, udio, comparison]
 internalLinks:

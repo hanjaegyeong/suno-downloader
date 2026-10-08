@@ -5,7 +5,9 @@ title: "Suno 곡을 DAW에서 후처리하기: EQ·컴프레서·매스터링 �
 title_en: "Post-Processing Suno Tracks in a DAW: EQ, Compression, and Mastering Checklist"
 summary: "Suno에서 받은 WAV를 DAW에 올린 뒤 무엇을 해야 듣기 좋아질까. EQ·컴프·리버브·라우드니스 매칭까지 단계별 체크리스트와 4개 DAW 첫 세팅을 정리했습니다."
 summary_en: "Once you have a Suno WAV in your DAW, what do you actually do? An EQ → compression → reverb → loudness checklist with first-setup notes for four DAWs."
-publishedAt: 2026-06-06
+publishedAt: 2026-05-30
+updatedAt: 2026-06-07
+order: 2
 ogSubtitle: "EQ · Compression · Mastering"
 tags: [suno, daw, mastering]
 internalLinks:

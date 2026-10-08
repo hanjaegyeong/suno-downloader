@@ -5,7 +5,9 @@ title: "유튜브에 Suno AI 음악 활용하기: 수익화·메타데이터·�
 title_en: "Using Suno AI Music on YouTube: Monetization, Metadata, and Copyright Safety"
 summary: "유튜브 BGM·인트로·전체 음악 채널까지 — Suno로 만든 곡을 안전하게 쓰는 방법. 수익화 조건·콘텐츠 ID·메타데이터·노란딱지 대응을 2026년 5월 기준으로 정리했습니다."
 summary_en: "From BGM to full music channels — how to use Suno tracks on YouTube safely. Monetization, Content ID, metadata, and demonetization cases as of May 2026."
-publishedAt: 2026-06-07
+publishedAt: 2026-05-30
+updatedAt: 2026-06-07
+order: 1
 ogSubtitle: "Monetization · Content ID · Safety"
 tags: [suno, youtube, monetization]
 internalLinks:

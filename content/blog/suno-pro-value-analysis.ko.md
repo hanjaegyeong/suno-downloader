@@ -5,7 +5,9 @@ title: "Suno Pro 구독은 본전을 뽑을까: 무손실 WAV·다운로드·우
 title_en: "Is Suno Pro Worth It? A Value Analysis of Lossless WAV, Downloads, and Priority"
 summary: "Suno Pro의 핵심 권리는 무손실 WAV·라이선스 명확화·우선 처리입니다. 월 $8과 $24 플랜을 시나리오별로 분석하고 본전 손익분기점을 계산합니다."
 summary_en: "Pro's core perks: lossless WAV, clearer licensing, and priority. Plan-by-plan ROI for $8 and $24 tiers with breakeven scenarios."
-publishedAt: 2026-06-05
+publishedAt: 2026-05-30
+updatedAt: 2026-06-07
+order: 3
 ogSubtitle: "WAV · Licensing · ROI"
 tags: [suno, pro, subscription]
 internalLinks:

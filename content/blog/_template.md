@@ -6,6 +6,10 @@ title_en: "Example Blog Post Title (English)"
 summary: "한 줄 요약 — 카드 레이아웃과 meta description에 사용됩니다."
 summary_en: "One-line summary used for article cards and meta description."
 publishedAt: 2026-06-01
+# Optional, shared by ko/en — set only when the article content is actually revised:
+# updatedAt: 2026-06-15
+# Optional blog-index tiebreaker for posts sharing a publishedAt (lower comes first):
+# order: 1
 ogSubtitle: "Short English subtitle for OG image (Latin only)"
 tags: [suno, ai-music]
 internalLinks:

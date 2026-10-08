@@ -5,7 +5,9 @@ title: "Suno AI 가사 프롬프트 작성법: 자연스러운 보컬을 만드�
 title_en: "Suno AI Lyrics Prompting: 9 Rules for Natural-Sounding Vocals"
 summary: "Suno에서 가사 입력란을 어떻게 쓰느냐에 따라 곡 품질이 크게 갈립니다. 메타태그·운율·발음 함정·한국어 처리까지 실전 규칙 9가지를 정리했습니다."
 summary_en: "Lyrics prompting in Suno is the single biggest quality lever — free or Pro. Meta tags, rhyme, phonetic traps, and Korean handling — 9 rules in one guide."
-publishedAt: 2026-06-01
+publishedAt: 2026-05-30
+updatedAt: 2026-06-07
+order: 7
 ogSubtitle: "Meta Tags · Rhyme · Phonetic Traps"
 tags: [suno, lyrics, prompt]
 internalLinks:

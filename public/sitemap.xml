@@ -3,13 +3,13 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://suno-down.com/</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://suno-down.com/guide/how-to-download-suno-playlist</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/how-to-download-suno-playlist" />
@@ -19,7 +19,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/guide/how-to-download-suno-playlist</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/how-to-download-suno-playlist" />
@@ -29,7 +29,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ja/guide/how-to-download-suno-playlist</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/guide/how-to-download-suno-playlist" />
@@ -99,7 +99,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/faq</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/faq" />
@@ -109,7 +109,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/faq</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/faq" />
@@ -119,7 +119,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ja/faq</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/faq" />
@@ -129,7 +129,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/contact</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/contact" />
@@ -139,7 +139,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/contact</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/contact" />
@@ -149,7 +149,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ja/contact</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/contact" />
@@ -159,25 +159,43 @@
   </url>
   <url>
     <loc>https://suno-down.com/about</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://suno-down.com/privacy</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://suno-down.com/terms</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://suno-down.com/blog</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/blog" />
+  </url>
+  <url>
+    <loc>https://suno-down.com/ko/blog</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/blog" />
+  </url>
+  <url>
     <loc>https://suno-down.com/blog/ai-music-copyright-guide</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/ai-music-copyright-guide" />
@@ -186,7 +204,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/blog/ai-music-copyright-guide</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/ai-music-copyright-guide" />
@@ -195,7 +213,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/blog/ai-music-genre-catalog</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/ai-music-genre-catalog" />
@@ -204,7 +222,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/blog/ai-music-genre-catalog</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/ai-music-genre-catalog" />
@@ -213,7 +231,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/blog/daw-post-processing</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/daw-post-processing" />
@@ -222,7 +240,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/blog/daw-post-processing</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/daw-post-processing" />
@@ -231,7 +249,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/blog/suno-lyrics-prompt-tips</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/suno-lyrics-prompt-tips" />
@@ -240,7 +258,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/blog/suno-lyrics-prompt-tips</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/suno-lyrics-prompt-tips" />
@@ -249,7 +267,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/blog/suno-pro-value-analysis</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/suno-pro-value-analysis" />
@@ -258,7 +276,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/blog/suno-pro-value-analysis</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/suno-pro-value-analysis" />
@@ -267,7 +285,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/blog/suno-vs-udio-comparison</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/suno-vs-udio-comparison" />
@@ -276,7 +294,7 @@
   </url>
   <url>
     <loc>https://suno-down.com/ko/blog/suno-vs-udio-comparison</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/blog/suno-vs-udio-comparison" />

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{{TITLE}} — SunoDown Blog</title>
+    <title>{{TITLE}} | SunoDown</title>
     <meta name="description" content="{{SUMMARY}}" />
     <link rel="canonical" href="{{CANONICAL_URL}}" />
 
@@ -39,6 +39,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
 
     <script type="application/ld+json">
     {{STRUCTURED_DATA_ARTICLE}}
@@ -114,15 +116,32 @@
       }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link {
-        color: var(--text-mute);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) {
+        .header-inner { flex-wrap: wrap; row-gap: 8px; }
+        .header-right { flex-wrap: wrap; gap: 8px; }
       }
-      .back-link:hover { color: var(--acc2); }
 
       main { padding: 48px 0 80px; }
+
+      .breadcrumb ol {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        list-style: none;
+        margin: 0 0 16px;
+        padding: 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--text-mute);
+      }
+      .breadcrumb li { margin: 0; font-size: 13px; color: var(--text-mute); }
+      .breadcrumb li + li::before { content: "›"; margin-right: 6px; }
+      .breadcrumb a { color: var(--text-mute); text-decoration: none; }
+      .breadcrumb a:hover { color: var(--acc2); }
 
       h1 {
         font-size: clamp(28px, 4.5vw, 40px);
@@ -279,7 +298,7 @@
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="{{BACK_URL}}" class="back-link">{{BACK_LABEL}}</a>
+            {{SITE_NAV_HTML}}
             <nav class="lang-switch" aria-label="{{LANG_SWITCH_LABEL}}">
               {{LANG_SWITCH_HTML}}
             </nav>
@@ -291,6 +310,13 @@
     <main>
       <div class="wrap">
         <article>
+          <nav class="breadcrumb" aria-label="{{BREADCRUMB_LABEL}}">
+            <ol>
+              <li><a href="/">{{BREADCRUMB_HOME}}</a></li>
+              <li><a href="{{BLOG_URL}}">{{BLOG_LABEL}}</a></li>
+              <li aria-current="page">{{TITLE}}</li>
+            </ol>
+          </nav>
           <h1>{{TITLE}}</h1>
           <p class="lede">{{SUMMARY}}</p>
           <p class="meta">{{META_LINE}}</p>

@@ -5,7 +5,9 @@ title: "AI 음악 장르 카탈로그: Suno에서 잘 작동하는 87개 스타�
 title_en: "AI Music Genre Catalog: 87 Style Descriptors That Work in Suno"
 summary: "장르 이름을 정확히 적는 것이 톤을 결정한다. Suno에서 실제로 잘 잡히는 장르·서브장르·악기·무드 디스크립터 87개를 카탈로그로 정리했다."
 summary_en: "Naming the genre precisely shapes the tone. A catalog of 87 genre, sub-genre, instrument, and mood descriptors that actually resolve well in Suno."
-publishedAt: 2026-06-02
+publishedAt: 2026-05-30
+updatedAt: 2026-06-07
+order: 6
 ogSubtitle: "Genres · Sub-genres · Instruments · Moods"
 tags: [suno, genres, prompt]
 internalLinks:

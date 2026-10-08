@@ -10,6 +10,41 @@ const ROOT = join(__dirname, '..');
 const CONTENT_DIR = join(ROOT, 'content', 'blog');
 const TEMPLATE_PATH = join(__dirname, 'templates', 'blog-article.html');
 const SITE_URL = 'https://suno-down.com';
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+// Authoring notes (e.g. <!-- TODO SCREENSHOT: ... -->) must never ship in public HTML.
+// The match can't cross another "<!--", so an unterminated TODO can't swallow content.
+const TODO_COMMENT_RE = /<!--\s*TODO(?:(?!<!--)[\s\S])*?-->/gi;
+
+// Non-blog internalLinks targets, keyed by the English path. Blog targets use the
+// target post's title instead. `localized` pages have a /ko/ twin; the rest are
+// single-URL pages that serve every language.
+const PAGE_LINKS = {
+  '/': {
+    localized: false,
+    en: 'SunoDown — free Suno playlist downloader (MP3/WAV)',
+    ko: 'SunoDown — Suno 플레이리스트 무료 다운로더 (MP3/WAV)',
+  },
+  '/faq': {
+    localized: true,
+    en: 'SunoDown FAQ',
+    ko: 'SunoDown 자주 묻는 질문 (FAQ)',
+  },
+  '/guide/how-to-download-suno-playlist': {
+    localized: true,
+    en: 'How to Download a Suno AI Playlist (Free MP3 & WAV)',
+    ko: 'Suno 플레이리스트 다운로드 방법 (MP3·WAV 무료)',
+  },
+  '/guide/suno-mp3-vs-wav': {
+    localized: true,
+    en: 'Suno MP3 vs WAV — Which Format Should You Download?',
+    ko: 'Suno MP3 vs WAV — 어느 형식으로 다운로드해야 할까?',
+  },
+  '/guide/suno-pro-cookie-setup': {
+    localized: true,
+    en: 'Suno Pro Cookie Setup — Unlock Lossless WAV Downloads',
+    ko: 'Suno Pro 쿠키 설정 — 무손실 WAV 다운로드 켜기',
+  },
+};
 
 marked.use({ gfm: true });
 
@@ -74,9 +109,48 @@ function validateFrontmatter(fm, filePath) {
       throw new Error(`Missing required frontmatter field "${field}" in ${filePath}`);
     }
   }
+  for (const field of ['publishedAt', 'updatedAt']) {
+    if (fm[field] && !DATE_RE.test(fm[field])) {
+      throw new Error(`Invalid ${field} "${fm[field]}" in ${filePath} — use YYYY-MM-DD`);
+    }
+  }
+  if (fm.updatedAt && fm.updatedAt < fm.publishedAt) {
+    throw new Error(`updatedAt ${fm.updatedAt} is before publishedAt ${fm.publishedAt} in ${filePath}`);
+  }
+  if (fm.order !== undefined && !/^\d+$/.test(fm.order)) {
+    throw new Error(`Invalid order "${fm.order}" in ${filePath} — use a non-negative integer`);
+  }
   if (!fm.schemaVersion) {
     console.warn(`[build-blog] WARN: missing schemaVersion in ${filePath} — treating as v0`);
   }
+}
+
+// updatedAt is optional and shared by both languages of a slug. Only set it when
+// the article content itself was revised — never to fake freshness.
+function lastModified(fm) {
+  return fm.updatedAt || fm.publishedAt;
+}
+
+function hasUpdate(fm) {
+  return Boolean(fm.updatedAt) && fm.updatedAt !== fm.publishedAt;
+}
+
+function stripTodoComments(body, filePath) {
+  const stripped = body.replace(TODO_COMMENT_RE, '');
+  if (/<!--\s*todo/i.test(stripped)) {
+    throw new Error(`Unterminated TODO comment in ${filePath} — close it with -->`);
+  }
+  return stripped;
+}
+
+// Index order: newest publishedAt first; posts sharing a date fall back to the
+// optional `order` frontmatter field (lower first), then slug.
+function compareForIndex(a, b) {
+  if (a.publishedAt !== b.publishedAt) return a.publishedAt < b.publishedAt ? 1 : -1;
+  const orderA = a.order === undefined ? Infinity : Number(a.order);
+  const orderB = b.order === undefined ? Infinity : Number(b.order);
+  if (orderA !== orderB) return orderA - orderB;
+  return a.slug.localeCompare(b.slug);
 }
 
 // --- Template substitution ---
@@ -107,6 +181,7 @@ function buildArticleJson(opts) {
     headline: opts.title,
     description: opts.summary,
     datePublished: opts.publishedAt,
+    dateModified: opts.dateModified,
     inLanguage: opts.lang,
     author: { '@type': 'Organization', name: 'SunoDown', url: SITE_URL },
     publisher: {
@@ -134,11 +209,38 @@ function buildBreadcrumbJson(opts) {
   }, null, 2).replace(/<\//g, '<\\/');
 }
 
-function buildInternalLinksHtml(internalLinks, lang) {
-  if (!internalLinks || internalLinks.length === 0) return '';
+// Maps a frontmatter internalLinks path (written in either language) to the
+// same-language URL for `lang`, labelled with the target's title in that language.
+function resolveInternalLink(href, lang, postsBySlug, filePath) {
+  const enPath = href.replace(/^\/ko(?=\/|$)/, '') || '/';
+  const blogMatch = enPath.match(/^\/blog\/([a-z0-9-]+)$/);
+
+  if (blogMatch) {
+    const post = postsBySlug.get(blogMatch[1]);
+    if (!post) {
+      throw new Error(`internalLinks target "${href}" in ${filePath} — no post with slug "${blogMatch[1]}"`);
+    }
+    return {
+      url: lang === 'ko' ? `/ko${enPath}` : enPath,
+      title: lang === 'ko' ? post.fm.title : (post.fm.title_en || post.fm.title),
+    };
+  }
+
+  const page = PAGE_LINKS[enPath];
+  if (!page) {
+    throw new Error(`internalLinks target "${href}" in ${filePath} has no label — add it to PAGE_LINKS`);
+  }
+  return {
+    url: lang === 'ko' && page.localized ? `/ko${enPath}` : enPath,
+    title: page[lang],
+  };
+}
+
+function buildInternalLinksHtml(links, lang) {
+  if (links.length === 0) return '';
   const label = lang === 'ko' ? '관련 글' : 'Related';
-  const items = internalLinks
-    .map(href => `          <li><a href="${href}">${href}</a></li>`)
+  const items = links
+    .map(({ url, title }) => `          <li><a href="${url}">${escapeHtml(title)}</a></li>`)
     .join('\n');
   return `
           <div class="internal-links">
@@ -158,6 +260,33 @@ function buildLangSwitchHtml(lang, enUrl, koUrl) {
   ].join('\n              ');
 }
 
+// blogCurrent: "page" on the blog index itself, "true" on articles inside the blog.
+function buildSiteNavHtml(lang, blogCurrent) {
+  const items = lang === 'ko'
+    ? [['/ko/blog', '블로그'], ['/ko/guide/how-to-download-suno-playlist', '가이드'], ['/ko/faq', 'FAQ'], ['/about', '소개']]
+    : [['/blog', 'Blog'], ['/guide/how-to-download-suno-playlist', 'Guides'], ['/faq', 'FAQ'], ['/about', 'About']];
+  const links = items
+    .map(([href, label], i) => `<a href="${href}"${i === 0 ? ` aria-current="${blogCurrent}"` : ''}>${label}</a>`)
+    .join('');
+  return `<nav class="site-nav" aria-label="${lang === 'ko' ? '사이트' : 'Site'}">${links}</nav>`;
+}
+
+function buildMetaLineHtml(fm, lang, wordCount) {
+  const isKo = lang === 'ko';
+  const time = date => `<time datetime="${escapeHtml(date)}">${escapeHtml(date)}</time>`;
+  const parts = [
+    isKo
+      ? '글: <a href="/about" rel="author">SunoDown 운영자</a>'
+      : 'By <a href="/about" rel="author">the SunoDown maintainer</a>',
+    isKo ? `게시일: ${time(fm.publishedAt)}` : `Published: ${time(fm.publishedAt)}`,
+  ];
+  if (hasUpdate(fm)) {
+    parts.push(isKo ? `최종 업데이트: ${time(fm.updatedAt)}` : `Updated: ${time(fm.updatedAt)}`);
+  }
+  parts.push(isKo ? `약 ${wordCount}단어` : `~${wordCount} words`);
+  return parts.join(' · ');
+}
+
 // --- Word count helper ---
 
 function countWords(text) {
@@ -166,7 +295,7 @@ function countWords(text) {
 
 // --- Article generator ---
 
-async function generateArticle(template, fm, bodyHtml, lang, enUrl, koUrl, wordCount) {
+async function generateArticle(template, fm, bodyHtml, lang, enUrl, koUrl, wordCount, internalLinks) {
   const isKo = lang === 'ko';
   const canonicalUrl = isKo ? `${SITE_URL}${koUrl}` : `${SITE_URL}${enUrl}`;
   const ogImageSlug = isKo ? `ko-blog-${fm.slug}` : `blog-${fm.slug}`;
@@ -190,6 +319,7 @@ async function generateArticle(template, fm, bodyHtml, lang, enUrl, koUrl, wordC
       title: rawTitle,
       summary: rawSummary,
       publishedAt: fm.publishedAt,
+      dateModified: lastModified(fm),
       lang,
       canonicalUrl,
       ogImage,
@@ -201,20 +331,22 @@ async function generateArticle(template, fm, bodyHtml, lang, enUrl, koUrl, wordC
       canonicalUrl,
     }),
 
-    BACK_URL: isKo ? '/ko/blog' : '/blog',
-    BACK_LABEL: isKo ? '← 블로그' : '← Blog',
+    SITE_NAV_HTML: buildSiteNavHtml(lang, 'true'),
     LANG_SWITCH_LABEL: isKo ? '언어 선택' : 'Language',
     LANG_SWITCH_HTML: buildLangSwitchHtml(lang, enUrl, koUrl),
 
+    BREADCRUMB_LABEL: isKo ? '이동 경로' : 'Breadcrumb',
+    BREADCRUMB_HOME: isKo ? '홈' : 'Home',
+    BLOG_URL: isKo ? '/ko/blog' : '/blog',
+    BLOG_LABEL: isKo ? '블로그' : 'Blog',
+
     BODY: bodyHtml,
-    META_LINE: isKo
-      ? `게시일: ${fm.publishedAt} · 약 ${wordCount}단어`
-      : `Published: ${fm.publishedAt} · ~${wordCount} words`,
+    META_LINE: buildMetaLineHtml(fm, lang, wordCount),
 
     CTA_TEXT: isKo ? '지금 바로 사용해보세요' : 'Ready to try it?',
     CTA_BTN: isKo ? 'SunoDown 열기 →' : 'Open SunoDown →',
 
-    INTERNAL_LINKS_HTML: buildInternalLinksHtml(fm.internalLinks, lang),
+    INTERNAL_LINKS_HTML: buildInternalLinksHtml(internalLinks, lang),
 
     FOOTER_HOME: isKo ? '홈' : 'Home',
     FOOTER_ABOUT_URL: '/about',
@@ -242,28 +374,28 @@ function buildIndexPage(articles, lang) {
   const isKo = lang === 'ko';
   const pageTitle = isKo
     ? 'Suno AI 음악 블로그 — 프롬프트·장르·저작권 가이드 | SunoDown'
-    : 'Suno AI Music Blog — Prompt Tips, Genres & Copyright Guides | SunoDown';
+    : 'Suno AI Music Blog: Prompt Tips, Genres & Copyright | SunoDown';
   const pageDesc = isKo
     ? 'Suno AI 음악 제작 팁과 가이드 — 프롬프트 작성, 장르 카탈로그, 저작권, Suno vs Udio, DAW 후처리까지. AI 음악을 200% 활용하세요.'
     : 'Suno AI music tips and guides — prompt writing, genre catalog, copyright, Suno vs Udio, and DAW post-processing. Get more from your AI music.';
   const canonicalUrl = isKo ? `${SITE_URL}/ko/blog` : `${SITE_URL}/blog`;
   const hreflangEn = `${SITE_URL}/blog`;
   const hreflangKo = `${SITE_URL}/ko/blog`;
-  const ogImage = `${SITE_URL}/og/${isKo ? 'ko-blog-index' : 'blog-index'}.png`;
+  const ogImage = `${SITE_URL}/og/${isKo ? 'ko-blog' : 'blog'}.png`;
 
-  const sortedArticles = [...articles].sort(
-    (a, b) => new Date(b.fm.publishedAt) - new Date(a.fm.publishedAt)
-  );
+  const sortedArticles = [...articles].sort((a, b) => compareForIndex(a.fm, b.fm));
 
   const cardsHtml = sortedArticles.length > 0
     ? sortedArticles.map(({ fm }) => {
         const articleUrl = isKo ? `/ko/blog/${fm.slug}` : `/blog/${fm.slug}`;
         const title = escapeHtml(isKo ? fm.title : (fm.title_en || fm.title));
         const summary = escapeHtml(isKo ? fm.summary : (fm.summary_en || fm.summary));
-        const publishedAt = escapeHtml(fm.publishedAt);
+        const dateLine = hasUpdate(fm)
+          ? `${escapeHtml(fm.publishedAt)} · ${isKo ? '업데이트' : 'Updated'} ${escapeHtml(fm.updatedAt)}`
+          : escapeHtml(fm.publishedAt);
         return `
           <a href="${articleUrl}" class="card">
-            <div class="card-date">${publishedAt}</div>
+            <div class="card-date">${dateLine}</div>
             <h2 class="card-title">${title}</h2>
             <p class="card-summary">${summary}</p>
           </a>`;
@@ -274,7 +406,6 @@ function buildIndexPage(articles, lang) {
     ? `<a href="/blog" hreflang="en">EN</a>\n              <a href="/ko/blog" class="current" hreflang="ko">한국어</a>`
     : `<a href="/blog" class="current" hreflang="en">EN</a>\n              <a href="/ko/blog" hreflang="ko">한국어</a>`;
 
-  const backLabel = isKo ? '← 홈' : '← Home';
   const heading = isKo ? '블로그' : 'Blog';
   const subheading = isKo
     ? 'Suno AI 음악 제작 가이드, 장르 분석, 저작권 이슈까지.'
@@ -300,6 +431,7 @@ function buildIndexPage(articles, lang) {
       headline: isKo ? fm.title : (fm.title_en || fm.title),
       url: `${SITE_URL}${isKo ? '/ko' : ''}/blog/${fm.slug}`,
       datePublished: fm.publishedAt,
+      dateModified: lastModified(fm),
     })),
   }, null, 2);
 
@@ -342,6 +474,8 @@ function buildIndexPage(articles, lang) {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817461938422229" crossorigin="anonymous"></script>
 
     <script type="application/ld+json">
     ${structuredData}
@@ -413,13 +547,14 @@ function buildIndexPage(articles, lang) {
       }
       .lang-switch a:hover { color: var(--acc2); border-color: var(--border); }
       .lang-switch a.current { color: var(--text); border-color: var(--border); background: var(--bg); }
-      .back-link {
-        color: var(--text-mute);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
+      .site-nav { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13px; }
+      .site-nav a { color: var(--text-mute); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
+      .site-nav a:hover { color: var(--acc2); }
+      .site-nav a[aria-current] { color: var(--text); background: var(--bg); }
+      @media (max-width: 540px) {
+        .header-inner { flex-wrap: wrap; row-gap: 8px; }
+        .header-right { flex-wrap: wrap; gap: 8px; }
       }
-      .back-link:hover { color: var(--acc2); }
 
       main { padding: 48px 0 80px; }
 
@@ -502,7 +637,7 @@ function buildIndexPage(articles, lang) {
         <div class="header-inner">
           <a href="/" class="logo">SunoDown<span class="logo-dot">.</span><span class="pill">FREE</span></a>
           <div class="header-right">
-            <a href="/" class="back-link">${backLabel}</a>
+            ${buildSiteNavHtml(lang, 'page')}
             <nav class="lang-switch" aria-label="${isKo ? '언어 선택' : 'Language'}">
               ${langSwitchHtml}
             </nav>
@@ -545,6 +680,7 @@ async function main() {
   const template = await readFile(TEMPLATE_PATH, 'utf8');
   const articles = [];
 
+  // Pass 1: parse every post so related links can resolve target titles.
   for (const koFile of koFiles) {
     const koPath = join(CONTENT_DIR, koFile);
     const slug = koFile.replace(/\.ko\.md$/, '');
@@ -569,6 +705,19 @@ async function main() {
       console.warn(`[build-blog] WARN: no English source for "${slug}" — using Korean body as fallback`);
     }
 
+    articles.push({
+      fm,
+      koPath,
+      koBody: stripTodoComments(koBody, koPath),
+      enBody: stripTodoComments(enBody, existsSync(enPath) ? enPath : koPath),
+    });
+  }
+
+  const postsBySlug = new Map(articles.map(a => [a.fm.slug, a]));
+
+  // Pass 2: render each post in both languages.
+  for (const { fm, koPath, koBody, enBody } of articles) {
+    const slug = fm.slug;
     const koWordCount = countWords(koBody);
     const enWordCount = countWords(enBody);
 
@@ -585,8 +734,11 @@ async function main() {
     const enUrl = `/blog/${slug}`;
     const koUrl = `/ko/blog/${slug}`;
 
-    const koHtml = await generateArticle(template, fm, koBodyHtml, 'ko', enUrl, koUrl, koWordCount);
-    const enHtml = await generateArticle(template, fm, enBodyHtml, 'en', enUrl, koUrl, enWordCount);
+    const linksFor = lang => (fm.internalLinks || [])
+      .map(href => resolveInternalLink(href, lang, postsBySlug, koPath));
+
+    const koHtml = await generateArticle(template, fm, koBodyHtml, 'ko', enUrl, koUrl, koWordCount, linksFor('ko'));
+    const enHtml = await generateArticle(template, fm, enBodyHtml, 'en', enUrl, koUrl, enWordCount, linksFor('en'));
 
     const koOutDir = join(ROOT, 'public', 'ko', 'blog', slug);
     const enOutDir = join(ROOT, 'public', 'blog', slug);
@@ -599,8 +751,6 @@ async function main() {
 
     await writeFile(join(enOutDir, 'index.html'), enHtml, 'utf8');
     console.log(`[build-blog] public/blog/${slug}/index.html`);
-
-    articles.push({ fm });
   }
 
   // Generate blog index pages

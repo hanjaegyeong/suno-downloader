@@ -3,41 +3,36 @@
  * build-sitemap.mjs
  *
  * Generates public/sitemap.xml from:
- *   1. Hardcoded static page entries (faithfully reproducing the 16 existing entries)
- *   2. Dynamic blog entries read from content/blog/*.ko.md frontmatter
+ *   1. Hardcoded static page entries + guide entries discovered from public/guide/
+ *   2. Dynamic blog entries (posts + /blog, /ko/blog index) read from content/blog/*.ko.md frontmatter
  *
  * Usage:
  *   node scripts/build-sitemap.mjs           -- write to public/sitemap.xml
- *   node scripts/build-sitemap.mjs --verify  -- diff non-blog entries vs sitemap.xml.bak, exit non-zero if changed
  */
 
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execSync } from 'node:child_process';
-import { tmpdir } from 'node:os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const BASE = 'https://suno-down.com';
 const CONTENT_DIR = join(ROOT, 'content', 'blog');
 const OUT_FILE = join(ROOT, 'public', 'sitemap.xml');
-const BAK_FILE = join(ROOT, 'public', 'sitemap.xml.bak');
-
-const VERIFY_MODE = process.argv.includes('--verify');
 
 // ---------------------------------------------------------------------------
 // Guide entry discovery from public/guide/*/index.html
 // ---------------------------------------------------------------------------
 
-// Known lastmod dates per slug. New/unknown slugs default to TODAY_DEFAULT.
+// lastmod per guide slug — the date its content last changed substantively.
+// Dates are explicit on purpose: Docker builds have no .git, so they can't be
+// derived at build time. A guide without an entry here fails the build.
 const GUIDE_LASTMOD = {
-  'how-to-download-suno-playlist': '2026-05-25',
+  'how-to-download-suno-playlist': '2026-10-08',
   'suno-mp3-vs-wav':               '2026-05-25',
   'suno-pro-cookie-setup':         '2026-05-26',
 };
-const GUIDE_TODAY_DEFAULT = '2026-06-07';
 
 // Explicit ordering: slugs listed here come first (in this order).
 // Discovered slugs not in this list are appended sorted alphabetically.
@@ -67,7 +62,10 @@ async function discoverGuideEntries() {
 
   const result = [];
   for (const slug of slugs) {
-    const lastmod = GUIDE_LASTMOD[slug] ?? GUIDE_TODAY_DEFAULT;
+    const lastmod = GUIDE_LASTMOD[slug];
+    if (!lastmod) {
+      throw new Error(`no lastmod for guide "${slug}" — add it to GUIDE_LASTMOD`);
+    }
     const alts = [
       { hreflang: 'en', href: `${BASE}/guide/${slug}` },
       { hreflang: 'ko', href: `${BASE}/ko/guide/${slug}` },
@@ -96,7 +94,7 @@ const STATIC_ENTRIES = [
   // alternates: there are no separate /ko/ or /ja/ home URLs to point at.
   {
     loc: `${BASE}/`,
-    lastmod: '2026-05-25',
+    lastmod: '2026-10-08',
     changefreq: 'weekly',
     priority: '1.0',
     alternates: [],
@@ -105,7 +103,7 @@ const STATIC_ENTRIES = [
   // FAQ (3 separate URL entries)
   {
     loc: `${BASE}/faq`,
-    lastmod: '2026-05-26',
+    lastmod: '2026-10-08',
     changefreq: 'monthly',
     priority: '0.8',
     alternates: [
@@ -117,7 +115,7 @@ const STATIC_ENTRIES = [
   },
   {
     loc: `${BASE}/ko/faq`,
-    lastmod: '2026-05-26',
+    lastmod: '2026-10-08',
     changefreq: 'monthly',
     priority: '0.8',
     alternates: [
@@ -129,7 +127,7 @@ const STATIC_ENTRIES = [
   },
   {
     loc: `${BASE}/ja/faq`,
-    lastmod: '2026-05-26',
+    lastmod: '2026-10-08',
     changefreq: 'monthly',
     priority: '0.8',
     alternates: [
@@ -143,7 +141,7 @@ const STATIC_ENTRIES = [
   // Contact (3 separate per-language URLs — same pattern as FAQ)
   {
     loc: `${BASE}/contact`,
-    lastmod: '2026-08-30',
+    lastmod: '2026-10-08',
     changefreq: 'yearly',
     priority: '0.5',
     alternates: [
@@ -155,7 +153,7 @@ const STATIC_ENTRIES = [
   },
   {
     loc: `${BASE}/ko/contact`,
-    lastmod: '2026-08-30',
+    lastmod: '2026-10-08',
     changefreq: 'yearly',
     priority: '0.5',
     alternates: [
@@ -167,7 +165,7 @@ const STATIC_ENTRIES = [
   },
   {
     loc: `${BASE}/ja/contact`,
-    lastmod: '2026-08-30',
+    lastmod: '2026-10-08',
     changefreq: 'yearly',
     priority: '0.5',
     alternates: [
@@ -181,7 +179,7 @@ const STATIC_ENTRIES = [
   // About — single URL serving all 3 languages via client-side toggle. No hreflang.
   {
     loc: `${BASE}/about`,
-    lastmod: '2026-05-29',
+    lastmod: '2026-10-08',
     changefreq: 'monthly',
     priority: '0.5',
     alternates: [],
@@ -190,7 +188,7 @@ const STATIC_ENTRIES = [
   // Privacy — single URL serving all 3 languages via client-side toggle. No hreflang.
   {
     loc: `${BASE}/privacy`,
-    lastmod: '2026-05-18',
+    lastmod: '2026-10-08',
     changefreq: 'yearly',
     priority: '0.3',
     alternates: [],
@@ -199,7 +197,7 @@ const STATIC_ENTRIES = [
   // Terms — single URL serving all 3 languages via client-side toggle. No hreflang.
   {
     loc: `${BASE}/terms`,
-    lastmod: '2026-05-18',
+    lastmod: '2026-10-08',
     changefreq: 'yearly',
     priority: '0.3',
     alternates: [],
@@ -243,6 +241,7 @@ async function discoverBlogEntries() {
 
   const koFiles = files.filter(f => f.endsWith('.ko.md') && !f.startsWith('_'));
   const entries = [];
+  let latestLastmod = '';
 
   for (const file of koFiles) {
     const raw = await readFile(join(CONTENT_DIR, file), 'utf8');
@@ -250,12 +249,17 @@ async function discoverBlogEntries() {
 
     // Derive slug from filename if frontmatter slug missing
     const slug = fm.slug || file.replace('.ko.md', '');
-    const publishedAt = fm.publishedAt || new Date().toISOString().slice(0, 10);
+    if (!fm.publishedAt) {
+      throw new Error(`missing publishedAt in content/blog/${file}`);
+    }
+    // updatedAt is optional and shared by both languages of the slug
+    const lastmod = fm.updatedAt || fm.publishedAt;
+    if (lastmod > latestLastmod) latestLastmod = lastmod;
 
     // English entry: /blog/{slug} with alternate to /ko/blog/{slug}
     entries.push({
       loc: `${BASE}/blog/${slug}`,
-      lastmod: publishedAt,
+      lastmod,
       changefreq: 'monthly',
       priority: '0.8',
       alternates: [
@@ -268,7 +272,7 @@ async function discoverBlogEntries() {
     // Korean entry: /ko/blog/{slug} with alternate to /blog/{slug}
     entries.push({
       loc: `${BASE}/ko/blog/${slug}`,
-      lastmod: publishedAt,
+      lastmod,
       changefreq: 'monthly',
       priority: '0.8',
       alternates: [
@@ -279,7 +283,24 @@ async function discoverBlogEntries() {
     });
   }
 
-  return entries;
+  if (entries.length === 0) return entries;
+
+  // Blog index pages (/blog, /ko/blog) list every post, so their content last
+  // changed when the newest post was published or updated.
+  const indexAlternates = [
+    { hreflang: 'en', href: `${BASE}/blog` },
+    { hreflang: 'ko', href: `${BASE}/ko/blog` },
+    { hreflang: 'x-default', href: `${BASE}/blog` },
+  ];
+  const indexEntries = ['/blog', '/ko/blog'].map(path => ({
+    loc: `${BASE}${path}`,
+    lastmod: latestLastmod,
+    changefreq: 'weekly',
+    priority: '0.7',
+    alternates: indexAlternates,
+  }));
+
+  return [...indexEntries, ...entries];
 }
 
 // ---------------------------------------------------------------------------
@@ -322,24 +343,6 @@ function renderSitemap(entries) {
 }
 
 // ---------------------------------------------------------------------------
-// Extract non-blog <url> blocks from an XML string for diffing
-// ---------------------------------------------------------------------------
-
-function extractNonBlogUrls(xml) {
-  const urlBlocks = [];
-  const urlRegex = /<url>([\s\S]*?)<\/url>/g;
-  let m;
-  while ((m = urlRegex.exec(xml)) !== null) {
-    const block = m[0];
-    // Blog entries contain /blog/ in their <loc>
-    if (!block.includes('/blog/')) {
-      urlBlocks.push(block.trim());
-    }
-  }
-  return urlBlocks;
-}
-
-// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -348,42 +351,6 @@ async function main() {
   const blogEntries = await discoverBlogEntries();
   const allEntries = [...STATIC_ENTRIES.slice(0, 1), ...guideEntries, ...STATIC_ENTRIES.slice(1), ...blogEntries];
   const xml = renderSitemap(allEntries);
-
-  if (VERIFY_MODE) {
-    if (!existsSync(BAK_FILE)) {
-      console.error(`ERROR: ${BAK_FILE} not found. Run without --verify first to generate sitemap, then create the .bak file.`);
-      process.exit(1);
-    }
-
-    const bakXml = await readFile(BAK_FILE, 'utf8');
-    const nonBlogGenerated = extractNonBlogUrls(xml);
-    const nonBlogBak = extractNonBlogUrls(bakXml);
-
-    // Write to temp files for diff
-    const tmpDir = tmpdir();
-    const tmpGen = join(tmpDir, 'sitemap-generated-nonblog.txt');
-    const tmpBak = join(tmpDir, 'sitemap-bak-nonblog.txt');
-    await writeFile(tmpGen, nonBlogGenerated.join('\n\n'));
-    await writeFile(tmpBak, nonBlogBak.join('\n\n'));
-
-    let diffOutput = '';
-    let exitCode = 0;
-    try {
-      diffOutput = execSync(`diff "${tmpBak}" "${tmpGen}"`, { encoding: 'utf8' });
-    } catch (err) {
-      diffOutput = err.stdout || '';
-      exitCode = 1;
-    }
-
-    if (exitCode === 0) {
-      console.log('verify: OK -- non-blog entries match sitemap.xml.bak (no drift detected)');
-    } else {
-      console.error('verify: FAIL -- non-blog entries differ from sitemap.xml.bak:');
-      console.error(diffOutput);
-      process.exit(1);
-    }
-    return;
-  }
 
   await writeFile(OUT_FILE, xml, 'utf8');
 

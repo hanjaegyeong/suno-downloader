@@ -5,7 +5,9 @@ title: "AI 음악 저작권 가이드: Suno로 만든 곡, 어디까지 내 것�
 title_en: "AI Music Copyright Guide: How Much of Your Suno Song Do You Actually Own?"
 summary: "Suno로 만든 곡을 상업적으로 써도 되는지, 누구에게 권리가 있는지, Pro와 무료가 어떻게 다른지 — 약관·법·실무를 한자리에 정리했다."
 summary_en: "Can you sell what Suno generated for you? Who holds the rights? How does Pro differ from Free? Terms, law, and practical implications in one place."
-publishedAt: 2026-06-03
+publishedAt: 2026-05-30
+updatedAt: 2026-06-07
+order: 5
 ogSubtitle: "Terms · Ownership · Commercial Use"
 tags: [suno, copyright, legal]
 internalLinks:
