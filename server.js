@@ -549,6 +549,9 @@ if (isProd) {
     'faq',
     'ko/faq',
     'ja/faq',
+    'contact',
+    'ko/contact',
+    'ja/contact',
     'guide/how-to-download-suno-playlist',
     'ko/guide/how-to-download-suno-playlist',
     'ja/guide/how-to-download-suno-playlist',
@@ -607,8 +610,23 @@ if (isProd) {
     });
   });
 
+  // 레거시 경로 → 정식 경로 301 리다이렉트 (중복 콘텐츠 방지)
+  app.get(['/privacy-policy', '/privacy-policy/'], (_req, res) => {
+    res.redirect(301, '/privacy');
+  });
+
+  // 홈페이지: index.html을 200으로 명시 서빙 (catch-all에 의존하지 않음)
+  app.get('/', (_req, res) => {
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('X-Robots-Tag', 'index, follow');
+    res.sendFile(path.join(distDir, 'index.html'));
+  });
+
   app.use(express.static(distDir, {
     maxAge: '7d',
+    // index.html 자동 서빙 비활성화: 디렉터리 요청이 index.html로 200 응답되는
+    // soft-404를 막고, 매칭 안 되는 경로는 아래 404 핸들러로 넘긴다.
+    index: false,
     setHeaders(res, filePath) {
       if (filePath.endsWith('.html')) {
         res.set('Cache-Control', 'public, max-age=3600');
@@ -617,10 +635,23 @@ if (isProd) {
     },
   }));
 
-  app.get('*', (_req, res) => {
-    res.set('Cache-Control', 'public, max-age=3600');
-    res.set('X-Robots-Tag', 'index, follow');
-    res.sendFile(path.join(distDir, 'index.html'));
+  // 매칭되지 않는 모든 경로: soft-404 대신 실제 404 + noindex 응답
+  app.use((_req, res) => {
+    const fs = require('fs');
+    res.status(404);
+    res.set('Cache-Control', 'no-cache');
+    res.set('X-Robots-Tag', 'noindex');
+    const notFoundPath = path.join(distDir, '404.html');
+    if (fs.existsSync(notFoundPath)) {
+      res.sendFile(notFoundPath);
+    } else {
+      res.type('html').send(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
+        '<meta name="robots" content="noindex"><title>404 Not Found</title></head>' +
+        '<body><h1>404 — Page Not Found</h1>' +
+        '<p><a href="/">Go to homepage</a></p></body></html>'
+      );
+    }
   });
 }
 
