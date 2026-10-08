@@ -92,18 +92,14 @@ async function discoverGuideEntries() {
 // ---------------------------------------------------------------------------
 
 const STATIC_ENTRIES = [
-  // Home — single URL, all 3 language alternates + x-default point to same URL
+  // Home — single URL serving all 3 languages via client-side toggle. No hreflang
+  // alternates: there are no separate /ko/ or /ja/ home URLs to point at.
   {
     loc: `${BASE}/`,
     lastmod: '2026-05-25',
     changefreq: 'weekly',
     priority: '1.0',
-    alternates: [
-      { hreflang: 'ko', href: `${BASE}/` },
-      { hreflang: 'en', href: `${BASE}/` },
-      { hreflang: 'ja', href: `${BASE}/` },
-      { hreflang: 'x-default', href: `${BASE}/` },
-    ],
+    alternates: [],
   },
 
   // FAQ (3 separate URL entries)
@@ -144,46 +140,69 @@ const STATIC_ENTRIES = [
     ],
   },
 
-  // About — single URL with 3 alternates all pointing to same URL
+  // Contact (3 separate per-language URLs — same pattern as FAQ)
+  {
+    loc: `${BASE}/contact`,
+    lastmod: '2026-08-30',
+    changefreq: 'yearly',
+    priority: '0.5',
+    alternates: [
+      { hreflang: 'en', href: `${BASE}/contact` },
+      { hreflang: 'ko', href: `${BASE}/ko/contact` },
+      { hreflang: 'ja', href: `${BASE}/ja/contact` },
+      { hreflang: 'x-default', href: `${BASE}/contact` },
+    ],
+  },
+  {
+    loc: `${BASE}/ko/contact`,
+    lastmod: '2026-08-30',
+    changefreq: 'yearly',
+    priority: '0.5',
+    alternates: [
+      { hreflang: 'en', href: `${BASE}/contact` },
+      { hreflang: 'ko', href: `${BASE}/ko/contact` },
+      { hreflang: 'ja', href: `${BASE}/ja/contact` },
+      { hreflang: 'x-default', href: `${BASE}/contact` },
+    ],
+  },
+  {
+    loc: `${BASE}/ja/contact`,
+    lastmod: '2026-08-30',
+    changefreq: 'yearly',
+    priority: '0.5',
+    alternates: [
+      { hreflang: 'en', href: `${BASE}/contact` },
+      { hreflang: 'ko', href: `${BASE}/ko/contact` },
+      { hreflang: 'ja', href: `${BASE}/ja/contact` },
+      { hreflang: 'x-default', href: `${BASE}/contact` },
+    ],
+  },
+
+  // About — single URL serving all 3 languages via client-side toggle. No hreflang.
   {
     loc: `${BASE}/about`,
     lastmod: '2026-05-29',
     changefreq: 'monthly',
     priority: '0.5',
-    alternates: [
-      { hreflang: 'ko', href: `${BASE}/about` },
-      { hreflang: 'en', href: `${BASE}/about` },
-      { hreflang: 'ja', href: `${BASE}/about` },
-      { hreflang: 'x-default', href: `${BASE}/about` },
-    ],
+    alternates: [],
   },
 
-  // Privacy — single URL with 3 alternates all pointing to same URL
+  // Privacy — single URL serving all 3 languages via client-side toggle. No hreflang.
   {
     loc: `${BASE}/privacy`,
     lastmod: '2026-05-18',
     changefreq: 'yearly',
     priority: '0.3',
-    alternates: [
-      { hreflang: 'ko', href: `${BASE}/privacy` },
-      { hreflang: 'en', href: `${BASE}/privacy` },
-      { hreflang: 'ja', href: `${BASE}/privacy` },
-      { hreflang: 'x-default', href: `${BASE}/privacy` },
-    ],
+    alternates: [],
   },
 
-  // Terms — single URL with 3 alternates all pointing to same URL
+  // Terms — single URL serving all 3 languages via client-side toggle. No hreflang.
   {
     loc: `${BASE}/terms`,
     lastmod: '2026-05-18',
     changefreq: 'yearly',
     priority: '0.3',
-    alternates: [
-      { hreflang: 'ko', href: `${BASE}/terms` },
-      { hreflang: 'en', href: `${BASE}/terms` },
-      { hreflang: 'ja', href: `${BASE}/terms` },
-      { hreflang: 'x-default', href: `${BASE}/terms` },
-    ],
+    alternates: [],
   },
 ];
 
@@ -268,21 +287,26 @@ async function discoverBlogEntries() {
 // ---------------------------------------------------------------------------
 
 function renderEntry(entry) {
-  const alts = entry.alternates
-    .map(
-      a =>
-        `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${a.href}" />`
-    )
-    .join('\n');
-  return [
+  const lines = [
     '  <url>',
     `    <loc>${entry.loc}</loc>`,
     `    <lastmod>${entry.lastmod}</lastmod>`,
     `    <changefreq>${entry.changefreq}</changefreq>`,
     `    <priority>${entry.priority}</priority>`,
-    alts,
-    '  </url>',
-  ].join('\n');
+  ];
+  // Single-URL pages (home, about, privacy, terms) serve all languages from one
+  // URL via a client-side toggle, so they carry NO hreflang alternates — claiming
+  // per-language URLs that don't exist is invalid hreflang. Only genuinely
+  // per-language URL sets (faq, contact, guides, blog) emit xhtml:link blocks.
+  if (Array.isArray(entry.alternates) && entry.alternates.length > 0) {
+    for (const a of entry.alternates) {
+      lines.push(
+        `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${a.href}" />`
+      );
+    }
+  }
+  lines.push('  </url>');
+  return lines.join('\n');
 }
 
 function renderSitemap(entries) {

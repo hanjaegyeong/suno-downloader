@@ -6,10 +6,6 @@
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/" />
   </url>
   <url>
     <loc>https://suno-down.com/guide/how-to-download-suno-playlist</loc>
@@ -132,34 +128,52 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/faq" />
   </url>
   <url>
+    <loc>https://suno-down.com/contact</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/contact" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/contact" />
+  </url>
+  <url>
+    <loc>https://suno-down.com/ko/contact</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/contact" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/contact" />
+  </url>
+  <url>
+    <loc>https://suno-down.com/ja/contact</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/contact" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/ko/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/ja/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/contact" />
+  </url>
+  <url>
     <loc>https://suno-down.com/about</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/about" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/about" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/about" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/about" />
   </url>
   <url>
     <loc>https://suno-down.com/privacy</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/privacy" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/privacy" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/privacy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/privacy" />
   </url>
   <url>
     <loc>https://suno-down.com/terms</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://suno-down.com/terms" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://suno-down.com/terms" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://suno-down.com/terms" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://suno-down.com/terms" />
   </url>
   <url>
     <loc>https://suno-down.com/blog/ai-music-copyright-guide</loc>
