@@ -70,6 +70,22 @@ const COPY = {
           </>
         ),
       },
+      {
+        h: '저작권 및 이용 책임 안내',
+        body: (
+          <>
+            SunoDown은 사용자가 <b>본인의 Suno 계정으로 생성했거나 적법한 다운로드 권한을 가진
+            음악</b>을 MP3·WAV로 백업·보관하도록 돕는 보조 도구입니다. 본 서비스는 음원을
+            자체적으로 호스팅하지 않으며, 사용자의 요청을 Suno로 전달하는 기술적 프록시 역할만
+            합니다. 타인의 저작물을 무단으로 다운로드·재배포하거나 상업적으로 이용하는 행위는
+            금지되며, 그로 인한 법적 책임은 전적으로 사용자 본인에게 있습니다.
+            다운로드한 음악의 저작권은 각 제작자에게 귀속되므로, 반드시 본인이 권리를 가진
+            콘텐츠에 한해 개인 용도로만 사용해 주세요. 권리 침해가 의심되는 콘텐츠에 대한
+            신고나 문의는 <a href="/ko/contact">문의 페이지</a>를 통해 접수해 주시면 신속히
+            조치하겠습니다.
+          </>
+        ),
+      },
     ],
     footnote: (
       <>
@@ -156,6 +172,22 @@ const COPY = {
           </>
         ),
       },
+      {
+        h: 'Copyright & Responsible Use',
+        body: (
+          <>
+            SunoDown is a helper tool for backing up music <b>you generated with your own Suno
+            account or otherwise have a lawful right to download</b>, as MP3 or WAV. The service
+            hosts no audio itself — it acts only as a technical proxy that relays your request
+            to Suno. Downloading, redistributing, or commercially exploiting other people's
+            works without permission is prohibited, and any legal responsibility for doing so
+            rests entirely with the user. Copyright in downloaded music belongs to its
+            creators, so please use the tool only for content you hold rights to, and only for
+            personal purposes. To report suspected copyright infringement, please reach us via
+            the <a href="/contact">contact page</a> and we will act promptly.
+          </>
+        ),
+      },
     ],
     footnote: (
       <>
@@ -237,6 +269,22 @@ const COPY = {
             許諾が必要です。SunoDownはツールを提供するだけで、どの曲をどう使うかの責任は
             利用者にあります。自分の創作物のバックアップと個人鑑賞 — この2つが
             ツールの想定使用シナリオです。
+          </>
+        ),
+      },
+      {
+        h: '著作権と利用責任について',
+        body: (
+          <>
+            SunoDownは、<b>ご自身のSunoアカウントで生成した、または適法なダウンロード権利を
+            持つ音楽</b>をMP3・WAVでバックアップ・保管するための補助ツールです。本サービスは
+            音源を自らホスティングせず、ユーザーのリクエストをSunoへ中継する技術的プロキシの
+            役割のみを担います。他者の著作物を無断でダウンロード・再配布・商用利用する行為は
+            禁止されており、それに伴う法的責任はすべて利用者本人にあります。ダウンロードした
+            音楽の著作権は各制作者に帰属しますので、必ずご自身が権利を持つコンテンツに限り、
+            個人用途でのみご利用ください。権利侵害が疑われるコンテンツの報告・お問い合わせは
+            <a href="/ja/contact">お問い合わせページ</a>までご連絡いただければ、速やかに
+            対応いたします。
           </>
         ),
       },
