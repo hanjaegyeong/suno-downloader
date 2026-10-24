@@ -1,6 +1,6 @@
 const messages = {
   ko: {
-    pageTitle: 'Suno 다운로더 — Suno AI 음악 무료 다운로드 | MP3·WAV',
+    pageTitle: 'SunoDown — 무료 Suno 다운로더 | 플레이리스트 MP3·WAV (ZIP)',
     pageDesc: '무료 Suno 다운로더 — Suno AI 플레이리스트와 라이브러리 전곡을 MP3·WAV로 다운로드. ZIP 일괄 다운로드, Suno Pro 무손실 WAV, 회원가입 불필요. 사용 가이드·FAQ·MP3 vs WAV 비교까지 제공하는 Suno 다운로드 허브.',
     heroTitle1: 'Suno 다운로더',
     heroTitle2: '플레이리스트 MP3·WAV 무료 다운로드',
@@ -83,7 +83,7 @@ const messages = {
     navAbout: '소개',
   },
   en: {
-    pageTitle: 'Suno Downloader — Free Suno AI Music Download | MP3 & WAV',
+    pageTitle: 'SunoDown — Free Suno Downloader | Playlist to MP3 & WAV (ZIP)',
     pageDesc: 'Free Suno downloader — download Suno AI playlists and your entire library as MP3 or WAV. Bulk ZIP download, lossless WAV for Pro, no signup. Plus how-to guides, FAQ, and MP3 vs WAV comparison.',
     heroTitle1: 'Suno Downloader',
     heroTitle2: 'Free Playlist MP3 · WAV Download',
@@ -166,7 +166,7 @@ const messages = {
     navAbout: 'About',
   },
   ja: {
-    pageTitle: 'Suno ダウンローダー — Suno AI 音楽 無料ダウンロード | MP3·WAV',
+    pageTitle: 'SunoDown — 無料 Suno ダウンローダー | プレイリストを MP3·WAV (ZIP)',
     pageDesc: '無料Sunoダウンローダー — Suno AIプレイリストとライブラリ全曲をMP3・WAVでダウンロード。ZIP一括ダウンロード、Pro無損失WAV、登録不要。使い方ガイド・FAQ・MP3 vs WAV比較もまとめたSunoダウンロードハブ。',
     heroTitle1: 'Suno ダウンローダー',
     heroTitle2: 'プレイリスト MP3・WAV 無料ダウンロード',

@@ -2,9 +2,9 @@
 schemaVersion: 1
 slug: youtube-content-with-ai-music
 title: "유튜브에 Suno AI 음악 활용하기: 수익화·메타데이터·저작권 안전 가이드"
-title_en: "Using Suno AI Music on YouTube: Monetization, Metadata, and Copyright Safety"
+title_en: "Can You Use Suno Music on YouTube? Monetization & Content ID (2026)"
 summary: "유튜브 BGM·인트로·전체 음악 채널까지 — Suno로 만든 곡을 안전하게 쓰는 방법. 수익화 조건·콘텐츠 ID·메타데이터·노란딱지 대응을 2026년 5월 기준으로 정리했습니다."
-summary_en: "From BGM to full music channels — how to use Suno tracks on YouTube safely. Monetization, Content ID, metadata, and demonetization cases as of May 2026."
+summary_en: "Yes, with conditions: Pro/Premier tracks carry commercial rights, while Free-plan songs are non-commercial only. Monetization, Content ID, AI disclosure, and metadata rules as of 2026."
 publishedAt: 2026-05-30
 updatedAt: 2026-06-07
 order: 1

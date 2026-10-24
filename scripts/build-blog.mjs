@@ -36,7 +36,7 @@ const PAGE_LINKS = {
   },
   '/guide/suno-mp3-vs-wav': {
     localized: true,
-    en: 'Suno MP3 vs WAV — Which Format Should You Download?',
+    en: 'Suno MP3 vs WAV: Which Format to Download & How to Get WAV',
     ko: 'Suno MP3 vs WAV — 어느 형식으로 다운로드해야 할까?',
   },
   '/guide/suno-pro-cookie-setup': {
