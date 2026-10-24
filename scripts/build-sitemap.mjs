@@ -188,7 +188,7 @@ const STATIC_ENTRIES = [
   // Privacy — single URL serving all 3 languages via client-side toggle. No hreflang.
   {
     loc: `${BASE}/privacy`,
-    lastmod: '2026-10-08',
+    lastmod: '2026-10-25',
     changefreq: 'yearly',
     priority: '0.3',
     alternates: [],

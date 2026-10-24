@@ -61,6 +61,7 @@ Suno 플레이리스트 URL만 입력하면 **전곡 일괄 다운로드**(ZIP) 
 - **프로덕션 리다이렉트**: fly.dev, kro.kr → suno-down.com 301 리다이렉트
 - **404 처리**: 미등록 경로는 404 + `X-Robots-Tag: noindex`로 404.html 응답 (soft-404 금지)
 - **광고**: AdSense 자동 광고. 로더는 홈·블로그·가이드·FAQ·about에만 (개인정보·약관·문의·404 제외)
+- **분석**: GA4(`G-DJ7782TP38`)는 광고와 달리 전 페이지 `<head>`에 인라인. EEA·영국·스위스는 동의 모드 기본 denied (Google CMP 동의 후 수집)
 - **날짜 표기**: 페이지 "업데이트" 날짜·sitemap lastmod는 실제 내용 변경 시에만 갱신 (Docker 빌드에 .git 없음 → 날짜는 명시값)
 
 ## 코딩 컨벤션

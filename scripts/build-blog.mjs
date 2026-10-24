@@ -441,6 +441,23 @@ function buildIndexPage(articles, lang) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Google Analytics 4. Consent defaults to denied in the EEA/UK/CH until Google's
+         consent message (AdSense Privacy & messaging) grants it; elsewhere it measures as usual. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-DJ7782TP38');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ7782TP38"></script>
+
     <title>${pageTitle}</title>
     <meta name="description" content="${pageDesc}" />
     <link rel="canonical" href="${canonicalUrl}" />

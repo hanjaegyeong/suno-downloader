@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Google Analytics 4. Consent defaults to denied in the EEA/UK/CH until Google's
+         consent message (AdSense Privacy & messaging) grants it; elsewhere it measures as usual. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-DJ7782TP38');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ7782TP38"></script>
+
     <title>Suno MP3 vs WAV — 어느 형식으로 다운로드해야 할까? | SunoDown 가이드</title>
     <meta name="description" content="Suno AI의 MP3와 WAV 다운로드 비교 — 음질·용량·Pro 필요 여부·편집 여유·플랫폼 호환성. 한 줄 결론 + 비교표 + 의사결정 플로우 + FAQ." />
     <link rel="canonical" href="https://suno-down.com/ko/guide/suno-mp3-vs-wav" />
